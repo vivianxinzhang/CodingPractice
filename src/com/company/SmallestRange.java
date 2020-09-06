@@ -1,36 +1,41 @@
 package com.company;
+import java.util.*;
 
 public class SmallestRange {
-    // Time O(kn)
+    public static void main(String[] args) {
+        SmallestRange s = new SmallestRange();
+        int[][] matrix = new int[][] {{1, 2}, {3, 4}};
+        System.out.println(Arrays.toString(s.smallestRange(matrix)));
+    }
+    // Time O(kn * k)
     // Space O(k)
-    public int[] smallestRange(int[][] arrays) {
-        // Write your solution here
-        if (arrays == null || arrays.length == 0) {
+    public int[] smallestRange(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) {
             return new int[0];
         }
         int[] result = new int[2];
-        int[] ptr = new int[arrays.length];
+        int[] idx = new int[matrix.length];
         int minRange = Integer.MAX_VALUE;
         while (true) {
-            int minIndex = -1, minVal = Integer.MAX_VALUE, maxVal = Integer.MIN_VALUE;
-            for (int i = 0; i < ptr.length; i++) {
-                if (ptr[i] == arrays[i].length) {
+            int minIndex = -1, currMin = Integer.MAX_VALUE, currMax = Integer.MIN_VALUE;
+            for (int i = 0; i < idx.length; i++) {
+                if (idx[i] == matrix[i].length) {
                     return result;
                 }
-                if (arrays[i][ptr[i]] < minVal) {
-                    minVal = arrays[i][ptr[i]];
+                if (matrix[i][idx[i]] < currMin){
+                    currMin = matrix[i][idx[i]];
                     minIndex = i;
                 }
-                if (arrays[i][ptr[i]] > maxVal) {
-                    maxVal = arrays[i][ptr[i]];
+                if (matrix[i][idx[i]] > currMax) {
+                    currMax = matrix[i][idx[i]];
                 }
             }
-            if (maxVal - minVal < minRange) {
-                result[0] = minVal;
-                result[1] = maxVal;
-                minRange = maxVal - minVal;
+            if ((currMax - currMin) < minRange) {
+                minRange = currMax - currMin;
+                result[0] = currMin;
+                result[1] = currMax;
             }
-            ptr[minIndex]++;
+            idx[minIndex]++;
         }
     }
 }
