@@ -4,39 +4,53 @@ import java.util.*;
 public class SmallestRange {
     public static void main(String[] args) {
         SmallestRange s = new SmallestRange();
-        int[][] matrix = new int[][] {{1, 2}, {3, 4}};
-        System.out.println(Arrays.toString(s.smallestRange(matrix)));
+        int[][] matrix = new int[][] {{129,356,388,985},{274,381,402,911},{95,112,181,193,284,323,459,463,489,508,548,680,708,738,791,842,923,940,951},{331,431,523,538,625,646,725,793,870,945},{635,839,923,989},{74,209,324,363,407,665,824,993},{18,176,183,483,574,585,595,646,676,687,688,697,783,869,918,964}};
+        System.out.println(Arrays.toString(s.smallestRange2(matrix)));
     }
 
     // Method 2:
-    // Time O(kn * k)
+    // Time O(kn * logk)
     // Space O(k)
-    public int[] smallestRange(int[][] matrix) {
-        int length = 0;
-        PriorityQueue<Solution.Entry> minHeap = new PriorityQueue<Solution.Entry>(14, new Solution.MyComparator());
+    public int[] smallestRange2(int[][] matrix) {
+        PriorityQueue<Entry> minHeap = new PriorityQueue<Entry>(matrix.length, new MyComparator());
+        int minRange = Integer.MAX_VALUE, min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+        int[] result = new int[2];
+        // initialize:
         for (int row = 0; row < matrix.length; row++) {
-            length += matrix[row].length;
-            if (matrix[row].length != 0) {
-                minHeap.offer(new Solution.Entry(row, 0, matrix[row][0]));
-            }
+            minHeap.offer(new Entry(row, 0, matrix[row][0]));
+            min = matrix[row][0] < min ? matrix[row][0] : min;
+            max = matrix[row][0] > max ? matrix[row][0] : max;
         }
-        int[] result = new int[length];
-        int curr = 0;
+
+        if ((max - min) < minRange) {
+            minRange = (max - min) < minRange ? (max - min) : minRange;
+            result[0] = min;
+            result[1] = max;
+        }
+
+        // loop to find minRange
         while (!minHeap.isEmpty()) {
-            Solution.Entry tmp = minHeap.poll();
-            result[curr] = tmp.value;
-            curr++;
-            if (tmp.col + 1 < matrix[tmp.row].length) {
-                tmp.col++;
-                tmp.value = matrix[tmp.row][tmp.col];
-                minHeap.offer(tmp);
+            Entry tmp = minHeap.poll();
+            if (tmp.col + 1 == matrix[tmp.row].length) {
+                return result;
+            }
+            tmp.col++;
+            tmp.value = matrix[tmp.row][tmp.col];
+            minHeap.offer(tmp);
+            min = minHeap.peek().value;
+            max = tmp.value > max ? tmp.value : max;
+            if ((max - min) < minRange) {
+                minRange = (max - min) < minRange ? (max - min) : minRange;
+                result[0] = min;
+                result[1] = max;
             }
         }
         return result;
     }
-    static class MyComparator implements Comparator<Solution.Entry> {
+
+    static class MyComparator implements Comparator<Entry> {
         @Override
-        public int compare(Solution.Entry e1, Solution.Entry e2) {
+        public int compare(Entry e1, Entry e2) {
             if (e1.value == e2.value) {
                 return 0;
             }
@@ -59,7 +73,7 @@ public class SmallestRange {
     // Method 1:
     // Time O(kn * k)
     // Space O(k)
-    public int[] smallestRange2(int[][] matrix) {
+    public int[] smallestRange1(int[][] matrix) {
         if (matrix == null || matrix.length == 0) {
             return new int[0];
         }

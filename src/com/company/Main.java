@@ -3,8 +3,8 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-//        MergeKSortedArray m = new MergeKSortedArray();
-        SmallestRange s = new SmallestRange();
+        Solution s = new Solution();
+        SmallestRange r = new SmallestRange();
         MergeSort m = new MergeSort();
         int[] array = {};
         int[][] matrix = new int[][] {{1, 2}, {3, 4}};
