@@ -3,7 +3,6 @@ import java.util.Arrays;
 
 public class CommonElement {
     public static void main(String[] args) {
-
         CommonElement s = new CommonElement();
         int[][] matrix = new int[][]{{0},{1},{1},{1}};
         System.out.println(s.search(matrix));
