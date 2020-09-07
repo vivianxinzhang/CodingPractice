@@ -1,18 +1,49 @@
 package com.company;
-
 import java.util.Arrays;
 
 public class CommonElement {
     public static void main(String[] args) {
 
         CommonElement s = new CommonElement();
-        int[][] matrix = new int[][]{{1, 2, 3, 4}, {4, 5, 6, 7}, {2, 3, 4, 8}};
-        System.out.println(s.search4(matrix));
+        int[][] matrix = new int[][]{{0},{1},{1},{1}};
+        System.out.println(s.search(matrix));
     }
 
     // Method 5: k pointers
     // Time O(k * kn)
     // Space O(1)
+    public int search(int[][] matrix) {
+        if (matrix == null || matrix.length <= 1) {
+            return -1;
+        }
+        int[] lastCol = new int[matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            lastCol[i] = matrix[i].length - 1;
+        }
+        int minRow = -1;
+        while (lastCol[minRow] >= 0) {
+            for (int i = 0; i < matrix.length; i++) {
+                if (matrix[i][lastCol[i]] < matrix[minRow][lastCol[minRow]]) {
+                    minRow = i;
+                }
+            }
+            int countEqual = 0;
+            for (int i = 0; i < matrix.length; i++) {
+                if (matrix[i][lastCol[i]] > matrix[minRow][lastCol[minRow]]) {
+                    if (lastCol[i] == 0) {
+                        return -1;
+                    }
+                    lastCol[i]--;
+                } else {
+                    countEqual++;
+                }
+            }
+            if (countEqual == matrix.length) {
+                return matrix[minRow][lastCol[minRow]];
+            }
+        }
+        return -1;
+    }
 
     // Method 4: k pointers
     // each round find the largest value and move all indexes pointing to smaller values
