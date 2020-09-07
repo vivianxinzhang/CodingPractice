@@ -7,9 +7,8 @@ public class Main {
         SmallestRange r = new SmallestRange();
         MergeSort m = new MergeSort();
         int[] array = {};
-        int[][] matrix = new int[][] {{1, 2}, {3, 4}};
-        System.out.println(Arrays.toString(m.mergeSort1(array)));
-        System.out.println(Arrays.toString(m.mergeSort2(array)));
-
+        int[][] matrix = new int[][] { { 1, 2, 3, 4 }, { 4, 5, 6, 7 }, { 2, 3, 4, 8 } };
+//        System.out.println(Arrays.toString(s.search(matrix)));
+        System.out.println(s.search(matrix));
     }
 }

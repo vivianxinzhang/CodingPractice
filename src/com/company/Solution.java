@@ -1,60 +1,37 @@
 package com.company;
-
 import java.util.*;
 
+// Method 4: k pointers
+// each round find the largest value and move all indexes pointing to smaller values
+// Time O(k * kn)
+// Space O(1)
 public class Solution {
-    // Method 2:
-    // Time O(kn * logk)
-    // Space O(k)
-    public int[] smallestRange(int[][] matrix) {
-        PriorityQueue<Entry> minHeap = new PriorityQueue<Entry>(matrix.length, new MyComparator());
-        int minRange = Integer.MAX_VALUE, min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
-        int[] result = new int[2];
-        for (int row = 0; row < matrix.length; row++) {
-            minHeap.offer(new Entry(row, 0, matrix[row][0]));
-            min = matrix[row][0] < min ? matrix[row][0] : min;
-            max = matrix[row][0] > max ? matrix[row][0] : max;
-            minRange = (max - min) < minRange ? (max - min) : minRange;
+    public int search(int[][] matrix) {
+        if (matrix == null || matrix.length <= 1) {
+            return -1;
         }
-
-        while (!minHeap.isEmpty()) {
-            Entry tmp = minHeap.poll();
-            if (tmp.col + 1 < matrix[tmp.row].length) {
-                return result;
+        int[] idx = new int[matrix.length];
+        while (true) {
+            int currMin = Integer.MAX_VALUE, currMax = Integer.MIN_VALUE, maxIdx = -1;
+            for (int i = 0; i < idx.length; i++) {
+                if (idx[i] == matrix[i].length) {
+                    return -1;
+                }
+                currMin = matrix[i][idx[i]] < currMin ? matrix[i][idx[i]] : currMin;
+                if (matrix[i][idx[i]] > currMax) {
+                    currMax = matrix[i][idx[i]];
+                    maxIdx = i;
+                }
             }
-            tmp.col++;
-            tmp.value = matrix[tmp.row][tmp.col];
-            minHeap.offer(tmp);
-            min = minHeap.peek().value;
-            max = tmp.value > max ? tmp.value : max;
-            if ((max - min) < minRange) {
-                minRange = (max - min) < minRange ? (max - min) : minRange;
-                result[0] = min;
-                result[1] = max;
+            if (currMin == currMax) {
+                return matrix[maxIdx][idx[maxIdx]];
             }
-        }
-        return result;
-    }
-
-    static class MyComparator implements Comparator<Entry> {
-        @Override
-        public int compare(Entry e1, Entry e2) {
-            if (e1.value == e2.value) {
-                return 0;
+            for (int i = 0; i < idx.length; i++) {
+                if (matrix[i][idx[i]] == matrix[maxIdx][idx[maxIdx]]) {
+                    continue;
+                }
+                idx[i]++;
             }
-            return e1.value < e2.value ? -1 : 1;
-        }
-    }
-
-    static class Entry {
-        int row;
-        int col;
-        int value;
-
-        Entry(int row, int col, int value) {
-            this.row = row;
-            this.col = col;
-            this.value = value;
         }
     }
 }
