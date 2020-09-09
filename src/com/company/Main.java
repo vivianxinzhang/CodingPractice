@@ -3,10 +3,9 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        SmallestRange r = new SmallestRange();
-        MergeSort m = new MergeSort();
-        int[] array = {};
+        Solution s = new Solution();
+        int[] array = {1, 2, 3, 5};
         int[][] matrix = new int[][] { { 1, 2, 3, 4 }, { 4, 5, 6, 7 }, { 2, 3, 4, 8 } };
-//        System.out.println(Arrays.toString(s.search(matrix)));
+        System.out.println(Arrays.toString(s.missing(array)));
     }
 }

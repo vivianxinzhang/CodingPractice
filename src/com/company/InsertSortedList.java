@@ -3,7 +3,7 @@ package com.company;
 public class InsertSortedList {
     public static void main(String[] args) {
         InsertSortedList s = new InsertSortedList();
-        ListNode head = GenerateLinkedList.generate(5)
+        ListNode head = GenerateLinkedList.generate(5);
         ListNode curr = head;
         curr = s.insert(head, 3);
         while (curr != null) {
