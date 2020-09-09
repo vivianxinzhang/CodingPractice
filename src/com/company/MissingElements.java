@@ -48,8 +48,6 @@ public class MissingElements {
         return right + 2;
     }
 
-
-
     //   []		            return [0, 1]
     //    0  1  2
     //   [1, 3, 5]
@@ -67,6 +65,7 @@ public class MissingElements {
         result[0] = firstIdx == -1 ? array.length + 1 : firstIdx + 1;
         int secondIdx = firstOccur(array, 3);
         result[1] = secondIdx == -1 ? array.length + 2 : secondIdx + 2;
+        return result;
     }
 
     // returns the idx of the first occur of array[i] - i == target

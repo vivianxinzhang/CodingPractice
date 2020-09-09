@@ -1,12 +1,12 @@
 package com.company;
 import java.util.*;
 
-public class Solution {
+public class QuickSort {
     public int[] quickSort(int[] array) {
         // Write your solution here
-//        if (array == null || array.length == 0) {
-//            return array;
-//        }
+        if (array == null || array.length == 0) {
+            return array;
+        }
         quickSort(array, 0, array.length - 1);
         return array;
     }
@@ -35,7 +35,7 @@ public class Solution {
             }
         }
         swap(array, i, right);	// swap pivot back
-        // recursion rule
+    // recursion rule
         quickSort(array, left, i - 1);
         quickSort(array, i + 1, right);
     }
