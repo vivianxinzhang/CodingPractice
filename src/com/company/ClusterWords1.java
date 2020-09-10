@@ -1,12 +1,12 @@
 package com.company;
 import java.util.*;
 
-public class ClusterWords {
+// Implementation 1:
+// Time O(n)
+// Space O(1)
+public class ClusterWords1 {
     private char[] chars = getCharArray();
 
-    // Method 1:
-    // Time O(n)
-    // Space O(1)
     public void clusterWords(List<String> list) {
         if (list == null) {
             return;
@@ -35,7 +35,7 @@ public class ClusterWords {
         }
     }
 
-    public void swap(List<String> list, int i, int j) {
+    private void swap(List<String> list, int i, int j) {
         String tmp = list.get(i);
         list.set(i, list.get(j));
         list.set(j, tmp);
@@ -44,7 +44,7 @@ public class ClusterWords {
     private char[] getCharArray() {
         char[] chars = new char[26];
         for (int i = 0; i < chars.length; i++) {
-            chars[i] = (char)('a' + i);
+            chars[i] = (char) ('a' + i);
         }
         return chars;
     }
