@@ -55,4 +55,20 @@ public class ClusterWords1 {
         idx[25] = list.size() - 1;
         return idx;
     }
+
+    public static void main(String[] args) {
+        ClusterWords1 s1 = new ClusterWords1();
+        List<String> list = new ArrayList<>();
+        list.add("w");
+        list.add("f");
+        list.add("h");
+        list.add("e");
+        System.out.println(list);
+        s1.clusterWords(list);
+        System.out.println(list);
+        list.add("a");
+        System.out.println(list);
+        s1.clusterWords(list);
+        System.out.println(list);
+    }
 }

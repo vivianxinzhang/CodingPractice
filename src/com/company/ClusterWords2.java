@@ -43,4 +43,20 @@ public class ClusterWords2 {
         }
         return chars;
     }
+
+    public static void main(String[] args) {
+        ClusterWords2 s2 = new ClusterWords2();
+        List<String> list = new ArrayList<>();
+        list.add("w");
+        list.add("f");
+        list.add("h");
+        list.add("e");
+        System.out.println(list);
+        s2.clusterWords(list);
+        System.out.println(list);
+        list.add("a");
+        System.out.println(list);
+        s2.clusterWords(list);
+        System.out.println(list);
+    }
 }
