@@ -11,7 +11,7 @@ public class ClusterWords1 {
         if (list == null) {
             return;
         }
-        int[] idx = initialIndex(list);
+        int[] idx = initializeIndex(list);
         rainbowSort(list, idx);
         return;
     }
@@ -49,7 +49,7 @@ public class ClusterWords1 {
         return chars;
     }
 
-    private int[] initialIndex(List<String> list) {
+    private int[] initializeIndex(List<String> list) {
         int[] idx = new int[26];
         Arrays.fill(idx, 0);
         idx[25] = list.size() - 1;
