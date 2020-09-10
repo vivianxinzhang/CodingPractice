@@ -2,18 +2,20 @@ package com.company;
 import java.util.*;
 
 public class ClusterWords {
-    public char[] chars = getCharArray();
-    public void clusterWords(List<String> list) {
-        int[] idx = new int[26];
-        Arrays.fill(idx, 0);
-        idx[25] = list.size() - 1;
-        rainbowSort(list, idx);
-        return;
-    }
+    private char[] chars = getCharArray();
 
     // Method 1:
     // Time O(n)
     // Space O(1)
+    public void clusterWords(List<String> list) {
+        if (list == null) {
+            return;
+        }
+        int[] idx = initialIndex(list);
+        rainbowSort(list, idx);
+        return;
+    }
+
     private void rainbowSort(List<String> list, int[] idx) {
         if (list == null || list.size() == 0) {
             return;
@@ -45,5 +47,12 @@ public class ClusterWords {
             chars[i] = (char)('a' + i);
         }
         return chars;
+    }
+
+    private int[] initialIndex(List<String> list) {
+        int[] idx = new int[26];
+        Arrays.fill(idx, 0);
+        idx[25] = list.size() - 1;
+        return idx;
     }
 }
