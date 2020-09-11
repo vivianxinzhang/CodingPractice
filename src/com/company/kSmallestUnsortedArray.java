@@ -76,4 +76,60 @@ public class kSmallestUnsortedArray {
     }
 
     // Method 4: quick select
+    public int[] kSmallestIV(int[] array, int k) {
+        // corner case
+        if (array == null || array.length == 0 || k == 0) {
+            return new int[0];
+        }
+        // quick select to find the kth smallest element
+        // after calling this method, the first k elements in the array
+        // are the k smallest ones(but not sorted)
+        quickSelect(array, 0, array.length - 1, k - 1);
+        // copy out the first k elements and sort them
+        int[] result = Arrays.copyOf(array, k);
+        Arrays.sort(result);
+        return result;
+    }
+
+    private void quickSelect(int[] array, int left, int right, int target) {
+        // like quick sort, we need to do the partition using pivot value
+        int pivotIdx = partition(array, left, right);
+        // unlike quick sort, we only need to do quickselect on
+        // at most one partition.
+        // if the pivot is already the kth smallest element, we can
+        // directly return
+        if (pivotIdx == target) {
+            return;
+        } else if (pivotIdx > target) {
+            // only need to recursively call quick select on the left
+            // partition if the kth smallest one is in the left part
+            quickSelect(array, left, pivotIdx - 1, target);
+        } else {
+            // only need to recursively call quick select on the right
+            // partition if the kth smallest one is in the right part
+            quickSelect(array, pivotIdx + 1, right, target);
+        }
+    }
+
+    private int partition(int[] array, int left, int right) {
+        int pivot = array[right];
+        int i = left, j = right - 1;
+        while (i <= j) {
+            if (array[i] < pivot) {
+                i++;
+            } else {
+                swap(array, i, j);
+                j--;
+            }
+        }
+        swap(array, i, right);
+        return i;
+    }
+
+    private void swap(int[] array, int i, int j) {
+        int tmp = array[i];
+        array[i] = array[j];
+        array[j] = tmp;
+    }
+
 }
