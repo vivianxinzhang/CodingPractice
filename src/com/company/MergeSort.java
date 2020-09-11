@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Arrays;
+
 public class MergeSort {
     // Method 2
     // Time O(nlogn)
@@ -93,5 +95,29 @@ public class MergeSort {
             k++;
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        MergeSort s = new MergeSort();
+        // test cases to cover possible situations
+        int[] array = null;
+        array = s.mergeSort2(array);
+        System.out.println(Arrays.toString(array));
+
+        array = new int[0];
+        array = s.mergeSort2(array);
+        System.out.println(Arrays.toString(array));
+
+        array = new int[] { 1, 2, 3, 4};
+        array = s.mergeSort2(array);
+        System.out.println(Arrays.toString(array));
+
+        array = new int[] { 4, 3, 2, 1};
+        array = s.mergeSort2(array);
+        System.out.println(Arrays.toString(array));
+
+        array = new int[] { 2, 4, 1, 5, 3 };
+        array = s.mergeSort2(array);
+        System.out.println(Arrays.toString(array));
     }
 }
