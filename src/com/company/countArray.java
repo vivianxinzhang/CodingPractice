@@ -1,7 +1,12 @@
 package com.company;
 
+import java.util.Arrays;
+
 public class countArray {
     public int[] countArray(int[] array) {
+        if (array == null || array.length == 0) {
+            return new int[0];
+        }
         // The indexArray contains the indices in the original array
         // and it will be sorted by the corresponding number in the original array
         // The countArray is the actual return array
@@ -33,12 +38,44 @@ public class countArray {
 
     private void merge(int[] array, int[] indexArray, int[] countArray, int[] helper,
                        int left, int mid, int right) {
-        copyArray(indexArray, helper, left, right);
+        copyIndex(indexArray, helper, left, right);
         int l = left;
         int r = mid + 1;
         int cur = left;
+        while (l <= mid && r <= right) {
+            // here must use <= to keep their original order for same element
+            // no need to move element with same value to its left
+            if (array[helper[l]] <= array[helper[r]]) {
+                indexArray[cur] = helper[l];
+                countArray[indexArray[cur]] += r - (mid + 1);
+                l++;
+            } else {
+                indexArray[cur] = helper[r];
+                r++;
+            }
+            cur++;
+        }
         while (l <= mid) {
-            // when sorting the indexArray, we use the corresponding value in the original array
+            indexArray[cur] = helper[l];
+            countArray[indexArray[cur]] += r - (mid + 1);
+            l++;
+            cur++;
+        }
+
+//        combine above two while loop: another implementation
+//        while (l <= mid) {
+//            when sorting the indexArray, we use the corresponding value in the original array
+//            here must use <= to keep their original order for same element
+//            no need to move element with same value to its left
+//            if (r > right || array[helper[l]] <= array[helper[r]]) {
+//                countArray[helper[l]] += (r - mid - 1);
+//                indexArray[cur++] = helper[l++];
+//            } else {
+//                indexArray[cur++] = helper[r++];
+//            }
+//        }
+
+        while (l <= mid) {
             if (r > right || array[helper[l]] <= array[helper[r]]) {
                 countArray[helper[l]] += (r - mid - 1);
                 indexArray[cur++] = helper[l++];
@@ -48,9 +85,30 @@ public class countArray {
         }
     }
 
-    private void copyArray(int[] indexArray, int[] helper, int left, int right) {
+    private void copyIndex(int[] indexArray, int[] helper, int left, int right) {
         for (int i = left; i <= right; i++) {
             helper[i] = indexArray[i];
         }
+    }
+
+    public static void main(String[] args) {
+        Solution s = new Solution();
+        int[] array = null;
+        System.out.println(Arrays.toString(s.countArray(array)));
+
+        array = new int[] {1};
+        System.out.println(Arrays.toString(s.countArray(array)));
+
+        array = new int[] {1, 2, 3};
+        System.out.println(Arrays.toString(s.countArray(array)));
+
+        array = new int[] {3, 2, 1};
+        System.out.println(Arrays.toString(s.countArray(array)));
+
+        array = new int[] {3, 3, 3};
+        System.out.println(Arrays.toString(s.countArray(array)));
+
+        array = new int[] {4, 1, 6, 6, 2};
+        System.out.println(Arrays.toString(s.countArray(array)));
     }
 }
