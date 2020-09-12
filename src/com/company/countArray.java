@@ -3,6 +3,8 @@ package com.company;
 import java.util.Arrays;
 
 public class countArray {
+    // Time O(nlogn)
+    // Space O(n)
     public int[] countArray(int[] array) {
         if (array == null || array.length == 0) {
             return new int[0];
@@ -92,7 +94,7 @@ public class countArray {
     }
 
     public static void main(String[] args) {
-        Solution s = new Solution();
+        countArray s = new countArray();
         int[] array = null;
         System.out.println(Arrays.toString(s.countArray(array)));
 
