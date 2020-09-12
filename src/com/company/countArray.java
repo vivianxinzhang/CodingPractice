@@ -1,10 +1,6 @@
 package com.company;
-import java.util.*;
 
-
-// Time O(nlogn)
-// Space O(n)
-public class Solution {
+public class countArray {
     public int[] countArray(int[] array) {
         // The indexArray contains the indices in the original array
         // and it will be sorted by the corresponding number in the original array

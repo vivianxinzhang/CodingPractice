@@ -10,6 +10,8 @@ public class MergeSort {
         if (array == null || array.length <= 1) {
             return array;
         }
+        // allocate helper array to help merge step, so that we guarantee no more than O(n) space is used
+        // The space complexity is O(n) in this case
         int[] helper = new int[array.length];
         mergeSort2(array, 0, array.length - 1, helper);
         return array;
@@ -28,6 +30,7 @@ public class MergeSort {
     }
 
     private void merge2(int[] array, int left, int mid, int right, int[] helper) {
+        // copy the content to helper array and we will merge from the helper array
         for (int i = left; i <= right; i++) {
             helper[i] = array[i];
         }
@@ -42,11 +45,14 @@ public class MergeSort {
             }
             idx++;
         }
+        // if there are some elements left on the left side, need to copy them
         while (leftIdx <= mid) {
             array[idx] = helper[leftIdx];
             leftIdx++;
             idx++;
         }
+        // if there are some elements at right side, we do not need to copy them,
+        // because they are already in their position
     }
 
     // Method 1
