@@ -17,8 +17,6 @@ public class FindPeak {
         return array[left] > array[right] ? left : right;
     }
 
-
-
     public static void main(String[] args) {
         FindPeak s = new FindPeak();
 
