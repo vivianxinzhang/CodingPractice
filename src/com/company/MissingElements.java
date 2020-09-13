@@ -90,4 +90,14 @@ public class MissingElements {
         }
         return -1;
     }
+
+    public static void main(String[] args) {
+        MissingElements s = new MissingElements();
+
+        int[] array = new int[] {};
+        System.out.println(s.oneMissing1(array));
+
+        array = new int[] {1, 2, 4};
+        System.out.println(s.oneMissing1(array));
+    }
 }

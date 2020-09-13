@@ -1,10 +1,6 @@
 package com.company;
 
-import java.util.*;
-
-// Time O(nlogn)
-// Space O(n)
-public class Solution {
+public class FindPeak {
     public int findPeakElement(int[] array) {
         if (array == null || array.length == 0) {
             return -1;
@@ -21,8 +17,10 @@ public class Solution {
         return array[left] > array[right] ? left : right;
     }
 
+
+
     public static void main(String[] args) {
-        Solution s = new Solution();
+        FindPeak s = new FindPeak();
 
         int[] array = new int[]{};
         System.out.println(s.findPeakElement(array));
