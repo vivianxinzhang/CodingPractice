@@ -1,30 +1,37 @@
 package com.company;
 
-public class CheckBalanced {
-    // Method 2:
-    // Time O(nlogn)
-    // Space O(h) worst case O(n)
-    public boolean isBalanced(TreeNode root) {
-        // Write your solution here
-        return unbalancedOrHeight(root) >= 0;
+public class CheckBalancedTree {
+    public static void main(String[] args) {
+        CheckBalancedTree s = new CheckBalancedTree();
+        TreeNode one = new TreeNode(1);
+        TreeNode two = new TreeNode(2);
+        TreeNode three = new TreeNode(3);
+        one.left = two;
+        two.left = three;
+        System.out.println(s.isBalanced(one));
     }
 
-    private int unbalancedOrHeight(TreeNode root) {
+    // Method 2:
+    // Time O(n^2)
+    // Space O(height) worst O(n) average O(logn)
+    public boolean isBalanced(TreeNode root) {
+        // Write your solution here
+        if (root == null) {
+            return true;
+        }
+        return unbalandedOrHeight(root) >= 0;
+    }
+
+    private int unbalandedOrHeight(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        int leftHeight = unbalancedOrHeight(root.left);
-        if (leftHeight == -1) {
+        int leftResult = unbalandedOrHeight(root.left);
+        int rightResult = unbalandedOrHeight(root.right);
+        if (leftResult == -1 || rightResult == -1 || Math.abs(leftResult - rightResult) > 1) {
             return -1;
         }
-        int rightHeight = unbalancedOrHeight(root.right);
-        if (rightHeight == -1) {
-            return -1;
-        }
-        if (Math.abs(leftHeight - rightHeight) > 1){
-            return -1;
-        }
-        return Math.max(leftHeight, rightHeight) + 1;
+        return Math.max(leftResult, rightResult) + 1;
     }
 
     // Method 1:
