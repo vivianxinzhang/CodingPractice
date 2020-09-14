@@ -64,5 +64,41 @@ public class kSmallestTwoSortedArray {
         }
     }
 
-
+    // Iteration
+    // Time O(logk)
+    // Space O(1)
+    public int kth(int[] a, int[] b, int k) {
+        // Write your solution here
+        if (k < 0 || k > a.length + b.length) {
+            return -1;
+        }
+        int aleft = 0, bleft = 0;
+        while (k >= 2) {
+            if (aleft >= a.length) {
+                return b[bleft + k - 1];
+            }
+            if (bleft >= b.length) {
+                return a[aleft + k - 1];
+            }
+            int amid = aleft + k/2 - 1;
+            int bmid = bleft + k/2 - 1;
+            int aval = amid >= a.length ? Integer.MAX_VALUE : a[amid];
+            int bval = bmid >= b.length ? Integer.MAX_VALUE : b[bmid];
+            if (aval <= bval) {
+                aleft = amid + 1;
+            } else {
+                bleft = bmid + 1;
+            }
+            k -= k/2;
+        }
+        if (aleft >= a.length) {
+            // smallest element in b
+            return b[bleft];
+        }
+        if (bleft >= b.length) {
+            // smallest element in a
+            return a[aleft];
+        }
+        return a[aleft] < b[bleft] ? a[aleft] : b[bleft];
+    }
 }
