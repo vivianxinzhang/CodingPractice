@@ -37,4 +37,42 @@ public class SortTwoStacks {
             preMax = currMax;
         }
     }
+
+    // no repetitive
+    public void sortI(Deque<Integer> s1) {
+        Deque<Integer> s2 = new ArrayDeque<>();
+        // Write your solution here.
+        int preMax = Integer.MAX_VALUE;
+        while (!s1.isEmpty() && s1.peekFirst() < preMax) {
+            int currMax = Integer.MIN_VALUE;
+            while (!s1.isEmpty() && s1.peekFirst() < preMax) {
+                int tmp = s1.pollFirst();
+                if (tmp >= currMax) {
+                    currMax = tmp;
+                }
+                s2.offerFirst(tmp);
+            }
+            s1.offerFirst(currMax);
+            while (!s2.isEmpty()) {
+                int tmp = s2.pollFirst();
+                if (tmp != currMax) {
+                    s1.offerFirst(tmp);
+                }
+            }
+            preMax = currMax;
+        }
+    }
+
+    public static void main(String[] args) {
+        SortTwoStacks s = new SortTwoStacks();
+        Deque<Integer> s1 = new ArrayDeque<>();
+        s1.offerFirst(2);
+        s1.offerFirst(1);
+        s1.offerFirst(3);
+//        s1.offerFirst(2);
+//        s1.offerFirst(1);
+        System.out.println(s1);
+        s.sortI(s1);
+        System.out.println(s1);
+    }
 }
