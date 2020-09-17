@@ -1,9 +1,10 @@
 package com.company;
 
 public class KClosest {
-    // Time O(2^n)
-    // Space O(n)
-    public int[] kClosest(int[] array, int target, int k) {
+
+    // Time O(logn + k)
+    // Space O(1)
+    public int[] kClosestI(int[] array, int target, int k) {
         // Write your solution here
         int[] result = new int[k];
         if (array == null || array.length == 0) {
