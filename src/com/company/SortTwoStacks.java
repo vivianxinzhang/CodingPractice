@@ -38,7 +38,7 @@ public class SortTwoStacks {
         }
     }
 
-    // no repetitive
+    // no duplicates
     public void sortI(Deque<Integer> s1) {
         Deque<Integer> s2 = new ArrayDeque<>();
         // Write your solution here.
