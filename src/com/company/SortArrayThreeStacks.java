@@ -8,13 +8,13 @@ public class SortArrayThreeStacks {
      * The numbers in s1 are original, after sorting, the numbers should be in
      * s1 as well and from top to bottom the numbers are sorted in ascending order.
      */
-    public void sort(ArrayDeque<Integer> s1) {
+    public void sort(Deque<Integer> s1) {
         Deque<Integer> s2 = new ArrayDeque<>();
         Deque<Integer> s3 = new ArrayDeque<>();
         sort(s1, s2, s3, s1.size());
     }
 
-    private void sort(ArrayDeque<Integer> s1, Deque<Integer> s2, Deque<Integer> s3, int length) {
+    private void sort(Deque<Integer> s1, Deque<Integer> s2, Deque<Integer> s3, int length) {
         if (length <= 1) {
             return;
         }
@@ -26,8 +26,8 @@ public class SortArrayThreeStacks {
         // use the other stacks to sort s2 / s1
         // after sorting the numbers in s2 / s1 are in ascending order from top to bottom
         // in the two stacks
-        sort(s2, s3, s1, mid1);
-        sort(s1, s3, s2, mid2);
+        sort(s1, s2, s3, mid2);
+        sort(s2, s1, s3, mid1);
 
         int i = 0;
         int j = 0;
@@ -53,6 +53,19 @@ public class SortArrayThreeStacks {
         for (int index = 0; index < length; index++) {
             s1.offerFirst(s3.pollFirst());
         }
+    }
+
+    public static void main(String[] args) {
+        SortArrayThreeStacks s = new SortArrayThreeStacks();
+        Deque<Integer> s1 = new ArrayDeque<>();
+        s1.offerFirst(1);
+        s1.offerFirst(2);
+        s1.offerFirst(1);
+        s1.offerFirst(3);
+        s1.offerFirst(2);
+        System.out.println(s1);
+        s.sort(s1);
+        System.out.println(s1);
     }
 }
 

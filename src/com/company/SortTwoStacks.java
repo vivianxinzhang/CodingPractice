@@ -67,8 +67,8 @@ public class SortTwoStacks {
         SortTwoStacks s = new SortTwoStacks();
         Deque<Integer> s1 = new ArrayDeque<>();
         s1.offerFirst(2);
-        s1.offerFirst(1);
-        s1.offerFirst(3);
+//        s1.offerFirst(1);
+//        s1.offerFirst(3);
 //        s1.offerFirst(2);
 //        s1.offerFirst(1);
         System.out.println(s1);
