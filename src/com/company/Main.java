@@ -12,7 +12,5 @@ public class Main {
 //        stack.offerFirst(8);
         int[] array = new int[] {1, 5};
         System.out.println(stack);
-        s.sort(stack);
-        System.out.println(stack);
     }
 }
