@@ -9,6 +9,9 @@ public class ExecutionTime {
         logs.add("0:start:1");
         logs.add("0:end:3");
         System.out.println(Arrays.toString(s.executeTime(1, logs)));
+        logs.add("1:start:8");
+        logs.add("1:end:10");
+        System.out.println(Arrays.toString(s.executeTime(2, logs)));
     }
 
     public int[] executeTime(int n, List<String> logs) {
