@@ -6,6 +6,11 @@ import java.util.Deque;
 import java.util.List;
 
 public class PreOrder {
+    // the left subtree should be traversed before the right subtree,
+    // since stack is LIFO, we should push right into the stack first,
+    // so for the next step the top element of the stack is the left subtree;
+    // Time O(n)
+    // Space O(h) worst O(n)
     public List<Integer> preOrder(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         if (root == null) {

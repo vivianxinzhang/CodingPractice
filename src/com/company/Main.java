@@ -10,9 +10,13 @@ public class Main {
 //        stack.offerFirst(1);
 //        stack.offerFirst(2);
 //        stack.offerFirst(8);
-        TreeNode root = new TreeNode(1);
-        TreeNode left= new TreeNode(11);
-        TreeNode right = new TreeNode(12);
+        TreeNode  = new TreeNode(1);
+        TreeNode left= new TreeNode(3);
+        TreeNode right = new TreeNode(2);
+        TreeNode left= new TreeNode(5);
+        TreeNode right = new TreeNode(4);
+        TreeNode left= new TreeNode(7);
+        TreeNode right = new TreeNode(6);
         root.left = left;
         root.right = right;
         int[] array = new int[] {1, 5};
