@@ -9,13 +9,18 @@ public class SortArrayThreeStacks {
      * s1 as well and from top to bottom the numbers are sorted in ascending order.
      */
     public void sort(Deque<Integer> s1) {
+        // if no sanity check, need to assume not null
+        // and need to handle empty in recursion base case
+        if (s1 == null || s1.size() == 0) {
+            return;
+        }
         Deque<Integer> s2 = new ArrayDeque<>();
         Deque<Integer> s3 = new ArrayDeque<>();
         sort(s1, s2, s3, s1.size());
     }
 
     private void sort(Deque<Integer> s1, Deque<Integer> s2, Deque<Integer> s3, int length) {
-        if (length <= 1) {
+        if (length <= 1) {	// length < 1 can handle corner case -- empty
             return;
         }
         int mid1 = length / 2;
