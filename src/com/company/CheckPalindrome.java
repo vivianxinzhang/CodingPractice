@@ -25,6 +25,23 @@ public class CheckPalindrome {
             return true;
         }
         ListNode middle = findMiddle(head);
+        ListNode right= reverse(middle.next);
+        while (right != null) {
+            if (head.value != right.value) {
+                return false;
+            }
+            head = head.next;
+            right = right.next;
+        }
+        return true;
+    }
+
+    public boolean isPalindromeI(ListNode head) {
+        // Write your solution here
+        if (head == null || head.next == null) {
+            return true;
+        }
+        ListNode middle = findMiddle(head);
         ListNode leftHalf = head;
         ListNode rightHalf = middle.next;
         middle.next = null;
