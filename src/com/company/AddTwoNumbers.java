@@ -30,6 +30,33 @@ public class AddTwoNumbers {
             System.out.print(curr.value);
             curr = curr.next;
         }
+        System.out.println();
+        curr = s.addTwoNumbersI(l1, l2);
+        while (curr != null) {
+            System.out.print(curr.value);
+            curr = curr.next;
+        }
+    }
+
+    public ListNode addTwoNumbers(ListNode a, ListNode b) {
+        // Write your solution here
+        ListNode dummy = new ListNode(0);
+        ListNode cur = dummy;
+        int val = 0;
+        while (a != null || b != null) {
+            if (a != null) {
+                val += a.value;
+                a = a.next;
+            }
+            if (b != null) {
+                val += b.value;
+                b = b.next;
+            }
+            cur.next = new ListNode(val % 10);
+            val /= 10;
+            cur = cur.next;
+        }
+        return dummy.next;
     }
 
     public ListNode addTwoNumbersI(ListNode l1, ListNode l2) {
