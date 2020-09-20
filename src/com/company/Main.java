@@ -22,15 +22,9 @@ public class Main {
         ListNode one = new ListNode(1);
         ListNode two = new ListNode(2);
         ListNode three = new ListNode(3);
-        ListNode two2 = new ListNode(2);
-        ListNode one2 = new ListNode(1);
         one.next = two;
         two.next = three;
-        three.next = two2;
-//        two2.next = one2;
-//        ListNode one = new ListNode(1);
-        int[] array = new int[] {0, 2, 1, 4};
-        ListNode curr = null;
+        ListNode curr = s.insert(one, 110, 4);
         while (curr != null) {
             System.out.println(curr.value);
             curr = curr.next;
