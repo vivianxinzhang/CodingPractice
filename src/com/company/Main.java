@@ -28,10 +28,10 @@ public class Main {
         three.next = four;
         ListNode five = new ListNode(5);
         four.next = five;
-        ListNode curr = s.removeNthFromEnd(one, 5);
-        while (curr != null) {
-            System.out.println(curr.value);
-            curr = curr.next;
-        }
+//        ListNode curr = s.removeNthFromEnd(one, 5);
+//        while (curr != null) {
+//            System.out.println(curr.value);
+//            curr = curr.next;
+//        }
     }
 }
