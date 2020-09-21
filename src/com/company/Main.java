@@ -24,7 +24,7 @@ public class Main {
         ListNode three = new ListNode(3);
         one.next = two;
         two.next = three;
-        ListNode curr = s.insert(one, 110, 4);
+        ListNode curr = s.rotateKplace(one, 4);
         while (curr != null) {
             System.out.println(curr.value);
             curr = curr.next;
