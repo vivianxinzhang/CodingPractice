@@ -21,10 +21,13 @@ public class Main {
 //        root.right = right;
         ListNode one = new ListNode(1);
         ListNode two = new ListNode(2);
-        ListNode three = new ListNode(3);
         one.next = two;
-        two.next = three;
-        ListNode curr = s.rotateKplace(one, 4);
+        ListNode two2 = new ListNode(2);
+        two.next = two2;
+        ListNode three = new ListNode(3);
+        ListNode three2 = new ListNode(3);
+        ListNode zero = new ListNode(0);
+        ListNode curr = s.removeDup(one);
         while (curr != null) {
             System.out.println(curr.value);
             curr = curr.next;

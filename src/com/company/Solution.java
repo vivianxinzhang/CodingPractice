@@ -11,7 +11,10 @@ import java.util.*;
  *   }
  * }
  */
-
+// Time O(n)
+// Space O(1)
 public class Solution {
-
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        // Write your solution here
+    }
 }
