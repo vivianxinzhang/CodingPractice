@@ -17,9 +17,26 @@ public class InsertAtIndex {
         }
     }
 
+    public ListNode insert(ListNode head, int index, int value) {
+        // Write your solution here
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode prev = dummy;
+        for (int i = 0; i < index; i++) {
+            if (prev == null) {
+                return head;
+            }
+            prev = prev.next;
+        }
+        ListNode newNode = new ListNode(value);
+        newNode.next = prev.next;
+        prev.next = newNode;
+        return dummy.next;
+    }
+
     // Time O(n)
     // Space O(1)
-    public ListNode insert(ListNode head, int index, int value) {
+    public ListNode insertI(ListNode head, int index, int value) {
         // Write your solution here
         ListNode dummy = new ListNode(0);
         dummy.next = head;

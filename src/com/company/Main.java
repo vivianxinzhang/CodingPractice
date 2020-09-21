@@ -22,12 +22,13 @@ public class Main {
         ListNode one = new ListNode(1);
         ListNode two = new ListNode(2);
         one.next = two;
-        ListNode two2 = new ListNode(2);
-        two.next = two2;
         ListNode three = new ListNode(3);
-        ListNode three2 = new ListNode(3);
-        ListNode zero = new ListNode(0);
-        ListNode curr = s.removeDup(one);
+        two.next = three;
+        ListNode four = new ListNode(4);
+        three.next = four;
+        ListNode five = new ListNode(5);
+        four.next = five;
+        ListNode curr = s.removeNthFromEnd(one, 5);
         while (curr != null) {
             System.out.println(curr.value);
             curr = curr.next;
