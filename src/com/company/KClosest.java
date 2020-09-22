@@ -1,6 +1,14 @@
 package com.company;
 
+import java.util.Arrays;
+
 public class KClosest {
+    public static void main(String[] args) {
+        KClosest s = new KClosest();
+        int[] array = new int[] {1, 2, 5, 6, 10};
+        System.out.println(Arrays.toString(s.kClosest(array, 0, 2)));
+    }
+
     public int[] kClosest(int[] array, int target, int k) {
         // Write your solution here
         if (array == null || array.length == 0 || k <= 0) {
