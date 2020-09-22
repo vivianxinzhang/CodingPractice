@@ -11,20 +11,26 @@ import java.util.*;
  *   }
  * }
  */
-
-// Time O(n)
-// Space O(1)
-// Step 1: find length
-// Step 2: move n %= length position
-// Step 3: find n - length, delink and relink
+//
 public class Solution {
-
+    public ListNode removeDup(ListNode head) {
+        // Write your solution here
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode prev = head, curr = head.next;
+        while (curr != null) {
+            if (curr.value == prev.value) {
+                while (curr != null && curr.value == prev.value) {
+                    curr = curr.next;
+                }
+            }
+             prev.next = curr;
+            prev = curr;
+            curr = curr.next;
+        }
+        return head;
+    }
 }
-
-
-
-
-
-
 
 

@@ -16,7 +16,30 @@ public class ReverseByPair {
         }
     }
 
+    // iterative
     public ListNode reverseInPairs(ListNode head) {
+        // Write your solution here
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode prev = dummy;
+        ListNode curr = head, next = null;
+        while (curr != null && curr.next != null) {
+            next = curr.next.next;
+            ListNode subHead = curr.next;
+            prev.next = subHead;
+            subHead.next = curr;
+            curr.next = next;
+            prev = curr;
+            curr = next;
+        }
+        return dummy.next;
+    }
+
+    // recursive
+    public ListNode reverseInPairsI(ListNode head) {
         // Write your solution here
         if (head == null || head.next == null) {
             return head;
