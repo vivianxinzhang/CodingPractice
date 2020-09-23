@@ -2,8 +2,8 @@ package com.company;
 import java.util.*;
 
 public class StackByTwoQueues {
-    Queue<Integer> q1;  // used to store element
-    Queue<Integer> q2;  // used as a buffer
+    private Queue<Integer> q1;  // used to store element
+    private Queue<Integer> q2;  // used as a buffer
     /** Initialize your data structure here. */
     public StackByTwoQueues() {
         q1 = new ArrayDeque<>();
