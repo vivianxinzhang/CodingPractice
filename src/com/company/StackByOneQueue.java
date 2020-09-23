@@ -1,5 +1,4 @@
 package com.company;
-
 import java.util.ArrayDeque;
 import java.util.Queue;
 
@@ -7,7 +6,7 @@ public class StackByOneQueue {
     private Queue<Integer> q;
 
     /** Initialize your data structure here. */
-    public Solution() {
+    public StackByOneQueue() {
         q = new ArrayDeque<>();
     }
 
