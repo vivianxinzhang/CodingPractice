@@ -1,10 +1,12 @@
 package com.company;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+// assume the keys stored in the binary search tree can not be Integer.MIN_VALUE or Integer.MAX_VALUE.
 public class CheckBST {
-    // Iterative
+    // Iteration
+    // Time O(n)
+    // Space O(h) worst case O(n)
     public boolean isBST(TreeNode root) {
         // Write your solution here
         if (root == null) {
@@ -15,17 +17,21 @@ public class CheckBST {
         TreeNode prev = null;
         while (curr != null || !stack.isEmpty()) {
             while (curr != null) {
-                stack.offerFirst(curr);
+                stack.push(curr);
                 curr = curr.left;
             }
+            curr = stack.pollFirst();
+            if (prev != null && prev.key >= curr.key) {
+                return false;
+            }
+            prev = curr;
+            curr = curr.right;
         }
-        return true;
     }
 
-    // Recursive
-    // assume the keys stored in the binary search tree can not be Integer.MIN_VALUE or Integer.MAX_VALUE.
+    // Recursion
     // Time O(n)
-    // Space O(h) worst case O(n)
+    // Space O(height) average O(logn) worst O(n)
     public boolean isBSTI(TreeNode root) {
         // Write your solution here
         if (root == null) {
