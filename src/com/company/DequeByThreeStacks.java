@@ -14,29 +14,35 @@ public class DequeByThreeStacks {
         buffer = new ArrayDeque<>();
     }
 
+    // Amortized time O(1)
     public void offerFirst(int element) {
         left.offerFirst(element);
     }
 
+    // Amortized time O(1)
     public void offerLast(int element) {
         right.offerFirst(element);
     }
 
+    // Amortized time O(1)
     public Integer pollFirst() {
         moveIfNecessary(right, left);
         return left.isEmpty() ? null : left.pollFirst();
     }
 
+    // Amortized time O(1)
     public Integer pollLast() {
         moveIfNecessary(left, right);
         return right.isEmpty() ? null : right.pollFirst();
     }
 
+    // Amortized time O(1)
     public Integer peekFirst() {
         moveIfNecessary(right, left);
         return left.isEmpty() ? null : left.peekFirst();
     }
 
+    // Amortized time O(1)
     public Integer peekLast() {
         moveIfNecessary(left, right);
         return right.isEmpty() ? null : right.peekFirst();
@@ -50,6 +56,9 @@ public class DequeByThreeStacks {
         return left.isEmpty() && right.isEmpty();
     }
 
+    // when the destination stack is empty, move half of the elements from
+    // the source stack to the destination stack
+    // Time O(n)
     private void moveIfNecessary(Deque<Integer> src, Deque<Integer> dest) {
         if (!dest.isEmpty()) {
             return;

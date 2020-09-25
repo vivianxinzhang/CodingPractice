@@ -9,7 +9,11 @@ public class UnknownSizeBinarySearch {
             return -1;
         }
         int left = 0, right = 1;
+        // find the right boundary for binary search
+        // extends until we are sure the target is within the [left, right] range
         while (dict.get(right) != null && dict.get(right) < target) {
+            // 1. move left to right
+            // 2. double right index
             left = right;
             right *= 2;
         }
@@ -17,6 +21,7 @@ public class UnknownSizeBinarySearch {
     }
 
     private int binarySearch(Dictionary dict, int left, int right, int target) {
+        // classical binary search
         if (dict == null) {
             return -1;
         }
