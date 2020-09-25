@@ -11,8 +11,6 @@ public class CheckTweakedIdentical {
         System.out.println(s.isBalanced(one));
     }
 
-    // Time O(4^n)
-    //
     // Time O(n^2) <-- assume the input tree is balanced
     // Space O(height) average O(logn) worst O(n) <-- assume the input tree is balanced
     // if input tree is balanced, it has log_2(n) levels, recursion quadral tree also has log_2(n) levels
