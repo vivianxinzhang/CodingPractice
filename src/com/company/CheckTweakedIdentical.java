@@ -12,12 +12,19 @@ public class CheckTweakedIdentical {
     }
 
     // Time O(4^n)
-    // Space O(height) worst O(n)
+    //
+    // Time O(n^2) <-- assume the input tree is balanced
+    // Space O(height) average O(logn) worst O(n) <-- assume the input tree is balanced
+    // if input tree is balanced, it has log_2(n) levels, recursion quadral tree also has log_2(n) levels
+    // the recursion tree(4 branches) is different from the input tree(2 branches)
+    // total number of nodes in the quadral tree = 4^(log_2(n)) = 2^(2log_2(n)) = 2^(log_2(n^2)) = O(n^2)
+    // if the input tree is not balanced, then time complexity <<< O(n^2)
+    // e.g. two linkedlist O(n)
     public boolean isTweakedIdentical(TreeNode one, TreeNode two) {
         // Write your solution here
         if (one == null && two == null) {
             return true;
-        } else if (one != null || two != null) {
+        } else if (one == null || two == null) {
             return false;
         } else if (one.key != two.key) {
             return false;
