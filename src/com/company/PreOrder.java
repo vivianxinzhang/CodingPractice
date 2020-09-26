@@ -13,6 +13,11 @@ public class PreOrder {
         System.out.println(s.preOrder(root));
     }
 
+    // the left subtree should be traversed before the right subtree,
+    // since stack is LIFO, we should push right into the stack first,
+    // so for the next step the top element of the stack is the left subtree;
+    // Time O(n)
+    // Space O(h) worst O(n)
     public List<Integer> preOrder(TreeNode root) {
         // Write your solution here
         List<Integer> result = new ArrayList<>();
@@ -25,34 +30,10 @@ public class PreOrder {
             TreeNode cur = stack.pollFirst();
             result.add(cur.key);
             if (root.right != null) {
-                stack.offerFirst(root.right);
+                stack.offerFirst(cur.right);
             }
             if (root.left != null) {
-                stack.offerFirst(root.left);
-            }
-        }
-        return result;
-    }
-    // the left subtree should be traversed before the right subtree,
-    // since stack is LIFO, we should push right into the stack first,
-    // so for the next step the top element of the stack is the left subtree;
-    // Time O(n)
-    // Space O(h) worst O(n)
-    public List<Integer> preOrderI(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
-        if (root == null) {
-            return result;
-        }
-        Deque<TreeNode> stack = new ArrayDeque<>();
-        stack.push(root);
-        while (!stack.isEmpty()) {
-            TreeNode curr = stack.pollFirst();
-            result.add(curr.key);
-            if (curr.right != null) {
-                stack.push(curr.right);
-            }
-            if (curr.left != null) {
-                stack.push(curr.left);
+                stack.offerFirst(cur.left);
             }
         }
         return result;
