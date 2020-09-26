@@ -23,10 +23,19 @@ public class GetRange {
         if (root == null) {
             return;
         }
-        getRange(root.left, result, min, max);
+        // 1. determine if the left subtree should be traversed, only when
+        // root.key > min, we should traverse the left subtree
+        if (root.key > min) {
+            getRange(root.left, result, min, max);
+        }
+        // 2. determine if root should be traversed
         if (root.key >= min && root.key <= max) {
             result.add(root.key);
         }
-        getRange(root.right, result, min, max);
+        // 3. determine if the right subtree should be traversed, only when
+        // root.key < max, we should traverse the right subtree
+        if (root.key < max) {
+            getRange(root.right, result, min, max);
+        }
     }
 }

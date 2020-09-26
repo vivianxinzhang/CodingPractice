@@ -19,6 +19,10 @@ public class MergeSort {
 
     private void mergeSort2(int[] array, int left, int right, int[] helper) {
         // base case
+        // left >= right is also ok, left > right is a corner case
+        // but only use left > right as base case is wrong, will stack overflow
+        // (when there is only one element, left = right = mid, the subproblem will not become smaller)
+        // left == right must be a base case
         if (left == right) {
             return;
         }
