@@ -6,32 +6,21 @@ public class BSTSearch {
     // Space O(h) worst case O(n)
     public TreeNode search(TreeNode root, int key) {
         // Write your solution here
-        if (root == null) {
-            return null;
-        }
-        if (root.key == key) {
+        if (root == null || root.key == key) {
             return root;
         }
-        return root.key > key ? search(root.left, key) : search(root.right, key);
+        return search(root.key > key ? root.left : root.right, key);
     }
 
     // Method 2: iteration
-    // Time O(n)
+    // Time O(n) Better answser O(height)
     // Space O(h) worst case O(n)
     public TreeNode searchI(TreeNode root, int key) {
         // Write your solution here
-        if (root == null) {
-            return null;
+        TreeNode cur = root;
+        while (cur != null && cur.key != key) {
+            cur = key < cur.key ? cur.left : cur.right;
         }
-        while (root != null) {
-            if (root.key == key) {
-                return root;
-            } else if (root.key > key) {
-                root = root.left;
-            } else {
-                root = root.right;
-            }
-        }
-        return null;
+        return cur;
     }
 }
