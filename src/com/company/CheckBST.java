@@ -27,6 +27,7 @@ public class CheckBST {
             prev = curr;
             curr = curr.right;
         }
+        return true;
     }
 
     // Recursion

@@ -28,7 +28,7 @@ public class InOrder {
         return result;
     }
 
-    public List<Integer> inOrderII(TreeNode root) {
+    public List<Integer> inOrderIII(TreeNode root) {
         // Write your solution here
         List<Integer> result = new ArrayList<>();
         if (root == null) {
@@ -46,6 +46,29 @@ public class InOrder {
             curr = curr.right;
         }
         return result;
+    }
+
+    public List<Integer> inOrderII(TreeNode root) {
+        // Write your solution here
+        List<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        pushLeft(stack, root);
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.pollFirst();
+            result.add(cur.key);
+            pushLeft(stack, cur.right);
+        }
+        return result;
+    }
+
+    private void pushLeft(Deque<TreeNode> stack, TreeNode root) {
+        while (root != null) {
+            stack.offerFirst(root);
+            root = root.left;
+        }
     }
 
 
