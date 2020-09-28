@@ -29,6 +29,7 @@ public class InsertBST {
                 if (cur.left == null) {
                     cur.left = new TreeNode(key);
                 }
+                cur = cur.left;
             } else {
                 if (cur.right == null) {
                     cur.right = new TreeNode(key);
