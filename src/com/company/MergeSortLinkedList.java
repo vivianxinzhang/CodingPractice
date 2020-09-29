@@ -6,12 +6,14 @@ public class MergeSortLinkedList {
         if (head == null || head.next == null) {
             return head;
         }
+        // split the list into two halves
         ListNode middle = findMiddle(head);
-        ListNode leftHalf = head;
-        ListNode rightHalf = middle.next;
+        ListNode middleNext = middle.next;
         middle.next = null;
-        leftHalf = mergeSort(leftHalf);
-        rightHalf = mergeSort(rightHalf);
+        // merge sort each half
+        ListNode leftHalf = mergeSort(head);
+        ListNode rightHalf = mergeSort(middleNext);
+        // combine two halves
         return merge(leftHalf, rightHalf);
     }
 
