@@ -2,17 +2,17 @@ package com.company;
 import java.util.*;
 
 // Time O(n)
-// Space O(h) worst O(n)
+// Space O(h)
 public class Solution {
-    public ListNode reverse(ListNode head) {
+    public int minDepth(TreeNode root) {
         // Write your solution here
-        ListNode prev = null;
-        while (head != null) {
-            ListNode next = head.next;
-            head.next = prev;
-            prev = head;
-            head = next;
+        return findMinDepth(root, 0);
+    }
+
+    private int findMinDepth(TreeNode root, int depth) {
+        if (root == null) {
+            return depth;
         }
-        return prev;
+        return Math.min(findMinDepth(root.left, depth++), findMinDepth(root.right, depth++));
     }
 }
