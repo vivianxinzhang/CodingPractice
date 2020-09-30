@@ -1,9 +1,6 @@
 package com.company;
-import java.util.*;
 
-// Time O(logn)
-// Space O(1)
-public class Solution {
+public class DividedTwoIntegersWithRestrictions {
     public int divide(int dividend, int divisor) {
         // Write your solution here
         if (divisor == 0) {
