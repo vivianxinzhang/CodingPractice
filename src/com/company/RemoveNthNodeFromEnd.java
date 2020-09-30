@@ -23,6 +23,28 @@ public class RemoveNthNodeFromEnd {
         // Write your solution here
         ListNode dummy = new ListNode(0);
         dummy.next = head;
+
+        while (n > 0 && head != null) {
+            head = head.next;
+            n--;
+        }
+        // if n > 0 here, the total number of nodes is smaller than n
+        if (n == 0) {
+            ListNode prev = dummy;
+            while (head != null) {
+                prev = prev.next;
+                head = head.next;
+            }
+            // when head == null, prev.next is the node to remove
+            prev.next = prev.next.next;
+        }
+        return dummy.next;
+    }
+
+    public ListNode removeNthFromEndI(ListNode head, int n) {
+        // Write your solution here
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
         ListNode fast = dummy, slow = dummy;
         for (int i = 0; i <= n; i++) {
             if (fast == null) {
