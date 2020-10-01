@@ -29,15 +29,15 @@ public class SpiralTraverseII {
         if (top == bottom) {
             for (int col = left; col <= right; col++) {
                 result.add(matrix[top][col]);
-                return;
             }
+            return;
         }
         // one col left
         if (left == right) {
             for (int row = top; row <= bottom; row++) {
                 result.add(matrix[row][left]);
-                return;
             }
+            return;
         }
         // top row
         for (int i = left; i < right; i++) {
