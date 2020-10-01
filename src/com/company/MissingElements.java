@@ -4,6 +4,31 @@ public class MissingElements {
     // Time O(logn)
     // Space O(n)
     // Assumption: The given array is not null, and N >= 1
+    // last occurrence array[i] - i == 1
+    public int missing(int[] array) {
+        // Write your solution here
+        if (array == null || array.length == 0) {
+            return 1;
+        }
+        int left = 0;
+        int right = array.length - 1;
+        while (left < right - 1) {
+            int mid = left + (right - left) / 2;
+            if (array[mid] - mid == 1) {
+                left = mid;
+            } else {
+                right = mid;
+            }
+        }
+        if (array[right] - right == 1) {
+            return array[right] + 1;
+        }
+        if (array[left] - left == 1) {
+            return array[left] + 1;
+        }
+        return 1;
+    }
+
     public int oneMissing1(int[] array) {
         if (array.length == 0) {
             return 1;
