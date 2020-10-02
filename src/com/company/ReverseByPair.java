@@ -25,6 +25,26 @@ public class ReverseByPair {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode prev = dummy;
+        while (prev.next != null && prev.next.next != null) {
+            ListNode next = head.next.next;
+            ListNode newHead = head.next;
+            prev.next = newHead;
+            newHead.next = head;
+            head.next = next;
+            prev = head;
+            head = next;
+        }
+        return dummy.next;
+    }
+
+    public ListNode reverseInPairsII(ListNode head) {
+        // Write your solution here
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode prev = dummy;
         ListNode curr = head, next = null;
         while (curr != null && curr.next != null) {
             next = curr.next.next;

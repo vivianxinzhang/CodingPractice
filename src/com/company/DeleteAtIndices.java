@@ -16,6 +16,8 @@ public class DeleteAtIndices {
         }
     }
 
+    // Time O(n)
+    // Space O(1)
     public ListNode deleteNodes(ListNode head, int[] indices) {
         // Write your solution here
         if (head == null || indices == null || indices.length == 0) {

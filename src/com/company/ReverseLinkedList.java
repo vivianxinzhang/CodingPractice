@@ -2,6 +2,8 @@ package com.company;
 
 public class ReverseLinkedList {
     public ListNode reverse(ListNode head) {
+        // the main logic can handle corner case
+        // so we do not need to add corner case check here
         ListNode prev = null;
         while (head != null) {
             ListNode next = head.next;
