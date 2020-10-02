@@ -1,6 +1,12 @@
 package com.company;
 
 public class RainbowSort {
+    public static void swap(int[] array, int i, int j) {
+        int tmp = array[i];
+        array[i] = array[j];
+        array[j] = tmp;
+    }
+
     // rainbow sort 3 colors: Time O(n) Space O(1)
     public int[] rainbowSort1(int[] array) {
         // Write your solution here
@@ -52,6 +58,39 @@ public class RainbowSort {
     }
 
     // rainbow sort k colors: Time O(nk) Space O(1)
+    public int[] rainbowSortK(int[] array, int k) {
+        // Write your solution here
+        if (array == null || array.length <= 1) {
+            return array;
+        }
+        int leftColor = 1;
+        int rightColor = k;
+        int leftIdx = 0;
+        int rightIdx = array.length - 1;
+        while (leftColor < rightColor) {
+            int i = leftIdx;
+            int j = leftIdx;
+            int l = rightIdx;
+            while (j <= l) {
+                if (array[j] == leftColor) {
+                    swap(array, i, j);
+                    i++;
+                    j++;
+                } else if (array[j] == rightColor) {
+                    swap(array, j, l);
+                    l--;
+                } else {
+                    j++;
+                }
+            }
+            leftIdx = i;
+            rightIdx = l;
+            leftColor++;
+            rightColor--;
+        }
+        return array;
+    }
+
     // Implementation 1:
     public int[] rainbowSortIII(int[] array, int k) {
         // Write your solution here
@@ -102,11 +141,5 @@ public class RainbowSort {
             }
         }
         return array;
-    }
-
-    public static void swap(int[] array, int i, int j) {
-        int tmp = array[i];
-        array[i] = array[j];
-        array[j] = tmp;
     }
 }
