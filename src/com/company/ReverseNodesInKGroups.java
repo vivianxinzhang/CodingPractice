@@ -12,7 +12,7 @@ public class ReverseNodesInKGroups {
         two.next = three;
         three.next = four;
         four.next = five;
-        ListNode curr = s.reverseKGroup(one, 3);
+        ListNode curr = s.reverseKGroup(one, 2);
         while (curr != null) {
             System.out.print(curr.value);
             curr = curr.next;
@@ -21,7 +21,7 @@ public class ReverseNodesInKGroups {
 
     public ListNode reverseKGroup(ListNode head, int k) {
         // Write your solution here
-        if (head == null) {
+        if (head == null || k <= 1) {
             return head;
         }
         ListNode curr = findKth(head, k);
@@ -30,17 +30,17 @@ public class ReverseNodesInKGroups {
         }
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode tail = dummy;
+        ListNode prev = dummy;
         while (curr != null) {
             ListNode subHead = curr.next;
             curr.next = null;
             // reverse first k nodes
             ListNode newHead = reverse(head);
-            tail.next = newHead;
-            tail = head;
+            prev.next = newHead;
             head.next = subHead;
-            head = newHead;
-            curr = findKth(subHead, k);
+            prev = head;
+            head = subHead;
+            curr = findKth(head, k);
         }
         return dummy.next;
     }
@@ -53,6 +53,19 @@ public class ReverseNodesInKGroups {
             head = head.next;
         }
         return head;
+    }
+    private ListNode reverse(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode prev = null;
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
+        return prev;
     }
 
     public ListNode reverseKGroupI(ListNode head, int k) {
@@ -73,19 +86,5 @@ public class ReverseNodesInKGroups {
         ListNode newHead = reverse(head);
         head.next = subHead;
         return newHead;
-    }
-
-    private ListNode reverse(ListNode head) {
-        if (head == null || head.next == null) {
-            return head;
-        }
-        ListNode prev = null;
-        while (head != null) {
-            ListNode next = head.next;
-            head.next = prev;
-            prev = head;
-            head = next;
-        }
-        return prev;
     }
 }
