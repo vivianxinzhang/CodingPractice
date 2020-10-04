@@ -25,22 +25,25 @@ public class ReverseAlternate {
         ListNode evenDummy = new ListNode(0);
         ListNode oddTail = oddDummy;
         ListNode evenTail = evenDummy;
+        // partition linked list
         while (head != null) {
             oddTail.next = head;
-            oddTail = oddTail.next;
             head = head.next;
+            oddTail = oddTail.next;
             if (head != null) {
                 evenTail.next = head;
-                evenTail = evenTail.next;
                 head = head.next;
+                evenTail = evenTail.next;
             }
         }
+        // de-link tail of even
         evenTail.next = null;
+        // reverse even nodes part
         ListNode evenHead = reverse(evenDummy.next);
+        // link odd nodes part with even nodes part
         oddTail.next = evenHead;
         return oddDummy.next;
     }
-
     private ListNode reverse(ListNode head) {
         if (head == null || head.next == null) {
             return head;
