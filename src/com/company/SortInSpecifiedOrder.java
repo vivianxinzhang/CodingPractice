@@ -29,7 +29,7 @@ public class SortInSpecifiedOrder {
             }
         }
         int i = 0;
-        // Step 2: iterate through A2 and get elements out of A1 according to the sequence
+        // Step 2: iterate through A2 and get elements out of the map according to the sequence
         for (int number : A2) {
             Integer count = map.get(number);
             if (count != null) {
