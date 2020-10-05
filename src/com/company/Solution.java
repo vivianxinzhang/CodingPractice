@@ -3,6 +3,5 @@ import java.util.*;
 
 // Time O(mn)
 // Space O(1)
-public class Solution {
 
-}
+
