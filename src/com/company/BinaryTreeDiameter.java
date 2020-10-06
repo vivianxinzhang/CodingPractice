@@ -16,6 +16,8 @@ public class BinaryTreeDiameter {
         }
         int leftHeight = helper(root.left, maximum);
         int rightHeight = helper(root.right, maximum);
+        // The diameter is defined as the longest distance from one leaf node to another leaf node.
+        // The distance is the number of nodes on the path.
         if (root.left != null && root.right != null) {
             int currDiameter = leftHeight + rightHeight + 1;
             maximum[0] = Math.max(maximum[0], currDiameter);
