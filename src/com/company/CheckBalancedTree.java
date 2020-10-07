@@ -11,14 +11,6 @@ public class CheckBalancedTree {
         System.out.println(s.isBalanced(one));
     }
 
-    public boolean isBalancedII(TreeNode root) {
-        // Write your solution here
-        if (root == null) {
-            return true;
-        }
-
-    }
-
     // Method 2:
     // Time O(n^2)
     // Space O(height) worst O(n) average O(logn)
@@ -43,6 +35,9 @@ public class CheckBalancedTree {
     }
 
     // Method 1:
+    // Height = log(n) levels
+    // Each level call getHeight: Time = O(n)
+    // Thus, total time = n + n/2 * 2 + n/4 * 4 + ... = O(nlogn)
     // Time O(nlogn)
     // Space O(h) worst case O(n)
     public boolean isBalancedI(TreeNode root) {

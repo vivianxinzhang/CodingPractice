@@ -11,7 +11,6 @@ public class PreOrder {
         TreeNode three = new TreeNode(3);
         TreeNode two = new TreeNode(2);
         root.left = three;
-        System.out.println(s.preOrder(root));
     }
 
 
