@@ -37,4 +37,39 @@ public class EvaluateSuffixExpression {
             return nLeft / nRight;
         }
     }
+
+    public int evaluateI(String[] suffix) {
+        // Write your solution here
+        int result = 0;
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (String token : suffix) {
+            if ("+-*/".indexOf(token) >= 0) {
+                int nRight = stack.pollFirst();
+                int nLeft = stack.pollFirst();
+                switch (token) {
+                    case "+": {
+                        stack.push(nLeft + nRight);
+                        break;
+                    }
+                    case "-": {
+                        stack.push(nLeft - nRight);
+                        break;
+                    }
+                    case "*": {
+                        stack.push(nLeft * nRight);
+                        break;
+                    }
+                    case "/": {
+                        stack.push(nLeft / nRight);
+                        break;
+                    }
+                }
+                int tmp = calculate(nLeft, nRight, token);
+                stack.push(tmp);
+            } else {
+                stack.offerFirst(Integer.valueOf(token));
+            }
+        }
+        return stack.peekFirst();
+    }
 }
