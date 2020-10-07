@@ -11,6 +11,14 @@ public class CheckBalancedTree {
         System.out.println(s.isBalanced(one));
     }
 
+    public boolean isBalancedII(TreeNode root) {
+        // Write your solution here
+        if (root == null) {
+            return true;
+        }
+
+    }
+
     // Method 2:
     // Time O(n^2)
     // Space O(height) worst O(n) average O(logn)
@@ -37,7 +45,7 @@ public class CheckBalancedTree {
     // Method 1:
     // Time O(nlogn)
     // Space O(h) worst case O(n)
-    public boolean isBalanced1(TreeNode root) {
+    public boolean isBalancedI(TreeNode root) {
         // Write your solution here
         if (root == null) {
             return true;
@@ -47,7 +55,7 @@ public class CheckBalancedTree {
         if (Math.abs(leftHeight - rightHeight) > 1){
             return false;
         }
-        return isBalanced1(root.left) && isBalanced1(root.right);
+        return isBalancedI(root.left) && isBalancedI(root.right);
     }
 
     public int findHeight(TreeNode root) {

@@ -13,12 +13,10 @@ public class LowestCommonAncestorI {
     //    c) otherwise, return the lowest node with one and two
     //      in the two different subtrees
     // Time O(n)
-    // Space O(n)
+    // Space O(height) worst case O(n)
     public TreeNode lowestCommonAncestor(TreeNode root,
                                          TreeNode one, TreeNode two) {
-        if (root == null) {
-            return null;
-        } else if (root == one || root == two) {
+        if (root == null || root == one || root == two) {
             return root;
         }
         TreeNode left = lowestCommonAncestor(root.left, one, two);
