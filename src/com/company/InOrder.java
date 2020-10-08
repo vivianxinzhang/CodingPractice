@@ -28,33 +28,6 @@ public class InOrder {
         return result;
     }
 
-    // Time O(n)
-    // Space O(h) worst case O(n)
-    public class Solution {
-        public List<Integer> inOrderIV(TreeNode root) {
-            // Write your solution here
-            List<Integer> result = new ArrayList<>();
-            if (root == null) {
-                return result;
-            }
-            Deque<TreeNode> stack = new ArrayDeque<>();
-            while (root != null) {
-                stack.offerFirst(root);
-                root = root.left;
-            }
-            while (!stack.isEmpty()) {
-                TreeNode curr = stack.pollFirst();
-                result.add(curr.key);
-                curr = curr.right;
-                while (curr != null) {
-                    stack.offerFirst(curr);
-                    curr = curr.left;
-                }
-            }
-            return result;
-        }
-    }
-
     public List<Integer> inOrderIII(TreeNode root) {
         // Write your solution here
         List<Integer> result = new ArrayList<>();
