@@ -1,7 +1,6 @@
 package com.company;
 import java.util.*;
 
-
 public class MaxWidthOfBinaryTree {
     public static void main(String[] args) {
         MaxWidthOfBinaryTree s = new MaxWidthOfBinaryTree();

@@ -1,0 +1,54 @@
+package com.company;
+
+public class LowestCommonAncestorIII {
+    // one and two are not necessarily on the tree
+    // if return c: then we know that
+    //              BOTH    a and b 不直接隶属
+    //              AND     both a and b MUST be in the tree
+    // if return a or b: (let's say we return a) then
+    //              Either  a 是 b 的直接隶属上级
+    //              OR      b is not in the tree -- HOW DO WE KNOW?
+    //                      we can run an additional findNode(root = a, b) or LCA(root = a, b, b) to check
+    // Time O(n)
+    // Space O(n)
+    public TreeNode lowestCommonAncestor(TreeNode root,
+                                         TreeNode one, TreeNode two) {
+        // write your solution here
+        TreeNode result = LCA(root, one, two);
+        if (result == one) {
+            if (LCA(one, two, two) == null) {
+                return null;
+            }
+        } else if (result == two) {
+            if (LCA(two, one, one) == null) {
+                return null;
+            }
+        }
+        return result;
+    }
+
+    // Assumptions: root is not null, one and two guaranteed to be in the tree and not null
+    // return:
+    // null - there is no one or two in the subtree
+    // not null -
+    // 1) if there is only one node of one/two in the subtree
+    //    just return the one/two itself
+    // 2) if both one and two are in the subtree, return the LCA
+    //    a) one is two's ancestor, return one
+    //    b) two is one's ancestor, return two
+    //    c) otherwise, return the lowest node with one and two
+    //      in the two different subtrees
+    private TreeNode LCA(TreeNode root, TreeNode one, TreeNode two) {
+        if (root == null) {
+            return null;
+        } else if (root == one || root == two) {
+            return root;
+        }
+        TreeNode left = LCA(root.left, one, two);
+        TreeNode right = LCA(root.right, one, two);
+        if (left != null && right != null) {
+            return root;
+        }
+        return left == null ? right : left;
+    }
+}
