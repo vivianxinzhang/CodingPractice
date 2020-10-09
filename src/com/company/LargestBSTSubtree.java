@@ -35,11 +35,11 @@ public class LargestBSTSubtree {
         if (root == null) {
             return 0;
         }
+        int leftRes = largestBSTSubtree(root.left, max, minValue, root.key);
+        int rightRes = largestBSTSubtree(root.right, max, root.key, maxValue);
         if (root.key < minValue || root.key > maxValue) {
             return -1;
         }
-        int leftRes = largestBSTSubtree(root.left, max, minValue, root.key);
-        int rightRes = largestBSTSubtree(root.right, max, root.key, maxValue);
         if (leftRes == -1 || rightRes == -1) {
             return -1;
         } else {
