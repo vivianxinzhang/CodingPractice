@@ -14,7 +14,6 @@ public class ConnectRightPointerToSuccessor {
         s.connect(one);
     }
 
-
     // Time O(n)
     // Space O(height) worst case O(n)
     public void connect(TreeNode root) {
