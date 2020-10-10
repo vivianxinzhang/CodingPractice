@@ -24,27 +24,40 @@ public class LargestBSTSubtree {
         if (root == null) {
             return 0;
         }
-        int[] max = new int[1];
-        largestBSTSubtree(root, max, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        int[] max = new int[] {1};
+        largestBSTSubtree(root, max);
         return max[0];
     }
 
     // if not BST return -1, if is BST return size
     // update max if current tree is BST
-    private int largestBSTSubtree(TreeNode root, int[] max, int minValue, int maxValue) {
+    private Value largestBSTSubtree(TreeNode root, int[] max) {
         if (root == null) {
-            return 0;
+            return new Value(0, true, Integer.MAX_VALUE, Integer.MIN_VALUE);
+        } else if (root.left == null && root.right == null) {
+            return new Value(1, true, root.key, root.key);
         }
-        int leftRes = largestBSTSubtree(root.left, max, minValue, root.key);
-        int rightRes = largestBSTSubtree(root.right, max, root.key, maxValue);
-        if (root.key < minValue || root.key > maxValue) {
-            return -1;
-        }
-        if (leftRes == -1 || rightRes == -1) {
-            return -1;
+        Value leftRes = largestBSTSubtree(root.left, max);
+        Value rightRes = largestBSTSubtree(root.right, max);
+        if (leftRes.isBST && rightRes.isBST && root.key > leftRes.max && root.key < rightRes.min) {
+            max[0] = Math.max(leftRes.size + rightRes.size + 1, max[0]);
+            return new Value(leftRes.size + rightRes.size + 1, true, leftRes.min, rightRes.max);
         } else {
-            max[0] = Math.max(leftRes + rightRes + 1, max[0]);
-            return leftRes + rightRes + 1;
+            return new Value(-1, false, -1, -1);
+        }
+    }
+
+    class Value {
+        int size = 0;
+        boolean isBST = false;
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+
+        public Value(int size, boolean isBST, int min, int max) {
+            this.size = size;
+            this.isBST = isBST;
+            this.min = min;
+            this.max = max;
         }
     }
 }
