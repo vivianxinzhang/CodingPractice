@@ -3,7 +3,7 @@ import java.util.*;
 
 public class DiagonalSumofBinaryTree {
     public static void main(String[] args) {
-        Solution s = new Solution();
+        DiagonalSumofBinaryTree s = new DiagonalSumofBinaryTree();
         TreeNode one = new TreeNode(1);
         TreeNode two = new TreeNode(2);
         TreeNode three = new TreeNode(3);
@@ -25,7 +25,7 @@ public class DiagonalSumofBinaryTree {
     }
 
     // Time O(n)
-// Space O(h)
+    // Space O(h)
     public List<Integer> diagonalSum(TreeNode root) {
         // Write your solution here
         List<Integer> result = new ArrayList<>();
