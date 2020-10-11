@@ -76,6 +76,13 @@ public class kSmallestUnsortedArray {
     }
 
     // Method 4: quick select
+    // Time O(n) worst case O(n^2)
+    // Space O(1)
+    // Assume k >= 0 and k <= array.length
+    // O(n + n/2 + n/4 + ... 1) if pivot separates array 1/2 and 1/2
+    // = O(1/(1-1/2) * n) = O(2n) = O(n)
+    // O(n + (9/10)n + (9/10)^2*n + ... + 1  if pivot separates array to 1/10 and 9/10
+    // = O(1/(1-9/10) * n) = O(10n) = O(n)
     public int[] kSmallestIV(int[] array, int k) {
         // corner case
         if (array == null || array.length == 0 || k == 0) {
@@ -94,10 +101,8 @@ public class kSmallestUnsortedArray {
     private void quickSelect(int[] array, int left, int right, int target) {
         // like quick sort, we need to do the partition using pivot value
         int pivotIdx = partition(array, left, right);
-        // unlike quick sort, we only need to do quickselect on
-        // at most one partition.
-        // if the pivot is already the kth smallest element, we can
-        // directly return
+        // unlike quick sort, we only need to do quick select on at most one partition.
+        // if the pivot is already the kth smallest element, we can directly return
         if (pivotIdx == target) {
             return;
         } else if (pivotIdx > target) {
