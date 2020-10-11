@@ -41,8 +41,8 @@ public class TopKFrequentWords {
     }
 
     private String[] freqArray(PriorityQueue<Map.Entry<String, Integer>> minHeap) {
-        String[] array = new String[];
-        for (int i = 0; i < array.length; i++) {
+        String[] array = new String[minHeap.size()];
+        for (int i = array.length - 1; i >= 0; i--) {
             array[i] = minHeap.poll().getKey();
         }
         return array;
