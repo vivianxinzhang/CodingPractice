@@ -35,6 +35,14 @@ public class AllValidPermutationsOfParenthesesI {
         if (left > 0) {
             cur[index] = '(';
             helper(cur, left - 1, right, index + 1, result);
+            // Notice: it looks like we do not do anything when back tracking
+            // to the previous level, the code is still right because:
+            // 1. we are setting the character at index and when back tracking,
+            // what we just need to do is 1) remove the character at index and
+            // 2) add a different character at index
+            // 2. only when we fill in all the positions in cur, we have a complete solution
+            // the code itself actually already suffices the above two points and it already
+            // does the correct removing operation when back tracked to previous level
         }
         // when we can add a ')' ?
         // when there is more '(' than ') used
