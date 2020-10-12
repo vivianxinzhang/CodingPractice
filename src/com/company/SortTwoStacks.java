@@ -15,47 +15,53 @@ public class SortTwoStacks {
         s.sortI(s1);
         System.out.println(s1);
     }
+
     // sort in descending order and store result in the bottom part of input
-    public void sort(LinkedList<Integer> s1) {
+    // Time O(n^2)
+    // Space O(n)
+    public void sort(Deque<Integer> s1) {
         if (s1 == null || s1.size() <= 1) {
             return;
         }
         // Initialize buffer stack and preMax
-        LinkedList<Integer> s2 = new LinkedList<Integer>();
-        // Initialize preMax, which helpers differ sorted area and unsorted area
+        // preMax helpers differ sorted area and unsorted area
+        Deque<Integer> s2 = new ArrayDeque<>();
         int preMax = Integer.MAX_VALUE;
         while (s1.peekFirst() < preMax) {
-            // Initialize currMax, compare with stack1 unsorted elements to find currMax
-            int curMax = Integer.MIN_VALUE;
+            // Initialize currMax, compare each stack1 unsorted element with currMax
+            // to find real currMax
+            int currMax = Integer.MIN_VALUE;
             int count = 0;
             while (!s1.isEmpty() && s1.peekFirst() < preMax) {
                 int curr = s1.pollFirst();
-                if (curr == curMax) {
+                if (curr == currMax) {
                     count++;
-                } else if (curr > curMax) {
-                    curMax = curr;
+                } else if (curr > currMax) {
+                    currMax = curr;
                     count = 1;
                 }
                 s2.offerFirst(curr);
             }
             // push currMax back to s1
             while (count > 0) {
-                s1.offerFirst(curMax);
+                s1.offerFirst(currMax);
                 count--;
             }
-            // push other elements back to s1
+            // push elements other than currMax back to s1
             while (!s2.isEmpty()) {
                 int tmp = s2.pollFirst();
-                s1.offerFirst(tmp);
+                if (tmp != currMax) {
+                    s1.offerFirst(tmp);
+                }
             }
-            preMax = curMax;
+            preMax = currMax;
         }
     }
 
     // sort in descending order and store result in the bottom part of input
     // input: result | unsorted elements
     // buffer: used to store elements temporarily when finding max each round
-    public void sort(Deque<Integer> s1) {
+    public void sortII(Deque<Integer> s1) {
         Deque<Integer> s2 = new ArrayDeque<>();
         // Write your solution here.
         int preMax = Integer.MAX_VALUE;
