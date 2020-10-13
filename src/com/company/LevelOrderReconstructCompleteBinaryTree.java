@@ -1,6 +1,9 @@
 package com.company;
 
 public class LevelOrderReconstructCompleteBinaryTree {
+    public static void main(String[] args) {
+        System.out.println("main");
+    }
     // Time O(n)
     // Space O(height) worst case O(n)
     public TreeNode construct(int[] level) {
