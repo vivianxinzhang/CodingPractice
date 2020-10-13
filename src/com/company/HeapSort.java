@@ -31,18 +31,6 @@ public class HeapSort {
         }
     }
 
-    private void percolateUp(int[] array, int i) {
-        while (i > 0) {
-            int parentIdx = (i - 1) / 2;
-            if (array[parentIdx] < array[i]) {
-                swap(array, i, parentIdx);
-                i = parentIdx;
-            } else {
-                break;
-            }
-        }
-    }
-
     private void percolateDown(int[] array, int i, int endIdx) {
         while (2 * i + 1 <= endIdx) {
             int leftIdx = 2 * i + 1;
