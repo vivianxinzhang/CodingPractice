@@ -2,8 +2,8 @@ package com.company;
 import java.util.*;
 
 public class TopKFrequentWords {
-    // Time average O((n + k)logk)  <--  O(n + klogk + (n-k)logk + klogk)
-    // worst case O(n^2 + 2klogk + (n-k)logk)
+    // Time average O((nlogk)  <--  O(n + klogk + 2(n-k)logk + klogk)
+    // worst case O(n^2 + 2klogk + 2(n-k)logk)
     // Space O(n + k)
     // Assumptions: combo is not null, and k >= 1
     public String[] topKFrequent(String[] combo, int k) {
