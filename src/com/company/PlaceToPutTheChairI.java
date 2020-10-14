@@ -2,18 +2,6 @@ package com.company;
 import java.util.*;
 
 public class PlaceToPutTheChairI {
-    public static void main(String[] args) {
-        PlaceToPutTheChairI s = new PlaceToPutTheChairI();
-        char[][] gym = {{'E', 'E'},{'E', 'O'},{'E', 'O'}};
-        System.out.println(s.putChair(gym));
-
-        gym = new char[][]{{'E', 'O', 'C'}, {'C', 'E', 'C'}, {'C', 'C', 'C'}};
-        System.out.println(s.putChair(gym));
-
-        gym = new char[][]{{'E','C','E','O','C'},{'E','O','C','C','E'},{'O','O','E','C','C'},{'C','O','C','E','E'},{'E','C','C','C','C'}};
-        System.out.println(s.putChair(gym));
-    }
-
     // Assumptions:
     // 1) The cost from one cell to any of its neighbors(up/down/left/right) is 1
     // 2) 'E' denotes equipment, 'O' denotes obstacle, 'C' denotes empty cell
