@@ -5,51 +5,50 @@ public class Solution {
     public static void main(String[] args) {
         System.out.println("main");
         Solution s = new Solution();
-        String[] combo = {"a", "a", "b", "b", "b", "b", "c", "c", "c", "d"};
-        System.out.println(Arrays.toString(combo));
-        System.out.println(s.getMap(combo));
-        System.out.println(Arrays.toString(s.topKFrequent(combo, 2)));
+//        String[] combo = {"a", "a", "b", "b", "b", "b", "c", "c", "c", "d"};
+//        System.out.println(Arrays.toString(combo));
+//        String str = "abc";
+        int[] A = {1, 3, 5};
+        int[] B = {4, 8};
+        System.out.println(s.kthSmallest(A, B, 4));
     }
 
-    // Time O(nlogk) <-- O(n) + O(klogk) + O(2(n-k)logk) + O(klogk)
-    // Space O()
-    public String[] topKFrequent(String[] combo, int k) {
-        // Write your solution here
-        HashMap<String, Integer> map = getMap(combo);
-        PriorityQueue<Map.Entry<String, Integer>> minHeap = new PriorityQueue<>(new Comparator<Map.Entry<String, Integer>>() {
-            @Override
-            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                if (o1.getValue() == o2.getValue()) {
-                    return 0;
-                }
-                return o1.getValue() < o2.getValue() ? -1 : 1;
+    // Time O(klogk)
+    // Space O(k)
+    public int kthSmallest(int[] A, int[] B, int k) {
+        PriorityQueue<Pair> minHeap = new PriorityQueue<>();
+        minHeap.offer(new Pair(0, 0, A[0] + B[0]));
+        for (int i = 1; i < k; i++) {
+            Pair curr = minHeap.poll();
+            if (curr.indexA + 1 < A.length) {
+                minHeap.offer(new Pair(curr.indexA + 1, curr.indexB, A[curr.indexA + 1] + B[ curr.indexB]));
             }
-        });
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            if (minHeap.size() < k) {
-                minHeap.offer(entry);
-            } else if (minHeap.peek().getValue() < entry.getValue()){
-                minHeap.poll();
-                minHeap.offer(entry);
+            if (curr.indexB + 1 < B.length) {
+                minHeap.offer(new Pair(curr.indexA, curr.indexB + 1, A[curr.indexA] + B[curr.indexB + 1]));
             }
         }
-        return freqArray(minHeap);
+        return minHeap.peek().sum;
     }
 
-    private HashMap<String, Integer> getMap(String[] combo) {
-        HashMap<String, Integer> map = new HashMap<>();
-        for (String str : combo) {
-            Integer count = map.getOrDefault(str, 0);
-            map.put(str, ++count);
+    class Pair implements Comparable<Pair> {
+        int indexA;
+        int indexB;
+        int sum;
+
+        public Pair(int indexA, int y, int sum) {
+            this.indexA = indexA;
+            this.indexB = indexB;
+            this.sum = sum;
         }
-        return map;
+
+        @Override
+        public int compareTo(Pair another) {
+            if (this.sum == another.sum) {
+                return 0;
+            }
+            return this.sum < another.sum ? -1 : 1;
+        }
     }
 
-    private String[] freqArray(PriorityQueue<Map.Entry<String, Integer>> minHeap) {
-        String[] array = new String[minHeap.size()];
-        for (int i = array.length - 1; i >= 0; i--) {
-            array[i] = minHeap.poll().getKey();
-        }
-        return array;
-    }
+
 }
