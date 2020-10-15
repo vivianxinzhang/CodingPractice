@@ -1,5 +1,4 @@
 package com.company;
-import java.util.Arrays;
 
 public class RemoveSpaces {
     public static void main(String[] args) {
