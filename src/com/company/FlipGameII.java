@@ -48,11 +48,11 @@ public class FlipGameII {
                 array[i] = '-';
                 array[i + 1] = '-';
                 boolean otherCanWin = canWin(array);
+                array[i] = '+';
+                array[i + 1] = '+';
                 if (!otherCanWin) {
                     return true;
                 }
-                array[i] = '+';
-                array[i + 1] = '+';
             }
         }
         return false;
