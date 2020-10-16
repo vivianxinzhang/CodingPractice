@@ -27,10 +27,6 @@ public class Student implements Comparable<Student> {
         return this.getAge() < another.getAge() ? -1 : 1;
     }
 
-    @Override
-    public boolean equals() {
-
-    }
     // standard getters/setters, equals and hashcode
 }
 
