@@ -30,12 +30,12 @@ public class Student implements Comparable<Student> {
     // standard getters/setters, equals and hashcode
 }
 
-class MyComparator implements Comparator<Student> {
-    @Override
-    public int compare(Student s1, Student s2) {
-        if (s1.getAge() == s2.getAge()) {
-            return 0;
-        }
-        return s1.getAge() < s2.getAge() ? -1 : 1;
-    }
-}
+//class MyComparator implements Comparator<Student> {
+//    @Override
+//    public int compare(Student s1, Student s2) {
+//        if (s1.getAge() == s2.getAge()) {
+//            return 0;
+//        }
+//        return s1.getAge() < s2.getAge() ? -1 : 1;
+//    }
+//}
