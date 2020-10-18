@@ -42,15 +42,6 @@ public class DetermineIfOneStringIsSubstringOfAnother {
         return -1;
     }
 
-    private boolean equals(String large, int index, String small) {
-        for (int i = 0; i < small.length(); i++) {
-            if (large.charAt(index + i) != small.charAt(i)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     // Notice:
     // 1. There is no assumption about the charset used in the String,
     //    so that we can not assume we are using 26 lower case characters
@@ -107,14 +98,24 @@ public class DetermineIfOneStringIsSubstringOfAnother {
         return -1;
     }
 
+    private boolean equals(String large, int index, String small) {
+        for (int i = 0; i < small.length(); i++) {
+            if (large.charAt(index + i) != small.charAt(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private int moduleHash(int hash, int addition, int prime, int largePrime) {
+        return (hash * prime % largePrime + addition) % largePrime;
+    }
+
+
     private int nonNegative(int hash, int largePrime) {
         if (hash < 0) {
             hash += largePrime;
         }
         return hash;
-    }
-
-    private int moduleHash(int hash, int addition, int prime, int largePrime) {
-        return (hash * prime % largePrime + addition) % largePrime;
     }
 }
