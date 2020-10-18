@@ -2,9 +2,29 @@ package com.company;
 import java.util.*;
 
 public class StringReplace {
+    // Method 2: Using Java's StringBuilder utility and String's indexof(),
+    // not using String's replace() ...
+    public String replace(String input, String s, String t) {
+        // Assumptions: input, s, t are not null, s is not empty
+        StringBuilder sb = new StringBuilder();
+        // We check if there exists a substring same as s in the substring of input
+        // starting at fromIndex
+        int fromIndex = 0;
+        int matchIndex = input.indexOf(s, fromIndex);
+        while (matchIndex != -1) {
+            sb.append(input, fromIndex, matchIndex).append(t);
+            // Next time we need to start from matchIndex + s.length()
+            // to find if we have later matches
+            fromIndex = matchIndex + s.length();
+            matchIndex = input.indexOf(s, fromIndex);
+        }
+        sb.append(input, fromIndex, input.length());
+        return sb.toString();
+    }
+
     // Method 1: Not using any String/StringBuilder utility,
     // and using char[] to do it "in place"
-    public String replace(String input, String s, String t) {
+    public String replaceI(String input, String s, String t) {
         // Assumptions: input, s, t are not null, s is not empty
         char[] array = input.toCharArray();
         if (s.length() >= t.length()) {
@@ -31,7 +51,6 @@ public class StringReplace {
         }
         return new String(input, 0, slow);
     }
-
 
     private String replaceLonger(char[] input, String s, String t) {
         // Notice: we will need a longer array in the case, and if the requirement is "in place",
