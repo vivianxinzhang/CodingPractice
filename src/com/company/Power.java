@@ -1,7 +1,5 @@
 package com.company;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
-
 public class Power {
     public static void main(String[] args) {
         Power s = new Power();
