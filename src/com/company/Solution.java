@@ -10,6 +10,22 @@ public class Solution {
         System.out.println(Arrays.toString(newArray));
     }
 
+    private void helper(String set, StringBuilder sb, int index, int len, List<String> sol) {
+        // sb size = x
+        if (index == len) {
+            sol.add(sb.toString());
+            return;
+        }
+        // sb size = x
+        helper(set, sb, index + 1, len, sol);
+        // sb size = x(induction)
+        sb.append(set.charAt(index));
+        // sb size = x + 1
+        helper(set, sb, index + 1, len, sol);
+        // sb size = x + 1 (induction)
+        sb.deleteCharAt(sb.length() - 1);
+        // sb size = x
+    }
     public String rightShift(String input, int k) {
         // Write your solution here
         if (input == null || input.length() == 0) {
