@@ -1,51 +1,101 @@
 package com.company;
+
 import java.util.*;
 
 public class Solution {
     public static void main(String[] args) {
         Solution s = new Solution();
         String input = "   I     love MTV   ";
-        char[] array = new char[] {'a', 'b', 'c'};
+        char[] array = new char[]{'a', 'b', 'c'};
         char[] newArray = Arrays.copyOf(array, 10);
         System.out.println(Arrays.toString(newArray));
     }
 
-    private void helper(String set, StringBuilder sb, int index, int len, List<String> sol) {
-        // sb size = x
-        if (index == len) {
-            sol.add(sb.toString());
-            return;
+    // Time O(n)
+    // Space O(h)
+    public TreeNode lowestCommonAncestor(TreeNode root,
+                                         TreeNode one, TreeNode two) {
+        if (root == null || root == one || root == two) {
+            return root;
         }
-        // sb size = x
-        helper(set, sb, index + 1, len, sol);
-        // sb size = x(induction)
-        sb.append(set.charAt(index));
-        // sb size = x + 1
-        helper(set, sb, index + 1, len, sol);
-        // sb size = x + 1 (induction)
-        sb.deleteCharAt(sb.length() - 1);
-        // sb size = x
-    }
-    public String rightShift(String input, int k) {
-        // Write your solution here
-        if (input == null || input.length() == 0) {
-            return input;
+        TreeNode leftRes = lowestCommonAncestor(root.left, one, two);
+        TreeNode rightRes = lowestCommonAncestor(root.right, one, two);
+        if (leftRes != null && rightRes != null) {
+            return root;
         }
-        k %= input.length();
-        char[] array = input.toCharArray();
-        reverse(array, 0, array.length - 1);
-        reverse(array, 0, k - 1);
-        reverse(array, k, array.length - 1);
-        return new String(array);
+        return leftRes == null ? rightRes : leftRes;
     }
 
-    private void reverse(char[] array, int i, int j) {
-        while (i < j) {
-            char tmp = array[i];
-            array[i] = array[j];
-            array[j] = tmp;
-            i++;
-            j--;
+    public void numNodesLeft(TreeNodeLeft root) {
+        numNodes(root);
+    }
+
+    private int numNodes(TreeNodeLeft root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftRes = numNodes(root.left);
+        int rightRes = numNodes(root.right);
+        root.numNodesLeft = leftRes;
+        return leftRes + rightRes + 1;
+    }
+
+
+    public ListNode reverseInPairs(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode subHead = reverseInPairs(head.next.next);
+        ListNode node2 = head.next;
+        head.next = subHead;
+        node2.next = head;
+        return node2;
+    }
+
+    public List<Integer> spiral(int[][] matrix) {
+        // Write your solution here
+        List<Integer> result = new ArrayList<>();
+        helper(matrix, 0, matrix.length, result);
+        return result;
+    }
+
+    private void helper(int[][] matrix, int start, int end, List<Integer> result) {
+        if (start > end) {
+            return;
+        }
+        if (start == end) {
+            result.add(matrix[start][start]);
+            return;
+        }
+        // top row
+        for (int i = start; i < end; i++) {
+            result.add(matrix[start][i]);
+        }
+        // right col
+        for (int i = start; i < end; i++) {
+            result.add(matrix[i][end]);
+        }
+        // bottom row
+        for (int i = end; i > start; i--) {
+            result.add(matrix[end][i]);
+        }
+        // left col
+        for (int i = end; i > start; i--) {
+            result.add(matrix[i][start]);
+        }
+        start++;
+        end--;
+        helper(matrix, start, end, result);
+    }
+
+    public class TreeNodeLeft {
+        public int key;
+        public TreeNodeLeft left;
+        public TreeNodeLeft right;
+        public int numNodesLeft;
+
+        public TreeNodeLeft(int key) {
+            this.key = key;
         }
     }
 }

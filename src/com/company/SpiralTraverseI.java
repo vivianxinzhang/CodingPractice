@@ -8,7 +8,7 @@ public class SpiralTraverseI {
         System.out.println(s.spiral(matrix));
     }
 
-    // Time O(n^2)
+    // Time O(n^2) = O(4n + 4(n - 2) + 4(n - 4) + ... + 0) = O(n/2 * (4n + 0)/2)
     // Space O(n)
     public List<Integer> spiral(int[][] matrix) {
         // Write your solution here
