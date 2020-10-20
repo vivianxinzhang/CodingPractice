@@ -11,15 +11,51 @@ public class InsertBST {
         System.out.println(s.isBalanced(one));
     }
 
-    // Time O(height)
+    // Time O(height) worst case O(n)
     // Space O(height)
+    public TreeNode deleteTree(TreeNode root, int key) {
+        if (root == null) {
+            return root;
+        }
+        if (root.key == key) {
+            // case 1: root is a leaf node
+            if (root.left == null && root.right == null) {
+                return null;
+            } else if (root.right == null) {
+                return root.left;
+            } else if (root.left == null && root.right.left == null) {
+                return root.right;
+            } else {
+                TreeNode newRoot = deleteSmallest(root.right);
+                newRoot.left = root.left;
+                newRoot.right = root.right;
+                return newRoot;
+            }
+        }
+        if (key < root.key) {
+            root.left = deleteTree(root.left, key);
+        } else {
+            root.right = deleteTree(root.right, key);
+        }
+        return root;
+    }
+
+    private TreeNode deleteSmallest(TreeNode root) {
+        while (root.left.left != null) {
+            root = root.left;
+        }
+        TreeNode smallest = root.left;
+        root.left = null;
+        return smallest;
+    }
+
     public TreeNode insert(TreeNode root, int key) {
         // Write your solution here
         if (root == null) {
             return new TreeNode(key);
         }
         TreeNode curr = root;
-        while (curr != null && curr.key != key) {
+        while (curr.key != key) {
             if (key < curr.key) {
                 if (curr.left == null) {
                     curr.left = new TreeNode(key);
