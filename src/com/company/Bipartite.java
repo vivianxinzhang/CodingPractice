@@ -1,13 +1,21 @@
 package com.company;
 import java.util.*;
 
-public class Solution {
+public class Bipartite {
     public static void main(String[] args) {
-        Solution s = new Solution();
-        int[] array = new int[] {5,3,4,2,1,1,2,1,8,4,4,9,13,5,8};
-        System.out.println();
+        Bipartite s = new Bipartite();
+        GraphNode one = new GraphNode(1);
+        GraphNode zero = new GraphNode(0);
+        one.neighbors.add(zero);
+        zero.neighbors.add(one);
+        List<GraphNode> graph = new ArrayList<>();
+        graph.add(one);
+        System.out.println(s.isBipartite(graph));
     }
 
+    // Best First Search
+    // 1. 一般用queue来做 建好queue之后记得把第一个点放进去
+    // 2. 每一轮expand一个点generate 被expand的这个点的neighbor
     // Time O(V + E)
     // Space O(V)
     public boolean isBipartite(List<GraphNode> graph) {
@@ -25,27 +33,26 @@ public class Solution {
     }
 
     private boolean BFS(GraphNode node, HashMap<GraphNode, Integer> visited) {
+        // if this node has been traversed, no need to do BFS again
         if (visited.containsKey(node)) {
             return true;
         }
-        visited.put(node, 1);
         Queue<GraphNode> queue = new ArrayDeque<>();
         queue.offer(node);
+        visited.put(node, 1);
         while (!queue.isEmpty()) {
-            GraphNode curr = queue.poll();
+            GraphNode curr = queue.poll();  // expand curr
             int currGroup = visited.get(curr);
             int neiGroup = currGroup == 1 ? 0 : 1;
-            for (GraphNode nei : node.neighbors) {
-                if (visited.containsKey(nei) && visited.get(nei) != neiGroup) {
-                    return false;
-                } else {
+            for (GraphNode nei : curr.neighbors) {  // generate curr.neighbors
+                if (visited.get(nei) == null) {
                     queue.offer(nei);
                     visited.put(nei, neiGroup);
+                } else if (visited.get(nei) != neiGroup) {
+                    return false;
                 }
             }
         }
         return true;
     }
 }
-
-

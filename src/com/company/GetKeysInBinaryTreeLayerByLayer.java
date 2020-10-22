@@ -10,6 +10,9 @@ public class GetKeysInBinaryTreeLayerByLayer {
         System.out.println(s.layerByLayer(two));
     }
 
+    // Best First Search
+    // 1. 一般用queue来做 建好queue之后记得把第一个点放进去
+    // 2. 每一轮expand一个点generate 被expand的这个点的neighbor
     // Time O(n)
     // Space O(n)
     public List<List<Integer>> layerByLayer(TreeNode root) {
