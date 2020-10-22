@@ -29,6 +29,11 @@ public class PostOrder {
         }
     }
 
+    // post order 用prev与curr(stack.top())的关系来分情况讨论
+    //               Case 1: 从上面下来  有左压左 有右压右 都没有 pop并打印当前栈顶
+    //               Case 2: 从左边上来 没有右边  或者 从右边上来 pop并打印当前栈顶
+    //               Case 3: 从左边上来 并且有右边 右边压栈
+    //               并注意每个循环要更新prev'
     // Method 2: check the relation between the current node and the previous node
     // to determine which direction should go next
     public List<Integer> postOrderII(TreeNode root) {

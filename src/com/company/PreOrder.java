@@ -13,7 +13,7 @@ public class PreOrder {
         root.left = three;
     }
 
-
+    // preorder 注意root打印完后 stack要先压右后压左
     // the left subtree should be traversed before the right subtree,
     // since stack is LIFO, we should push right into the stack first,
     // so for the next step the top element of the stack is the left subtree;

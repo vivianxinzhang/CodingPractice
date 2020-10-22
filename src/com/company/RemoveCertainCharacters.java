@@ -12,7 +12,7 @@ public class RemoveCertainCharacters {
     }
     // input length n, target length m
     // Time average O(m + n + n)    worst case O(m^2 + mn + n)
-    // Space O(n)
+    // Space O(m)
     public String remove(String input, String target) {
         // Write your solution here
         if (input == null || input.length() == 0 || target == null || target.length() == 0) {

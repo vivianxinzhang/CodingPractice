@@ -5,6 +5,13 @@ import java.util.HashSet;
 public class MissingNumberI {
     public static void main(String[] args) {
         System.out.println("main");
+
+        System.out.println(0^1);
+        System.out.println(1^1);
+
+        System.out.println(0^2);
+        System.out.println(2^2);
+
         MissingNumberI s = new MissingNumberI();
         int[] array = {1, 2, 3};
         System.out.println(s.missingIII(array));

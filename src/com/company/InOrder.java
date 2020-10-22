@@ -48,6 +48,7 @@ public class InOrder {
         return result;
     }
 
+    // inorder 注意要一路先走到左边
     // Time O(n)
     // Space O(h) worst O(n)
     public List<Integer> inOrderI(TreeNode root) {
