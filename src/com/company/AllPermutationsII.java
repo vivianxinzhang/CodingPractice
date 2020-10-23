@@ -2,11 +2,21 @@ package com.company;
 import java.util.*;
 
 public class AllPermutationsII {
+    public static void main(String[] args) {
+        Solution s = new Solution();
+
+        // "" is a substring of ""
+        // this should also do dfs
+        System.out.println(s.permutations(""));
+
+        System.out.println(s.permutations("aba"));
+    }
+
     // Time O(n!)
     // Space O(n^2)
     public List<String> permutations(String input) {
         List<String> result = new ArrayList<>();
-        if (input == null) {
+        if (input == null) {    // corner case should not include empty string ""
             return result;
         }
         char[] array = input.toCharArray();
