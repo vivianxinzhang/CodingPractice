@@ -3,7 +3,7 @@ import java.util.*;
 
 public class AllPermutationsII {
     public static void main(String[] args) {
-        Solution s = new Solution();
+        AllPermutationsII s = new AllPermutationsII();
 
         // "" is a substring of ""
         // this should also do dfs

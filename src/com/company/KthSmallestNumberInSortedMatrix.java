@@ -2,7 +2,7 @@ package com.company;
 import java.util.*;
 
 public class KthSmallestNumberInSortedMatrix {
-    // the matrix is not null, N > 0 and M > 0
+    // Assume the matrix is not null, N > 0 and M > 0
     // K > 0 and K <= N * M
     // Time O(k log k)
     // Space = O(k + mn)  while 循环 k次 每次heapsize净增加一 但都不超过k
@@ -21,11 +21,16 @@ public class KthSmallestNumberInSortedMatrix {
     //      generate[i][j] = true
     //      or we can also use a HashSet	Space = O(k)
     public int kthSmallest(int[][] matrix, int k) {
-        // Write your solution here
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0 || k == 0) {
-            return -1;
-        }
         PriorityQueue<Cell> minHeap = new PriorityQueue<>();
+//        PriorityQueue<Solution.Pair> minHeap = new PriorityQueue<>(new Comparator<Solution.Pair>() {
+//            @Override
+//            public int compare(Solution.Pair o1, Solution.Pair o2) {
+//                if (o1.value == o2.value) {
+//                    return 0;
+//                }
+//                return o1.value < o2.value ? -1 : 1;
+//            }
+//        });
         boolean[][] visited = new boolean[matrix.length][matrix[0].length];
         minHeap.offer(new Cell(0, 0, matrix[0][0]));
         visited[0][0] = true;
