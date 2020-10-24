@@ -1,6 +1,20 @@
 package com.company;
 
+import java.util.Arrays;
+
 public class ReOrderArray {
+    public static void main(String[] args) {
+        ReOrderArray s = new ReOrderArray();
+        int[] array = new int[] {1, 2, 3, 4};
+        System.out.println(Arrays.toString(s.reorder(array)));
+
+        array = new int[] {1, 2, 3};
+        System.out.println(Arrays.toString(s.reorder(array)));
+
+        array = new int[] {1, 2, 3, 4, 5, 6, 7};
+        System.out.println(Arrays.toString(s.reorder(array)));
+    }
+
     /**
      * Array reorder in place implementation
      *
