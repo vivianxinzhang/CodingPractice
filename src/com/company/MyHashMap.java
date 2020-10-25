@@ -137,7 +137,7 @@ public class MyHashMap<K, V> {
 //            return false;
 //        }
 //        return k1.equals(k2);
-        return k1 == k2 || k1 != null && k1.equals(k2);
+        return k1 != null && k1.equals(k2) || k1 == k2;
     }
 
     public boolean containsKey(K key) {
