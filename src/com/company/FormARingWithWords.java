@@ -16,6 +16,34 @@ public class FormARingWithWords {
         System.out.println(s.formRing(input));
     }
 
+    // Time O(n)
+    // Space O(n)
+    public String rightShift(String input, int k) {
+        // Write your solution here
+        if (input == null || input.length() == 0) {
+            return input;
+        }
+        k %= input.length();
+        if (k == 0) {
+            return input;
+        }
+        char[] array = input.toCharArray();
+        reverse(array, 0, array.length - 1);
+        reverse(array, 0, k - 1);
+        reverse(array, k, array.length - 1);
+        return new String(array);
+    }
+
+    private void reverse(char[] array, int i, int j) {
+        while (i < j) {
+            char tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+            i++;
+            j--;
+        }
+    }
+
     // Time O(n!)
     // Space O(n)
     public boolean formRing(String[] input) {
