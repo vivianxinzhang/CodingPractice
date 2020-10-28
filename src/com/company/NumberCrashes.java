@@ -18,6 +18,7 @@ public class NumberCrashes {
         System.out.println(Arrays.toString(s.numberCrash(array)));
     }
 
+    // need polish
     // Time O(n)
     // Space O(n)
     public int[] numberCrash(int[] nums) {
