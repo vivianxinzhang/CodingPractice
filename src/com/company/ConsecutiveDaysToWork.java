@@ -9,8 +9,8 @@ public class ConsecutiveDaysToWork {
     }
 
     // Method 1:
-    // Time
-    // Space
+    // Time    O(2^30)
+    // Space   O(30)
     public List<String> workSchedule(int totalDays, int workDays) {
         List<String> result = new ArrayList<>();
         int[] array = new int[totalDays];
