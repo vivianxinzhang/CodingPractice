@@ -2,7 +2,7 @@ package com.company;
 
 public class MedianOfTwoSortedArrays {
     public static void main(String[] args) {
-        Solution s = new Solution();
+        MedianOfTwoSortedArrays s = new MedianOfTwoSortedArrays();
         int[] A = new int[] {1, 2, 4};
         int[] B = new int[] {3, 5};
         System.out.println(s.median(A, B)); // 3.0
@@ -20,6 +20,7 @@ public class MedianOfTwoSortedArrays {
         B = new int[] {2, 3};
         System.out.println(s.median(A, B));   // 2.0
     }
+
 
     // Time O(k)
     // Space O(1)
