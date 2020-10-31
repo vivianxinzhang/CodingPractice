@@ -5,14 +5,48 @@ import java.util.Arrays;
 public class LongestPalindromicSubstring {
     public static void main(String[] args) {
         LongestPalindromicSubstring s = new LongestPalindromicSubstring();
+        System.out.println(s.longestPalindrome("bbc"));
+
         System.out.println(s.longestPalindrome("abcbcbd"));
 
         System.out.println(s.longestPalindrome("abbc"));
     }
 
+    // Try all possible i and find the longest palindromic string
+    // whose center is i (odd case) and i / i + 1 (even case).
     // Time O(n^2)
     // Space O(1)
     public String longestPalindrome(String input) {
+        // Write your solution here
+        int maxLength = 0;
+        int start = 0;
+        int globalLeft = 0;
+        int globalRight = 0;
+        for (int i = 0; i < input.length(); i++) {
+            // odd length(center i)
+            int oldLength = getLen(input, i, i);
+            // even length(center i, i+1)
+            int evenLength = getLen(input, i, i + 1);
+            int currLength = Math.max(oldLength, evenLength);
+            if (currLength > maxLength) {
+                maxLength = currLength;
+                globalLeft = i - (currLength - 1) / 2;
+            }
+        }
+        return input.substring(globalLeft, globalLeft + maxLength);
+    }
+
+    private int getLen(String input, int l, int r) {
+        while (l >= 0 && r < input.length() && input.charAt(l) == input.charAt(r)) {
+            --l;
+            ++r;
+        }
+        return r - l -1;
+    }
+
+    // Time O(n^2)
+    // Space O(1)
+    public String longestPalindromeII(String input) {
         // Write your solution here
         int maxLength = 0;
         int start = 0;
