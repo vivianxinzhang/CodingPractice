@@ -66,7 +66,7 @@ public class LongestPalindromeSubsequence {
     // Method 2:
     // Time O(n^2)
     // Space O(n)
-    public int longestPalindrome(String input) {
+    public int longestPalindromeII(String input) {
         // Write your solution here
         int[][] M = new int[input.length()][input.length()];
         // Base case
@@ -99,5 +99,66 @@ public class LongestPalindromeSubsequence {
             }
         }
         return f[input.length() - 1];
+    }
+
+    // Another implementation:
+    // Time O(n^2)
+    // Space O(n^2)
+    public int longestPalindromeIII(String input) {
+        int[][] M = new int[input.length()][input.length()];
+        // Base case
+        // M[i][i-1] = 0 (size = 0) empty string
+        // M[i][j] = 1   (size = 1)
+        // M[i]j] depends on M[i+1][j-1](左下), M[i+1][j](下), M[i][j-1](左)
+        // from bottom to up, left to right to fill M
+        for (int length = 1; length <= input.length(); length++) {
+            for (int i = 0; i <= input.length() - length; i++) {
+                int j = i + length - 1;
+                if (i == j) {
+                    M[i][j] = 1;
+                    continue;
+                }
+                if (input.charAt(i) == input.charAt(j)) {
+                    M[i][j] = 2 + M[i + 1][j - 1];
+                } else {
+                    M[i][j] = Math.max(M[i + 1][j], M[i][j - 1]);
+                }
+            }
+        }
+        return M[0][input.length() - 1];
+    }
+
+    // Another implementation with space optimization: ???
+    // Time O(n^2)
+    // Space O(n)
+    public int longestPalindrome(String input) {
+        // int[][] M = new int[input.length()][input.length()];
+        // dp0[i]表示起始位置为i, 长度为l的解
+        int[] dp0 = new int[input.length()];    // sols of len = l
+        int[] dp1 = new int[input.length()];    // sols of len = l - 1
+        int[] dp2 = new int[input.length()];    // sols of len = l - 2
+        for (int length = 1; length <= input.length(); length++) {
+            for (int i = 0; i <= input.length() - length; i++) {
+                int j = i + length - 1;
+                if (i == j) {
+                    // M[i][j] = 1;
+                    dp0[i] = 1;
+                    continue;
+                }
+                if (input.charAt(i) == input.charAt(j)) {
+                    // M[i][j] = 2 + M[i + 1][j - 1];
+                    dp0[i]= dp2[i + 1] + 2;
+                } else {
+                    // M[i][j] = Math.max(M[i + 1][j], M[i][j - 1]);
+                    dp0[i] = Math.max(dp1[i], dp1[i + 1]);
+                }
+            }
+            int[] tmp = dp2;
+            dp2 = dp1;
+            dp1 = dp0;
+            dp0 = tmp;
+        }
+        // return M[0][input.length() - 1];
+        return dp1[0];
     }
 }
