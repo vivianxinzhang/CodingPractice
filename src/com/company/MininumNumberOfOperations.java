@@ -1,13 +1,20 @@
 package com.company;
-import java.util.*;
 
-public class Solution {
+public class MininumNumberOfOperations {
     public static void main(String[] args) {
-        Solution s = new Solution();
+        MininumNumberOfOperations s = new MininumNumberOfOperations();
+        System.out.println(s.minOps(0));    // 0
+
+        System.out.println(s.minOps(1));    // 0
+
         System.out.println(s.minOps(2));    // 2
+
         System.out.println(s.minOps(3));    // 3
+
         System.out.println(s.minOps(4));    // 4
+
         System.out.println(s.minOps(5));    // 5
+
         System.out.println(s.minOps(6));    // 4
     }
 
