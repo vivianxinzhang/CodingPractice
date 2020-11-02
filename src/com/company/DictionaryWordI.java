@@ -26,6 +26,17 @@ import java.util.*;
 // Time O(n^3) ? worst case n*n*(m+n)? dict.contains O(m)? substring O(n)?
 // Space O(n)
 public class DictionaryWordI {
+    public static void main(String[] args) {
+        DictionaryWordI s = new DictionaryWordI();
+        String input = "bcdef";
+        String[] dict = new String[]{"abc","bcd","def"};
+        System.out.println(s.canBreak(input, dict));
+
+        input = "abccdde";
+        dict = new String[]{"abc","ab","cd","de","def"};
+        System.out.println(s.canBreak(input, dict));
+    }
+
     // Method 1:
     // Time O(n^3)
     // Space O(n)
@@ -45,6 +56,8 @@ public class DictionaryWordI {
         canBreak[0] = true;
         for (int i = 1; i < canBreak.length; i++) {
             for (int j = 0; j < i; j++) {
+                // j == 0 canBreak[j] represents empty string
+                // input.substring(j, i) represents substring [0, i-1]  which is the first i characters
                 if (canBreak[j] && dictSet.contains(input.substring(j, i))) {
                     canBreak[i] = true;
                     break;
