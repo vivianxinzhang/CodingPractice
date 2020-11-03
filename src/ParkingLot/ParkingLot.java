@@ -19,6 +19,15 @@ public class ParkingLot {
         return false;
     }
 
+    public boolean park(Vehicle v) {
+        for (Level l : levels) {
+            if (l.hasSpot(v)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean leave(Vehicle v) {
         for (Level l : levels) {
             if (l.leave(v)) {

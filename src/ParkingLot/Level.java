@@ -13,7 +13,7 @@ class Level {
         for (; i < numOfSpots; i++) {
             list.add(new ParkingSpot(VehicleSize.Large));
         }
-        spots = Collections.unmodifiableList(list)
+        spots = Collections.unmodifiableList(list);
     }
 
     boolean hasSpot(Vehicle v) {
