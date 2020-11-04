@@ -6,7 +6,6 @@ public enum VehicleSize {
 
     private final int size;
 
-
     VehicleSize(int size) {
         this.size =size;
     }

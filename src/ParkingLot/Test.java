@@ -13,6 +13,7 @@ public class Test {
                 // make sure you enable assert if using it for test
                 assert hasSpot;
                 assert lot.park(v);
+                System.out.println(v.getSize() + " parked ");
             }
         }
         assert list.size() == 50;
@@ -20,6 +21,7 @@ public class Test {
         for (Vehicle v : list) {
             assert i >= 40 || lot.leave(v);
             i++;
+            System.out.println(v.getSize() + " left");
         }
     }
 }
