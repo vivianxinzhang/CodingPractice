@@ -1,15 +1,22 @@
 package com.company;
-
-import java.util.Deque;
 import java.util.*;
 
 public class DecompressStringIII {
     public static void main(String[] args) {
         DecompressStringIII s = new DecompressStringIII();
-        String input = "abc";
+        String input = "2[e]";
         System.out.println(s.decodeStringIII(input));
 
-        input = "ab3[cd[2e]]f";
+        input = "cd[2[e]]";
+        System.out.println(s.decodeStringIII(input));
+
+        input = "3[cd[2[e]]";
+        System.out.println(s.decodeStringIII(input));
+
+        input = "ab3[cd[2[e]]]f";
+        System.out.println(s.decodeStringIII(input));
+
+        input = "abc";
         System.out.println(s.decodeStringIII(input));
     }
 
@@ -21,10 +28,10 @@ public class DecompressStringIII {
     public String decodeStringIII(String input) {
         Deque<Character> queue = new ArrayDeque<>();
         for (char c : input.toCharArray()) queue.offer(c);
-        return helper(queue).toString();
+        return helper(queue);
     }
 
-    public StringBuilder helper(Deque<Character> queue) {
+    public String helper(Deque<Character> queue) {
         StringBuilder sb = new StringBuilder();
         int num = 0;
         while (!queue.isEmpty()) {
@@ -32,9 +39,13 @@ public class DecompressStringIII {
             if (Character.isDigit(c)) {
                 num = num * 10 + c - '0';
             } else if (c == '[') {
-                StringBuilder sub = helper(queue);
-                for (int i = 0; i < num; i++) {
+                String sub = helper(queue);
+                if (num == 0) {     // no prefix int
                     sb.append(sub);
+                } else {    // has prefix int
+                    for (int i = 0; i < num; i++) {
+                        sb.append(sub);
+                    }
                 }
                 num = 0;
             } else if (c == ']') {
@@ -43,6 +54,6 @@ public class DecompressStringIII {
                 sb.append(c);
             }
         }
-        return sb;
+        return sb.toString();
     }
 }
