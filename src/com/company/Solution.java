@@ -4,6 +4,6 @@ import java.util.*;
 public class Solution {
     public static void main(String[] args) {
         Solution s = new Solution();
-        System.out.println();
+        int[] nums = new int[] {1,2,3};
     }
 }
