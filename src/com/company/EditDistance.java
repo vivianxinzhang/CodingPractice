@@ -9,14 +9,21 @@ public class EditDistance {
         System.out.println(s.editDistance(one, two));
     }
 
-    // Method 1: DP
+    // Method 2: DP
     // M[i][j] represents the minimum edit distance needed to transform
-    // first i characters from one(substring(0, i)) into first j characters into two(substring(0, j))
+    // first i characters from one(substring(0, i)) into first j characters
+    // into first j chars of two(substring(0, j))
     // if last character same M[i][j] = M[i-1][j-1]
     // if last character different M[i][j] =
     //                              Replace  M[i-1][j-1]+1
     //                              Delete   M[i-1][j]+1
     //                              Insert   M[i][j-1]+1
+    // M[i][j] represents minimum editing distance between first i chars of one [0 ... i - 1]
+    // and first j chars of two substring [0 ... j - 1]
+    // f(i,j) = min{f(i-1, j-1) + (W1[i-1] == W[j-1]), f(i-1, j)+1, f(i,j-1)+1}
+    // f(0,0) = 0
+    // f(0,j) = j, for all j > 0
+    // f(i,0) = i, for all i > 0
     // Time O(mn)
     // Space O(mn)
     public int editDistance(String one, String two) {
