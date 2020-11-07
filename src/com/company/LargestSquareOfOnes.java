@@ -2,10 +2,9 @@ package com.company;
 
 public class LargestSquareOfOnes {
     public static void main(String[] args) {
-        Solution s = new Solution();
-        String input = "bcdbcdabc";
-        String[] dict = new String[]{"abc", "bcd", "def"};
-        System.out.println(s.editDistance("sigh", "asith"));
+        LargestSquareOfOnes s = new LargestSquareOfOnes();
+        int[][] matrix = {{0, 0, 0, 0}, {1, 1, 1, 1}, {0, 1, 1, 1}, {1, 0, 1, 1}};
+        System.out.println(s.largest(matrix));
     }
 
     // Assumption:
@@ -22,7 +21,6 @@ public class LargestSquareOfOnes {
     // Time O(N^2)
     // Space O(N^2)
     public int largest(int[][] matrix) {
-        // Write your solution here
         int N = matrix.length;
         if (N == 0) {
             return 0;
