@@ -7,29 +7,60 @@ public class TargetSum {
         int[] array = new int[] {1, 0};
         System.out.println(s.waysToTargetSum(array, 1));
         System.out.println(s.waysToTargetSumI(array, 1));
+        System.out.println(s.waysToTargetSumIII(array, 1));
     }
 
     // Method 3: 2D Dynamic Programming
     // Time O(n) <- O(l*n) l is range of sum
-    // Space O(n) <- O(l*n) l is range of sum
+    // Space O(l) <- O(n * l) l is range of sum
     public int waysToTargetSumI(int[] nums, int target) {
         int sum = 0;
         for (int num : nums)
             sum += num;
         if (sum < target) return 0;
         int kOffset = sum;
-        int kMaxN = sum * 2 + 1;
+        int kMaxN = sum * 2 + 1;   // 所有sum 取值的可能性
         int[] ways = new int[kMaxN];
-        ways[kOffset] = 1;
+        ways[kOffset] = 1;   // 使用前0个元素能够构成0的可能性是1种
         for (int num : nums) {
             int[] tmp = new int[kMaxN];
-            for (int i = num; i < kMaxN - num; ++i) {
-                tmp[i + num] += ways[i];
-                tmp[i - num] += ways[i];
+            for (int j = num; j < kMaxN - num; j++) {
+                // 使用前i-1个元素 构成j的可能性是ways[j]种
+                // 使用前i个元素 构成j+num[i]的可能性是ways[j]种
+                tmp[j + num] += ways[j];
+                // 使用前i个元素 构成j-num[i]的可能性是ways[j]种
+                tmp[j - num] += ways[j];
             }
             ways = tmp;
         }
         return ways[target + kOffset];
+    }
+
+    // Method 3: 2D Dynamic Programming
+    // Time O(n) <- O(l*n) l is range of sum
+    // Space O(l) <- O(n * l) l is range of sum
+    public int waysToTargetSumIII(int[] nums, int target) {
+        int sum = 0;
+        for (int num : nums)
+            sum += num;
+        if (sum < target) return 0;
+        int kOffset = sum;
+        int kMaxN = sum * 2 + 1;   // 所有sum 取值的可能性
+        int[][] M = new int[nums.length][kMaxN];
+        M[0][nums[0] + kOffset] = 1;
+        for (int i = 1; i < nums.length; i++) {
+            int[] tmp = new int[kMaxN];
+            // j的取值范围
+            // 防止 j-nums[i] 和 j+nums[i] 越界
+            for (int j = nums[i]; j < kMaxN - nums[i]; j++) {
+                // 使用前i-1个元素 构成j的可能性是ways[j]种
+                // 使用前i个元素 构成j+num[i]的可能性是ways[j]种
+                M[i][j + nums[i]] += M[i - 1][j];
+                // 使用前i个元素 构成j-num[i]的可能性是ways[j]种
+                M[i][j - nums[i]] += M[i - 1][j];
+            }
+        }
+        return M[nums.length - 1][target + kOffset];
     }
 
     // Method 2: recursion + memo
