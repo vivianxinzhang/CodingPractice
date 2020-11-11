@@ -23,7 +23,6 @@ public class CompressString {
     private String encode(char[] array) {
         int slow = 0;
         int fast = 0;
-        int newLength = 0;
         while (fast < array.length) {
             int beginIdx = fast;
             while (fast < array.length && array[fast] == array[beginIdx]) {

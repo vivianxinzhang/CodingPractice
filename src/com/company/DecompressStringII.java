@@ -24,6 +24,9 @@ public class DecompressStringII {
         return decodeLong(array, decodeShort(array));
     }
 
+    // return length of the decoded string (the position of end pointer)
+    // when decodeLong, start from end - 1
+    // [0, end) is the processed part
     // return the length of the decoded string,
     // only cares about 'a0', 'a1', 'a2', A.K.A the decoded string is shorter
     private int decodeShort(char[] input) {
@@ -33,10 +36,12 @@ public class DecompressStringII {
         for (int i = 0; i < input.length; i += 2) {
             int digit = getDigit(input[i + 1]);
             if (digit >= 0 && digit <= 2) {
+                // copy chars less than 2
                 for (int j = 0; j < digit; j++) {
                     input[end++] = input[i];
                 }
             } else {
+                // copy two indices
                 // we don't handle the longer decoded string here
                 input[end++] = input[i];
                 input[end++] = input[i + 1];
@@ -45,12 +50,14 @@ public class DecompressStringII {
         return end;
     }
 
+    // decode [0, length - 1]
     // decodeLong: take care of "a3", "a4", "a5", ... the decoded string is longer
     // length: the length of the valid partition starting from index 0
     private String decodeLong(char[] input, int length) {
         // we need to calculate the new required length
         int newLength = length;
         for (int i = 0; i < length; i++) {
+            // char is a number
             int digit = getDigit(input[i]);
             if (digit > 2 && digit <= 9) {
                 newLength += digit - 2;
