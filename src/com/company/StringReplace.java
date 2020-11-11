@@ -2,6 +2,14 @@ package com.company;
 import java.util.*;
 
 public class StringReplace {
+    public static void main(String[] args) {
+        StringReplace s = new StringReplace();
+        String input = "appledogapple";
+        String source = "apple";
+        String target = "cat";
+        System.out.println(s.replaceI(input, source, target));
+    }
+
     // Method 2: Using Java's StringBuilder utility and String's indexof(),
     // not using String's replace() ...
     public String replace(String input, String s, String t) {
