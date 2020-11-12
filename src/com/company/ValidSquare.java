@@ -71,4 +71,13 @@ public class ValidSquare {
         p[x] = p[y];
         p[y] = temp;
     }
+
+    // Method 3:
+    // only three possible set of edges and diagonals
+    // Time O(1)
+    // Space O(1)
+    public boolean validSquareIII(int[] p1, int[] p2, int[] p3, int[] p4) {
+        int[][] p = {p1, p2, p3, p4};
+        return check(p1, p2, p3, p4) || check(p1, p3, p2, p4) || check(p1, p2, p4, p3);
+    }
 }
