@@ -1,4 +1,5 @@
 package com.company;
+import java.util.*;
 
 public class DecompressStringII {
     // Method 1: "in place"
@@ -10,7 +11,7 @@ public class DecompressStringII {
     // 2. The characters used in the original string are guaranteed to be 'a' - 'z'
     // 3. There are no adjacent repeated characters with length > 9
     // Time O(n)
-    // Space O(1)
+    // Space O(n)
     public String decompress(String input) {
         if (input.isEmpty()) {
             return input;
@@ -24,6 +25,10 @@ public class DecompressStringII {
         return decodeLong(array, decodeShort(array));
     }
 
+    // case of 0, 1, 2 chars, do not need more space, decode from left to right
+    // a0 -> ""
+    // a1 -> "a"
+    // a2 --> "aa"
     // return length of the decoded string (the position of end pointer)
     // when decodeLong, start from end - 1
     // [0, end) is the processed part
@@ -50,6 +55,11 @@ public class DecompressStringII {
         return end;
     }
 
+    // case of >2 chars, need more space, decode from right to left
+    // need to know
+    // 1. the end of decodeShort short
+    // 2. the length of new String for decode long
+    // a3 -> "aaa"
     // decode [0, length - 1]
     // decodeLong: take care of "a3", "a4", "a5", ... the decoded string is longer
     // length: the length of the valid partition starting from index 0
@@ -86,5 +96,49 @@ public class DecompressStringII {
 
     private int getDigit(char digit) {
         return digit - '0';
+    }
+
+    /**
+      * another implementation of decodeLong
+     case of >2 chars, need more space, decode from right to left
+     need to know
+     1. the end of decodeShort short
+     2. the length of new String for decode long
+     a3 -> "aaa"
+      */
+    private String decodeLongI(char[] array, int length) {
+        int newLength = getNewLength(array, length);
+        char[] result = Arrays.copyOf(array, newLength);
+        int slow = newLength - 1;
+        int fast = length - 1;
+        // decode numbers
+        while (fast >= 0) {
+            if (Character.isDigit(array[fast])) {
+                int count = array[fast] - '0';
+                char c = array[fast - 1];
+                while (count > 0) {
+                    result[slow--] = c;
+                    count--;
+                }
+                fast -= 2;
+            } else {
+                result[slow--] = array[fast--];
+            }
+        }
+        return new String(result);
+    }
+
+    // ab4c5 -> 5 + (4-2) + (5-2)
+    // b4 2 position -> bbbb  4 position: diff 4 - 2
+    // c5 2 position -> ccccc 5 position: diff 5 - 2
+    private int getNewLength(char[] array, int length) {
+        int newLength = length;
+        for (int i = 0; i < length; i++) {
+            if (Character.isDigit(array[i])) {
+                int digit = array[i] - '0';
+                newLength += digit - 2;
+            }
+        }
+        return newLength;
     }
 }
