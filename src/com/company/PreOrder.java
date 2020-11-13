@@ -39,4 +39,38 @@ public class PreOrder {
         }
         return result;
     }
+
+
+    public List<Integer> preOrderII(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        stack.offerFirst(root);
+        TreeNode prev = null;
+        while (!stack.isEmpty()) {
+            TreeNode curr = stack.peekFirst();
+            if (prev == null || prev.left == curr || prev.right == curr) {
+                result.add(curr.key);
+                if (curr.left != null) {
+                    stack.offerFirst(curr.left);
+                } else if (curr.right != null) {
+                    stack.offerFirst(curr.right);
+                } else {
+                    stack.pollFirst();
+                }
+            } else if (curr.left == prev) {
+                if (curr.right != null) {
+                    stack.offerFirst(curr.right);
+                } else {
+                    stack.pollFirst();
+                }
+            } else { // curr.right = prev
+                stack.pollFirst();
+            }
+            prev = curr;
+        }
+        return result;
+    }
 }

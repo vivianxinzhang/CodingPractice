@@ -7,6 +7,9 @@ public class PrimesLessThanOrEqualToTarget {
         System.out.println(s.primes(10));
     }
 
+    // best solution
+    // https://www.geeksforgeeks.org/sieve-of-eratosthenes/
+
     // Time O(N3/2)  <-- O(n^2)
     // Space O(1)
     public List<Integer> primes(int target) {
