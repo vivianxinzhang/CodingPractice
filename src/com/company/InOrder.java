@@ -70,4 +70,39 @@ public class InOrder {
             root = root.left;
         }
     }
+
+    public List<Integer> inOrderIII(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        stack.offerFirst(root);
+        TreeNode prev = null;
+        while (!stack.isEmpty()) {
+            TreeNode curr = stack.peekFirst();
+            if (prev == null || prev.left == curr || prev.right == curr) {
+                if (curr.left != null) {
+                    stack.offerFirst(curr.left);
+                } else if (curr.right != null) {
+                    result.add(curr.key);
+                    stack.offerFirst(curr.right);
+                } else {
+                    result.add(curr.key);
+                    stack.pollFirst();
+                }
+            } else if (curr.left == prev) {
+                result.add(curr.key);
+                if (curr.right != null) {
+                    stack.offerFirst(curr.right);
+                } else {
+                    stack.pollFirst();
+                }
+            } else { // curr.right = prev
+                stack.pollFirst();
+            }
+            prev = curr;
+        }
+        return result;
+    }
 }
