@@ -16,7 +16,6 @@ public class ReverseInteger {
     // Time O(1)
     // Space O(1)
     public int reverse(int x) {
-        // Write your solution here
         String str = Integer.toString(x);
         char[] array = str.toCharArray();
         boolean isNegative = array[0] == '-';
