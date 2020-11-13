@@ -11,7 +11,7 @@ public class AllSubsetsI {
     // Space O(n)
     public List<String> subSets(String set) {
         List<String> result = new ArrayList<>();
-        if (set == null || set.length() == 0) {
+        if (set == null) {
             return result;
         }
         // record the current subset

@@ -4,7 +4,7 @@ import java.util.*;
 public class AllSubsetsofSizeK {
     public static void main(String[] args) {
         AllSubsetsofSizeK s = new AllSubsetsofSizeK();
-        System.out.println();
+        System.out.println(s.subSetsOfSizeK("abc", 2));
     }
 
     // Time O(2^n * k)
