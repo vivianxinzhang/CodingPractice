@@ -4,8 +4,14 @@ import java.util.*;
 public class SpiralTraverseI {
     public static void main(String[] args) {
         SpiralTraverseI s = new SpiralTraverseI();
-        int[][] matrix = new int[][] {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+
+        int[][] matrix = new int[][] {{1, 2}, {3, 4}};
         System.out.println(s.spiral(matrix));
+
+        matrix = new int[][] {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        System.out.println(s.spiral(matrix));
+
+
     }
 
     // Time O(n^2) = O(4n + 4(n - 2) + 4(n - 4) + ... + 0) = O(n/2 * (4n + 0)/2)
@@ -26,18 +32,26 @@ public class SpiralTraverseI {
             return;
         }
         // top row
+        // row: start
+        // col: [start ... end-1]
         for (int i = start; i < end; i++) {
             result.add(matrix[start][i]);
         }
         // right col
+        // row: [start ... end-1]
+        // col: end
         for (int i = start; i < end; i++) {
             result.add(matrix[i][end]);
         }
         // bottom row
+        // row: end
+        // col: [end ... start+1]
         for (int i = end; i > start; i--) {
             result.add(matrix[end][i]);
         }
         // left col
+        // row: [end ... start + 1]
+        // col: start
         for (int i = end; i > start; i--) {
             result.add(matrix[i][start]);
         }

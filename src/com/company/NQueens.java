@@ -32,8 +32,12 @@ public class NQueens {
     }
 
     private boolean valid(List<Integer> cur, int col) {
+        // cur row: cur.size()
+        // cur col: col
         int row = cur.size();
         for (int i = 0; i < row; i++) {
+            // pre row: i
+            // pre col: cur.get(i)
             if (cur.get(i) == col || Math.abs(cur.get(i) - col) == Math.abs(row - i)) {
                 return false;
             }

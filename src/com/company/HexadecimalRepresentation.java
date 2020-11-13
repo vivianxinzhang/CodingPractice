@@ -1,6 +1,13 @@
 package com.company;
 
 public class HexadecimalRepresentation {
+    public static void main(String[] args) {
+        HexadecimalRepresentation s = new HexadecimalRepresentation();
+        System.out.println(s.hex(0));
+
+        System.out.println(s.hex(255));
+    }
+
     // Assumption: number > 0
     // Time O(1)
     // Space O(1)
