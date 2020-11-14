@@ -4,7 +4,13 @@ import java.util.*;
 public class SpiralTraverseII {
     public static void main(String[] args) {
         SpiralTraverseII s = new SpiralTraverseII();
-        int[][] matrix = new int[][] {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+        int[][] matrix = new int[][] {{}, {}, {}};
+        System.out.println(s.spiral(matrix));
+
+        matrix = new int[][] {{1}, {2}, {3}};
+        System.out.println(s.spiral(matrix));
+
+        matrix = new int[][] {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
         System.out.println(s.spiral(matrix));
     }
 

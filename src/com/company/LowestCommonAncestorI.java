@@ -1,7 +1,10 @@
 package com.company;
 
 public class LowestCommonAncestorI {
-    // Assumptions: root is not null, one and two guaranteed to be in the tree and not null
+    // Assumptions:
+    // 1. There is no parent pointer for the nodes in the binary tree
+    // 2. The given two nodes are guaranteed to be in the binary tree
+    // 3. root is not null
     // return:
     // null - there is no one or two in the subtree
     // not null -
