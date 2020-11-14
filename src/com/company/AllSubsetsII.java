@@ -17,8 +17,8 @@ public class AllSubsetsII {
         if (set == null) {
             return result;
         }
-        char[] array = set.toCharArray();
-        Arrays.sort(array);
+        char[] array = set.toCharArray();   // O(n)
+        Arrays.sort(array);     // O(nlogn)
         // record the current subset
         StringBuilder sb = new StringBuilder();
         helper(array, 0, sb, result);
