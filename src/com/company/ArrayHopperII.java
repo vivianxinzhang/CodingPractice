@@ -19,6 +19,12 @@ public class ArrayHopperII {
     // Assumptions: array is not null and is not empty
     // Method 1:
     // M[i] represents the min number of jumps from the i-th element to the last element
+    // M[i] represents the min number of jumps from the 0th element to the ith element
+    // M[i] =  Case 1.1: can reach end from i directly
+    //                   i + array[i] >= array.length - 1   =>  M[i] = 1;
+    //         Case 1.2: jump to end by passing j, i+1 <= j <= i+array[i]
+    //                   i+1, ..., i+array[i] can reach end
+    //                   M[i] = min(M[j] + 1), where i+1 <= j <= i+array[i]
     // fill M from right to left
     // Time O(n^2)
     // Space O(n)
