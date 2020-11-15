@@ -1,44 +1,34 @@
 package com.company;
+
 import java.util.*;
 
-
-// Assumption:
-// 1. input is not null or empty
-// 2. dict is not null and dict is not empty
-// 3. all the strings in dict are not null or empty
-// M[i] represents 前i个字母是否能切成单词的concatenation: true or false
-//      whether index 0 to i-1, substring(0, i) can break to words in the dictionary
-// Base case:
-// M[0] = true	不用切 就是0个单词的concatenation i = 0 表示空串   i = 1 前1个字母
-// Induction rule:
-// M[1] = whether “b” is in the dictionary = false
-// M[2] = whether “bo” can be cut into words
-// 左边是左大段 需要查表得到
-// Option 1: “bo” , then whether “bo” is a word	=> false
-// Option 2: “b | o”, then M[i] and “o” is a word concatenation	=> false
-// M[2] = Option 1 or Option 2 => false
-// M[3] = whether “bob” can be cut into words
-// Option 1: “bob”, then whether  “bob” is a word => true
-// Option 2: “bo | b”, then M[2] and “b” is a word => false
-// bo之间可能切也可能不切 都包括了 bo通过查表拿到
-// Option 3: “b | ob”, then M[1] and “ob” is a word => false
-// M[3] = Option 1 or Option 2 or Option 3 => true
-// Time O(n^3) ? worst case n*n*(m+n)? dict.contains O(m)? substring O(n)?
-// Space O(n)
 public class DictionaryWordI {
     public static void main(String[] args) {
         DictionaryWordI s = new DictionaryWordI();
         String input = "bcdef";
-        String[] dict = new String[]{"abc","bcd","def"};
-        System.out.println(s.canBreak(input, dict));
+        String[] dict = new String[]{"abc", "bcd", "def"};
+        System.out.println(s.canBreak(input, dict));    // false
 
         input = "abccdde";
-        dict = new String[]{"abc","ab","cd","de","def"};
-        System.out.println(s.canBreak(input, dict));
+        dict = new String[]{"abc", "ab", "cd", "de", "def"};
+        System.out.println(s.canBreak(input, dict));    // true
     }
 
-    // Method 1:
-    // Time O(n^3)
+    // Assumption:
+    // 1. input is not null or empty
+    // 2. dict is not null and dict is not empty
+    // 3. all the strings in dict are not null or empty
+    // M[i] represents 前i个字母是否能切成单词的concatenation: true or false
+    //      whether index 0 to i-1, substring(0, i) can break to words in the dictionary
+    // M[i] represents if the first i chars can be composed by concatenating words from the given dictionary
+    // [0, ... , i-1]
+    // Base case:
+    // M[0] = true	不用切 就是0个单词的concatenation i = 0 表示空串   i = 1 前1个字母
+    // Induction rule:
+    // M[i] = true if for any possible j(0 < j < i): M[j] == true && substring[j, i-1] is in the dict
+    //        j is the starting index of right part    [0,j-1]                [j, i-1]
+    // return M[input.length]
+    // Time O(n^3) ? worst case n*n*(m+n)? dict.contains O(m)? substring O(n)?
     // Space O(n)
     public boolean canBreak(String input, String[] dict) {
         // Assumption:
