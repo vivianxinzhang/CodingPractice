@@ -1,10 +1,10 @@
 package com.company;
-import java.util.*;
 
-public class Solution {
+public class LongestAscendingSubArray {
     public static void main(String[] args) {
-        Solution s = new Solution();
-        System.out.println();
+        LongestAscendingSubArray s = new LongestAscendingSubArray();
+        int[] array = new int[] {9, 9};
+        System.out.println(s.longest(array));
     }
 
     // M[i] represents length of the longest subarray ending at index i
@@ -19,7 +19,7 @@ public class Solution {
         int[] M = new int[array.length];
         M[0] = 1;
         int maxLength = 1;
-        for (int i = 2; i < array.length; i++) {
+        for (int i = 1; i < array.length; i++) {
             if (array[i] > array[i - 1]) {
                 M[i] = M[i - 1] + 1;
                 maxLength = Math.max(maxLength, M[i]);
@@ -27,6 +27,6 @@ public class Solution {
                 M[i] = 1;
             }
         }
-        return M[array.length - 1];
+        return maxLength;
     }
 }
