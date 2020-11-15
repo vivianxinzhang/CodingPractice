@@ -11,6 +11,33 @@ public class LargestSubArraySum {
         System.out.println(Arrays.toString(s.largestSum(array)));
     }
 
+    // Assumptions
+    // The given array is not null and has length of at least 1.
+    // M[i] represents largest SubArray Sum ending at index i
+    // M[i] =  if M[i-1] > 0  M[i-1] + array[i]
+    //         else           M[i] = array[i]
+    // base case: M[0] = array[0]
+    // Time O(n)
+    // Space O(n)
+    public int largestSumI(int[] array) {
+        // Write your solution here
+        if (array == null || array.length == 0) {
+            return 0;
+        }
+        int[] M = new int[array.length];
+        M[0] = array[0];
+        int maxSum = array[0];
+        for (int i = 1; i < array.length; i++) {
+            if (M[i - 1] > 0) {
+                M[i] = M[i - 1] + array[i];
+            } else {
+                M[i] = array[i];
+            }
+            maxSum = Math.max(maxSum, M[i]);
+        }
+        return maxSum;
+    }
+
     // Time O(n)
     // Space O(n)
     public int[] largestSum(int[] array) {
