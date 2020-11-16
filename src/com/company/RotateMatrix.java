@@ -29,6 +29,11 @@ public class RotateMatrix {
             return;
         }
         for (int i = 0; i < end - start; i++) {
+            // top row matrix[start][start + i]
+            // left col matrix[end - i][start]
+            // bottom row matrix[end][end - i]
+            // right col matrix[start + i][end]
+            // counter clockwise
             // top row
             int tmp = matrix[start][start + i];
             // fill top row
