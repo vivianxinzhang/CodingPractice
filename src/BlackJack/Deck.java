@@ -40,7 +40,7 @@ public class Deck {
         return cards;
     }
 
-    private Card dealCard() {
+    public Card dealCard() {
         return remainingCards() == 0 ? null : cards.get(dealtIndex);
     }
 

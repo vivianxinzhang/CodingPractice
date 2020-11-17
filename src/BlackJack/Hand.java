@@ -21,4 +21,11 @@ public class Hand {
     public int size() {
         return cards.size();
     }
+
+    public void print() {
+        for (Card c : cards) {
+            System.out.print(c.value() + ", ");
+        }
+        System.out.println();
+    }
 }
