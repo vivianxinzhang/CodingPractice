@@ -7,6 +7,25 @@ public class MirrorReflection {
     }
 
     // Method 1:
+    // Time O(logP) GCD(similar to greatest common divisor)
+    // Space O(1)
+    public int mirrorReflection(int p, int q) {
+        int numOfP = 1;
+        int numOfQ = 1;
+        while (p * numOfP != q * numOfQ) {
+            numOfQ += 1;
+            numOfP = q * numOfQ;    // p
+        }
+        if (numOfQ % 2 == 0) {
+            return 2;
+        } else if (numOfP % 2 == 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    // Method 3:
     // Instead of modelling the ray as a bouncing line,
     // model it as a straight line through reflections of the room.
     // In general, the ray goes to the first integer point (kp, kq)
@@ -35,7 +54,7 @@ public class MirrorReflection {
     // Method 2:
     // Time O(logp)
     // Space O(1)
-    public int mirrorReflection(int p, int q) {
+    public int mirrorReflectionII(int p, int q) {
         int extension = q, reflection = p;
         while (extension % 2 == 0 && reflection % 2 == 0) {
             extension /= 2;
