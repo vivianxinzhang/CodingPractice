@@ -23,9 +23,11 @@ public class Hand {
     }
 
     public void print() {
-        for (Card c : cards) {
-            System.out.print(c.value() + ", ");
+        System.out.print("[");
+        for (int i = 0; i < cards.size() - 1; i++) {
+            System.out.print(cards.get(i).value() + ", ");
         }
-        System.out.println();
+        System.out.print(cards.get(cards.size() - 1).value());
+        System.out.println("]");
     }
 }

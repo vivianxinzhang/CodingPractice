@@ -79,7 +79,7 @@ public class BlackJackGameAutomator {
 
     void printHandsAndScore() {
         for (int i = 0; i < hands.length; i++) {
-            System.out.println("Hand" + i + "(" + hands[i].score() + "): ");
+            System.out.print("Hand" + i + "(" + hands[i].score() + "): ");
             hands[i].print();
             System.out.println();
         }
@@ -113,13 +113,13 @@ public class BlackJackGameAutomator {
             return;
         }
 
-        System.out.println("\n -- Completed Game -- ");
+        System.out.println("\n-- Completed Game -- ");
         printHandsAndScore();;
         List<Integer> winners = getWinners();
         if (winners.size() > 0) {
             System.out.println("Winners: ");
             for (int i : winners) {
-                System.out.println(i + " ");
+                System.out.println("Hand" + i + " ");
             }
             System.out.println();
         } else {

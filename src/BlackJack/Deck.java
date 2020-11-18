@@ -36,6 +36,7 @@ public class Deck {
         Card[] cards = new Card[number];
         for (int i = 0; i < number; i++) {
             cards[i] = dealCard();
+            dealtIndex++;
         }
         return cards;
     }
