@@ -1,6 +1,7 @@
 package com.company;
 
 public class MaximumPathSumBinaryTreeI {
+    // path from leaf node to leaf node
     // Time O(n) need to traverse all nodes in the tree, each node takes O(1) time
     // Space O(h) worst case O(n)
     public int maxPathSum(TreeNode root) {
