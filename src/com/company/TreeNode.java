@@ -44,10 +44,10 @@ import java.util.*;
 //}
 
 public class TreeNode {
-    public int value;
+    public int key;
     public TreeNode left;
     public TreeNode right;
     public TreeNode(int key) {
-        this.value = key;
+        this.key = key;
     }
 }
