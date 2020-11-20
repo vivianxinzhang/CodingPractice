@@ -6,10 +6,10 @@ public class SpiralTraverseI {
         SpiralTraverseI s = new SpiralTraverseI();
 
         int[][] matrix = new int[][] {{1, 2}, {3, 4}};
-        System.out.println(s.spiral(matrix));
+        System.out.println(s.spiral(matrix));   // [1, 2, 4, 3]
 
         matrix = new int[][] {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-        System.out.println(s.spiral(matrix));
+        System.out.println(s.spiral(matrix));   // [1, 2, 3, 6, 9, 8, 7, 4, 5]
 
 
     }
