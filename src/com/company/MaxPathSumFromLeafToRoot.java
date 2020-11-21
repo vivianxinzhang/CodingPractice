@@ -1,6 +1,21 @@
 package com.company;
 
 public class MaxPathSumFromLeafToRoot {
+    public static void main(String[] args) {
+        MaxPathSumFromLeafToRoot s = new MaxPathSumFromLeafToRoot();
+        TreeNode ten = new TreeNode(10);
+        TreeNode negTwo = new TreeNode(-2);
+        TreeNode seven = new TreeNode(7);
+        ten.left = negTwo;
+        ten.right = seven;
+        TreeNode eight = new TreeNode(8);
+        TreeNode negFour = new TreeNode(-4);
+        negTwo.left = eight;
+        negTwo.right = negFour;
+        System.out.println(s.maxPathSumLeafToRoot(ten));
+
+    }
+
     // Method 1: Pass down the prefix sum
     // Time O(n) need to traverse all nodes in the tree, each node takes O(1) time
     // Space O(h) worst case O(n)
