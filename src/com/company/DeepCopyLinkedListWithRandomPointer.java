@@ -1,30 +1,79 @@
 package com.company;
-import java.util.List;
+import java.util.*;
 
 public class DeepCopyLinkedListWithRandomPointer {
     public static void main(String[] args) {
         DeepCopyLinkedListWithRandomPointer s = new DeepCopyLinkedListWithRandomPointer();
-        RandomListNode head = new RandomListNode(0);
         RandomListNode one = new RandomListNode(1);
         RandomListNode two = new RandomListNode(2);
         RandomListNode three = new RandomListNode(3);
-        head.next = one;
         one.next = two;
         two.next = three;
-        System.out.println(head);
+        one.random = one;
+        two.random = two;
+        three.random = three;
+
+        print(one);
+        System.out.println("Copy");
+        print(s.copy(one));
+        System.out.println();
+
+        one.random = three;
+        three.random = two;
+        two.random = one;
+        print(one);
+        System.out.println("Copy");
+        print(s.copy(one));
+    }
+
+    private static void print(RandomListNode head) {
         while (head != null) {
-            System.out.println(head.value);
+            System.out.print(head.value + " ");
+            if (head.random != null) {
+                System.out.println("Random node: " + head.random.value);
+            }
             head = head.next;
-        }
-        RandomListNode copyHead = s.copy(head);
-        System.out.println(copyHead);
-        while (copyHead != null) {
-            System.out.println(copyHead.value);
-            copyHead = copyHead.next;
         }
     }
 
+    // Method 1: using HashMap to avoid copy multiple times for the same node
+    // Time O(n)
+    // Space O(n)
     public RandomListNode copy(RandomListNode head) {
+        // Write your solution here.
+        if (head == null) {
+            return null;
+        }
+        // Sentinel node to help construct the deep copy.
+        RandomListNode dummy = new RandomListNode(0);
+        RandomListNode cur = dummy;
+        // Maintains the mapping between the node in the original list and
+        // the corresponding node in the new list.
+        Map<RandomListNode, RandomListNode> map = new HashMap<>();
+        while (head != null) {
+            // Copy the current node if necessary.
+            if (!map.containsKey(head)) {
+                map.put(head, new RandomListNode(head.value));
+            }
+            // Connect the copied node to the deep copy list.
+            cur.next = map.get(head);
+            // Copy the random node if necessary.
+            if (head.random != null) {
+                if (!map.containsKey(head.random)) {
+                    map.put(head.random, new RandomListNode(head.random.value));
+                }
+                // Connect the copied node to the random pointer
+                cur.next.random = map.get(head.random);
+            }
+            head = head.next;
+            cur = cur.next;
+        }
+        return dummy.next;
+    }
+
+    // Time O(n)
+    // Space O(n)
+    public RandomListNode copyI(RandomListNode head) {
         if (head == null) {
             return null;
         }
