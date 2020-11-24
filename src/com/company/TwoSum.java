@@ -22,7 +22,7 @@ public class TwoSum {
         Arrays.sort(array);
         int left = 0;
         int right = array.length - 1;
-        while (left < right) {
+        while (left < right) {  // not including = , because left and right need to be different
             if (array[left] + array[right] == target) {
                 return true;
             } else if (array[left] + array[right] < target) {

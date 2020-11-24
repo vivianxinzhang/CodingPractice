@@ -4,7 +4,10 @@ import java.util.*;
 public class TwoSumAllPairII {
     public static void main(String[] args) {
         TwoSumAllPairII s = new TwoSumAllPairII();
-        int[] array = new int[] {1, 3, 2, 4};
+        int[] array = new int[] {2, 1, 3, 2, 4, 3, 4, 2};
+        System.out.println(s.allPairs(array, 5));
+
+        array = new int[] {1, 3, 2, 4};
         System.out.println(s.allPairs(array, 5));
 
         array = new int[] {1, 2, 2, 4};
@@ -14,7 +17,7 @@ public class TwoSumAllPairII {
     // Assumptions: array is not null, array.length >= 2.
     // Method 1: sort the array first, then use two pointers.
     // Time O(nlogn)
-    // Space O(n)
+    // Space O(1)
     public List<List<Integer>> allPairs(int[] array, int target) {
         Arrays.sort(array);
         List<List<Integer>> result = new ArrayList<>();
