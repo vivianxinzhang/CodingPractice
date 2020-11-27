@@ -1,15 +1,16 @@
 package com.company;
-import java.util.*;
 
-public class Solution {
+public class MergeTwoSortedLinkedLists {
     public static void main(String[] args) {
-        Solution s = new Solution();
+        MergeTwoSortedLinkedLists s = new MergeTwoSortedLinkedLists();
         ListNode one = new ListNode(1);
         ListNode two = new ListNode(2);
         ListNode three = new ListNode(3);
-        ListNode zero = new ListNode(0);
         one.next = two;
         two.next = three;
+        ListNode zero = new ListNode(0);
+        ListNode two2 = new ListNode(2);
+        zero.next = two2;
         ListNode head = s.merge(one, zero);
         while (head != null) {
             System.out.println(head.value);
@@ -18,6 +19,8 @@ public class Solution {
         System.out.println();
     }
 
+    // Time O(n)
+    // Space O(1)
     public ListNode merge(ListNode one, ListNode two) {
         ListNode dummy = new ListNode(0);
         ListNode prev = dummy;
