@@ -2,12 +2,25 @@ package com.company;
 import java.util.*;
 
 public class TopKFrequentWords {
-    // Time average O((nlogk)  <--  O(n + klogk + 2(n-k)logk + klogk)
-    // worst case O(n^2) <-- O(n^2 + klogk + 2(n-k)logk + klogk)
-    // Space O(n + k)
+    public static void main(String[] args) {
+        TopKFrequentWords s = new TopKFrequentWords();
+        String [] array = new String[] {"a", "a", "b", "b", "b", "b", "c", "c", "c", "d"};
+        System.out.println(Arrays.toString(s.topKFrequent(array, 2)));
+    }
+
     // Assumptions: combo is not null, and k >= 1
+    // Time O(nlogk) <-- O(n) + O(klogk) + O(2(n-k)logk) + O(klogk)
+    // Time average O((n + k)logk)  <--  O(n + klogk + (n-k)logk + klogk)
+    // worst case O(n^2) <-- O(n^2 + klogk + (n-k)logk + klogk)
+    // Space O(n + k)
+    // Step 1: get frequency map of combo with word as key, frequency as value
+    // Step 2: build min heap of Map.Entry
+    // Step 3: iterate through hashMap entry set,
+    //         if size of min heap < k, offer map entry to hashmap
+    //         else, compare top of minHeap with new entry key
+    //         if value of top entry is smaller than new entry element,
+    //         minHeap.poll() and minHeap.offer(entry)
     public String[] topKFrequent(String[] combo, int k) {
-        // Write your solution here
         if (combo == null || combo.length == 0 || k == 0) {
             return new String[0];
         }
