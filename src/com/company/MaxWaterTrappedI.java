@@ -10,6 +10,7 @@ public class MaxWaterTrappedI {
         System.out.println(s.maxTrapped(array));
     }
 
+    // Method 3: Optimized solution
     // Time O(n)
     // Space O(1)
     // Assumptions: The given array is not null
@@ -35,4 +36,10 @@ public class MaxWaterTrappedI {
         }
         return result;
     }
+
+    // Method 2: DP
+
+
+    // Method 1: 中心开花
+
 }
