@@ -85,4 +85,12 @@ public class MergeKSortedLists {
             return o1.value < o2.value ? -1 : 1;
         }
     }
+
+    // Method 2: binary reduction
+    // Time O(kn * logk)
+    // Space O(1)
+
+    // Method 1: iterative reduction
+    // Time O(k^2 * n)
+    // Space O()
 }
