@@ -10,6 +10,7 @@ public class MaxWaterTrappedII {
         System.out.println(s.maxTrapped(matrix));
     }
 
+    //
     public int maxTrapped(int[][] matrix) {
         // Assumptions: matrix is not null, has size of M * N
         // M > 0 & N > 0, all the values are non-negative integers
