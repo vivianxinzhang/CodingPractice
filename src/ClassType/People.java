@@ -1,4 +1,4 @@
-package com.company.Practice;
+package ClassType;
 
 public class People {
     String name;

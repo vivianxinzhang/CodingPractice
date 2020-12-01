@@ -1,4 +1,4 @@
-package com.company.Practice;
+package ClassType;
 import java.util.*;
 
 public class Test {

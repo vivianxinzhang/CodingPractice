@@ -12,6 +12,12 @@ public class MergeKSortedArray {
         System.out.println(Arrays.toString(s.mergeII(arrayOfArrays)));
         System.out.println(Arrays.toString(s.mergeI(arrayOfArrays)));
         System.out.println(Arrays.toString(s.merge(arrayOfArrays)));
+
+        arrayOfArrays = new int[][]{{},{1,5,7},{4},{2,3,5,11},{2,4,4,6,8}};
+        System.out.println(Arrays.toString(s.mergeIII(arrayOfArrays)));
+        System.out.println(Arrays.toString(s.mergeII(arrayOfArrays)));
+        System.out.println(Arrays.toString(s.mergeI(arrayOfArrays)));
+        System.out.println(Arrays.toString(s.merge(arrayOfArrays)));
     }
 
     // Assumption：arrayOfArrays is not null, none of the array is null either
