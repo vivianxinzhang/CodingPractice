@@ -1,51 +1,81 @@
 package com.company;
-
-import java.util.Arrays;
+import java.util.*;
 
 public class MergeKSortedArray {
-//    public int[] merge(int[][] matrix) {
-//        Method 0:
-//        Time O(mn * log(mn))
-//        Space O(kn)
-//        if (matrix == null || matrix.length == 0) {
-//            return new int[0];
-//        }
-//        int length = 0;
-//        for (int[] array : matrix) {
-//            length += array.length;
-//        }
-//        int[] result = new int[length];
-//        int k = 0;
-//        for (int i = 0; i < matrix.length; i++) {
-//            for (int j = 0; j < matrix[i].length; j++) {
-//                result[k] = matrix[i][j];
-//                k++;
-//            }
-//        }
-//        Arrays.sort(result);
-//        return result;
-//    }
+    public static void main(String[] args) {
+        MergeKSortedArray s = new MergeKSortedArray();
+        int[][] arrayOfArrays = new int[3][];
+        arrayOfArrays[0] = new int[] {1, 3, 9};
+        arrayOfArrays[1] = new int[] {0, 4};
+        arrayOfArrays[2] = new int[] {2, 7, 8, 10};
+        System.out.println(Arrays.toString(s.mergeIII(arrayOfArrays)));
+        System.out.println(Arrays.toString(s.mergeII(arrayOfArrays)));
+        System.out.println(Arrays.toString(s.mergeI(arrayOfArrays)));
+        System.out.println(Arrays.toString(s.merge(arrayOfArrays)));
+    }
 
-//     Method 1:
-//     Time O(k^2 * n)
-//     Space O(kn)
-//    public int[] merge(int[][] matrix) {
-//        // Write your solution here
-//        if (matrix == null || matrix.length == 0) {
-//            return new int[0];
-//        }
-//        int[] tmp = matrix[0];
-//        for (int i = 1; i < matrix.length; i++) {
-//            tmp = merge(tmp, matrix[i]);
-//        }
-//        return tmp;
-//    }
+    // Assumption：arrayOfArrays is not null, none of the array is null either
+    // Method 3: play together (heap)
+    // Time O(kn*logk)
+    // Space O(k)
+    public int[] mergeIII(int[][] arrayOfArrays) {
+        PriorityQueue<Entry> minHeap = new PriorityQueue<>(11, new MyComparator());
+        int length = 0;
+        // initialize minHeap
+        for (int i = 0; i < arrayOfArrays.length; i++) {
+            int[] array = arrayOfArrays[i];
+            length += array.length;
+            if (array.length != 0) {
+                // we use two index to record the position of each element:
+                // i is the index of the array in the arrayOfArrays --> row
+                // y is the index of the element in array[i] --> col
+                minHeap.offer(new Entry(i, 0, array[0]));
+            }
+        }
+        int[] result = new int[length];
+        int cur = 0;
+        while (!minHeap.isEmpty()) {
+            Entry tmp = minHeap.poll();
+            result[cur++] = tmp.value;
+            if (tmp.y + 1 < arrayOfArrays[tmp.x].length) {
+                // reuse the same Entry object but advance the index by 1
+                tmp.y++;
+                tmp.value = arrayOfArrays[tmp.x][tmp.y];
+                minHeap.offer(tmp);
+            }
+        }
+        return result;
+    }
 
-//    Method 2:
-//    Time O(kn * logk)
-//    Space O(kn)
-    public int[] merge(int[][] matrix) {
-        // Write your solution here
+    static class MyComparator implements Comparator<Entry> {
+        @Override
+        public int compare(Entry e1, Entry e2) {
+            if (e1.value == e2.value) {
+                return 0;
+            }
+            return e1.value < e2.value ? -1 : 1;
+        }
+    }
+
+    static class Entry {
+        // The row number
+        int x;
+        // The column number
+        int y;
+        // The corresponding value
+        int value;
+
+        Entry(int x, int y, int value) {
+            this.x = x;
+            this.y = y;
+            this.value = value;
+        }
+    }
+
+    // Method 2: binary reduction (recursive implementation)
+    // Time O(kn * logk)
+    // Space O(kn)
+    public int[] mergeII(int[][] matrix) {
         if (matrix == null || matrix.length == 0) {
             return new int[0];
         }
@@ -90,6 +120,44 @@ public class MergeKSortedArray {
             j++;
             k++;
         }
+        return result;
+    }
+
+    // Method 1: iterative reduction
+    // Time O(k^2 * n)
+    // Space O(kn)
+    public int[] mergeI(int[][] matrix) {
+        // Write your solution here
+        if (matrix == null || matrix.length == 0) {
+            return new int[0];
+        }
+        int[] tmp = matrix[0];
+        for (int i = 1; i < matrix.length; i++) {
+            tmp = merge(tmp, matrix[i]);
+        }
+        return tmp;
+    }
+
+    // Method 0:
+    // Time O(mn * log(mn))
+    // Space O(kn)
+    public int[] merge(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) {
+            return new int[0];
+        }
+        int length = 0;
+        for (int[] array : matrix) {
+            length += array.length;
+        }
+        int[] result = new int[length];
+        int k = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                result[k] = matrix[i][j];
+                k++;
+            }
+        }
+        Arrays.sort(result);
         return result;
     }
 }
