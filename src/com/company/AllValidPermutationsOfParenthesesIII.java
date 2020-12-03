@@ -5,11 +5,17 @@ public class AllValidPermutationsOfParenthesesIII {
     public static void main(String[] args) {
         AllValidPermutationsOfParenthesesIII s = new AllValidPermutationsOfParenthesesIII();
         System.out.println(s.validParenthesesIII(1, 1, 0));
+        // [()<>, <()>, <>()]
+        System.out.println(s.validParenthesesIII(2, 0, 1));
+        // [()(){}, (){()}, (){}(), {()()}, {()}(), {}()()]
     }
 
-    // Assumptions: l, m, n >= 0
+    // Assumptions:
+    // 1. l, m, n >= 0
+    // 2. l + m + n > 0
     // Time O(6^2(m+n+l)*(m+n+l))     ←     O(6^2(m+n+l)*2(m+n+l))
     // Space O(m+n+l)    ←     stringbuilder 2(m+n+l) + recursion 层数 2(m+n+l)
+    // (): round brackets  <>: angle brackets  {}: curly brackets  []: square brackets
     private static final char[] PS = new char[] {'(', ')', '<', '>', '{', '}'};
     public List<String> validParenthesesIII(int l, int m, int n) {
         List<String> result = new ArrayList<>();

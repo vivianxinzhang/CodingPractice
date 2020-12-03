@@ -5,10 +5,13 @@ public class TwoSubsetsWithMinDifference {
         TwoSubsetsWithMinDifference s = new TwoSubsetsWithMinDifference();
         int[] array = new int[] {1, 3, 0};
         System.out.println(s.minDifference(array));
+
+        array = new int[] {1, 3, 2};
+        System.out.println(s.minDifference(array));
     }
 
     // Assumptions:
-    //The given integer array is not null and it has length of >= 2.
+    // The given integer array is not null and it has length of >= 2.
     // Method 1:
     // Time O(2^n)
     // Space O(n)
