@@ -42,6 +42,8 @@ public class MaxWaterTrappedI {
     }
 
     // Method 2: DP
+    // Time O(n)
+    // Space O(n)
     public int maxTrappedII(int[] array) {
         // Step 1: pre-processing
         int[] leftMax = fillLeftMax(array);

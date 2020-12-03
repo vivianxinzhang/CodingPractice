@@ -50,7 +50,7 @@ public class MaxWeightsSumOfIntervals {
         return false;
     }
 
-    static class IntervalW {
+    private static class IntervalW {
         public int start;
         public int end;
         public int weight;

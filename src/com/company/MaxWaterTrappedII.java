@@ -1,16 +1,35 @@
 package com.company;
+
 import java.util.*;
 
 public class MaxWaterTrappedII {
     public static void main(String[] args) {
         MaxWaterTrappedII s = new MaxWaterTrappedII();
-        int[][] matrix = new int[][] { { 2, 3, 4, 2 },
-                                       { 3, 1, 2, 3 },
-                                       { 4, 3, 5, 4 } };
-        System.out.println(s.maxTrapped(matrix));
+        int[][] matrix = new int[][]{
+                {1, 9, 2, 5, 8, 4},
+                {2, 4, 5, 1, 3, 2},
+                {7, 1, 3, 5, 6, 6},
+                {8, 5, 9, 3, 3, 4},
+                {5, 2, 1, 7, 5, 7}};
+        System.out.println(s.maxTrapped(matrix));   // 8
+
+        matrix = new int[][]{
+                {3, 5, 6, 4},
+                {2, 2, 3, 5},
+                {5, 2, 2, 4},
+                {7, 6, 6, 5}};
+        System.out.println(s.maxTrapped(matrix));   // 0
+
+        matrix = new int[][]{
+                {2, 3, 4, 2},
+                {3, 1, 2, 3},
+                {4, 3, 5, 4}};
+        System.out.println(s.maxTrapped(matrix));   // 3
     }
 
-    //
+    // Method: Best First Search
+    // Time: O(mnlogmn)
+    // Space: O(mn)
     public int maxTrapped(int[][] matrix) {
         // Assumptions: matrix is not null, has size of M * N
         // M > 0 & N > 0, all the values are non-negative integers
@@ -43,6 +62,9 @@ public class MaxWaterTrappedII {
                 // how much water can be trapped at the neighbor cell
                 // the maximum water level currently is controlled by the cur cell
                 result += Math.max(cur.height - nei.height, 0);
+//                if (cur.height - nei.height > 0) {
+//                    System.out.println("row " + nei.x + " col " + nei.y + " trapped water " + (cur.height - nei.height));
+//                }
                 nei.height = Math.max(cur.height, nei.height);
                 minHeap.offer(nei);
             }
@@ -85,7 +107,7 @@ public class MaxWaterTrappedII {
         return neis;
     }
 
-    static class Pair implements Comparable<Pair> {
+    class Pair implements Comparable<Pair> {
         int x;  // row index
         int y;  // column index
         int height; // height of the cell in the original matrix

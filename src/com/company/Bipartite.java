@@ -10,7 +10,7 @@ public class Bipartite {
         zero.neighbors.add(one);
         List<GraphNode> graph = new ArrayList<>();
         graph.add(one);
-        System.out.println(s.isBipartite(graph));
+        System.out.println(s.isBipartite(graph));   // true
     }
 
     // Best First Search
