@@ -34,7 +34,7 @@ public class FactorCombinations {
             return;
         }
         dfs(remain, factors, index + 1, curr, result);
-        int count = 0;
+        // int count = 0;
         int factor = factors.get(index);
         int size = curr.size();
         while (remain % factor == 0) {
