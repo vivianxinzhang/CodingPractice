@@ -2,6 +2,17 @@ package com.company;
 import java.util.*;
 
 public class CombinationsOfCoins {
+    public static void main(String[] args) {
+        CombinationsOfCoins s = new CombinationsOfCoins();
+        int[] array = new int[] {2, 1};
+        System.out.println(s.combinations(4, array));
+        // [[0, 4], [1, 2], [2, 0]]
+
+        array = new int[] {5, 2, 1};
+        System.out.println(s.combinations(9, array));
+        // [[0, 0, 9], [0, 1, 7], [0, 2, 5], [0, 3, 3], [0, 4, 1], [1, 0, 4], [1, 1, 2], [1, 2, 0]]
+    }
+
     // Time and Space complexity depend on int[] coins and target number, for 99 cents example
     // Time O(99^4) general O(target/min(coins)^coins.length)
     // Space O(1) general O(1)  recursion 有n层 但 in reality coins.length 不会特别长  n 不会趋向于无穷大

@@ -4,14 +4,14 @@ import java.util.*;
 public class AllSubsetsIIOfSizeK {
     public static void main(String[] args) {
         AllSubsetsIIOfSizeK s = new AllSubsetsIIOfSizeK();
-
-        System.out.println(s.subSetsIIOfSizeK("xak", 2));   // expected:<["ak", "ax", "kx"]> but was:<["ak", "ax", "xk"]>
-
+        System.out.println(s.subSetsIIOfSizeK("xak", 2));
+        // [kx, ax, ak]
         System.out.println(s.subSetsIIOfSizeK("cba", 2));
-
+        // [bc, ac, ab]
         System.out.println(s.subSetsIIOfSizeK("bab", 2));
-
+        // [bb, ab]
         System.out.println(s.subSetsIIOfSizeK("abab", 2));
+        // [bb, ab, aa]
     }
 
     // Method 1:

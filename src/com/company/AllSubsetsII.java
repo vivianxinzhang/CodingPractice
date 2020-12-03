@@ -4,10 +4,10 @@ import java.util.*;
 public class AllSubsetsII {
     public static void main(String[] args) {
         AllSubsetsII s = new AllSubsetsII();
-        System.out.println(s.subSets(""));
-        System.out.println(s.subSets("aa"));
-        System.out.println(s.subSets("abb"));
-        System.out.println(s.subSets("abab"));
+        System.out.println(s.subSets(""));  // []
+        System.out.println(s.subSets("aa")); // [aa, a, ]
+        System.out.println(s.subSets("abb")); // [abb, ab, a, bb, b, ]
+        System.out.println(s.subSets("abab")); // [aabb, aab, aa, abb, ab, a, bb, b, ]
     }
 
     // Time O(2^n * n)

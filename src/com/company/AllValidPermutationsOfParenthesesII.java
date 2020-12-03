@@ -5,12 +5,16 @@ public class AllValidPermutationsOfParenthesesII {
     public static void main(String[] args) {
         AllValidPermutationsOfParenthesesII s = new AllValidPermutationsOfParenthesesII();
         System.out.println(s.validParentheses(1, 1, 0));
+        // [()<>, (<>), <()>, <>()]
     }
 
-    // Assumptions: l, m, n >= 0
+    // Assumptions:
+    // 1. l, m, n >= 0
+    // 2. l + m + n > 0
     // Time O(6^2(m+n+l)*(m+n+l))     ←     O(6^2(m+n+l)*2(m+n+l))
-    // Space O(m+n+l)    ←     stringbuilder 2(m+n+l) + recursion 层数 2(m+n+l)
+    // Space O(m+n+l)    ←     char[] 2(m+n+l) + recursion 层数 2(m+n+l)
     private static final char[] PS = new char[] {'(', ')', '<', '>', '{', '}'};
+    // (): round brackets  <>: angle brackets  {}: curly brackets  []: square brackets
     public List<String> validParentheses(int l, int m, int n) {
         List<String> result = new ArrayList<>();
         char[] array = new char[2 * (l + m + n)];

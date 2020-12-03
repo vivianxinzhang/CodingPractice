@@ -1,11 +1,13 @@
 package com.company;
-
 import java.util.*;
 
 public class AllValidPermutationsOfParenthesesI {
     public static void main(String[] args) {
-        AllSubsetsI s = new AllSubsetsI();
-        System.out.println(s.subSets("a"));
+        AllValidPermutationsOfParenthesesI s = new AllValidPermutationsOfParenthesesI();
+        System.out.println(s.validParentheses(0)); // []
+        System.out.println(s.validParentheses(1)); // [()]
+        System.out.println(s.validParentheses(2)); // [(()), ()()]
+        System.out.println(s.validParentheses(3)); // [((())), (()()), (())(), ()(()), ()()()]
     }
 
     // O(2^(2n)*n)  <--  O(2^(2n)*2n)
