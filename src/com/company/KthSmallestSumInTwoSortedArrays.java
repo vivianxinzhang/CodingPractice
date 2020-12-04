@@ -13,16 +13,16 @@ public class KthSmallestSumInTwoSortedArrays {
     }
 
     // Assumption: 1) m > 0, n > 0
-    //                    2) k >0 and k < m * n
-    //										3) A and B are sorted in ascending order
+    //             2) k >0 and k < m * n
+    //			   3) A and B are sorted in ascending order
     // Approach: Use Best First Search to find the k-th smallest element
-    //                Total possilbe values of  s can be put in an imiginary 2-D array: dimension mn and there could have same values
-    //								Data Structure: Priority Queue -- minHeap
-    //								Initial State: A[0] + B[0]
-    //								Expand: A[i] + B[j]
-    //								Generate: A[i + 1] + B[j] and A[i] + B[j + 1]
-    //								Termination condition: before the k-th element is popped out for expansion
-    //								Deduplication: which node have been generated
+    // Total possible values of  s can be put in an imiginary 2-D array: dimension mn and there could have same values
+    // Data Structure: Priority Queue -- minHeap
+    // Initial State: A[0] + B[0]
+    // Expand: A[i] + B[j]
+    // Generate: A[i + 1] + B[j] and A[i] + B[j + 1]
+    // Termination condition: before the k-th element is popped out for expansion
+    // Deduplication: which node have been generated
     // Time O(klogk)
     // Space O(k + m * n)
     public int kthSum(int[] A, int[] B, int k) {
