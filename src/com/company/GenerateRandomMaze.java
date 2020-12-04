@@ -29,8 +29,8 @@ public class GenerateRandomMaze {
     // 2. the top left corner must be corridor
     // 3. there should be as many corridor cells as possible
     // 4. for each pair of cells on the corridor, there must exist one and only one path between them
-    // Time O()
-    // Space O()
+    // Time O(4^mn)
+    // Space O(mn)
     public int[][] maze(int n) {
         int[][] maze = new int[n][n];
         // initialize the matrix as only (0, 0) is corridor,
