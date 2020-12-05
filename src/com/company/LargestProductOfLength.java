@@ -5,10 +5,10 @@ public class LargestProductOfLength {
     public static void main(String[] args) {
         LargestProductOfLength s = new LargestProductOfLength();
         String[] dict = new String[] {"abcde", "abcd", "ade", "xy"};
-        System.out.println(s.largestProduct(dict));
+        System.out.println(s.largestProduct(dict));     // 10
 
         dict = new String[] {"abc", "abc", "abc", "abc"};
-        System.out.println(s.largestProduct(dict));
+        System.out.println(s.largestProduct(dict));     // 0
     }
 
     // Given a dictionary containing many words,
