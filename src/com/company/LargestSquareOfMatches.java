@@ -10,6 +10,11 @@ public class LargestSquareOfMatches {
                         {2, 0, 2, 0, 0, 0, 0, 0},
                         {1, 1, 0, 0, 0, 0, 0, 0}};
         /*
+        0 - there is no match to its right or bottom.
+        1 - there is a match to its right.
+        2 - there is a match to its bottom.
+        3 - there is a match to its right, and a match to its
+
                         -- --  --  --    -- --
                        |         |
                        |         |
