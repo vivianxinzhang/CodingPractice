@@ -59,4 +59,36 @@ public class FactorCombinations {
         }
         return result;
     }
+
+    // Method 2:
+    public List<List<Integer>> combinationsII(int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> factors = new ArrayList<>();
+        for (int i = 2; i * 2 <= target; i++) {
+            if (target % i == 0) {
+                factors.add(i);
+            }
+        }
+        if (factors.size() == 0) {
+            return result;
+        }
+        List<Integer> cur = new ArrayList<>();
+        helper(factors, 0, 1, target, cur, result);
+        return result;
+    }
+    private void helper(List<Integer> factors, int start, int product, int target, List<Integer> cur,
+                        List<List<Integer>> result) {
+        if (product > target) {
+            return;
+        }
+        if (product == target) {
+            result.add(new ArrayList<Integer> (cur));
+            return;
+        }
+        for (int i = start; i < factors.size(); i++) {
+            cur.add(factors.get(i));
+            helper(factors, i, product * factors.get(i), target, cur, result);
+            cur.remove(cur.size() - 1);
+        }
+    }
 }
