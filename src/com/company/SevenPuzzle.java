@@ -91,7 +91,7 @@ public class SevenPuzzle {
                     return numOfSteps;
                 }
 
-                int[] zeroPos = board.findZero();
+                int[] zeroPos = board.findZero();   // O(8)
                 int zeroI = zeroPos[0];
                 int zeroJ = zeroPos[1];
 
@@ -101,7 +101,7 @@ public class SevenPuzzle {
                     if (!board.outOfBound(i, j)) {
                         board.swap(zeroI, zeroJ, i, j);
                         if (!set.contains(board)) {
-                            Board newBoard = board.clone();
+                            Board newBoard = board.clone();     // O(8)
                             queue.offer(newBoard);
                             set.add(newBoard);
                         }

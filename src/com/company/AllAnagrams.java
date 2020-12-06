@@ -4,7 +4,9 @@ import java.util.*;
 public class AllAnagrams {
     public static void main(String[] args) {
         AllAnagrams s = new AllAnagrams();
-        System.out.println();
+        String lo = "abcbac";
+        String sh = "ab";
+        System.out.println(s.allAnagrams(sh, lo));
     }
 
     // Find All anagrams of String sh in string lo, return all the starting indices
