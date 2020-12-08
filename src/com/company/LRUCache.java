@@ -60,6 +60,11 @@ public class LRUCache<K, V> {
     }
 
     // Time: O(1)
+    // 看一下有没有
+    // Case 1:有的话 先 update value 再换位置(remove + append)
+    // Case 2: 没有的话
+    //     2.1 没有满 还可以加 append at head
+    //     2.2 满了不能加 先remove oldest(tail)再append new node at head
     public void set(K key, V value) {
         Node<K, V> node = null;
         // 1. if the key already in the cache, we need to update its value
@@ -98,6 +103,7 @@ public class LRUCache<K, V> {
     }
 
     // Time: O(1)
+    // remove the node from the double linked list
     private Node<K, V> remove(Node<K, V> node) {
         map.remove(node.key);
         // 前面指向后面
@@ -121,9 +127,9 @@ public class LRUCache<K, V> {
     }
 
     // Time: O(1)
+    // append the last accessed node at head
     private Node<K, V> append(Node<K, V> node) {
         map.put(node.key, node);
-        // insert at head
         if (head == null) {
             head = tail = node;
         } else {
