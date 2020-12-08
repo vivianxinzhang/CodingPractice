@@ -12,7 +12,7 @@ public class MaximumValuesOfSizeKSlidingWindows {
 
     // Assumptions:
     // 1. array is not null or not empty, 2. k >= 1 and k <= a.length
-    // Method 3: use a decreasing deque to maintain max candidates
+    // Method 3: use a decreasing deque to maintain index of max candidates
     // Time O(n)
     // Space O(k)
     public List<Integer> maxWindows(int[] array, int k) {
@@ -28,7 +28,7 @@ public class MaximumValuesOfSizeKSlidingWindows {
             // 有又大又新的进来之后 之前又小又旧的不可能是max了
             // while (the last element in max_candidates < current element):
             // remove the last element in max_candidate
-            while (!deque.isEmpty() && array[deque.peekLast()] <= array[i]) {
+            while (!deque.isEmpty() && array[deque.peekLast()] <= array[i]) {   // amortized O(1) for each update
                 deque.pollLast();
             }
             // remove the oldest element in the sliding window: if this oldest element
