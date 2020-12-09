@@ -19,7 +19,7 @@ public class HeapSort {
         // Step 2: n times poll and percolateDown operation - O(nlogn)
         //         swap the polled element with end element in the heap
         //         (last element is sorted, heapSize--)
-        //         percolateDown first element to maintain heap property for the unsorted part in heap
+        //         percolateDown first element to maintain heap property for the unsorted part in heap [0, endIdx]
         for (int endIdx = array.length - 1; endIdx > 0; endIdx--) {
             swap(array, 0, endIdx);
             percolateDown(array, 0, endIdx - 1);
