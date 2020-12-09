@@ -30,24 +30,30 @@ public class EditDistance {
     // Time O(mn)
     // Space O(mn)
     public int editDistance(String one, String two) {
-        // distance[i][j] represents minimum number of edit distance
-        // between substring(0,i) in one and substring(0,j) in two
-        int[][] distance = new int[one.length() + 1][two.length() + 1];
+        int[][] M = new int[one.length() + 1][two.length() + 1];
         for (int i = 0; i <= one.length(); i++) {
-            for (int j = 0; j < two.length(); j++) {
+            for (int j = 0; j <= two.length(); j++) {
+                // Base case:
+                // M[i][0] = i and M[0][j] = j
                 if (i == 0) {
-                    distance[i][j] = j;
+                    M[i][j] = j;
                 } else if (j == 0) {
-                    distance[i][j] = i;
-                } else if (one.charAt(i - 1) == two.charAt(j - 1)) {
-                    distance[i][j] = distance[i - 1][j - 1];
+                    M[i][j] = i;
+                } else if (one.charAt(i - 1) == two.charAt(j - 1)){
+                    // Case 1: if s1[i-1] = s2[j-1], then M[i][j] = M[i-1][j-1]
+                    M[i][j] = M[i - 1][j - 1];
                 } else {
-                    distance[i][j] = Math.min(distance[i - 1][j] + 1, distance[i][j - 1] + 1);
-                    distance[i][j] = Math.min(distance[i - 1][j - 1] + 1, distance[i][j]);
+                    // Case 2: if s1[i-1] != s2[j-1],
+                    //         Option 1: replace, then M[i][j] = 1 + M[i-1][j-1]
+                    //         Option 2: delete, then M[i][j] = 1 + M[i-1][j]
+                    //         Option 3: insert, then M[i][j] = 1 + M[i][j-1]
+                    //         M[i][j] = min(Option 1, Option 2, Option 3)
+                    M[i][j] = Math.min(M[i - 1][j], M[i][j - 1]) + 1;
+                    M[i][j] = Math.min(M[i][j], M[i - 1][j - 1] + 1);
                 }
             }
         }
-        return distance[one.length()][two.length()];
+        return M[one.length()][two.length()];
     }
 
     // Method 1: Recursion
