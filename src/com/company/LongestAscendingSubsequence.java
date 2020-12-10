@@ -4,7 +4,7 @@ public class LongestAscendingSubsequence {
     public static void main(String[] args) {
         LongestAscendingSubsequence s = new LongestAscendingSubsequence();
         int[] array = new int[] {5, 2, 6, 3, 4, 7, 5};
-        System.out.println(s.longest(array));
+        System.out.println(s.longest(array));  // 4
     }
 
     // Method 1:
