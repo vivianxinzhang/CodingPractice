@@ -122,19 +122,22 @@ public class WildcardMatching {
         }
         for (int i = 1; i <= str.length(); i++) {
             for (int j = 1; j <= pattern.length(); j++) {
+                // If current characters match, result is same as result for
+                // lengths minus one. Characters match in two cases:
+                // a) if pattern character is a '?' then it matches with any character of text.
+                // b) the current characters in both match
+                if (pattern.charAt(j - 1) == '?' ||
+                        str.charAt(i - 1) == pattern.charAt(j - 1)) {
+                    M[i][j] = M[i - 1][j - 1];
+                }
                 // Two cases if we see a '*'
                 // a) we ignore '*' character and move to next character
                 // in the pattern, i.e., '*' indicates an empty sequence.
                 // b) '*' character matches with ith character in input
-                if (pattern.charAt(j - 1) == '*') {
-                    M[i][j] = M[i][j - 1] || M[i - 1][j];
-                }
-                // a) the current character of the pattern is '?'
-                // b) characters actually match
-                else if (pattern.charAt(j - 1) == '?' ||
-                        str.charAt(i - 1) == pattern.charAt(j - 1)) {
-                    M[i][j] = M[i - 1][j - 1];
-                } else {
+                else if (pattern.charAt(j - 1) == '*') {
+                    M[i][j] = M[i][j - 1]       // '*' match 0 letter
+                            || M[i - 1][j];     // '*' matches 1 or more letters
+                } else {    // if (pattern[j - 1] != text[i - 1])
                     M[i][j] = false;
                 }
             }

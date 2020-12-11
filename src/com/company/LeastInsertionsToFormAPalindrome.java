@@ -4,7 +4,7 @@ public class LeastInsertionsToFormAPalindrome {
     public static void main(String[] args) {
         LeastInsertionsToFormAPalindrome s = new LeastInsertionsToFormAPalindrome();
         String input = "zzazz";
-        System.out.println(s.leastInsertion(input));
+        System.out.println(s.leastInsertion(input));    // 0
 
         input = "mbadm";
         System.out.println(s.leastInsertion(input));    // 2 "mbdadbm" or "mdbabdm"
@@ -13,10 +13,12 @@ public class LeastInsertionsToFormAPalindrome {
         System.out.println(s.leastInsertion(input));    // 5 "leetcodocteel"
     }
 
-    // dp[i][j] := min chars to insert
-    // base case: dp[i][i] = 0, dp[i][i-1] = 0
-    // dp[i][j] = dp[i+1][j-1] if s[i] == s[j] else min(dp[i+1][j] , dp[i][j-1]) + 1
-    // ans: dp[0][n-1]
+    // Base case: dp[i][i] = 0, dp[i][i-1] = 0
+    // Induction rule:
+    // dp[i][j] := min chars to insert for substring [i, j] to form a palindrome
+    // M[i][j] = M[i+1][j-1]			        if input[i] == input[j]
+    //           1 + min(M[i][j-1], M[i+1][j])	else
+    // return dp[0][n-1]
     // Time O(n^2)
     // Space O(n^2)
     public int leastInsertion(String input) {
