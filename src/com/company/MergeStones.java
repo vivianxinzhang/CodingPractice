@@ -10,13 +10,12 @@ public class MergeStones {
         System.out.println(s.minCost(array));   // 28
     }
 
+    // minCost[j][i]: the min cost of merging the partition [j, i]
+    // M[i, j] = min (sun(j ... i) + M[i][k] + M[k][j]) for all possible k.
     // Time= O(n^2 * n) = O(n^3)
     // Space = O(n^2)
     public int minCost(int[] stones) {
-        // First we need to pad the original array at leftmost and rightmost position
-        // int[] helper = getPrefixSum(stones);
         // [4, 3, 3, 4];
-        // minCost[j][i]: the min cost of merging the partition (j, i).
         int[][] minCost = new int[stones.length][stones.length];
         // 枚举所有的终点
         for (int i = 1; i < stones.length; i++) {

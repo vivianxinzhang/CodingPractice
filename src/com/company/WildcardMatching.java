@@ -31,7 +31,7 @@ public class WildcardMatching {
     // Method 2:
     // M[i][j represents whether the first i characters of input string
     // matches the first j characters of pattern.
-    // Time O(mn*n)
+    // Time O(mn)
     // Space O(mn)
     public boolean match(String input, String pattern) {
         boolean[][] M = new boolean[input.length() + 1][pattern.length() + 1];
@@ -65,8 +65,8 @@ public class WildcardMatching {
     }
 
     // Method 1:
-    // Time O()
-    // Space O()
+    // Time O(mn*m)
+    // Space O(mn)
     public boolean matchI(String input, String pattern) {
         boolean[][] M = new boolean[input.length() + 1][pattern.length() + 1];
         for (int i = 0; i <= input.length(); i++) {
@@ -106,7 +106,9 @@ public class WildcardMatching {
         return M[input.length()][pattern.length()];
     }
 
-    // another implementation
+    // Another implementation:
+    // Time O(mn)
+    // Space O(mn)
     public boolean matchII(String str, String pattern) {
         boolean[][] M = new boolean[str.length() + 1][pattern.length() + 1];
         for (int i = 0; i <= str.length(); i++) {
