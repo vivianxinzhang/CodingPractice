@@ -10,12 +10,19 @@ public class GetKeysInBinaryTreeLayerByLayerZigzagOrder {
         TreeNode one = new TreeNode(1);
         TreeNode four = new TreeNode(4);
         TreeNode eleven = new TreeNode(11);
+        /*
+                      5
+                    /    \
+                   3      8
+                 /   \     \
+                1   4      11
+        **/
         five.left = three;
         five.right = eight;
         three.left = one;
         three.right = four;
         eight.right = eleven;
-        System.out.println(s.zigZag(five));
+        System.out.println(s.zigZag(five));   // [5, 3, 8, 11, 4, 1]
     }
 
     // Time O(n)
