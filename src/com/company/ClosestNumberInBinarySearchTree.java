@@ -5,7 +5,12 @@ public class ClosestNumberInBinarySearchTree {
         ReconstructBinarySearchTreeWithLevelOrder rec = new ReconstructBinarySearchTreeWithLevelOrder();
         int[] level = new int[]{5, 3, 8, 1, 4, 11};
         TreeNode root = rec.reconstruct(level);
-
+        /*           5
+                  /    \
+                 3      8
+              /    \       \
+            1     4         11
+        * */
         ClosestNumberInBinarySearchTree s = new ClosestNumberInBinarySearchTree();
         System.out.println(s.closest(root, 10));
     }
