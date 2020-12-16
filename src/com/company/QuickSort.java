@@ -2,8 +2,13 @@ package com.company;
 import java.util.*;
 
 public class QuickSort {
+    public static void main(String[] args) {
+        QuickSort s = new QuickSort();
+        int[] array = new int[] {4, 2, -3, 6, 1};
+        System.out.println(Arrays.toString(s.quickSort(array)));    // [-3, 1, 2, 4, 6]
+    }
+
     public int[] quickSort(int[] array) {
-        // Write your solution here
         if (array == null || array.length == 0) {
             return array;
         }

@@ -38,6 +38,11 @@ public class MergeKSortedLists {
             System.out.println();
         }
 
+        // 0 7
+        // 1 3 5
+        // 2 6
+        // 0 1 2 3 5 6 7
+
         head = s.merge(listOfLists);
         while (head != null) {
             System.out.print(head.value + " ");
@@ -45,12 +50,13 @@ public class MergeKSortedLists {
         }
     }
 
-    // Assumptions: ListOfLists is not null, and none of the lists is null.
+    // Assumptions:
+    // 1. ListOfLists is not null, 2. none of the lists is null.
     // Method 3: play together (heap)
     // Time O(kn * logk)
     // Space O(k)
     public ListNode merge(List<ListNode> listOfLists) {
-        Queue<ListNode> minHeap = new PriorityQueue<>(new MyComparator());
+        PriorityQueue<ListNode> minHeap = new PriorityQueue<>(new MyComparator());
         ListNode dummy = new ListNode(0);
         ListNode tail = dummy;
         for (ListNode head : listOfLists) {
@@ -61,22 +67,15 @@ public class MergeKSortedLists {
         while (!minHeap.isEmpty()) {
             ListNode curr = minHeap.poll();
             tail.next = curr;
-            tail = tail.next;
             if (curr.next != null) {
                 minHeap.offer(curr.next);
             }
+            tail = tail.next;
         }
-//        while (!minHeap.isEmpty()) {
-//            tail.next = minHeap.poll();
-//            if (tail.next.next != null) {
-//                minHeap.offer(tail.next.next);
-//            }
-//            tail = tail.next;
-//        }
         return dummy.next;
     }
 
-    static class MyComparator implements Comparator<ListNode> {
+    class MyComparator implements Comparator<ListNode> {
         @Override
         public int compare(ListNode o1, ListNode o2) {
             if (o1.value == o2.value) {
@@ -88,9 +87,60 @@ public class MergeKSortedLists {
 
     // Method 2: binary reduction
     // Time O(kn * logk)
-    // Space O(1)
+    // Space O(logk)
+    public ListNode mergeII(List<ListNode> listOfLists) {
+        if (listOfLists == null || listOfLists.size() == 0) {
+            return null;
+        }
+        return mergeInBinaryReduction(listOfLists, 0, listOfLists.size() - 1);
+    }
+
+    private ListNode mergeInBinaryReduction(List<ListNode> listOfLists, int i, int j) {
+        if (i == j) {
+            return listOfLists.get(i);
+        }
+        if (i == j - 1) {
+            return mergeTwo(listOfLists.get(i), listOfLists.get(j));
+        }
+        int mid = i + (j - i) / 2;
+        ListNode left = mergeInBinaryReduction(listOfLists, i, mid);
+        ListNode right = mergeInBinaryReduction(listOfLists, mid + 1, j);
+        return mergeTwo(left, right);
+    }
+
+    private ListNode mergeTwo(ListNode one, ListNode two) {
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+        while (one != null && two != null) {
+            if (one.value < two.value) {
+                tail.next = one;
+                one = one.next;
+            } else {
+                tail.next = two;
+                two = two.next;
+            }
+            tail = tail.next;
+        }
+        if (one != null) {
+            tail.next = one;
+        }
+        if (two != null) {
+            tail.next = two;
+        }
+        return dummy.next;
+    }
 
     // Method 1: iterative reduction
     // Time O(k^2 * n)
-    // Space O()
+    // Space O(1)
+    public ListNode mergeI(List<ListNode> listOfLists) {
+        if (listOfLists == null || listOfLists.size() == 0) {
+            return null;
+        }
+        ListNode head = listOfLists.get(0);
+        for (int i = 1; i < listOfLists.size(); i++) {
+            head = mergeTwo(head, listOfLists.get(i));
+        }
+        return head;
+    }
 }

@@ -4,10 +4,7 @@ import java.util.*;
 public class MergeKSortedArray {
     public static void main(String[] args) {
         MergeKSortedArray s = new MergeKSortedArray();
-        int[][] arrayOfArrays = new int[3][];
-        arrayOfArrays[0] = new int[] {1, 3, 9};
-        arrayOfArrays[1] = new int[] {0, 4};
-        arrayOfArrays[2] = new int[] {2, 7, 8, 10};
+        int[][] arrayOfArrays = new int[][] {{1, 3, 4, 9}, {0, 1, 4}, {1, 2, 4, 7, 8, 10}};
         System.out.println(Arrays.toString(s.mergeIII(arrayOfArrays)));
         System.out.println(Arrays.toString(s.mergeII(arrayOfArrays)));
         System.out.println(Arrays.toString(s.mergeI(arrayOfArrays)));
@@ -85,7 +82,6 @@ public class MergeKSortedArray {
         if (matrix == null || matrix.length == 0) {
             return new int[0];
         }
-        int[] tmp = matrix[0];
         return merge(matrix, 0, matrix.length - 1);
     }
 

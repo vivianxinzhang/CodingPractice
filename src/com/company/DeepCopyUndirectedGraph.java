@@ -2,6 +2,41 @@ package com.company;
 import java.util.*;
 
 public class DeepCopyUndirectedGraph {
+    public static void main(String[] args) {
+        DeepCopyUndirectedGraph s = new DeepCopyUndirectedGraph();
+        GraphNode node1 = new GraphNode(1);
+        GraphNode node2 = new GraphNode(2);
+        GraphNode node3 = new GraphNode(3);
+        GraphNode node4 = new GraphNode(4);
+        GraphNode node5 = new GraphNode(5);
+        node1.neighbors.add(node2);
+        node2.neighbors.add(node3);
+        node4.neighbors.add(node5);
+        node5.neighbors.add(node4);
+        node1.neighbors.add(node5);
+        List<GraphNode> graph = new ArrayList<>();
+        graph.add(node1);
+        graph.add(node2);
+        graph.add(node3);
+        graph.add(node4);
+        graph.add(node5);
+        printGraph(graph);
+        System.out.println();
+        List<GraphNode> newGraph = s.copy(graph);
+        printGraph(newGraph);
+    }
+
+    private static void printGraph(List<GraphNode> graph) {
+        for (GraphNode node : graph) {
+            System.out.print(node.key + " --> ");
+            for (GraphNode nei : node.neighbors) {
+                System.out.print(nei.key + "  ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Assumptions: The given graph is not null
     // Method 2: Recursion(DFS)
     // Recursive manner. Use map to store whether a node has been copied before
     // For every single recursion function call, we make a copy of the input node,
@@ -31,10 +66,7 @@ public class DeepCopyUndirectedGraph {
         }
     }
 
-    // Method 2: Recursion(DFS)
-    // Recursive manner. Use map to store whether a node has been copied before
-    // For every single recursion function call, we make a copy of the input node,
-    // and leave all other copies of the successors to the recursion functions.
+    // DFS for connected graph
     // Time O(V+E)
     // Space O(V)
     public Node cloneGraph(Node input, Map<Node, Node> lookup) {
@@ -61,31 +93,8 @@ public class DeepCopyUndirectedGraph {
         }
     }
 
-    // Method 1: Breadth First Search
-    // Time O(V+E)
-    // Space O(V)
-    public List<GraphNode> copyII(List<GraphNode> graph) {
-        List<GraphNode> newNodes = new ArrayList<>();
-        Queue<GraphNode> q = new ArrayDeque<>();
-        Map<GraphNode, GraphNode> oldToNew = new HashMap<>();
-        for (GraphNode node : graph) {
-            oldToNew.put(node, new GraphNode(node.key));
-            q.offer(node);
-            newNodes.add(oldToNew.get(node));
-        }
-        while (!q.isEmpty()) {
-            GraphNode old = q.poll();
-            for (GraphNode neighbor : old.neighbors) {
-                if (oldToNew.get(neighbor) == null) {
-                    oldToNew.put(neighbor, new GraphNode(neighbor.key));
-                    q.offer(neighbor);
-                }
-                oldToNew.get(old).neighbors.add(oldToNew.get(neighbor));
-            }
-        }
-        return newNodes;
-    }
 
+    // Method 1: Breadth First Search
     // Time O(v + e)
     // Space O(v)
     public List<GraphNode> copyI(List<GraphNode> graph) {
@@ -117,5 +126,30 @@ public class DeepCopyUndirectedGraph {
             map.put(curr, new GraphNode(curr.key));
         }
         return map.get(curr);
+    }
+
+    // Another implementation of BFS:
+    // Time O(V+E)
+    // Space O(V)
+    public List<GraphNode> copyII(List<GraphNode> graph) {
+        List<GraphNode> newNodes = new ArrayList<>();
+        Queue<GraphNode> q = new ArrayDeque<>();
+        Map<GraphNode, GraphNode> oldToNew = new HashMap<>();
+        for (GraphNode node : graph) {
+            oldToNew.put(node, new GraphNode(node.key));
+            q.offer(node);
+            newNodes.add(oldToNew.get(node));
+        }
+        while (!q.isEmpty()) {
+            GraphNode old = q.poll();
+            for (GraphNode neighbor : old.neighbors) {
+                if (oldToNew.get(neighbor) == null) {
+                    oldToNew.put(neighbor, new GraphNode(neighbor.key));
+                    q.offer(neighbor);
+                }
+                oldToNew.get(old).neighbors.add(oldToNew.get(neighbor));
+            }
+        }
+        return newNodes;
     }
 }

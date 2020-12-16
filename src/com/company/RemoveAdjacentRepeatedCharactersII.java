@@ -13,7 +13,6 @@ public class RemoveAdjacentRepeatedCharactersII {
     // Time O(n)
     // Space O(n)
     public String deDup(String input) {
-        // Write your solution here
         if (input == null || input.length() <= 2) {
             return input;
         }
