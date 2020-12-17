@@ -137,8 +137,13 @@ public class KthSmallestInTwoSortedArrays {
         return  -1;
     }
 
+    // index mid from A:
+    // 0 <= mid <= k - 1
+    // query in B:
+    // 0 <= k - mid - 1 <= k - 1
+    // -1 <= k - mid - 2 <= k - 2
     private int ReadFromIndex(int[] array, int index) {
-        if (index < 0) {
+        if (index < 0) {    // index == -1
             // mid is too big in A, mid + 1 elements in A <= a[mid]
             // k - (mid + 1) in B should be <= a[mid]
             // k - (mid + 1) < 0 means mid + 1 is bigger than k
