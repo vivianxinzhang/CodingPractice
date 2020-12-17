@@ -28,6 +28,20 @@ public class MaxWaterTrappedII {
     }
 
     // Method: Best First Search
+    // data structure:
+    // priority queue: storing bars with their indexes and height
+    // priority_queue的物理意义是当前边界下的蓄水池的海平面(边界高度)，其值决定了边界向内bfs探索过程中的蓄水量。
+    // class bar: storing the indexes, its height and bounding bar height
+    // total: recording the total trapped water
+    // a m x n boolean matrix: recording checked bar
+    // initialization: traverse the outtest circle of the matirx, recording in priority queue, total is 0, marking corresponding bar as true in the boolean matrix
+    // for each step:
+    // poll pq top, hereinafter cur
+    // if the neighbors of cur are not checked, generating its neighbors and marking them as checked.
+    // case 1: if neighbor's height lower than or equal current bounding bar height, total add the volumn of trapped water on such neighbor, offer neighbor into pq with cur bounding bar height
+    // case 2: if neighbor's height larger than cur bounding bar height, offer neighbor into pq with neighbor's height as bounding bar height
+    // termination: pq is empty
+    // deduplicate: a m x n boolean matrix recording checked bars
     // Time: O(mnlogmn)
     // Space: O(mn)
     public int maxTrapped(int[][] matrix) {
@@ -55,9 +69,8 @@ public class MaxWaterTrappedII {
                 if (visited[nei.x][nei.y]) {
                     continue;
                 }
-                // adjust the neighbor cell's height to teh current water level
-                // if necessary, mark the neighbor cell as visited, and put the
-                // neighbor cell into the min heap
+                // adjust the neighbor cell's height to the current water level if necessary,
+                // mark the neighbor cell as visited, and put the neighbor cell into the min heap
                 visited[nei.x][nei.y] = true;
                 // how much water can be trapped at the neighbor cell
                 // the maximum water level currently is controlled by the cur cell

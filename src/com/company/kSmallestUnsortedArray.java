@@ -8,7 +8,6 @@ public class kSmallestUnsortedArray {
     // Time = O(nlogn)
     // Space = O(1)
     public int[] kSmallestI(int[] array, int k) {
-        // Write your solution here
         if (array == null || array.length == 0) {
             return array;
         }
@@ -16,6 +15,7 @@ public class kSmallestUnsortedArray {
         return k >= array.length ? array : Arrays.copyOf(array, k);
     }
 
+    // Assume k >= 0 and k <= array.length
     // Method 2: heap
     // Implementation 1: n sized minHeap -- offline algorithm
     // Step 1: heapify the whole array with minHeap
@@ -75,12 +75,10 @@ public class kSmallestUnsortedArray {
         return result;
     }
 
-
-
     // Method 4: quick select
-    // Time O(n) worst case O(n^2)
-    // Space O(1)
-    // Assume k >= 0 and k <= array.length
+    // Time O(n) => if want answer to be sorted O(n + k + klogk)
+    // worst case O(n^2)  => if want answer to be sorted O(n^2 + k + k^2)
+    // Space O(1) <= O(logk) worst case O(k)
     // O(n + n/2 + n/4 + ... 1) if pivot separates array 1/2 and 1/2
     // = O(1/(1-1/2) * n) = O(2n) = O(n)
     // O(n + (9/10)n + (9/10)^2*n + ... + 1  if pivot separates array to 1/10 and 9/10
@@ -95,8 +93,8 @@ public class kSmallestUnsortedArray {
         // are the k smallest ones(but not sorted)
         quickSelect(array, 0, array.length - 1, k - 1);
         // copy out the first k elements and sort them
-        int[] result = Arrays.copyOf(array, k);
-        Arrays.sort(result);
+        int[] result = Arrays.copyOf(array, k); // O(k)
+        Arrays.sort(result);    // O(klogk)
         return result;
     }
 

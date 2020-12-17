@@ -47,19 +47,22 @@ public class MajorityNumberI {
     // Time: O(nlogn)
     // Space: O(1)
     public int majorityII(int[] array) {
-        heapsort(array);
+        heapsort(array);            // - O(nlogn)
         return array[array.length / 2];
     }
 
     public void heapsort(int[] array) {
-        // Step 1: heapify the input array to maxHeap.      - O(n)
+        // Step 1: heapify whole input array to maxHeap.                              - O(n)
         heapify(array); // O(n)
-        // Step 2: n times poll and percolateDown operation - O(nlogn)
-        //         swap the polled element with end element in the heap
-        //         (last element is sorted, heapSize--)
-        //         percolateDown first element to maintain heap property for the unsorted part in heap
+        // Step 2: n times poll from maxHeap, and adjust to maintain heap property     - O(nlogn)
+        // [0, endIdx] is maxHeap
+        // [endId + 1, n - 1] is the sorted part in ascending order
         for (int endIdx = array.length - 1; endIdx > 0; endIdx--) {
+            // 2.1 swap the first element with end element in the heap
             swap(array, 0, endIdx);
+            // 2.2 last element is sorted, endIdx--
+            // 2.3 percolateDown the first element in range [0, endIdx]
+            // percolateDown first element to maintain heap property for the unsorted part in heap
             percolateDown(array, 0, endIdx - 1);
         }
     }
@@ -76,16 +79,16 @@ public class MajorityNumberI {
             // need to get new leftChildIdx
             int leftChildIdx = 2 * i + 1;
             int rightChildIdx = 2 * i + 2;
-            int swapCandidate = leftChildIdx;
-            while (rightChildIdx <= endIdx && array[rightChildIdx] > array[swapCandidate]) {
-                swapCandidate = rightChildIdx;
+            int swapCandidateIdx = leftChildIdx;
+            while (rightChildIdx <= endIdx && array[rightChildIdx] > array[swapCandidateIdx]) {
+                swapCandidateIdx = rightChildIdx;
             }
-            if (array[swapCandidate] > array[i]) {
-                swap(array, i, swapCandidate);
+            if (array[swapCandidateIdx] > array[i]) {
+                swap(array, i, swapCandidateIdx);
             } else {
                 break;
             }
-            i = swapCandidate;
+            i = swapCandidateIdx;
         }
     }
 
@@ -99,14 +102,16 @@ public class MajorityNumberI {
     // Time: O(n)
     // Space: O(n)
     public int majorityI(int[] array) {
-        Map<Integer, Integer> countMap = new HashMap<>();
+        // Step 1: put all values of array in hash map, key is the number, value if count of the number
+        Map<Integer, Integer> map = new HashMap<>();
         for (int num : array) {
-            int count = countMap.getOrDefault(num, 0);
-            countMap.put(num, count + 1);
+            int count = map.getOrDefault(num, 0);
+            map.put(num, count + 1);
         }
-        double half = array.length / 2;
-        for (Map.Entry<Integer, Integer> entry : countMap.entrySet()) {
-            if (entry.getValue() > half) {
+        double halfCount = array.length / 2;
+        // Step 2: iterate through hash map and find which one has more than half of the total count
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getValue() > halfCount) {
                 return entry.getKey();
             }
         }

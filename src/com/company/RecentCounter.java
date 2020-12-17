@@ -3,7 +3,7 @@ import java.util.*;
 
 public class RecentCounter {
     public static void main(String[] args) {
-        Solution s = new Solution();
+        RecentCounter s = new RecentCounter();
         RecentCounter obj = new RecentCounter();
         int p1 = obj.ping(1);
         System.out.println(p1);

@@ -3,7 +3,7 @@ import java.util.*;
 
 public class AllUniqueCharactersII {
     public static void main(String[] args) {
-        Solution s = new Solution();
+        AllUniqueCharactersII s = new AllUniqueCharactersII();
         System.out.println();
     }
 

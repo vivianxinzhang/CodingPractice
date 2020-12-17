@@ -22,9 +22,9 @@ public class LRUCache<K, V> {
         cache.set(2, "second");
         cache.set(3, "third");
         cache.set(2, "newTwo");
-        System.out.println(cache.get(2));
-        System.out.println(cache.get(3));
-        System.out.println(cache.get(0));
+        System.out.println(cache.get(2));   // newTwo
+        System.out.println(cache.get(3));   // third
+        System.out.println(cache.get(0));   // null
     }
     // each node contains the key, value pair,
     // and it is also a double linked list node.
@@ -105,7 +105,9 @@ public class LRUCache<K, V> {
     // Time: O(1)
     // remove the node from the double linked list
     private Node<K, V> remove(Node<K, V> node) {
+        // step 1: update index map first
         map.remove(node.key);
+        // step 2: update storage layer, doubly linked list
         // 前面指向后面
         if (node.prev != null) {
             node.prev.next = node.next;
@@ -129,7 +131,9 @@ public class LRUCache<K, V> {
     // Time: O(1)
     // append the last accessed node at head
     private Node<K, V> append(Node<K, V> node) {
+        // step 1: update index map first
         map.put(node.key, node);
+        // step 2: update storage layer, doubly linked list
         if (head == null) {
             head = tail = node;
         } else {

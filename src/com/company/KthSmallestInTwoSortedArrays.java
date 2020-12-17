@@ -8,21 +8,24 @@ public class KthSmallestInTwoSortedArrays {
         System.out.println(s.kth(A, B, 3));  // 3
         System.out.println(s.kthI(A, B, 3));  // 3
         System.out.println(s.kthII(A, B, 3));  // 3
+        System.out.println(s.kthIII(A, B, 3));  // 3
 
         A = new int[] {1, 2, 3, 4};
-        B = new int[] {};
+        B = new int[] {1};
         System.out.println(s.kth(A, B, 2));  // 2
         System.out.println(s.kthI(A, B, 2));  // 2
         System.out.println(s.kthII(A, B, 2));  // 2
+        System.out.println(s.kthIII(A, B, 2));  // 2
     }
 
-    // Assumptions: a, b is not null, at least one of them is not empty,
-    // k <= a.length + b.length, k >= 1
-    // Method 2: Binary Search
+    // Assumptions:
+    // 1. a, b is not null, at least one of them is not empty,
+    // 2. k <= a.length + b.length, k >= 1
+    // Method 3: Binary Search using recursion
     // 核心：1. search space decreases over time after each iteration
     //      2. target cannot be ruled out
-    // Time O(mn)
-    // Space O(mn)
+    // Time O(logk)
+    // Space O(logk)
     public int kth(int[] a, int[] b, int k) {
         return kth(a, 0, b, 0, k);
     }
@@ -51,12 +54,102 @@ public class KthSmallestInTwoSortedArrays {
         // included in the smallest k elements
         int amid = aLeft + k/2 - 1;
         int bmid = bLeft + k/2 - 1;
+        // if amid out of bound, we want to delete the the elements in b
         int aval = amid >= a.length ? Integer.MAX_VALUE : a[amid];
+        // if bmid out of bound, we want to delete the the elements in a
         int bval = bmid >= b.length ? Integer.MAX_VALUE : b[bmid];
+        // either first k/2 in a are smaller
+        // or b index is out of range
         if (aval <= bval) {
             return kth(a, amid + 1, b, bLeft, k - k/2);
         } else {
             return kth(a, aLeft, b, bmid + 1, k - k/2);
+        }
+    }
+
+    // Method 3: binary search with Space optimization
+    // Time O(logk)
+    // Space O(1) iteration O(logk) → O(1)
+    public int kthIII(int[] a, int[] b, int k) {
+        if (k < 0 || k > a.length + b.length) {
+            return -1;
+        }
+        int aleft = 0, bleft = 0;
+        while (k >= 2) {
+            if (aleft >= a.length) {
+                return b[bleft + k - 1];
+            }
+            if (bleft >= b.length) {
+                return a[aleft + k - 1];
+            }
+            int amid = aleft + k/2 - 1;
+            int bmid = bleft + k/2 - 1;
+            int aval = amid >= a.length ? Integer.MAX_VALUE : a[amid];
+            int bval = bmid >= b.length ? Integer.MAX_VALUE : b[bmid];
+            if (aval <= bval) {
+                aleft = amid + 1;
+            } else {
+                bleft = bmid + 1;
+            }
+            k -= k/2;
+        }
+        if (aleft >= a.length) {
+            return b[bleft];
+        }
+        if (bleft >= b.length) {
+            return a[aleft];
+        }
+        return a[aleft] < b[bleft] ? a[aleft] : b[bleft];
+    }
+
+    // If we only look at A, currently I am looking at A[i], how do I know whether this element is the one I am looking for?
+    // B[k - i - 2] <= A[i] <= B[k - i - 1], to check this O(1)
+    // Case 1: If this is satisfied, then A[i] is the kth smallest in the merged results.
+    // Case 2: When no,
+    //   Case 2.1: A[i] < B[k - i - 2], if the answer exists in A, then it must exists on the right side of A[i]
+    //   Case 2.2: A[i] > B[k - i - 1], then the answer must exist on the left side of A[i]
+    // The search space has this monotonic property.
+    // If we use this binary search and cannot find the answer in A, then use the same logic to find the answer in B.
+    // Method 2:
+    // Time O(logk + logk) = O(logk))
+    // Space O(1)
+    public int kthII(int[] A, int[] B, int k) {
+        // Assuming 0 <= k < a.length + b.length
+        int ansFromA = binarySearch(A, B, k);
+        return ansFromA == -1 ? B[binarySearch(B, A, k)] : A[ansFromA];
+    }
+
+    private int binarySearch(int[] A, int[] B, int k) {
+        // using binary search to find an i in A such that B[k - i - 2] <= A[i] <= B[k - i - 1]
+        // return -1 if no such i. Otherwise, teh found i will be returned.
+        int left = 0;
+        int right = Math.min(k, A.length) - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (A[mid] < ReadFromIndex(B, k - mid - 2)) {
+                left = mid + 1;
+            } else if (A[mid] > ReadFromIndex(B, k - mid - 1)) {
+                right = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        return  -1;
+    }
+
+    private int ReadFromIndex(int[] array, int index) {
+        if (index < 0) {
+            // mid is too big in A, mid + 1 elements in A <= a[mid]
+            // k - (mid + 1) in B should be <= a[mid]
+            // k - (mid + 1) < 0 means mid + 1 is bigger than k
+            // there are already more elements in A than k
+            return Integer.MIN_VALUE;
+        } else if (index >= array.length) {
+            // need to have more elements in B in order for a[mid] to be the kth elemnt
+            // but no more element, means mid is too small, need to move left border
+            return Integer.MAX_VALUE;
+        } else {
+            return array[index];
         }
     }
 
@@ -83,46 +176,4 @@ public class KthSmallestInTwoSortedArrays {
         }
         return kthSmallest;
     }
-
-    // Space： O(logk) → O(1)
-    // Time O(logk)
-    // Space O(1)
-    public int kthII(int[] a, int[] b, int k) {
-        // Write your solution here
-        if (k < 0 || k > a.length + b.length) {
-            return -1;
-        }
-        int aleft = 0, bleft = 0;
-        while (k >= 2) { // 大家思考一下这里为什么要k >= 2
-            if (aleft >= a.length) {
-                return b[bleft + k - 1];
-            }
-            if (bleft >= b.length) {
-                return a[aleft + k - 1];
-            }
-            int amid = aleft + k/2 - 1;
-            int bmid = bleft + k/2 - 1;
-            int aval = amid >= a.length ? Integer.MAX_VALUE : a[amid];
-            int bval = bmid >= b.length ? Integer.MAX_VALUE : b[bmid];
-            if (aval <= bval) {
-                aleft = amid + 1;
-            } else {
-                bleft = bmid + 1;
-            }
-            k -= k/2;
-        }
-        if (aleft >= a.length) {
-            return b[bleft];
-        }
-        if (bleft >= b.length) {
-            return a[aleft];
-        }
-        return a[aleft] < b[bleft] ? a[aleft] : b[bleft];
-    }
-/* 每次k减小 K/2 元素
-   Example：
-      K = 4   第一次去掉了2个元素
-      K = 4 - 2 = 2   这时候还没有找到K小 还需要再次进循环
-      K = 1 这个时候的result应该是 两个array valid index里谁的第一个元素比较小 答案就是谁
-*/
 }

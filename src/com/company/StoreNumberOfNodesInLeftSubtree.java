@@ -2,7 +2,7 @@ package com.company;
 
 public class StoreNumberOfNodesInLeftSubtree {
     public static void main(String[] args) {
-        Solution s = new Solution();
+        StoreNumberOfNodesInLeftSubtree s = new StoreNumberOfNodesInLeftSubtree();
         System.out.println();
     }
     // helper function return the total # of nodes in  subtree

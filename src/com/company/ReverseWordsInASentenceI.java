@@ -2,7 +2,7 @@ package com.company;
 
 public class ReverseWordsInASentenceI {
     public static void main(String[] args) {
-        Solution s = new Solution();
+        ReverseWordsInASentenceI s = new ReverseWordsInASentenceI();
         System.out.println("main");
     }
 

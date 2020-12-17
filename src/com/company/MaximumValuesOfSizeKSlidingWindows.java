@@ -8,11 +8,18 @@ public class MaximumValuesOfSizeKSlidingWindows {
         System.out.println(s.maxWindows(array, 3));
         System.out.println(s.maxWindowsI(array, 3));
         System.out.println(s.maxWindowsII(array, 3));
+
+        array = new int[] {5, 2, 1, 4, 3, 6, 2, 8, 3, 1, 4};
+        System.out.println(s.maxWindows(array, 4));
+        System.out.println(s.maxWindowsI(array, 4));
+        System.out.println(s.maxWindowsII(array, 4));
     }
 
     // Assumptions:
     // 1. array is not null or not empty, 2. k >= 1 and k <= a.length
     // Method 3: use a decreasing deque to maintain index of max candidates
+    // left side represents index of current maximum value in the sliding window
+    // right side we will put index of future maximum value candidates
     // Time O(n)
     // Space O(k)
     public List<Integer> maxWindows(int[] array, int k) {
