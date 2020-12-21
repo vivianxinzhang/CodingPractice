@@ -39,10 +39,10 @@ public class MajorityNumberII {
         }
         count1 = count2 = 0;
         for (int num : array) {
-            if (num == num1) {
+            if (num1 != null && num == num1) {
                 count1++;
             }
-            if (num == num2) {
+            if (num2 != null && num == num2) {
                 count2++;
             }
         }
