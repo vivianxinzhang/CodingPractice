@@ -114,6 +114,7 @@ public class WordSearchII {
 
     private void dfs(char[][] board, int row, int col, Set<String> wordSet, StringBuilder sb, Set<String> res, boolean[][] visited) {
         // check if path prefix is a word in the set
+        // if empty string "" is in the wordSet, also can collect result here
         String word = sb.toString();
         if (wordSet.contains(word)) {
             res.add(word);
