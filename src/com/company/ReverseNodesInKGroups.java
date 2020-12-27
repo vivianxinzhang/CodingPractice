@@ -19,6 +19,8 @@ public class ReverseNodesInKGroups {
         }
     }
 
+    // Time O(n)
+    // Space O(n)
     public ListNode reverseKGroup(ListNode head, int k) {
         // Write your solution here
         if (head == null || k <= 1) {
