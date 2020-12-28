@@ -1,18 +1,18 @@
 package com.company;
-import java.util.Arrays;
+import java.util.*;
 
 /**
-Randomly generate a maze of size N * N (where N = 2K + 1)
-whose corridor and wall’s width are both 1 cell.
-For each pair of cells on the corridor, there must exist one and only one path between them.
-(Randomly means that the solution is generated randomly, and whenever the program is executed,
-the solution can be different.).
-The wall is denoted by 1 in the matrix and corridor is denoted by 0.
+  Randomly generate a maze of size N * N (where N = 2K + 1)
+  whose corridor and wall’s width are both 1 cell.
+  For each pair of cells on the corridor, there must exist one and only one path between them.
+  (Randomly means that the solution is generated randomly, and whenever the program is executed,
+  the solution can be different.).
+  The wall is denoted by 1 in the matrix and corridor is denoted by 0.
 */
 public class GenerateRandomMaze {
     public static void main(String[] args) {
         GenerateRandomMaze s = new GenerateRandomMaze();
-        printResult(s.maze(5));
+        printResult(s.maze(11));
         System.out.println();
         printResult(s.maze(3));
         System.out.println();
@@ -56,6 +56,7 @@ public class GenerateRandomMaze {
         shuffle(dirs);
         for (Dir dir : dirs) {
             // advance by two steps
+            // For each pair of cells on the corridor, there must exist one and only one path between them.
             int nextX = dir.moveX(x, 2);
             int nextY = dir.moveY(y, 2);
             if (isValidWall(maze, nextX, nextY)) {
@@ -71,10 +72,11 @@ public class GenerateRandomMaze {
     // get a random order of the directions
     private void shuffle(Dir[] dirs) {
         for (int i = 0; i < dirs.length; i++) {
-            int index = (int) (Math.random() * (dirs.length - i));
+            // randomize generate an index between [i, n - 1]
+            int randomIdx = i + (int) (Math.random() * (dirs.length - i));
             Dir tmp = dirs[i];
-            dirs[i] = dirs[i + index];
-            dirs[i + index] = tmp;
+            dirs[i] = dirs[randomIdx];
+            dirs[randomIdx] = tmp;
         }
     }
 

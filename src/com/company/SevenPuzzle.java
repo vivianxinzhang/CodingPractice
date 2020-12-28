@@ -29,8 +29,7 @@ public class SevenPuzzle {
     //	         有多少种排列方式？8！每个格子选一个树
     // 什么是边？每一个棋盘 和 它移动一步能变成的棋盘之间有边
     // 看起来是个有向图  其实是个无向图  可以变过去 也可以变回来
-    // Follow up:
-    // What if there are thousands of queries? How to minimize the processing time for each query?
+    // Follow up: What if there are thousands of queries? How to minimize the processing time for each query?
     // 从终点出发 做一次 BFS1 就可以了
     // Method 2: breadth first search from ending point
     // and use a hashmap to memorize all possible generated boards and its steps
@@ -114,7 +113,7 @@ public class SevenPuzzle {
         return -1;
     }
 
-        static class Board {
+    static class Board {
         public final static int R = 2;
         public final static int C = 4;
 

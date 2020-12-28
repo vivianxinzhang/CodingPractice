@@ -23,6 +23,9 @@ public class TwoSubsetsWithMinDifference {
         return minDiff[0];
     }
 
+    // current level considering number at index i
+    // have already picked # of count, still need to pick n/2 - count
+    // have already considered i numbers, still have n - i to consider
     private void dfs(int[] array, int i, int currSum, int count, int totalSum, int[] minDiff) {
         // picked n/2 elements, return
         if (count == array.length / 2) {

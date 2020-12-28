@@ -4,7 +4,6 @@ public class DecodeWays {
     public static void main(String[] args) {
         DecodeWays s = new DecodeWays();
         System.out.println(s.numDecodeWay("0"));
-
         System.out.println(s.numDecodeWay("212"));
     }
 

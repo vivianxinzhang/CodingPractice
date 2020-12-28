@@ -24,32 +24,38 @@ public class KeepDistanceForIdenticalElements {
     // The problem can reduce to how to place each element from [1 to k],
     // among all the permutation, find the correct one(s).
     // Method 3: k levels; put one pair at a time
-    // Time O(n!)
-    // Space O(n)
+    // Time O(k!)
+    // Space O(k)
     public int[] keepDistance(int k) {
         int[] array = new int[2 * k];
         return helper3(array, k) ? array : null;
     }
 
-    private boolean helper3(int[] array, int n) {
-        if (n == 0) {
+    private boolean helper3(int[] array, int k) {
+        if (k == 0) {
             return true;
         }
         // try each position that does not has a number yet
-        // [ , , , , , ]
         // put a pair of n with distance n
         // first position is i, second position is i + n + 1
-        for (int i = 0; i < array.length - n - 1; i++) {
+        // [x, x, x, x, x, x]
+        // [x, 3, x, x, x, 3]
+        // [2, 3, x, 2, x, 3]
+        // last k placed at n - 1, it's paired k placed at n - 1 - k
+        // 2k - 1 - k = k - 1 iterations in for loop
+        // 2k - 1 - (k-1) = 2k - 1 - k + 1 = k iterations in for loop, but 1 pos has been taken -> k - 1
+        // 2k - 1 - (k-2) = 2k - 1 - k + 2 = k + 1 iterations in for loop, but 3 pos has been taken -> k + 1 - 3 = k - 2
+        for (int i = 0; i < array.length - k - 1; i++) {
             // [3, , , , 3, ] or [ , 3, , , , 3]
-            if (array[i] == 0 && array[i + n + 1] == 0) {
-                array[i] = n;
-                array[i + n + 1] = n;
-                if (helper3(array, n - 1)) {
+            if (array[i] == 0 && array[i + k + 1] == 0) {
+                array[i] = k;
+                array[i + k + 1] = k;
+                if (helper3(array, k - 1)) {
                     return true;
                 }
                 // recover previous state
                 array[i] = 0;
-                array[i + n + 1] = 0;
+                array[i + k + 1] = 0;
             }
         }
         return false;

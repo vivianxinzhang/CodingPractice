@@ -35,16 +35,17 @@ public class MinimumHeightTrees {
             return centroids;
         }
         // Build the graph with the adjacency list
-        ArrayList<Set<Integer>> neighbors = new ArrayList<>();
-        for (int i = 0; i < n; i++)
+        List<Set<Integer>> neighbors = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
             neighbors.add(new HashSet<Integer>());
+        }
         for (int[] edge : edges) {
             Integer start = edge[0], end = edge[1];
             neighbors.get(start).add(end);
             neighbors.get(end).add(start);
         }
         // Initialize the first layer of leaves
-        ArrayList<Integer> leaves = new ArrayList<>();
+        List<Integer> leaves = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             if (neighbors.get(i).size() == 1) {
                 leaves.add(i);
@@ -54,7 +55,7 @@ public class MinimumHeightTrees {
         int remainingNodes = n;
         while (remainingNodes > 2) {
             remainingNodes -= leaves.size();
-            ArrayList<Integer> newLeaves = new ArrayList<>();
+            List<Integer> newLeaves = new ArrayList<>();
             // remove the current leaves along with the edges
             for (Integer leaf : leaves) {
                 for (Integer neighbor : neighbors.get(leaf)) {

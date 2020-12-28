@@ -3,12 +3,6 @@ package com.company;
 public class LargestSquareOfMatches {
     public static void main(String[] args) {
         LargestSquareOfMatches s = new LargestSquareOfMatches();
-        int[][] matrix = new int[][]{
-                        {3, 1, 1, 3, 0, 1, 1, 0},
-                        {2, 0, 0, 2, 0, 0, 0, 0},
-                        {3, 1, 3, 0, 0, 0, 0, 0},
-                        {2, 0, 2, 0, 0, 0, 0, 0},
-                        {1, 1, 0, 0, 0, 0, 0, 0}};
         /*
         0 - there is no match to its right or bottom.
         1 - there is a match to its right.
@@ -23,7 +17,13 @@ public class LargestSquareOfMatches {
                        |      |
                         -- --
          **/
-        System.out.println(s.largestSquareOfMatches(matrix));
+        int[][] matrix = new int[][]{
+                {3, 1, 1, 3, 0, 1, 1, 0},
+                {2, 0, 0, 2, 0, 0, 0, 0},
+                {3, 1, 3, 0, 0, 0, 0, 0},
+                {2, 0, 2, 0, 0, 0, 0, 0},
+                {1, 1, 0, 0, 0, 0, 0, 0}};
+        System.out.println(s.largestSquareOfMatches(matrix));   // 2
     }
 
     // Assumptions:

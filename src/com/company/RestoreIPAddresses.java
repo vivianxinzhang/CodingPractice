@@ -4,17 +4,18 @@ import java.util.*;
 public class RestoreIPAddresses {
     public static void main(String[] args) {
         RestoreIPAddresses s = new RestoreIPAddresses();
+        System.out.println(s.Restore("0000"));
         System.out.println(s.Restore("25525511135"));
     }
 
-    // what is valid IP integer: 0 <  X <= 255
+    // what is valid IP integer: 0 <=  X <= 255
     // valid integer → if there are more than one digit in the integer, the first digit should not be 0
     // 分四层     →  	每层是一个IP的integer
     // 分三个branch   →   每个branch是每个integer可取多少种
     // Implementation 2:
     // Time O(3^4)
     // Space O(4)
-    public List<String> Restore(String ip) {
+    public List<String> RestoreI(String ip) {
         List<String> result = new ArrayList<>();
         if (ip == null || ip.length() == 0) {
             return result;
@@ -23,6 +24,7 @@ public class RestoreIPAddresses {
         helper(ip.toCharArray(), 0, 0, sb, result);
         return result;
     }
+
     private void helper(char[] ip, int level, int offset, StringBuilder sb, List<String> result) {
         if (level == 4) {
             if (sb.length() == ip.length + 4) {
@@ -59,12 +61,12 @@ public class RestoreIPAddresses {
 
     // 目的是把3个点插入进去把String分成4段：
     // pruning:
-    // 1. 如果剩余的Number长度不足以给剩下的Integer至少每个数一个digit  或者 远远长于 max可分配的长度(每个都是3位数), 直接返回
+    // 1. 如果剩余的Number长度不足以给剩下的Integer至少每个数一个digit  或者 远远长于max可分配的长度(每个都是3位数), 直接返回
     // 2. 如果上一个被加进path的integer string转换成int后大于255，或者它是一个首位是0且长度大于1的string，则 直接返回
     // Implementation 1:
     // Time O(3^4)
     // Space O(4)
-    public List<String> restoreIpAddresses(String s) {
+    public List<String> Restore(String s) {
         List<String> result = new ArrayList<>();
         if(s == null || s.length() == 0){
             return result;
@@ -84,6 +86,9 @@ public class RestoreIPAddresses {
         if(level == 0){
             return;
         }
+        // start index: index
+        // end index: i
+        // substring [index, i]
         for(int i = index; i< Math.min(index + 3,s.length()); i++){
             int length = sb.length();
             if(isValid(s.substring(index,i + 1))){
