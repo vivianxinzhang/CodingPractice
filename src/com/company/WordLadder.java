@@ -206,7 +206,6 @@ public class WordLadder {
             }
             return neighbors;
         }
-
         private Map<String, Integer> wordIndex = new HashMap<>();
         private List<String> words;
     }
