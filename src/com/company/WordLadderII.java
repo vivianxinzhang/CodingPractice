@@ -6,6 +6,7 @@ public class WordLadderII {
         WordLadderII s = new WordLadderII();
         List<String> dict = Arrays.asList("hot", "dot", "dog", "lot", "log", "cog");
         System.out.println(s.findLadders("hit", "cog", dict));
+        // [[hit, hot, dot, dog, cog], [hit, hot, lot, log, cog]]
         /*
                           dot  --->  dog
                        /                  \
@@ -16,6 +17,7 @@ public class WordLadderII {
 
         dict = Arrays.asList("ted", "tex", "red", "tax", "tad", "den", "rex", "pee");
         System.out.println(s.findLadders("red", "tax", dict));
+        // [[red, ted, tad, tax], [red, ted, tex, tax], [red, rex, tex, tax]]
         /*
                           rex  --->  tex
                        /          /       \
@@ -57,9 +59,6 @@ public class WordLadderII {
                         }
                         word[i] = (char)ch;
                         String neiWord = new String(word);
-                        if (steps.containsKey(neiWord)) {
-                            System.out.println(step + " " + neiWord + " " + steps.get(neiWord));
-                        }
                         // find the solution
                         if (neiWord.equals(endWord)) {
                             found = true;
