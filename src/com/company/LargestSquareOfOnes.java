@@ -4,7 +4,10 @@ public class LargestSquareOfOnes {
     public static void main(String[] args) {
         LargestSquareOfOnes s = new LargestSquareOfOnes();
         int[][] matrix = {{0, 0, 0, 0}, {1, 1, 1, 1}, {0, 1, 1, 1}, {1, 0, 1, 1}};
-        System.out.println(s.largest(matrix));
+        System.out.println(s.largest(matrix));  // 2
+
+        matrix = new int[][]{{0,1,1,1},{1,1,0,1},{0,1,0,1},{1,1,1,1}};
+        System.out.println(s.largest(matrix));  // 1
     }
 
     // Assumption:

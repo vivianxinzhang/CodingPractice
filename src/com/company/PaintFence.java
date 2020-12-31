@@ -8,12 +8,15 @@ public class PaintFence {
 
     // DP: Define two DP arrays, diff[n] and same[i].
     // same[i] means the number of ways if fence i has the same color with fence i - 1.
-    // Where diff[i] means the number of ways for the fence i which has different color with fence i -1.
+    // diff[i] means the number of ways for the fence i which has different color with fence i -1.
     // Initialization:
-    //      same[0] = 0, diff[0] = k.
+    //     same[0] = 0, diff[0] = k.
     // Induction rule:
-    //      same[i] = diff[i - 1].
-    //      diff[i] = (k - 1) * (same[i - 1] + diff[i - 1]);
+    //     Case 1 : if paint i  same color with i - 1, i - 1 must be different from i - 2, then only use diff[i - 1] to computer same
+    //              same[i]= diff[i - 1]
+    //     Case 2: if paint i different color with i - 1, doesn't matter if color i - 1 same or different with i - 2, can use both
+    //              there are (dp1[i - 1] + dp2[i - 1]) # of ways to paint previous i - 1, for each choice, (k - 1) ways to paint current fence
+    //              diff[i] = (k - 1) * (same[i - 1] + diff[i - 1])
     // Final state: same[n - 1] + diff[n - 1].
     public int numWays(int n, int k) {
         if (n <= 0 || k <= 0) {
