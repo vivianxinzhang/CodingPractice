@@ -4,10 +4,10 @@ public class ArrayHopperI {
     public static void main(String[] args) {
         ArrayHopperI s = new ArrayHopperI();
         int[] array = new int[] {1};
-        System.out.println(s.canJump(array));
+        System.out.println(s.canJump(array));   // true
 
         array = new int[] {1, 2, 0};
-        System.out.println(s.canJump(array));
+        System.out.println(s.canJump(array));   // true
     }
 
     // Assumption:
@@ -37,6 +37,12 @@ public class ArrayHopperI {
                     break;
                 }
             }
+//            for (int j = i + 1; j <= Math.min(i + array[i], array.length - 1); j++) {
+//                if (M[j] == true) {
+//                    M[i] = true;
+//                    break;
+//                }
+//            }
         }
         return M[0];
     }
