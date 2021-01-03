@@ -4,18 +4,67 @@ import java.util.*;
 public class LargestRectangleOfOnes {
     public static void main(String[] args) {
         LargestRectangleOfOnes s = new LargestRectangleOfOnes();
-        int[][] matrix = {{0, 0, 0, 0}, {1, 1, 1, 1}, {0, 1, 1, 1}, {1, 0, 1, 1}};
+        int[][] matrix = new int[][]{{1,1,1,1},{0,0,1,1},{1,0,1,1},{1,1,1,1}};
+        System.out.println(s.largest(matrix));  // 8
+
+        matrix = new int[][]{{0, 0, 0, 0}, {1, 1, 1, 1}, {0, 1, 1, 1}, {1, 0, 1, 1}};
         System.out.println(s.largest(matrix));  // 6
 
         matrix = new int[][]{{0,1,1,1},{1,1,0,1},{0,1,0,1},{1,1,1,1}};
         System.out.println(s.largest(matrix));  // 4
     }
 
+    // optimize space: fill M and compute max for each row at the same time
+    // only need to record one row
+    // Time O(mn)
+    // Space O(n)
+    public int largest(int[][] matrix) {
+        int max = 0;
+        int[] M = new int[matrix[0].length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (i == 0) {
+                    M[j] = matrix[i][j];
+                } else if (matrix[i][j] == 1) {
+                    M[j] = M[j] + 1;
+                } else if (matrix[i][j] == 0){
+                    M[j] = 0;
+                }
+            }
+            int currMax = largest(M);
+            max = Math.max(max, currMax);
+        }
+        return max;
+    }
+
+    // Time O(n)
+    // Space O(n)
+    public int largest(int[] array) {
+        if (array == null || array.length == 0) {
+            return 0;
+        }
+        Deque<Integer> incStack = new ArrayDeque<>();
+        int max = 0;
+        for (int i = 0; i <= array.length; i++) {
+            // i - 1 or 0 is right boundary
+            int nextHeight = i == array.length ? 0 : array[i];
+            while (!incStack.isEmpty() && array[incStack.peekFirst()] > nextHeight) {
+                int currHeight = array[incStack.pollFirst()];
+                int left = incStack.isEmpty() ? 0 : incStack.peekFirst() + 1;
+                int right = i - 1;
+                int currMax = (right - left + 1) * currHeight;
+                max = Math.max(currMax, max);
+            }
+            incStack.offerFirst(i);
+        }
+        return max;
+    }
+
     // Assumption:
     // The given matrix is not null and has size of M * N, M >= 0 and N >= 0
     // Time O(mn)
     // Space O(mn)
-    public int largest(int[][] matrix) {
+    public int largestII(int[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return 0;
         }

@@ -4,7 +4,7 @@ public class LongestCrossOfOnes {
     public static void main(String[] args) {
         LongestCrossOfOnes s = new LongestCrossOfOnes();
         int[][] matrix = {{0, 0, 0, 0}, {1, 1, 1, 1}, {0, 1, 1, 1}, {1, 0, 1, 1}};
-        System.out.println();
+        System.out.println(s.largest(matrix));  // 2
     }
 
     // Assumptions: matrix is not null, has size of N * M, where N >= 0 and M >= 0

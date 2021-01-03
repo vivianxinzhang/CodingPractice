@@ -5,11 +5,11 @@ public class LargestRectangleInHistogram {
     public static void main(String[] args) {
         LargestRectangleInHistogram s = new LargestRectangleInHistogram();
         int[] array = new int[] {2, 1, 3, 3, 4};
-        System.out.println(s.largest(array));
+        System.out.println(s.largest(array));   // 9
         System.out.println(s.largestI(array));
 
         array = new int[] {2, 1, 3, 4, 5, 2, 6};
-        System.out.println(s.largest(array));
+        System.out.println(s.largest(array));   // 10
         System.out.println(s.largestI(array));
     }
 

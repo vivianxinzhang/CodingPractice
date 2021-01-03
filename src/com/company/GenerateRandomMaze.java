@@ -12,9 +12,9 @@ import java.util.*;
 public class GenerateRandomMaze {
     public static void main(String[] args) {
         GenerateRandomMaze s = new GenerateRandomMaze();
-        printResult(s.maze(11));
-        System.out.println();
         printResult(s.maze(3));
+        System.out.println();
+        printResult(s.maze(5));
         System.out.println();
     }
 
