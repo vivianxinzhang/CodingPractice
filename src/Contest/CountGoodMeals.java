@@ -1,4 +1,4 @@
-package com.company;
+package Contest;
 import java.util.*;
 
 public class CountGoodMeals {

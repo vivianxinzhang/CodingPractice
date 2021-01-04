@@ -1,4 +1,6 @@
-package com.company;
+package DailyChallenge;
+
+import com.company.TreeNode;
 
 public class FindCorrespondingNodeOfABinaryTreeInACloneOfThatTree {
     public static void main(String[] args) {
