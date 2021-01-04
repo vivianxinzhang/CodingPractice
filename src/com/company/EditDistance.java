@@ -5,11 +5,11 @@ public class EditDistance {
         EditDistance s = new EditDistance();
         String one = "";
         String two = "";
-        System.out.println(s.editDistance(one, two));
+        System.out.println(s.editDistance(one, two));   // 0
 
         one = "sigh";
         two = "asith";
-        System.out.println(s.editDistance(one, two));
+        System.out.println(s.editDistance(one, two));   // 2
     }
 
     // Method 2: DP

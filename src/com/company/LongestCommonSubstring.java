@@ -11,12 +11,13 @@ public class LongestCommonSubstring {
         one = "sigh";
         two = "asith";
         System.out.println(s.longestCommon(one, two));  // si
-        System.out.println(s.longestCommonI(one, two));  // cd
+        System.out.println(s.longestCommonI(one, two));  // si
     }
 
     // Assumptions:
     // The two given strings are not null.
-    // M[i][j] represents the length of the longest common substring between a[0 … i-1] (the first i letters of a) and b[0 … j-1] (the first j letters of b) that includes a[i-1] and b[j-1].
+    // M[i][j] represents the length of the longest common substring between a[0 … i-1] (the first i letters of a)
+    // and b[0 … j-1] (the first j letters of b) that includes a[i-1] and b[j-1].
     // Base case:
     // M[0][0] = 0
     // M[i][0] = 0

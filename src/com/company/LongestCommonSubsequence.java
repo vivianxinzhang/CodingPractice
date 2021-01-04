@@ -5,15 +5,24 @@ public class LongestCommonSubsequence {
         LongestCommonSubsequence s = new LongestCommonSubsequence();
         String one = "abcde";
         String two = "cbabdfe";
-        System.out.println(s.longest(one, two));  // cd
+        System.out.println(s.longest(one, two));  // 4
 
         one = "sigh";
         two = "asith";
-        System.out.println(s.longest(one, two));  // si
+        System.out.println(s.longest(one, two));  // 3
     }
 
     // Assumptions:
     // The two given strings are not null.
+    // M[i][j] represents the length of the longest common subsequence between a[0 … i-1] (the first i letters of a)
+    // and b[0 … j-1] (the first j letters of b) that includes a[i-1] and b[j-1].
+    // Base case:
+    // M[0][0] = 0
+    // M[i][0] = 0
+    // M[0][j] = 0
+    // Induction rule:
+    // M[i][j] = 1 + M[i-1][j-1]	                if a[i-1] == b[j-1]
+    //	         Math.max(M[i-1][j], M[i][j-1])		if a[i-1] != b[j-1]
     // Time O(mn)
     // Space O(mn)
     public int longest(String source, String target) {
