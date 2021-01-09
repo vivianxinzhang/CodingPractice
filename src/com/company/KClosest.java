@@ -9,8 +9,15 @@ public class KClosest {
         System.out.println(Arrays.toString(s.kClosest(array, 0, 2)));
     }
 
+    // Method 2: binary search + quick select
+    // Time O(logn + logk)
+    // Space O(1)
+
+
+    // Method 1: binary search + expand from center
+    // Time O(logn + k)
+    // Space O(1)
     public int[] kClosest(int[] array, int target, int k) {
-        // Write your solution here
         if (array == null || array.length == 0 || k <= 0) {
             return new int[0];
         }

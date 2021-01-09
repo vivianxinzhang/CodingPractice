@@ -1,11 +1,8 @@
 package com.company;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
-public class CheckPalindrome {
+public class CheckIfLinkedListIsPalindrome {
     public static void main(String[] args) {
-        CheckPalindrome s = new CheckPalindrome();
+        CheckIfLinkedListIsPalindrome s = new CheckIfLinkedListIsPalindrome();
         ListNode one = new ListNode(1);
         ListNode two = new ListNode(2);
         ListNode three = new ListNode(3);

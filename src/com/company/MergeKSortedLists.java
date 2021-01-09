@@ -43,7 +43,7 @@ public class MergeKSortedLists {
         // 2 6
         // 0 1 2 3 5 6 7
 
-        head = s.merge(listOfLists);
+        head = s.mergeII(listOfLists);
         while (head != null) {
             System.out.print(head.value + " ");
             head = head.next;
@@ -92,20 +92,24 @@ public class MergeKSortedLists {
         if (listOfLists == null || listOfLists.size() == 0) {
             return null;
         }
-        return mergeInBinaryReduction(listOfLists, 0, listOfLists.size() - 1);
-    }
-
-    private ListNode mergeInBinaryReduction(List<ListNode> listOfLists, int i, int j) {
-        if (i == j) {
-            return listOfLists.get(i);
+        List<ListNode> result = new ArrayList<>();
+        int size = listOfLists.size();
+        while (size > 1) {
+            List<ListNode> newList = new ArrayList<>();
+            int i = 0;
+            int j = listOfLists.size() - 1;
+            while (i < j) {
+                newList.add(mergeTwo(listOfLists.get(i), listOfLists.get(j)));
+                i++;
+                j--;
+            }
+            if (i == j) {
+                newList.add(listOfLists.get(i));
+            }
+            listOfLists = newList;
+            size = listOfLists.size();
         }
-        if (i == j - 1) {
-            return mergeTwo(listOfLists.get(i), listOfLists.get(j));
-        }
-        int mid = i + (j - i) / 2;
-        ListNode left = mergeInBinaryReduction(listOfLists, i, mid);
-        ListNode right = mergeInBinaryReduction(listOfLists, mid + 1, j);
-        return mergeTwo(left, right);
+        return listOfLists.get(0);
     }
 
     private ListNode mergeTwo(ListNode one, ListNode two) {
@@ -128,6 +132,27 @@ public class MergeKSortedLists {
             tail.next = two;
         }
         return dummy.next;
+    }
+
+    // iteration:
+    public ListNode mergeIII(List<ListNode> listOfLists) {
+        if (listOfLists == null || listOfLists.size() == 0) {
+            return null;
+        }
+        return mergeInBinaryReduction(listOfLists, 0, listOfLists.size() - 1);
+    }
+
+    private ListNode mergeInBinaryReduction(List<ListNode> listOfLists, int i, int j) {
+        if (i == j) {
+            return listOfLists.get(i);
+        }
+        if (i == j - 1) {
+            return mergeTwo(listOfLists.get(i), listOfLists.get(j));
+        }
+        int mid = i + (j - i) / 2;
+        ListNode left = mergeInBinaryReduction(listOfLists, i, mid);
+        ListNode right = mergeInBinaryReduction(listOfLists, mid + 1, j);
+        return mergeTwo(left, right);
     }
 
     // Method 1: iterative reduction

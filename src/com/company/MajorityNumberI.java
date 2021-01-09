@@ -25,19 +25,24 @@ public class MajorityNumberI {
     //         m / (N - 2) > 1 / 2
     // Case 2: removed one majority number and one non-majority number:
     //         (m - 1) / (N - 2) > 1 / 2
+    // pick the first element as majority element candidate:
+    // iterate through the array, for each new element:
+    // Case 1: same with candidate, count++
+    // Case 2: if different with candidate
+    //      2.1 count == 0, update candidate
+    //      2.2 count != 0, count--, new element and candidate offset/counteract each other
     // Time O(n)
     // Space O(1)
-    public int majority(int[] array) {
-        int candidate = array[0];
+    public int majority(int[] nums) {
+        int candidate = nums[0];
         int count = 1;
-        for (int i = 1; i < array.length; i++) {
-            if (count == 0) {  // assign a new candidate
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == candidate) { // Case 1: cannot remove, update count
                 count++;
-                candidate = array[i];
-            } else if (candidate == array[i]) {  // cannot remove, update count
-                count++;
-            } else {  // remove two different number
-                count--;
+            } else if (count == 0) {
+                candidate = nums[i];    // Case 2.1: update candidate
+            } else {
+                count--;    // Case 2.2: remove two different number
             }
         }
         return candidate;

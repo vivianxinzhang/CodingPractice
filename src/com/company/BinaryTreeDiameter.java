@@ -1,6 +1,10 @@
 package com.company;
 
 public class BinaryTreeDiameter {
+    // Any path can be written as two arrows (in different directions) from some node,
+    // where an arrow is a path that starts at some node and only travels down to child nodes.
+    // If we knew the maximum length arrows L, R for each child,
+    // then the best path touches L + R + 1 nodes.
     // Time O(n)
     // Space O(h)
     public int diameter(TreeNode root) {
