@@ -4,6 +4,31 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class DequeByThreeStacks {
+    public static void main(String[] args) {
+        DequeByThreeStacks deque = new DequeByThreeStacks();
+        deque.offerFirst(1);    // 1
+        deque.offerFirst(2);    // 2 1
+        deque.offerFirst(3);    // 3 2 1
+        System.out.println(deque.peekLast());   // 1
+        deque.pollLast();               // 3 2
+        System.out.println(deque.peekLast());   // 2
+        deque.pollFirst();              // 2
+        System.out.println(deque.peekFirst());   // 2
+        System.out.println(deque.peekLast());    // 2
+
+//        Solution s = new Solution();
+//        System.out.println();
+//        s.offerFirst(1);
+//        s.offerFirst(2);
+//        s.offerFirst(3);
+//        System.out.println(s.peekLast());           // 1
+//        s.pollLast();
+//        System.out.println(s.peekLast());           // 2
+//        s.pollFirst();
+//        System.out.println(s.peekFirst());          // 2
+//        System.out.println(s.peekLast());           // 2
+    }
+
     private Deque<Integer> left;
     private Deque<Integer> right;
     private Deque<Integer> buffer;

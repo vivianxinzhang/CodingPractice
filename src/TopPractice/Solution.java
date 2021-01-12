@@ -1,4 +1,4 @@
-package com.company;
+package TopPractice;
 import java.util.*;
 
 public class Solution {

@@ -1,19 +1,18 @@
 package com.company;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
-// Time O(2^n)
-// Space O(n)
-public class SortTwoStacks {
+public class SortWithTwoStacks {
     public static void main(String[] args) {
-        SortTwoStacks s = new SortTwoStacks();
+        SortWithTwoStacks s = new SortWithTwoStacks();
         Deque<Integer> s1 = new ArrayDeque<>();
         s1.offerFirst(1);
         s1.offerFirst(2);
         s1.offerFirst(3);
         s1.offerFirst(4);
-        System.out.println(s1);
+        System.out.println(s1);     // [1, 2, 3, 4
         s.sortI(s1);
-        System.out.println(s1);
+        System.out.println(s1);     // [4, 3, 2, 1
     }
 
     // sort in descending order and store result in the bottom part of input

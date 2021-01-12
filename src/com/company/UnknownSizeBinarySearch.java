@@ -1,6 +1,26 @@
 package com.company;
 
 public class UnknownSizeBinarySearch {
+    public static void main(String[] args) {
+        UnknownSizeBinarySearch s = new UnknownSizeBinarySearch();
+
+        Dictionary dict = new DictImpl(new int[0]);
+        System.out.println(s.search(dict, 0));  // -1
+
+        dict = new DictImpl(new int[] {2, 3, 5});
+        System.out.println(s.search(dict, 0));  // -1
+        System.out.println(s.search(dict, 3));  // 1
+        System.out.println(s.search(dict, 8));  // -1
+    }
+
+    /**
+     * Binary search implementation on an dictionary with unknown size
+     * Assumption:
+     * 1). The dictionary is an unknown sized sorted array, it only provides
+     *     get(int index) functionality, if the index asked for is out of right
+     *     bound, it will return null.
+     * 2). The elements in the dictionary are all Integers.
+     */
     // Time O(logn)
     // Space O(1)
     public int search(Dictionary dict, int target) {
@@ -36,18 +56,6 @@ public class UnknownSizeBinarySearch {
             }
         }
         return -1;
-    }
-
-    public static void main(String[] args) {
-        UnknownSizeBinarySearch s = new UnknownSizeBinarySearch();
-
-        Dictionary dict = new DictImpl(new int[0]);
-        System.out.println(s.search(dict, 0));
-
-        dict = new DictImpl(new int[] {2, 3, 5});
-        System.out.println(s.search(dict, 0));
-        System.out.println(s.search(dict, 3));
-        System.out.println(s.search(dict, 8));
     }
 }
 

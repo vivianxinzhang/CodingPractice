@@ -1,8 +1,35 @@
 package com.company;
 
-public class ReorderList {
+public class ReOrderLinkedList {
+    public static void main(String[] args) {
+        ReOrderLinkedList s = new ReOrderLinkedList();
+        ListNode head = null;
+        ListNode curr = s.reorder(head);
+        while (curr != null) {
+            System.out.println(curr.value);
+            curr = curr.next;
+        }
+
+        // 1 -> 2 -> 3  -> 4 -> 5
+        ListNode one = new ListNode(1);
+        ListNode two = new ListNode(2);
+        ListNode three = new ListNode(3);
+        ListNode four = new ListNode(4);
+        ListNode five = new ListNode(5);
+        one.next = two;
+        two.next = three;
+        three.next = four;
+        four.next = five;
+        curr = s.reorder(one);
+        while (curr != null) {
+            System.out.println(curr.value);
+            curr = curr.next;
+        }
+    }
+
+    // Time O(n)
+    // Space O(1)
     public ListNode reorder(ListNode head) {
-        // Write your solution here
         if (head == null || head.next == null) {
             return head;
         }
@@ -26,9 +53,9 @@ public class ReorderList {
     }
 
     private ListNode reverse(ListNode head) {
-        if (head == null || head.next == null) {
-            return head;
-        }
+//        if (head == null || head.next == null) {
+//            return head;
+//        }
         ListNode curr = head, prev = null, next = null;
         while (curr != null) {
             next = curr.next;
