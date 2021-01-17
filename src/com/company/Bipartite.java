@@ -5,12 +5,17 @@ public class Bipartite {
     public static void main(String[] args) {
         Bipartite s = new Bipartite();
         GraphNode one = new GraphNode(1);
-        GraphNode zero = new GraphNode(0);
-        one.neighbors.add(zero);
-        zero.neighbors.add(one);
+        GraphNode two = new GraphNode(2);
+        one.neighbors.add(two);
+        two.neighbors.add(one);
+        //  1 -- 2
         List<GraphNode> graph = new ArrayList<>();
         graph.add(one);
         System.out.println(s.isBipartite(graph));   // true
+        GraphNode three = new GraphNode(3);
+        //  1 -- 2
+        //   \  /
+        //     3    not Bipartite
     }
 
     // Best First Search

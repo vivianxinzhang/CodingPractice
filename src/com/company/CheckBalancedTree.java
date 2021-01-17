@@ -8,7 +8,7 @@ public class CheckBalancedTree {
         TreeNode three = new TreeNode(3);
         one.left = two;
         two.left = three;
-        System.out.println(s.isBalanced(one));
+        System.out.println(s.isBalanced(one));  // false
     }
 
     // Method 2:
