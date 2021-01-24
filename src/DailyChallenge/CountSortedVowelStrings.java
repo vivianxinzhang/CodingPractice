@@ -9,13 +9,21 @@ public class CountSortedVowelStrings {
         System.out.println(s.countVowelStrings(33));    // 66045
     }
 
+    // Method 3: math
     // The problem is a variant of finding Combinations.
     // Mathematically, the problem can be described as, given 5 vowels (let k = 5k=5),
     // we want to find the number of combinations using only n vowels.
     // Also, we can repeat each of those vowels multiple times.
+    // find n combo from k = (k+n-1)!/(k-1)!n!
+    // k = 5: (n+4)!/4!n! = (n+4)(n+3)(n+2)(n+1)n!/4!n! = (n+4)(n+3)(n+2)(n+1)/4! = (n+4)(n+3)(n+2)(n+1)/24
     // Time O(1)
     // Space O(1)
+    public int countVowelStringsIV(int n) {
+        return (n + 4) * (n + 3) * (n + 2) * (n + 1) / 24;
+    }
 
+    // Time O(n)
+    // Space O(1)  -> optimize space
     public int countVowelStringsIII(int n) {
         int[] dp = new int[5];
         Arrays.fill(dp, 1);
@@ -52,6 +60,7 @@ public class CountSortedVowelStrings {
         return M[n][5];
     }
 
+    // dfs
     // Algorithm
     // 1. As we start with the first vowel a then e and so on, we need a way to determine the current vowel in a recursive function.
     // We use an integer variable vowel for that purpose, where 1 denotes a, 2 denotes e, and so on.
