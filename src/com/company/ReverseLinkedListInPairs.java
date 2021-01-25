@@ -22,7 +22,38 @@ public class ReverseLinkedListInPairs {
     // iterative
     // Time O(n)
     // Space O(1)
+    // 1->2->3		2->1->3
+    // 1->2->3->4	2->1->4->3
+    // Time O(n)
+    // Space O(1)
     public ListNode reverseInPairs(ListNode head) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode pre = dummy;
+        // pre->1->2|->3
+        while (pre.next != null && pre.next.next != null) {
+            // pre->1->2|->3
+            ListNode node1 = pre.next;
+            ListNode node2 = pre.next.next;
+            // pre->1 2|->3
+            //      |_____↑
+            node1.next = node2.next;
+            //      2
+            //      ↓
+            // pre->1 2|->3
+            //      |_____↑
+            node2.next = node1;
+            // pre->2
+            //      ↓
+            //      1     3
+            //      |_____↑
+            pre.next = node2;
+            pre = node1;
+        }
+        return dummy.next;
+    }
+
+    public ListNode reverseInPairsII(ListNode head) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode pre = dummy;
