@@ -20,7 +20,6 @@ public class LongestValidParentheses {
     // Space O(1)
     // chars between [left, right] is a valid substring of Parentheses
     public int longestValidParentheses(String input) {
-
         int max = 0;
         int i = 0;
         int j = 0;

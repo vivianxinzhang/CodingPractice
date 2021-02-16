@@ -28,6 +28,10 @@ public class LowestCommonAncestorBinarySearchTreeI {
     // Assumptions:
     // 1. There is no parent pointer for the nodes in the binary search tree
     // 2. There are no duplicate keys in the binary search tree
+    // 3. The given two nodes are guaranteed to be in the binary search tree
+    // Case 1: if root.value < a, then a and b must be in root’s right subtree, therefore, root = root.right
+    // Case 2: if root.value > b, then a and b must be in root’s left subtree, therefore, root = root.left
+    // Case 3: a <= root.value <= b, then return root
     // Time O(height) worst case O(n)
     // Space O(1)
     public TreeNode lca(TreeNode root, int p, int q) {

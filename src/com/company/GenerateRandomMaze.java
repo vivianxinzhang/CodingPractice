@@ -108,4 +108,60 @@ public class GenerateRandomMaze {
             return y + times * deltaY;
         }
     }
+
+    // [0, 1, 0, 0, 0],
+    // [0, 1, 1, 1, 0],
+    // [0, 0, 0, 1, 0],
+    // [1, 1, 0, 1, 0],
+    // [1, 1, 0, 0, 0]]
+    // Assumptions:
+    // 1. N = 2K + 1 and K >= 0
+    // 2. the top left corner must be corridor
+    // 3. there should be as many corridor cells as possible
+    // 4. for each pair of cells on the corridor, there must exist one and only one path between them
+    // levels: n^2/4  branch factor: 4
+    // Time O(4^((n^2)/4))
+    // Space O(n^2/4)
+    private static final int[][] DIRS = new int[][] {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    public int[][] mazeI(int n) {
+        int[][] result = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 && j == 0) {
+                    result[i][j] = 0;
+                } else {
+                    result[i][j] = 1;
+                }
+            }
+        }
+        helper(result, 0, 0);
+        return result;
+    }
+
+    private void helper(int[][] result, int i, int j) {
+        shuffle(DIRS);
+        for (int[] dir : DIRS) {
+            int nextX = i + 2 * dir[0];
+            int nextY = j + 2 * dir[1];
+            if (validWall(result, nextX, nextY)) {
+                result[i + dir[0]][j + dir[1]] = 0;
+                result[nextX][nextY] = 0;
+                helper(result, nextX, nextY);
+            }
+        }
+    }
+
+    private boolean validWall(int[][] result, int i, int j) {
+        return i >= 0 && i < result.length && j >= 0 && j < result.length && result[i][j] == 1;
+    }
+
+    private void shuffle(int[][] dirs) {
+        for (int i = 0; i < dirs.length; i++) {
+            // random pick index bettwen i and n - 1
+            int index = (int)(Math.random() * (dirs.length - i)) + i;
+            int[] tmp = dirs[i];
+            dirs[i] = dirs[index];
+            dirs[index] = tmp;
+        }
+    }
 }

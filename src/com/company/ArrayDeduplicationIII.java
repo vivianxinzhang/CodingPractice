@@ -2,6 +2,15 @@ package com.company;
 import java.util.Arrays;
 
 public class ArrayDeduplicationIII {
+    public static void main(String[] args) {
+        ArrayDeduplicationIII s = new ArrayDeduplicationIII();
+        int[] array = new int[] {};
+        System.out.println(Arrays.toString(s.dedup(array)));
+
+        array = new int[] {1, 2, 2, 3, 3, 3};
+        System.out.println(Arrays.toString(s.dedup(array)));
+    }
+
     // Data structure:
     // slow: all elements to the left side of the slow (excluding slow) pointer are the results for the elements that have been processed. a[0 … s-1] 是已经处理过并且应该被保留的
     // fast: the current index being processed. (all elements to the right side of the fast pointer have not been processed) 正在处理元素的index

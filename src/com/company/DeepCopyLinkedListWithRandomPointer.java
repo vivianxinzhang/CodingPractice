@@ -14,6 +14,9 @@ public class DeepCopyLinkedListWithRandomPointer {
         three.random = three;
 
         print(one);
+        // 1 Random node: 1
+        // 2 Random node: 2
+        // 3 Random node: 3
         System.out.println("Copy");
         print(s.copy(one));
         System.out.println();
@@ -22,6 +25,9 @@ public class DeepCopyLinkedListWithRandomPointer {
         three.random = two;
         two.random = one;
         print(one);
+        // 1 Random node: 3
+        // 2 Random node: 1
+        // 3 Random node: 2
         System.out.println("Copy");
         print(s.copy(one));
     }

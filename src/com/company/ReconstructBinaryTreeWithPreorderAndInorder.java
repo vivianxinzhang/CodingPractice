@@ -2,8 +2,27 @@ package com.company;
 import java.util.*;
 
 public class ReconstructBinaryTreeWithPreorderAndInorder {
-    // Method 1: Utilizing the inOrder sequence to determine
-    // the size of left/right subtrees
+    public static void main(String[] args) {
+        ReconstructBinaryTreeWithPreorderAndInorder s = new ReconstructBinaryTreeWithPreorderAndInorder();
+        int[] preOrder = new int[] {5, 3, 1, 4, 8, 11};
+        int[] inOrder = new int[] {1, 3, 4, 5, 8, 11};
+        TreeNode root = s.reconstruct(inOrder, preOrder);
+        TreePrinter.print(root);
+    }
+
+    //    			        5
+    //          pre(3,1,4)		(8,11)
+    //          in (1,3,4)		(8,11)
+    //            3				    8
+    //      (1)		(4)		    ()	    (11)
+    //      (1)		(4)		    ()	    (11)
+    //       1		 4				     11
+    // Assumptions:
+    // 1. The given sequences are not null and they have the same length
+    // 2. There are no duplicate keys in the binary tree
+    // preorder traversal = {5, 3, 1, 4, 8, 11}
+    // inorder traversal = {1, 3, 4, 5, 8, 11}
+    // Method 1: Utilizing the inOrder sequence to determine the size of left/right subtrees
     // Time O(n)
     // Space O(h) worst case O(n)
     public TreeNode reconstruct(int[] inOrder, int[] preOrder) {

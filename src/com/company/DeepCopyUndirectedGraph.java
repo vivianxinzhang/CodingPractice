@@ -21,9 +21,20 @@ public class DeepCopyUndirectedGraph {
         graph.add(node4);
         graph.add(node5);
         printGraph(graph);
+        // 1 --> 2  5
+        // 2 --> 3
+        // 3 -->
+        // 4 --> 5
+        // 5 --> 4
+
         System.out.println();
         List<GraphNode> newGraph = s.copy(graph);
         printGraph(newGraph);
+        // 1 --> 2  5
+        // 4 --> 5
+        // 2 --> 3
+        // 5 --> 4
+        // 3 -->
     }
 
     private static void printGraph(List<GraphNode> graph) {
@@ -53,11 +64,14 @@ public class DeepCopyUndirectedGraph {
             }
         }
         return new ArrayList<GraphNode>(lookup.values());
-
     }
 
     private void DFS(GraphNode node, Map<GraphNode, GraphNode> lookup) {
+        if (node == null) {
+            return;
+        }
         GraphNode copyNode = new GraphNode(node.key);
+        lookup.put(node, copyNode);
         for (GraphNode neighbor : node.neighbors) {
             if (!lookup.containsKey(neighbor)) {
                 DFS(neighbor, lookup);
@@ -109,7 +123,7 @@ public class DeepCopyUndirectedGraph {
     }
 
     private void BFS(GraphNode node, Map<GraphNode, GraphNode> map) {
-        Queue<GraphNode> queue = new ArrayDeque<>();
+        Deque<GraphNode> queue = new ArrayDeque<>();
         queue.offer(node);
         while (!queue.isEmpty()) {
             GraphNode curr = queue.poll();

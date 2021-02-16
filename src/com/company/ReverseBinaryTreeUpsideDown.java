@@ -3,12 +3,19 @@ package com.company;
 public class ReverseBinaryTreeUpsideDown {
     public static void main(String[] args) {
         ReverseBinaryTreeUpsideDown s = new ReverseBinaryTreeUpsideDown();
-        System.out.println();
+        TreeNode root = s.reverse(null);
+
+        TreeNode one = new TreeNode(1);
+        TreeNode two = new TreeNode(2);
+        TreeNode five = new TreeNode(5);
+        one.left = two;
+        one.right = five;
+        root = s.reverse(one);
     }
 
     // Method 1: Recursion
     // Time O(n)
-    // Space O(1)
+    // Space O(n)
     public TreeNode reverse(TreeNode root) {
         if (root == null || root.left == null) {
             return root;
@@ -23,6 +30,8 @@ public class ReverseBinaryTreeUpsideDown {
     }
 
     // Method 2: iterative
+    // Time O(n)
+    // Space O(1)
     public TreeNode reverseI(TreeNode root) {
         TreeNode prev = null;
         TreeNode prevRight = null;
