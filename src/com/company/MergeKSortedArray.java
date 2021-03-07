@@ -5,12 +5,14 @@ public class MergeKSortedArray {
     public static void main(String[] args) {
         MergeKSortedArray s = new MergeKSortedArray();
         int[][] arrayOfArrays = new int[][] {{1, 3, 4, 9}, {0, 1, 4}, {1, 2, 4, 7, 8, 10}};
+        // [0, 1, 1, 1, 2, 3, 4, 4, 4, 7, 8, 9, 10]
         System.out.println(Arrays.toString(s.mergeIII(arrayOfArrays)));
         System.out.println(Arrays.toString(s.mergeII(arrayOfArrays)));
         System.out.println(Arrays.toString(s.mergeI(arrayOfArrays)));
         System.out.println(Arrays.toString(s.merge(arrayOfArrays)));
 
         arrayOfArrays = new int[][]{{},{1,5,7},{4},{2,3,5,11},{2,4,4,6,8}};
+        // [1, 2, 2, 3, 4, 4, 4, 5, 5, 6, 7, 8, 11]
         System.out.println(Arrays.toString(s.mergeIII(arrayOfArrays)));
         System.out.println(Arrays.toString(s.mergeII(arrayOfArrays)));
         System.out.println(Arrays.toString(s.mergeI(arrayOfArrays)));

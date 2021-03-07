@@ -3,8 +3,8 @@ package com.company;
 public class LargestSquareSurroundedByOne {
     public static void main(String[] args) {
         LargestSquareSurroundedByOne s = new LargestSquareSurroundedByOne();
-        int[][] matrix = new int[][] {{1}};
-        System.out.println(s.largestSquareSurroundedByOne(matrix));
+        int[][] matrix = new int[][] {{1, 1, 1}, {1, 0, 1}, {1, 1, 0}};
+        System.out.println(s.largestSquareSurroundedByOne(matrix));  // 1
     }
 
     // Assumptions:

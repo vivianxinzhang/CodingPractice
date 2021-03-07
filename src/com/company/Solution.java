@@ -1,55 +1,9 @@
 package com.company;
-
 import java.util.*;
 
 public class Solution {
     public static void main(String[] args) {
         Solution s = new Solution();
         System.out.println();
-        int[][] matrix = new int[][] {{1}};
-        System.out.println(s.largestSquareSurroundedByOne(matrix));
     }
-
-    // Assumptions:
-    // The given matrix is guaranteed to be of size M * N, where M, N >= 0
-    // Time O(mn)
-    // Space O(mn)
-    public int largestSquareSurroundedByOne(int[][] matrix) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return 0;
-        }
-        int m = matrix.length;
-        int n = matrix[0].length;
-        int[][] left = new int[m][n];
-        int[][] up = new int[m][n];
-        int max = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (matrix[i][j] == 1) {
-                    left[i][j] = getLeft(left, i, j - 1) + 1;
-                    up[i][j] = getUp(up, i - 1, j) + 1;
-                    // ()                (i-maxLength,j)
-                    // (i,j-maxLength)   (i,j)
-                    for (int maxLength = Math.min(left[i][j], up[i][j]); maxLength >= 1; maxLength--) {
-                        if (up[i][j - maxLength + 1] >= maxLength && left[i - maxLength + 1][j] >= maxLength) {
-                            max = Math.max(max, maxLength);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        return max;
-    }
-
-    private int getUp(int[][] up, int i, int j) {
-        return i < 0 ? 0 : up[i][j];
-    }
-
-    private int getLeft(int[][] left, int i, int j) {
-        return j < 0 ? 0 : left[i][j];
-    }
-
-
 }
-

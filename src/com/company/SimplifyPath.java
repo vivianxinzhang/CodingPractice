@@ -9,22 +9,30 @@ public class SimplifyPath {
 
         input = "/a/./b/../../c/";
         System.out.println(s.simplify(input));
+
+        input = "/a/../../../..";
+        System.out.println(s.simplify(input));
     }
 
+    // consider different cases: ".","" need skip;
+    // ".." go back to prev level  or  skip
     // Time O(n)
     // Space O(n)
     public String simplify(String path) {
-        Deque<String> stack = new LinkedList<>();
-        Set<String> skip = new HashSet<>(Arrays.asList("..",".",""));
+        Deque<String> deque = new ArrayDeque<>();
+        Set<String> skip = new HashSet<>(Arrays.asList("..", ".", ""));
         for (String dir : path.split("/")) {
-            if (dir.equals("..") && !stack.isEmpty()) stack.pop();
-            else if (!skip.contains(dir)) stack.push(dir);
+            if (dir.equals("..") && !deque.isEmpty()) {
+                deque.pollFirst();
+            } else if (!skip.contains(dir)) {
+                deque.offerFirst(dir);
+            }
         }
-        String res = "";
-        while (!stack.isEmpty()) {
-            String dir = stack.pollFirst();
-            res = "/" + dir + res;
+        StringBuilder sb = new StringBuilder();
+        while (!deque.isEmpty()) {
+            sb.append("/");
+            sb.append(deque.pollLast());
         }
-        return res.isEmpty() ? "/" : res;
+        return sb.length() == 0 ? "/" : sb.toString();
     }
 }
