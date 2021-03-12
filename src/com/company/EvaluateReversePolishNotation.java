@@ -5,10 +5,10 @@ public class EvaluateReversePolishNotation {
     public static void main(String[] args) {
         EvaluateReversePolishNotation s = new EvaluateReversePolishNotation();
         String[] tokens = new String[] {"2", "1", "+", "3", "*"};
-        System.out.println(s.evalRPN(tokens));
+        System.out.println(s.evalRPN(tokens));  // (2 + 1) * 3 = 9
 
         tokens = new String[] {"4", "13", "5", "/", "+"};
-        System.out.println(s.evalRPN(tokens));
+        System.out.println(s.evalRPN(tokens));  // (4 + (13 / 5)) -> 6
     }
 
     // Time O(n)
@@ -24,7 +24,7 @@ public class EvaluateReversePolishNotation {
                 int tmp = compute(stack, tokens[i]);
                 stack.offerFirst(tmp);
             } else {
-                stack.offerFirst(Integer.parseInt(tokens[i]));
+                stack.offerFirst(Integer.valueOf(tokens[i]));
             }
         }
         return stack.peekFirst();
@@ -47,4 +47,5 @@ public class EvaluateReversePolishNotation {
     private boolean isOperator(String token) {
         return token == "+" || token == "-" || token == "*" || token == "/";
     }
+
 }
