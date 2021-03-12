@@ -6,27 +6,69 @@ public class MinimumHeightTrees {
         MinimumHeightTrees s = new MinimumHeightTrees();
         int[][] edges = new int[][] {{1, 0}, {1, 2}, {1, 3}};
         List<List<Integer>> neighbors = s.getNeightbors(4, edges);
-        System.out.println(s.findHeight(0, 4, neighbors));
-        System.out.println(s.findHeight(1, 4, neighbors));
-        System.out.println(s.findHeight(2, 4, neighbors));
-        System.out.println(s.findHeight(3, 4, neighbors));
-        System.out.println(s.findMinHeightTrees(4, edges));
-
+        System.out.println(s.findMinHeightTrees(4, edges));     // 1
 
         edges = new int[][] {{3, 0}, {3, 1}, {3, 2}, {3, 4}, {5, 4}};
-        System.out.println(s.findMinHeightTrees(6, edges));
+        System.out.println(s.findMinHeightTrees(6, edges));     // 3, 4
 
         edges = new int[][] {};
-        System.out.println(s.findMinHeightTrees(1, edges));
+        System.out.println(s.findMinHeightTrees(1, edges));     // 0
 
         edges = new int[][] {{0, 1}};
-        System.out.println(s.findMinHeightTrees(2, edges));
+        System.out.println(s.findMinHeightTrees(2, edges));     // 0, 1
+    }
+    // Note:
+    // (1) According to the definition of tree on Wikipedia: “a tree is an undirected graph in which any two vertices are connected by exactly one path.
+    //  In other words, any connected graph without simple cycles is a tree.”
+    // (2) The height of a rooted tree is the number of edges on the longest downward path between the root and a leaf.
+    // Time O(v + e)
+    // Space O(v + e)
+    public List<Integer> findMinHeightTrees(int n, int[][] edges) {
+        List<Integer> result = new ArrayList<>();
+        // base cases
+        if (n == 1) {
+            result.add(0);
+            return result;
+        }
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        int[] inDegree = new int[n];
+        for (int i = 0; i < n; i++) {
+            map.put(i, new ArrayList<>());
+        }
+        for (int[] pair : edges) {
+            map.get(pair[0]).add(pair[1]);
+            map.get(pair[1]).add(pair[0]);
+            inDegree[pair[0]]++;
+            inDegree[pair[1]]++;
+        }
+        Deque<Integer> queue = new ArrayDeque<>();
+        for (int i = 0; i < inDegree.length; i++) {
+            if (inDegree[i] == 1) {
+                queue.offer(i);
+            }
+        }
+        while (!queue.isEmpty()) {
+            List<Integer> list = new ArrayList<>();
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                int cur = queue.poll();
+                list.add(cur);
+                for (int nei : map.get(cur)) {
+                    inDegree[nei]--;
+                    if (inDegree[nei] == 1) {
+                        queue.offer(nei);
+                    }
+                }
+            }
+            result = list;
+        }
+        return result;
     }
 
     // Method 2:
     // Time O(n)
     // Space O(n)
-    public List<Integer> findMinHeightTrees(int n, int[][] edges) {
+    public List<Integer> findMinHeightTreesII(int n, int[][] edges) {
         // base cases
         if (n < 2) {
             ArrayList<Integer> centroids = new ArrayList<>();
@@ -81,7 +123,7 @@ public class MinimumHeightTrees {
         List<Integer> result = new ArrayList<>();
         int minHeight = Integer.MAX_VALUE;
         for (int i = 0; i < n; i++) {
-            int height = findHeight(i, n, neighbors);
+            int height = findHeight(i, neighbors);
             if (height == minHeight) {
                 result.add(i);
             } else if (height < minHeight) {
@@ -95,11 +137,11 @@ public class MinimumHeightTrees {
 
     // Time O(n + edges.length) -> O(V + E)
     // Space O(n) -> O(V)
-    private int findHeight(int i, int n, List<List<Integer>> neighbors) {
+    private int findHeight(int root, List<List<Integer>> neighbors) {
         Queue<Integer> queue = new ArrayDeque<>();
-        queue.offer(i);
-        boolean[] visited = new boolean[n];
-        visited[i] = true;
+        queue.offer(root);
+        boolean[] visited = new boolean[neighbors.size()];
+        visited[root] = true;
         int level = 0;
         while (!queue.isEmpty()) {
             int size = queue.size();

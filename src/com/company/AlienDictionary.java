@@ -4,12 +4,38 @@ import java.util.*;
 public class AlienDictionary {
     public static void main(String[] args) {
         AlienDictionary s = new AlienDictionary();
-        String[] words = new String[] {"wrt",
+        String[] words = new String[] {
+                "wrt",
                 "wrf",
                 "er",
                 "ett",
                 "rftt"};
-        System.out.println(s.alienOrder(words));
+        System.out.println(s.alienOrder(words));    // wertf
+
+        words = new String[] {
+                "wnrwjuhezuhmauwhgflfmzma",
+                "aezarvahlavgfv",
+                "zaajzuf",
+                "zmzznjuanhaaplwjp",
+                "pzarfujmvzufmewljnvhmjrzpjgn",
+                "jlrjnefpz",
+                "eufvlnzvwu",
+                "vpfuereujmufhaghrrjnzvwnaj",
+                "vlzgel",
+                "mgrzemlmuzmvrza",
+                "mzfgmgfhwfrhzere",
+                "mjegjw",
+                "mlenmjjwhhhvwfpfmehz",
+                "mhrujzuuew",
+                "lznaggjvnfeeajzumvwphezmjnmv",
+                "hwulgnpwjumumn",
+                "hlrevzwrvrvrml",
+                "unzgjjuprhhwugjamej",
+                "rgrhvnnzrhg",
+                "rupralvvjlhpelav",
+                "fzvjv",
+                "fnwjrepzejuzhg"};
+        System.out.println(s.alienOrder(words));    // gwazpnjevmlhurf
     }
 
     // Topological sort:
@@ -30,7 +56,9 @@ public class AlienDictionary {
         Map<Character, Set<Character>> graph = new HashMap<>();
         int[] inDegree = new int[26];
         buildGraph(words, graph, inDegree);
-
+        for (int i = 0; i < inDegree.length; i++) {
+            System.out.println(i + " " + inDegree[i]);
+        }
         String order = topologicalSort(graph, inDegree);
         return order.length() == graph.size() ? order : "";
     }

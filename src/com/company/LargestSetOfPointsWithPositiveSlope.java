@@ -30,7 +30,7 @@ public class LargestSetOfPointsWithPositiveSlope {
     // Space O(n)
     public int largest(Point[] points) {
         // we need to sort the points by x ascending and y descending
-        // y descending 为了避免把 相同x 不同y slope == 0 的 points 加入结果
+        // y descending 为了避免把 相同x不同y slope==infinity 的 points 加入结果
         Arrays.sort(points, new MyComparator());
         // similar to longest ascending subsequence
         int result = 0;

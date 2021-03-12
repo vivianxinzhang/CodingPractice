@@ -7,6 +7,8 @@ public class CanIWinEatingPizzaII {
         System.out.println(s.canWin(array));    // 102
     }
 
+    // Assumption:
+    // If during your friend's turn, the leftmost pizza has the same size as the rightmost pizza, he will pick the rightmost one.
     // M[i][j] represents [from the ith pizza to the jth pizza] the largest total sum of all pizza you can pick assuming you start first.
     // Time O(n^2)
     // Space O(n^2)

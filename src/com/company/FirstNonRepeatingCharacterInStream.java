@@ -2,17 +2,17 @@ package com.company;
 import java.util.*;
 
 /*
-Two level           index               hashmap
-                --------------                          LinkedHashMap
-                    storage             linked list
+    Two level           index               hashmap
+                    --------------        --------------     LinkedHashMap
+                        storage             linked list
 
-Index layer 查询这个字母有没有出现过
-Storage layer 按出现的顺序存储
-In order to answer the question, you need to store those chars you have read.
-Storage layer: Store those non-repeating chars by the reading order.
-array: [a, b, c, d] or linked list
-read a, lookup in the storage to see if it appears or not
-This should be taken care of by the index layer: HashMap.
+    Index layer 查询这个字母有没有出现过
+    Storage layer 按出现的顺序存储
+    In order to answer the question, you need to store those chars you have read.
+    Storage layer: Store those non-repeating chars by the reading order.
+    array: [a, b, c, d] or linked list
+    read a, lookup in the storage to see if it appears or not
+    This should be taken care of by the index layer: HashMap.
 * */
 public class FirstNonRepeatingCharacterInStream {
     public static void main(String[] args) {
@@ -37,8 +37,7 @@ public class FirstNonRepeatingCharacterInStream {
     // for any character, it could be in three state:
     // 1. not existed yet, it will not be in singled Map or repeated Set
     // 2. only exists once, it will be in singled Map and there will be a corresponding node in the list
-    // 3. exists more than once, it will be in the repeated Set
-    // and it will be removed from the list
+    // 3. exists more than once, it will be in the repeated Set and it will be removed from the list
     private HashMap<Character, Node> singled;   // Non-Repeating Chars Candidates
     private HashSet<Character> repeated;    // Repeated Chars
 
