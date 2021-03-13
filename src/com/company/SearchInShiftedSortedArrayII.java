@@ -8,10 +8,45 @@ public class SearchInShiftedSortedArrayII {
         System.out.println(s.search(array, 3));
     }
 
-    // Assumptions：
+    // Assumptions:
     // 1. There could be duplicate elements in the array.
     // 2. Return the smallest index if target has multiple occurrence.
+    // Time O(logn)
+    // Space O(1)
     public int search(int[] array, int target) {
+        if (array == null || array.length == 0) {
+            return -1;
+        }
+        int left = 0;
+        int right = array.length - 1;
+        while (left < right - 1) {
+            int mid = left + (right - left) / 2;
+            // 左边sorted
+            if (array[mid] > array[left] && withInRange(array, target, left, mid)) {
+                right = mid; // 右边sorted
+            } else if (array[mid] < array[right] && !withInRange(array, target, mid, right)) {
+                right = mid;
+            } else if (array[left] == target) {
+                return left;
+            } else {
+                left++;
+            }
+        }
+        if (array[left] == target) {
+            return left;
+        }
+        if (array[right] == target) {
+            return right;
+        }
+        return -1;
+    }
+
+    private boolean withInRange(int[] array, int target, int left, int right) {
+        return target >= array[left] && target <= array[right];
+    }
+
+
+    public int searchII(int[] array, int target) {
         if (array.length==0){
             return -1;
         }
@@ -45,7 +80,7 @@ public class SearchInShiftedSortedArrayII {
         return -1;
     }
 
-    // 然後如果無法確定array[middle]到底在左半段還是右半段，
+    // 如果無法確定array[middle]到底在左半段還是右半段:
     // 比如1,1,1,1,1,1,2,1,1,1,1,1 然後array[middle]等於1，
     // 不知道target在左半段還是右半段，那麽就讓begin ++, end --縮小搜索範圍即可，
     // 最糟糕時間複雜度O(n)
