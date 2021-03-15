@@ -32,9 +32,10 @@ public class CuttingWoodI {
         // minCost[j][i]: the min cost of cutting the partition (j, i).
         int[][] minCost = new int[helper.length][helper.length];
         // 枚举所有的终点
-        for (int i = 1; i < helper.length; i++) {
+        for (int i = 1; i < helper.length; i++) {   // left -> right
             // 枚举所有的起点
-            for (int j = i - 1; j >= 0; j--) {
+            for (int j = i - 1; j >= 0; j--) {      // bottom -> up
+                // base case
                 if (j + 1 == i) {
                     minCost[j][i] = 0;
                 } else {

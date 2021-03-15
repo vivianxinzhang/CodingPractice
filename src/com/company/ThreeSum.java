@@ -4,43 +4,46 @@ import java.util.*;
 public class ThreeSum {
     public static void main(String[] args) {
         ThreeSum s = new ThreeSum();
-        int[] array = new int[] {2, 1, 3, 2, 4, 3, 4, 2};
-        System.out.println(s.allTriples(array, 8));
+        int[] array = new int[] {3, 4, 0, -1, 2, 0, 5};
+        System.out.println(s.allTriples(array, 4)); // [[-1, 0, 5], [-1, 2, 3], [0, 0, 4]]
+
+        array = new int[] {2, 1, 3, 2, 4, 3, 4, 2};
+        System.out.println(s.allTriples(array, 8)); // [[2, 3, 3]]
 
         array = new int[] {1, 2, 3, 2, 1, 2, 3, 2, 1};
-        System.out.println(s.allTriples(array, 6));
+        System.out.println(s.allTriples(array, 6)); // [[2, 2, 2]]
     }
 
-    // Method 2: cannot sort the array, how to deduplicate?
-    // O(n^2)
-    // O(n)
+    // Method 2: cannot sort the array, use Set and sorting to deduplicate
+    // Assumptions:
+    // 1. The given array is not null and has length of at least 3
+    // 2. No duplicate triples should be returned, order of the values in the tuple does not matter
+    // Time O(n^2)
+    // Space O(n)
     public List<List<Integer>> allTriples(int[] array, int target) {
-        List<List<Integer>> result = new ArrayList<>();
-        // key: num  value: count
-        Set<Integer> set = new HashSet<>();
+        Set<List<Integer>> set = new HashSet<>();
         for (int i = 0; i < array.length; i++) {
-            if (set.contains(array[i])) {
-                continue;
-            }
-            set.add(array[i]);
-            int twoSumTarget = target - array[i];
+            // two sum
+            int twoSum = target - array[i];
             Map<Integer, Integer> map = new HashMap<>();
             for (int j = i + 1; j < array.length; j++) {
-                Integer count = map.get(array[j]);
-                if (array[j] * 2 == twoSumTarget && count != null && count == 1) {
-                    result.add(Arrays.asList(array[i], array[j], array[j]));
-                } else if (map.containsKey(twoSumTarget - array[j]) && count == null) {
-                    result.add(Arrays.asList(array[i], twoSumTarget - array[j], array[j]));
+                int num = array[j];
+                int count = map.getOrDefault(num, 0);
+                if (num * 2 == twoSum && count == 1) {
+                    List<Integer> currRes = Arrays.asList(array[i], num, num);
+                    Collections.sort(currRes);
+                    System.out.println(currRes);
+                    set.add(new ArrayList<>(currRes));
+                } else if (count == 0 && map.containsKey(twoSum - array[j])) {
+                    List<Integer> currRes = Arrays.asList(array[i], twoSum - num, num);
+                    Collections.sort(currRes);
+                    System.out.println(currRes);
+                    set.add(new ArrayList<>(currRes));
                 }
-                // update map
-                if (count == null) {
-                    map.put(array[j], 1);
-                } else {
-                    map.put(array[j], count + 1);
-                }
+                map.put(num, count + 1);
             }
         }
-        return result;
+        return new ArrayList<>(set);
     }
 
     // Assumptions: array is not null, array.length >= 3.

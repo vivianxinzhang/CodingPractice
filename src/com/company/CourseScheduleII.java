@@ -4,7 +4,6 @@ import java.util.*;
 public class CourseScheduleII {
     public static void main(String[] args) {
         CourseScheduleII s = new CourseScheduleII();
-        System.out.println();
         int[][]  prerequisites = new int[][]{{1,0}};
         int[] result = s.findOrder(2, prerequisites);
         System.out.println(Arrays.toString(result));  // true 0 -> 1

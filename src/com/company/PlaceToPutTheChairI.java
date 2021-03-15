@@ -9,8 +9,17 @@ public class PlaceToPutTheChairI {
                 {'C', 'E', 'C'},
                 {'C', 'C', 'C'}
         };
-        // System.out.println(s.putChair(gym));
-        System.out.println(s.putChairI(gym));
+        System.out.println(s.putChair(gym));    // [1, 0]
+        // System.out.println(s.putChairI(gym));
+
+        gym = new char[][] {
+                {'C', 'C', 'E', 'O', 'C'},
+                {'C', 'C', 'O', 'C', 'E'},
+                {'C', 'C', 'E', 'E', 'C'},
+                {'C', 'O', 'C', 'E', 'E'},
+                {'C', 'C', 'O', 'C', 'C'},
+        };
+        System.out.println(s.putChair(gym));    // [2, 4]
     }
 
     // Assumptions:

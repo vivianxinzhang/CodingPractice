@@ -4,15 +4,15 @@ import java.util.*;
 public class WordLadder {
     public static void main(String[] args) {
         WordLadder s = new WordLadder();
-         List<String> dict = Arrays.asList("git", "hit", "hog", "hot", "got");
-         System.out.println(s.ladderLength("git", "hot", dict));    // 3
-         // git -> hit -> hot  3
-         System.out.println(s.ladderLengthI("git", "hot", dict));    // 3
+        List<String> dict = Arrays.asList("git", "hit", "hog", "hot", "got");
+        System.out.println(s.ladderLength("git", "hot", dict));    // 3
+        // git -> hit -> hot  3
+        System.out.println(s.ladderLengthI("git", "hot", dict));    // 3
 
         dict = Arrays.asList("bcd","adc","bdd","baa","bbd","cbd","ddb");
-        System.out.println(s.ladderLength("ddb", "cbd", dict));
+        System.out.println(s.ladderLength("ddb", "cbd", dict));     // 0
         // 0
-        System.out.println(s.ladderLengthI("ddb", "cbd", dict));
+        System.out.println(s.ladderLengthI("ddb", "cbd", dict));    // 0
     }
 
     // Assumptions:

@@ -2,6 +2,13 @@ package com.company;
 import java.util.*;
 
 public class DecompressStringII {
+    public static void main(String[] args) {
+        DecompressStringII s = new DecompressStringII();
+        System.out.println(s.decompress("a1"));     // a
+
+        System.out.println(s.decompress("a1b3"));   // abbb
+    }
+
     // Method 1: "in place"
     // When we say in place, it usually means the input is a long enough char array,
     // and the original string only occupies part of the array starting from index 0,

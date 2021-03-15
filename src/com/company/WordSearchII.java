@@ -4,13 +4,17 @@ import java.util.*;
 public class WordSearchII {
     public static void main(String[] args) {
         WordSearchII s = new WordSearchII();
-        char[][] board = new char[][] {
+        char[][] board = new char[][] {{'o'}};
+        String[] words = new String[] {"o"};
+        System.out.println(s.findWords(board, words));  // ["o"]
+
+        board = new char[][] {
                 {'o','a','a','n'},
                 {'e','t','a','e'},
                 {'i','h','k','r'},
                 {'i','f','l','v'}
         };
-        String[] words = new String[] {"oath","pea","eat","rain"};
+        words = new String[] {"oath","pea","eat","rain"};
         System.out.println(s.findWords(board, words));  // [oath, eat]
         System.out.println(s.findWordsI(board, words)); // [oath, eat]
     }

@@ -7,12 +7,15 @@ public class ReOrderArray {
         ReOrderArray s = new ReOrderArray();
         int[] array = new int[] {1, 2, 3, 4};
         System.out.println(Arrays.toString(s.reorder(array)));
+        // [1, 3, 2, 4]
 
         array = new int[] {1, 2, 3};
         System.out.println(Arrays.toString(s.reorder(array)));
+        //[1, 2, 3]
 
         array = new int[] {1, 2, 3, 4, 5, 6, 7};
         System.out.println(Arrays.toString(s.reorder(array)));
+        // [1, 4, 2, 5, 3, 6, 7]
     }
 
     /**
