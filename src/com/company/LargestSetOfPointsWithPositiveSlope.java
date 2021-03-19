@@ -9,18 +9,14 @@ public class LargestSetOfPointsWithPositiveSlope {
         points[1] = new Point(1, 1);
         points[2] = new Point(2, 3);
         points[3] = new Point(3, 3);
-        System.out.println(s.largest(points));
-        System.out.println(s.largestI(points));
-    }
+        System.out.println(s.largest(points));      // 3
+        System.out.println(s.largestI(points));     // 3
 
-    static class Point {
-        public int x;
-        public int y;
-
-        public Point(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
+        Point[] points1 = new Point[3];
+        points1[0] = new Point(0, 10);
+        points1[1] = new Point(1, 3);
+        points1[2] = new Point(2, 5);
+        System.out.println(s.largest(points1));      // 2
     }
 
     // Assumptions: points is not null

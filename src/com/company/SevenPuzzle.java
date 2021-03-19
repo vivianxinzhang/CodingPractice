@@ -4,9 +4,12 @@ import java.util.*;
 public class SevenPuzzle {
     public static void main(String[] args) {
         SevenPuzzle s = new SevenPuzzle();
-        int[] values = new int[] {7, 3, 1, 5, 4, 6, 2, 0};
+
+        int[] values = new int[] {0, 1, 2, 3, 4, 5, 6, 7};
         System.out.println(s.numOfSteps(values));   // -1
-        System.out.println(s.numOfStepsI(values));   // -1
+
+        values = new int[] {7, 3, 1, 5, 4, 6, 2, 0};
+        System.out.println(s.numOfSteps(values));   // -1
 
         values = new int[] {4, 1, 2, 3, 0, 5, 6, 7};
         /*
@@ -14,7 +17,6 @@ public class SevenPuzzle {
               0  5  6  7     1 step     4  5  6  7
          */
         System.out.println(s.numOfSteps(values));   // 1
-        System.out.println(s.numOfStepsI(values));   // 1
 
         values = new int[] {1, 5, 2, 3, 4, 0, 6, 7};
         /*
@@ -22,7 +24,6 @@ public class SevenPuzzle {
               4  0  6  7     1 step    4  5  6  7   1 step   4  5  6  7
          */
         System.out.println(s.numOfSteps(values));   // 2
-        System.out.println(s.numOfStepsI(values));   // 2
     }
 
     // 什么是点？ 每一个棋盘

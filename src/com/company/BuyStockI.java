@@ -85,7 +85,7 @@ public class BuyStockI {
         return maxProfit;
     }
 
-        // Method 1: brute force
+    // Method 1: brute force
     // enumerate all buy and sell time, and compute gain
     // Time O(n^2)
     // Space O(1)

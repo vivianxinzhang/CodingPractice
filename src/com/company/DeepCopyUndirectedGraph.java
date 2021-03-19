@@ -160,7 +160,7 @@ public class DeepCopyUndirectedGraph {
         if (map.containsKey(node)) {
             return map.get(node);
         }
-        GraphNode copyNode = new GraphNode(input.key);
+        GraphNode copyNode = new GraphNode(node.key);
         map.put(node, copyNode);
         for (GraphNode neighbor : node.neighbors) {
             // copy node

@@ -37,17 +37,16 @@ public class MergeKSortedLists {
             }
             System.out.println();
         }
-
         // 0 7
         // 1 3 5
         // 2 6
-        // 0 1 2 3 5 6 7
 
         head = s.mergeII(listOfLists);
         while (head != null) {
             System.out.print(head.value + " ");
             head = head.next;
         }
+        // 0 1 2 3 5 6 7
     }
 
     // Assumptions:

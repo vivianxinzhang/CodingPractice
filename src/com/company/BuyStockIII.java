@@ -48,9 +48,13 @@ public class BuyStockIII {
         return M;
     }
 
-    // insights: keep track of the minimum price of the stock till previous day and record the maximum profit can be obtained in the current day
-    // dp[i][j] means:in the ith transaction, the maximum profit from day 1 to day index j; (including day 1 and day index j)
-    // base case: dp[0][j] = 0; dp[i][0] = 0;
+    // insights: keep track of the minimum price of the stock till previous day
+    // and record the maximum profit can be obtained in the current day
+    // dp[i][j] means:in the ith transaction, the maximum profit from day 1 to day j
+    // (including day 1 and day j)
+    // base case:
+    // dp[0][j] = 0;
+    // dp[i][0] = 0;
     // want to know: dp[transactions][prices.length - 1]
     // Time O(n)
     // Space O(n)

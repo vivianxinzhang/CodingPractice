@@ -33,6 +33,7 @@ public class BuyStockII {
         int totalProfit = 0;
         for (int i = 1; i < array.length; i++) {
             int dailyProfit = array[i] - array[i - 1];
+            // sum up profits between peak and valley
             if (dailyProfit > 0) {
                 totalProfit += dailyProfit;
             }

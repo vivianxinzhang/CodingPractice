@@ -3,8 +3,65 @@ package com.company;
 public class LargestSubArrayProduct {
     public static void main(String[] args) {
         LargestSubArrayProduct s = new LargestSubArrayProduct();
-        double[] array = new double[] {2.0, -0.1, 4, -2, -1.5};
-        System.out.println(s.largestProduct(array));
+        double[] array = new double[] {-1};
+        System.out.println(s.largestProduct(array));   // 216.0
+
+        array = new double[] {4, -2, -3, -2, 3, -1, -2, 6};
+        System.out.println(s.largestProduct(array));   // 216.0
+
+        array = new double[] {2.0, -0.1, 4, -2, -1.5};
+        System.out.println(s.largestProduct(array));   // 12.0
+    }
+
+    // Assumptions:
+    // The given array is not null and has length of at least 1.
+    // Time: O(n)
+    // Space: O(n)
+    public double largestProduct(double[] array) {
+        double[] min = new double[array.length];
+        double[] max = new double[array.length];
+        min[0] = array[0];
+        max[0] = array[0];
+        double globalMaxProd = max[0];
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] == 0) {
+                min[i] = 1;
+                max[i] = 1;
+                globalMaxProd = Math.max(array[i], globalMaxProd);
+            } else {
+                // min of (min[i-1]*array[i], max[i-1]*array[i], array[i])
+                min[i] = Math.min(min[i - 1] * array[i], max[i - 1] * array[i]);
+                min[i] = Math.min(min[i], array[i]);
+                // max of (min[i - 1] * array[i], max[i - 1] * array[i], array[i])
+                max[i] = Math.max(min[i - 1] * array[i], max[i - 1] * array[i]);
+                max[i] = Math.max(max[i], array[i]);
+                globalMaxProd = Math.max(max[i], globalMaxProd);
+            }
+        }
+        return globalMaxProd;
+    }
+
+    // Time: O(n)
+    // Space: O(1)
+    public double largestProductI(double[] array) {
+        double currMin = 1;
+        double currMax = 1;
+        double res = Integer.MIN_VALUE;
+        for (double num : array) {
+            if (num == 0) {
+                currMin = 1;
+                currMax = 1;
+                res = Math.max(res, num);
+                continue;
+            }
+            double tmp = currMax * num;
+            currMax = Math.max(num * currMax, num * currMin);
+            currMax = Math.max(currMax, num);
+            currMin = Math.min(tmp, num * currMin);
+            currMin = Math.min(currMin, num);
+            res = Math.max(res, currMax);
+        }
+        return res;
     }
 
     // maxProd[i] maximum positive subarray product ending at i - 1;
@@ -28,7 +85,7 @@ public class LargestSubArrayProduct {
     //        case 3: GlobalMax = Math.max(0,GlobalMax)
     // Time: O(n)
     // Space: O(n)
-    public double largestProduct(double[] array) {
+    public double largestProductII(double[] array) {
         double[] maxProd = new double[array.length + 1];
         double[] minProd = new double[array.length + 1];
         maxProd[0] = 1;
