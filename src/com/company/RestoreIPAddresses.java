@@ -5,7 +5,9 @@ public class RestoreIPAddresses {
     public static void main(String[] args) {
         RestoreIPAddresses s = new RestoreIPAddresses();
         System.out.println(s.Restore("0000"));
+        // [0.0.0.0]
         System.out.println(s.Restore("25525511135"));
+        // [255.255.11.135, 255.255.111.35]
     }
 
     // what is valid IP integer: 0 <=  X <= 255

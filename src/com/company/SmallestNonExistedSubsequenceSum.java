@@ -9,6 +9,7 @@ public class SmallestNonExistedSubsequenceSum {
         array = new int[] {1, 3, 6, 10, 11, 15};
         System.out.println(s.firstMissing(array));
     }
+
     // We can solve this problem in O(n) time using a simple loop. Let the input array be arr[0..n-1].
     // We initialize the result as 1 (smallest possible outcome) and traverse the given array.
     // Let the smallest element that cannot be represented by elements at indexes from 0 to (i-1) be ‘res’,
@@ -21,7 +22,6 @@ public class SmallestNonExistedSubsequenceSum {
     // Time O(n)
     // Space O(1)
     public int firstMissing(int[] array) {
-        // Write your solution here
         // smallest array[0] largest array[0 ... n-1]
         int sum = 1; // Initialize result
         int n = array.length;
