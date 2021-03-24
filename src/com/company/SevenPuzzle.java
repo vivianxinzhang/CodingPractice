@@ -6,7 +6,7 @@ public class SevenPuzzle {
         SevenPuzzle s = new SevenPuzzle();
 
         int[] values = new int[] {0, 1, 2, 3, 4, 5, 6, 7};
-        System.out.println(s.numOfSteps(values));   // -1
+        System.out.println(s.numOfSteps(values));   // 0
 
         values = new int[] {7, 3, 1, 5, 4, 6, 2, 0};
         System.out.println(s.numOfSteps(values));   // -1

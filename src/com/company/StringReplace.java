@@ -4,11 +4,12 @@ import java.util.*;
 public class StringReplace {
     public static void main(String[] args) {
         StringReplace s = new StringReplace();
-        System.out.println(s.replaceI("a", "ab", "m"));  // a
 
-        System.out.println(s.replaceI("ab", "abc", "m"));  // a
+        System.out.println(s.replace("a", "ab", "m"));  // a
 
-        System.out.println(s.replaceI("appledogapple", "apple", "cat"));  // catdogcat
+        System.out.println(s.replace("ab", "abc", "m"));  // ab
+
+        System.out.println(s.replace("appledogapple", "apple", "cat"));  // catdogcat
     }
 
     // Method 2: Using Java's StringBuilder utility and String's indexof(),
