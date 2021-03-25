@@ -8,6 +8,35 @@ public class BuyStockIV {
         System.out.println(s.maxProfitI(array, 3)); // 14
     }
 
+    // DP optimal solution: O(k*n)
+    // M[k][i]: max profit on day i with at most k transactions
+    // M[k][i] = max of:
+    //    1) do nothing on day i: M[k][i-1], profit is same as yesterday
+    //    2) sell on day i, which means last purchase happened before day i,
+    //       could have purchased on any day j where 0<=j<i
+    //       if on day j optimal action was to hold, then new profit is just
+    //       price appreciation price[i]-price[j]
+    //       if on day j optimal action was to sell, then it means I buy back
+    //       on the same day j and hold till now (day i), new profit still
+    //       price[i]-price[j]
+    //       therefore, if sell on day i, profit =
+    //       max(price[i]-price[j]+M[k-1][j]) for all 0<=j<i
+    // Therefore, M[k][i] = max(M[k][i-1],
+    //                      max_{0<=j<i}(price[i]-price[j]+M[k-1][j]))
+    //                    = max(M[k][i-1],
+    //                      price[i] + max_{0<=j<i}(-price[j]+M[k-1][j]))
+    //
+    // **optmize**
+    // at k, i, let maxDiff = max_{0<=j<i}(-price[j]+M[k-1][j])
+    // at k, i+1:   maxDiff = max_{0<=j<i+1}(-price[j]+M[k-1][j])
+    //                      = max(maxDiff, {j=i}(-price[j]+M[k-1][j]))
+    //                      = max(maxDiff, -price[i]+M[k-1][i])
+    // M[k][i] = max(M[k][i-1], max(price[i] + maxDiff))
+    // maxDiff = max(maxDiff, M[k-1][i]-price[i])
+
+
+
+
     // M[i][j]: i is total number of transactions, j is day
     // Base case:
     // M[0][0] = 0, M[i][0] = 0 (0 days), M[0][j] = 0 (0 transactions)
