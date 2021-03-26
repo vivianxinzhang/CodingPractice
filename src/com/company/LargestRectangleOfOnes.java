@@ -14,6 +14,8 @@ public class LargestRectangleOfOnes {
         System.out.println(s.largest(matrix));  // 4
     }
 
+    // Assumptions:
+    // The given matrix is not null and has size of M * N, M >= 0 and N >= 0
     // optimize space: fill M and compute max for each row at the same time
     // only need to record one row
     // Time O(mn)
@@ -31,31 +33,8 @@ public class LargestRectangleOfOnes {
                     M[j] = 0;
                 }
             }
-            int currMax = largest(M);
+            int currMax = largestRectangleInHistogram(M);
             max = Math.max(max, currMax);
-        }
-        return max;
-    }
-
-    // Time O(n)
-    // Space O(n)
-    public int largest(int[] array) {
-        if (array == null || array.length == 0) {
-            return 0;
-        }
-        Deque<Integer> incStack = new ArrayDeque<>();
-        int max = 0;
-        for (int i = 0; i <= array.length; i++) {
-            // i - 1 or 0 is right boundary
-            int nextHeight = i == array.length ? 0 : array[i];
-            while (!incStack.isEmpty() && array[incStack.peekFirst()] > nextHeight) {
-                int currHeight = array[incStack.pollFirst()];
-                int left = incStack.isEmpty() ? 0 : incStack.peekFirst() + 1;
-                int right = i - 1;
-                int currMax = (right - left + 1) * currHeight;
-                max = Math.max(currMax, max);
-            }
-            incStack.offerFirst(i);
         }
         return max;
     }
@@ -64,48 +43,24 @@ public class LargestRectangleOfOnes {
     // The given matrix is not null and has size of M * N, M >= 0 and N >= 0
     // Time O(mn)
     // Space O(mn)
-    public int largestII(int[][] matrix) {
+    public int largestI(int[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return 0;
         }
-        // Step 1: find longest consecutive 1s from top to bottom - O(mn)
-        int[][] M = preProcess(matrix);
+        // Step 1: preProcess - find longest consecutive 1s from top to bottom - O(mn)
+        int[][] M = topLongestConsecutiveOnes(matrix);
         // Step 2: enumerate all the bottom line and find the largest rectangle in the histogram
         int largest = 0;
         for (int i = 0; i < M.length; i++) {
             // find the largest
-            int currMax = findMax(M[i]);
+            int currMax = largestRectangleInHistogram(M[i]);
             largest = Math.max(largest, currMax);
         }
         return largest;
     }
 
-    // Time O(n)
-    // Space O(n)
-    private int findMax(int[] array) {
-        // Assumptions: array is not null, array.length >= 1
-        // all the values in the array are non-negative
-        int result = 0;
-        // Note that the stack contains the "index", not the "value" of the array
-        Deque<Integer> stack = new ArrayDeque<>();
-        for (int i = 0; i <= array.length; i++) {
-            // we need a way of popping out all the elements in the stack at last,
-            // so that we explicitly add a bar of height 0
-            int cur = i == array.length ? 0 : array[i];
-            while (!stack.isEmpty() && array[stack.peekFirst()] >= cur) {
-                int height = array[stack.pollFirst()];
-                // determine the left boundary of the largest rectangle
-                // with height array[i]
-                int left = stack.isEmpty() ? 0 : stack.peekFirst() + 1;
-                // determine the right boundary of the largest rectangle with height of the popped element
-                result = Math.max(result, height * (i - left));
-            }
-            stack.offerFirst(i);
-        }
-        return result;
-    }
-
-    private int[][] preProcess(int[][] matrix) {
+    // longest consecutive one top of each element(including)
+    private int[][] topLongestConsecutiveOnes(int[][] matrix) {
         int[][] M = new int[matrix.length][matrix[0].length];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
@@ -120,4 +75,36 @@ public class LargestRectangleOfOnes {
         }
         return M;
     }
+
+    // Time O(n)
+    // Space O(n)
+    private int largestRectangleInHistogram(int[] array) {
+        // Assumptions: array is not null, array.length >= 1
+        // all the values in the array are non-negative
+        int max = 0;
+        // Note that the stack contains the "index", not the "value" of the array
+        Deque<Integer> incStack = new ArrayDeque<>();
+        for (int i = 0; i <= array.length; i++) {   // must including = array.length in order to pop all element out
+            // we need a way of popping out all the elements in the stack at last,
+            // so that we explicitly add a bar of height 0
+            int nextHeight = i == array.length ? 0 : array[i];
+            while (!incStack.isEmpty() && array[incStack.peekFirst()] > nextHeight) {
+                int currHeight = array[incStack.pollFirst()];
+                // determine the left boundary of the largest rectangle
+                // with height array[i]
+                int left = incStack.isEmpty() ? 0 : incStack.peekFirst() + 1;
+                // determine the right boundary of the largest rectangle with height of the popped element
+                int right = i - 1;
+                int currMax = (right - left + 1) * currHeight;
+                max = Math.max(currMax, max);
+            }
+            incStack.offerFirst(i);
+        }
+        return max;
+    }
+
+    // Method 1:
+    // enumerate all rectangles in the matrix, and check if it is all ones
+    // Time: O((mn)^3)
+    // Space: O(1)
 }

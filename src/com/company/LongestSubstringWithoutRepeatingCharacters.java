@@ -4,13 +4,16 @@ import java.util.*;
 public class LongestSubstringWithoutRepeatingCharacters {
     public static void main(String[] args) {
         LongestSubstringWithoutRepeatingCharacters s = new LongestSubstringWithoutRepeatingCharacters();
-        System.out.println(s.longest("bcdfbd"));
+        System.out.println(s.longest("bcdfbd"));    // 4
+
+        System.out.println(s.longest("abca"));    // 3
+
+        System.out.println(s.longest("ababacb"));    // 3
     }
 
     // Time O(n)
     // Space O(n)
     public int longest(String input) {
-        // Write your solution here
         // Assumption: the input string is not null
         // the set contains all distinct characters in the sliding window of [slow, fast)
         Set<Character> distinct = new HashSet<>();

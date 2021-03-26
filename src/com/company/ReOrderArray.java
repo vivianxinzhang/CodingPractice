@@ -27,8 +27,14 @@ public class ReOrderArray {
      * 2). [c1, c2, ... c2k]
      * --> [c1, ck+1, c2, ck+2, ... , ck, c2k, c2k+1]
      */
+    // size = r - l + 1
+    // m = l + size / 2
+    // lm = l + (size/2) / 2 = l + size/4
+    // rm = m + length(chunk 1) = m + size/4 = l + size * 3 / 4
+    // Assumptions:
+    // The given array is not null
     // Time O(nlogn)
-    // Space O(1)
+    // Space O(logn)
     public int[] reorder(int[] array) {
         // Assumptions: array is not null
         if (array.length % 2 == 0) {
@@ -51,8 +57,11 @@ public class ReOrderArray {
         // lm: 2, m: 4, rm: 6
         // 0 1 2 3 4 5 6 7 8 9
         // lm: 2, m: 5, rm: 7
+        // mid is the last element index of left 1 / 2
         int mid = left + length / 2;
+        // lmid is the first element of second 1 / 4
         int lmid = left + length / 4;
+        // lmid is the first element of fourth 1 / 4
         int rmid = left + length * 3 / 4;
         reverse(array, lmid, mid - 1);
         reverse(array, mid, rmid - 1);

@@ -42,6 +42,7 @@ public class ReverseInteger {
         }
         return isNegative ? -(int)sum : (int)sum;
     }
+
     private void reverse(char[] array, int i, int j) {
         while (i < j) {
             char tmp = array[i];

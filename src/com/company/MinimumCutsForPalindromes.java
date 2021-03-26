@@ -10,6 +10,7 @@ public class MinimumCutsForPalindromes {
 
     // Assumptions:
     // The given string is not null
+    // Method 1:
     // Time O(n^3) bottle neck在for loop, two nested outside for loop each takes O(n),
     // for loop 里的 palindrome check takes O(n), total should be O(n^3)
     // Space O(n) char[] array takes O(n) extra space
@@ -59,4 +60,10 @@ public class MinimumCutsForPalindromes {
         }
         return true;
     }
+
+    // trade off between time and space
+    // Step 1: find all palindromes --> O(n^2)
+    // Step 2: DP , linear scan and look back --> O(n^2)
+    // T: O(n^2)
+    // S: O(n^2) + O(n)
 }
