@@ -23,7 +23,6 @@ public class RemoveNthNodeFromEnd {
         // Write your solution here
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-
         while (n > 0 && head != null) {
             head = head.next;
             n--;
