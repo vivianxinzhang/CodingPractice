@@ -12,14 +12,13 @@ import java.util.*;
 public class GenerateRandomMaze {
     public static void main(String[] args) {
         GenerateRandomMaze s = new GenerateRandomMaze();
-        printResult(s.maze(3));
+        int[][] res = s.maze(3);
+        for (int[] row : res) {
+            System.out.println(Arrays.toString(row));
+        }
         System.out.println();
-        printResult(s.maze(5));
-        System.out.println();
-    }
-
-    private static void printResult(int[][] result) {
-        for (int[] row : result) {
+        res = s.maze(5);
+        for (int[] row : res) {
             System.out.println(Arrays.toString(row));
         }
     }

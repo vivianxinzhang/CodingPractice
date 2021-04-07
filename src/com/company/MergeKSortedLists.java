@@ -85,6 +85,7 @@ public class MergeKSortedLists {
     }
 
     // Method 2: binary reduction
+    // 2.1 iteration:
     // Time O(kn * logk)
     // Space O(logk)
     public ListNode mergeII(List<ListNode> listOfLists) {
@@ -133,7 +134,7 @@ public class MergeKSortedLists {
         return dummy.next;
     }
 
-    // iteration:
+    // recursion:
     public ListNode mergeIII(List<ListNode> listOfLists) {
         if (listOfLists == null || listOfLists.size() == 0) {
             return null;

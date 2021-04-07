@@ -6,18 +6,15 @@ public class KeepDistanceForIdenticalElements {
         KeepDistanceForIdenticalElements s = new KeepDistanceForIdenticalElements();
         System.out.println("Put [1, 1]:");
         System.out.println(Arrays.toString(s.keepDistance(1)));
-        System.out.println(Arrays.toString(s.keepDistanceI(1)));
-        System.out.println(Arrays.toString(s.keepDistanceII(1)));
+        // null
 
         System.out.println("Put [1, 1], [2, 2]:");
         System.out.println(Arrays.toString(s.keepDistance(2)));
-        System.out.println(Arrays.toString(s.keepDistanceI(2)));
-        System.out.println(Arrays.toString(s.keepDistanceII(2)));
+        // null
 
         System.out.println("Put [1, 1], [2, 2], [3, 3]:");
         System.out.println(Arrays.toString(s.keepDistance(3)));
-        System.out.println(Arrays.toString(s.keepDistanceI(3)));
-        System.out.println(Arrays.toString(s.keepDistanceII(3)));
+        // [3, 1, 2, 1, 3, 2]
     }
 
     // Assumptions: k > 0
@@ -38,6 +35,8 @@ public class KeepDistanceForIdenticalElements {
         // try each position that does not has a number yet
         // put a pair of n with distance n
         // first position is i, second position is i + n + 1
+        // i, i + k + 1
+        // last position of i: i + k + 1 = n - 1  => i = n - k - 2
         // [x, x, x, x, x, x]
         // [x, 3, x, x, x, 3]
         // [2, 3, x, 2, x, 3]

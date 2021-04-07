@@ -4,13 +4,16 @@ public class BuyStockIII {
     public static void main(String[] args) {
         BuyStockIII s = new BuyStockIII();
         int[] array = new int[] {3, 4, 1, 2, 6, 2, 3, 5, 1, 7, 3, 8};
-        System.out.println(s.maxProfit(array)); // (4 - 3) + (7 - 1) = 12
+        System.out.println(s.maxProfit(array));
+        // (4 - 3) + (7 - 1) = 12
 
         array = new int[] {3, 4, 1, 2, 7, 6};
-        System.out.println(s.maxProfit(array)); // (4 - 3) + (7 - 1) = 7
+        System.out.println(s.maxProfit(array));
+        // (4 - 3) + (7 - 1) = 7
 
         array = new int[] {2, 3, 2, 1, 4, 5, 2, 11};
-        System.out.println(s.maxProfit(array)); // (5 - 1) + (11 - 2) = 13
+        System.out.println(s.maxProfit(array));
+        // (5 - 1) + (11 - 2) = 13
     }
 
     // Assumptions:

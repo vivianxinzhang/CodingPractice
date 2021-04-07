@@ -4,6 +4,23 @@ import java.util.*;
 
 // Method 1:
 public class StackWithMin {
+    public static void main(String[] args) {
+        StackWithMin s = new StackWithMin();
+        s.push(6);
+        System.out.println(s.min());    // 6
+        s.push(5);
+        s.push(9);
+        System.out.println(s.top());    // 9
+        System.out.println(s.min());    // 5
+        s.pop();
+        System.out.println(s.min());    // 5
+        System.out.println(s.top());    // 5
+        System.out.println(s.min());    // 5
+        s.pop();
+        System.out.println(s.min());    // 6
+    }
+
+
     // min used to store elements contribute to min
     Deque<Integer> min;
     Deque<Integer> stack;

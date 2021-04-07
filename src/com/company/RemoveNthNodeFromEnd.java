@@ -19,8 +19,19 @@ public class RemoveNthNodeFromEnd {
         }
     }
 
+    // Assumptions:
+    // 1. If n is not valid, you do not need to do anything to the original list.
+    // 2. Try to do this in one pass.
+    // Examples
+    // dummy -> 1 -> 2 -> 3 -> 4 -> 5 -> null, and n = 2.
+    //                   slow
+    //                                   fast
+    // n nodes between slow and fast points,
+    // Step 1: move fast pointer n + 1 steps first
+    // Step 2: move slow and fast together, when fast hits null, slow is the previous node of node that to be deleted
+    // Time O(n)
+    // Space O(1)
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        // Write your solution here
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         while (n > 0 && head != null) {
@@ -40,6 +51,8 @@ public class RemoveNthNodeFromEnd {
         return dummy.next;
     }
 
+    // Time O(n)
+    // Space O(1)
     public ListNode removeNthFromEndI(ListNode head, int n) {
         // Write your solution here
         ListNode dummy = new ListNode(0);

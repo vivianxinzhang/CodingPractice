@@ -6,14 +6,6 @@ public class MaxWaterTrappedII {
     public static void main(String[] args) {
         MaxWaterTrappedII s = new MaxWaterTrappedII();
         int[][] matrix = new int[][]{
-                {1, 9, 2, 5, 8, 4},
-                {2, 4, 5, 1, 3, 2},
-                {7, 1, 3, 5, 6, 6},
-                {8, 5, 9, 3, 3, 4},
-                {5, 2, 1, 7, 5, 7}};
-        System.out.println(s.maxTrapped(matrix));   // 8
-
-        matrix = new int[][]{
                 {3, 5, 6, 4},
                 {2, 2, 3, 5},
                 {5, 2, 2, 4},
@@ -25,8 +17,26 @@ public class MaxWaterTrappedII {
                 {3, 1, 2, 3},
                 {4, 3, 5, 4}};
         System.out.println(s.maxTrapped(matrix));   // 3
+
+        matrix = new int[][]{
+                {1,9,2,5,8,4},
+                {2,4,5,1,3,2},
+                {7,1,3,5,6,6},
+                {8,5,9,3,3,4},
+                {5,2,1,7,5,7}};
+        System.out.println(s.maxTrapped(matrix));   // 8
+
+        matrix = new int[][]{
+                {1, 9, 2, 5, 8, 4},
+                {2, 4, 5, 1, 3, 2},
+                {7, 1, 3, 5, 6, 6},
+                {8, 5, 9, 3, 3, 4},
+                {5, 2, 1, 7, 5, 7}};
+        System.out.println(s.maxTrapped(matrix));   // 8
     }
 
+    // Assumptions:
+    // The given matrix is not null and has size of M * N, where M > 0 and N > 0, all the values are non-negative integers in the matrix.
     // Method: Best First Search
     // data structure:
     // priority queue: storing bars with their indexes and height
@@ -42,101 +52,87 @@ public class MaxWaterTrappedII {
     // case 2: if neighbor's height larger than cur bounding bar height, offer neighbor into pq with neighbor's height as bounding bar height
     // termination: pq is empty
     // deduplicate: a m x n boolean matrix recording checked bars
-    // Time: O(mnlogmn)
+    // Time: O(mn*logmn)
     // Space: O(mn)
+    private static final int[][] DIRS = new int[][] {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
     public int maxTrapped(int[][] matrix) {
-        // Assumptions: matrix is not null, has size of M * N
-        // M > 0 & N > 0, all the values are non-negative integers
-        int rows = matrix.length;
-        int cols = matrix[0].length;
-        if (rows < 3 || cols < 3) {
+        if (matrix == null || matrix.length < 3 || matrix[0].length < 3) {
             return 0;
         }
         // Best-First-Search, minHeap maintains all the border cells
         // of the "closed area" and we always find the one with lowest
         // height to see if any of its neighbors can trap any water
-        PriorityQueue<Pair> minHeap = new PriorityQueue<>();
-        boolean[][] visited = new boolean[rows][cols];
-        // put all the border cells of the matrix at the beginning
-        processBorder(matrix, visited, minHeap, rows, cols);
-        int result = 0;
-        while (!minHeap.isEmpty()) {
-            Pair cur = minHeap.poll();
-            // get all possible neighbor cells
-            List<Pair> neighbors = allNeighbors(cur, matrix, visited);
-            for (Pair nei : neighbors) {
-                // if any neighbor has been visited before, we just ignore
-                if (visited[nei.x][nei.y]) {
-                    continue;
+        PriorityQueue<Cell> minHeap = new PriorityQueue<>(new Comparator<Cell>() {
+            @Override
+            public int compare(Cell o1, Cell o2) {
+                if (o1.waterLevel == o2.waterLevel) {
+                    return 0;
                 }
-                // adjust the neighbor cell's height to the current water level if necessary,
-                // mark the neighbor cell as visited, and put the neighbor cell into the min heap
-                visited[nei.x][nei.y] = true;
-                // how much water can be trapped at the neighbor cell
-                // the maximum water level currently is controlled by the cur cell
-                result += Math.max(cur.height - nei.height, 0);
-//                if (cur.height - nei.height > 0) {
-//                    System.out.println("row " + nei.x + " col " + nei.y + " trapped water " + (cur.height - nei.height));
-//                }
-                nei.height = Math.max(cur.height, nei.height);
-                minHeap.offer(nei);
+                return o1.waterLevel < o2.waterLevel ? -1 : 1;
+            }
+        });
+        int m = matrix.length;
+        int n = matrix[0].length;
+        boolean[][] visited = new boolean[m][n];
+        // put all the border cells of the matrix at the beginning
+        processBorder(matrix, minHeap, visited, m, n);
+        int maxWater = 0;
+        while (!minHeap.isEmpty()) {
+            Cell cur = minHeap.poll();
+            for (int[] dir : DIRS) {
+                int nextX = cur.x + dir[0];
+                int nextY = cur.y + dir[1];
+                if (valid(visited, nextX, nextY, m, n)) {
+                    // adjust the neighbor cell's height to the current water level if necessary,
+                    // mark the neighbor cell as visited, and put the neighbor cell into the min heap
+                    int neiWaterLevel = Math.max(cur.waterLevel, matrix[nextX][nextY]);
+                    // how much water can be trapped at the neighbor cell
+                    // the maximum water level currently is controlled by the cur cell
+                    Cell nei = new Cell(nextX, nextY, neiWaterLevel);
+                    minHeap.offer(nei);
+                    visited[nextX][nextY] = true;
+                    maxWater += nei.waterLevel - matrix[nextX][nextY];
+                }
             }
         }
-        return result;
+        return maxWater;
+    }
+
+    private boolean valid(boolean[][] visited, int nextX, int nextY, int m, int n) {
+        if (nextX < 0 || nextX >= m || nextY < 0 || nextY >= n || visited[nextX][nextY]) {
+            return false;
+        }
+        return true;
     }
 
     // put all the border cells into the min heap at the very beginning,
     // these are the start points of the whole BFS process
-    private void processBorder(int[][] matrix, boolean[][] visited, PriorityQueue<Pair> minHeap, int rows, int cols) {
-        for (int j = 0; j < cols; j++) {
-            minHeap.offer(new Pair(0, j, matrix[0][j]));
-            minHeap.offer(new Pair(rows - 1, j, matrix[rows - 1][j]));
-            visited[0][j] = true;
-            visited[rows - 1][j] = true;
+    private void processBorder(int[][] matrix, PriorityQueue<Cell> minHeap, boolean[][] visited, int m, int n) {
+        // top, bottom rows
+        for (int col = 0; col < n; col++) {
+            minHeap.offer(new Cell(0, col, matrix[0][col]));
+            visited[0][col] = true;
+            minHeap.offer(new Cell(m - 1, col, matrix[m - 1][col]));
+            visited[m - 1][col] = true;
         }
-
-        for (int i = 1; i < rows - 1; i++) {
-            minHeap.offer(new Pair(i, 0, matrix[i][0]));
-            minHeap.offer(new Pair(i, cols - 1, matrix[i][cols - 1]));
-            visited[i][0] = true;
-            visited[i][cols - 1] = true;
+        // left, right cols (excluding top and bottom cells)
+        for (int row = 1; row < m; row++) {
+            minHeap.offer(new Cell(row, 0, matrix[row][0]));
+            visited[row][0] = true;
+            minHeap.offer(new Cell(row, n - 1, matrix[row][n - 1]));
+            visited[row][n - 1] = true;
         }
     }
 
-    private List<Pair> allNeighbors(Pair cur, int[][] matrix, boolean[][] visited) {
-        List<Pair> neis = new ArrayList<>();
-        if (cur.x + 1 < matrix.length) {
-            neis.add(new Pair(cur.x + 1, cur.y, matrix[cur.x + 1][cur.y]));
-        }
-        if (cur.x - 1 >= 0) {
-            neis.add(new Pair(cur.x - 1, cur.y, matrix[cur.x - 1][cur.y]));
-        }
-        if (cur.y + 1 < matrix[0].length) {
-            neis.add(new Pair(cur.x, cur.y + 1, matrix[cur.x][cur.y + 1]));
-        }
-        if (cur.y - 1 >= 0) {
-            neis.add(new Pair(cur.x, cur.y - 1, matrix[cur.x][cur.y - 1]));
-        }
-        return neis;
-    }
+    class Cell {
+        int x;
+        int y;
+        int waterLevel;
 
-    class Pair implements Comparable<Pair> {
-        int x;  // row index
-        int y;  // column index
-        int height; // height of the cell in the original matrix
-
-        Pair(int x, int y, int height) {
+        public Cell(int x, int y, int waterLevel) {
             this.x = x;
             this.y = y;
-            this.height = height;
-        }
-
-        @Override
-        public int compareTo(Pair another) {
-            if (this.height == another.height) {
-                return 0;
-            }
-            return this.height < another.height ? -1 : 1;
+            this.waterLevel = waterLevel;
         }
     }
 }

@@ -33,11 +33,16 @@ public class TwoSubsetsWithMinDifference {
             minDiff[0] = Math.min(currDiff, minDiff[0]);
             return;
         }
+        // how elements need to be picked: array.length / 2 - count
+        // how many element left: array.length - index
         // count < n/2, still need n/2-count elements, but have less elements left not considered
         // array.length - i < n / 2 - count
         if (array.length - i < array.length / 2 - count) {
             return;
         }
+        // this includes condition index == array.length
+        // when pass count == array.length/2 which means count < array.length/2 -> array.length/2 - count > 0
+        // index == array.length which means array.length - index == 0
         // not add array[i] to currSum
         dfs(array, i + 1, currSum, count, totalSum, minDiff);
         // add array[i] to currSum
