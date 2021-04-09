@@ -8,22 +8,22 @@ public class ArrayHopperIV {
         ArrayHopperIV s = new ArrayHopperIV();
 
         int[] array = new int[]{1};
-        System.out.println(s.minJump(array, 0));
+        System.out.println(s.minJump(array, 0));    // 0
 
         array = new int[]{1, 2, 0};
-        System.out.println(s.minJump(array, 0));
+        System.out.println(s.minJump(array, 0));    // 2
 
         array = new int[]{1, 3, 1, 2, 2};
-        System.out.println(s.minJump(array, 2));
+        System.out.println(s.minJump(array, 2));    // 2
 
         array = new int[]{3, 3, 1, 0, 0};
-        System.out.println(s.minJump(array, 2));
+        System.out.println(s.minJump(array, 2));    // 2
 
         array = new int[]{4, 0, 1, 0, 0};
-        System.out.println(s.minJump(array, 2));
+        System.out.println(s.minJump(array, 2));    // -1
 
         array = new int[]{4, 2, 1, 2, 0, 0};
-        System.out.println(s.minJump(array, 0));
+        System.out.println(s.minJump(array, 0));    // 2
     }
 
     // Time O(n)

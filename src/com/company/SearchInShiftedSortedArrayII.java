@@ -4,8 +4,17 @@ public class SearchInShiftedSortedArrayII {
     public static void main(String[] args) {
         SearchInShiftedSortedArrayII s = new SearchInShiftedSortedArrayII();
         System.out.println();
-        int[] array = new int[] {1, 1, 3, 3, 3};
-        System.out.println(s.search(array, 3));
+        int[] array = new int[] {3, 1};
+        System.out.println(s.search(array, 3)); // 0
+
+        array = new int[] {1, 1, 3, 3, 3};
+        System.out.println(s.search(array, 3)); // 2
+
+        array = new int[] {1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1};
+        System.out.println(s.search(array, 2)); // 6
+
+        array = new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1};
+        System.out.println(s.search(array, 2)); // 12
     }
 
     // Assumptions:

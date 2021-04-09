@@ -6,11 +6,12 @@ public class LargestProductOfLength {
         LargestProductOfLength s = new LargestProductOfLength();
         String[] dict = new String[] {"abcde", "abcd", "ade", "xy"};
         System.out.println(s.largestProduct(dict));     // 10
-        System.out.println(s.largestProductI(dict));    // 10
 
         dict = new String[] {"abc", "abc", "abc", "abc"};
         System.out.println(s.largestProduct(dict));     // 0
-        System.out.println(s.largestProductI(dict));    // 0
+
+        dict = new String[] {"abcdefhi", "ix", "hj", "x"};
+        System.out.println(s.largestProduct(dict));     // 8
     }
 
     // Given a dictionary containing many words,
@@ -56,6 +57,7 @@ public class LargestProductOfLength {
                 // there is not any position such that in the two bit masks they are all 1
                 if ((iMask & jMask) == 0) {
                     largest = prod;
+                    break;
                 }
             }
         }

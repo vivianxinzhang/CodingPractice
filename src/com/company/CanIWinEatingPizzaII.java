@@ -5,6 +5,9 @@ public class CanIWinEatingPizzaII {
         CanIWinEatingPizzaII s = new CanIWinEatingPizzaII();
         int[] array = new int[]{2, 1, 100, 3};
         System.out.println(s.canWin(array));    // 102
+
+        array = new int[]{95, 4, 21, 35, 55, 94, 87, 54, 76, 26, 9, 50, 70, 64, 74, 11, 93, 43, 46, 65};
+        System.out.println(s.canWin(array));    // 626
     }
 
     // Assumption:

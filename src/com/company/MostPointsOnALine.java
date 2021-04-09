@@ -10,6 +10,17 @@ public class MostPointsOnALine {
         array[2] = new Point(2, 3);
         array[3] = new Point(3, 3);
         System.out.println(s.most(array));  // 3
+
+        array = new Point[8];
+        array[0] = new Point(1, 1);
+        array[1] = new Point(2, 3);
+        array[2] = new Point(1, 1);
+        array[3] = new Point(2, 3);
+        array[4] = new Point(1, 1);
+        array[5] = new Point(2, 2);
+        array[6] = new Point(3, 4);
+        array[7] = new Point(9, 10);
+        System.out.println(s.most(array));  // 5
     }
 
     // Assumptions: points is not null, and points.length >= 2

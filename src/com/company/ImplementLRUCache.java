@@ -2,20 +2,36 @@ package com.company;
 import java.util.*;
 
 public class ImplementLRUCache<K, V> {
+    public static void main(String[] args) {
+        ImplementLRUCache<Integer, Integer> s = new ImplementLRUCache<>(2);
+        System.out.println(s.get(1)); // null
+        s.set(1, 1);      // 1: 1
+        s.set(2, 2);      // 2: 2, 1: 1
+
+        System.out.println(s.get(2)); // 2
+        System.out.println(s.get(1)); // 1
+
+        s.set(3, 3);      // 3: 3, 2: 2
+
+        System.out.println(s.get(1)); // 1
+        System.out.println(s.get(2)); // null
+        System.out.println(s.get(3)); // 3
+    }
+
     // each node contains the key, value pair,
     // and it is also a double linked list node.
-    class Node<K, V> {
+    private class Node<K, V> {
         Node<K, V> next;
         Node<K, V> pre;
         K key;
         V value;
 
-        Node(K key, V value) {
+        private Node(K key, V value) {
             this.key = key;
             this.value = value;
         }
 
-        void update(K key, V value) {
+        private void update(K key, V value) {
             this.key = key;
             this.value = value;
         }
@@ -24,7 +40,7 @@ public class ImplementLRUCache<K, V> {
     private final int limit;
     // record all the time the head and tail of the double linked list.
     private Node<K, V> head;
-    private Node<K, V> tail;
+    private Node<K, V> tail;    // tail used when limit hit and need to remove old elements
     // maintains the relationship of key and its corresponding node
     // in the double linked list.
     private Map<K, Node<K, V>> map;
@@ -91,7 +107,7 @@ public class ImplementLRUCache<K, V> {
 
     // Time: O(1)
     private Node<K, V> removeNode(Node<K,V> node) {
-        map.remove(node.key);
+        map.remove(node.key);   // not map.remove(node)
         // 前面指向后面
         if (node.pre != null) {
             node.pre.next = node.next;
