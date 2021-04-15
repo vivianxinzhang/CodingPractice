@@ -25,31 +25,22 @@ public class DiagonalSumofBinaryTree {
     }
 
     // Time O(n)
-    // Space O(h)
+    // Space O(h) worst case O(n)
     public List<Integer> diagonalSum(TreeNode root) {
-        // Write your solution here
-        List<Integer> result = new ArrayList<>();
-        if (root == null) {
-            return result;
-        }
-        dfs(root, result, 0);
-        return result;
+        List<Integer> list = new ArrayList<>();
+        dfs(root, 0, list);
+        return list;
     }
 
-    private void dfs(TreeNode root, List<Integer> result, int diaLevel) {
+    private void dfs(TreeNode root, int diagonalIndex, List<Integer> list) {
         if (root == null) {
             return;
         }
-        if (diaLevel >= result.size()) {
-            result.add(root.key);
-        } else {
-            result.set(diaLevel, result.get(diaLevel) + root.key);
+        if (diagonalIndex > list.size() - 1) {
+            list.add(root.key);
         }
-        if (root.left != null) {
-            dfs(root.left, result, diaLevel + 1);
-        }
-        if (root.right != null) {
-            dfs(root.right, result, diaLevel);
-        }
+        list.set(diagonalIndex, list.get(diagonalIndex) + root.key);
+        dfs(root.left, diagonalIndex + 1, list);
+        dfs(root.right, diagonalIndex, list);
     }
 }

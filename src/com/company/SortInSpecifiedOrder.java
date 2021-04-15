@@ -14,7 +14,6 @@ public class SortInSpecifiedOrder {
     // Time O(n) worst case O(n^2)
     // Space O(n)
     public int[] sortSpecial(int[] A1, int[] A2) {
-        // Write your solution here
         if (A1 == null || A1.length <= 1) {
             return A1;
         }

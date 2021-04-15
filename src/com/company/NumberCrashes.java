@@ -18,34 +18,36 @@ public class NumberCrashes {
         System.out.println(Arrays.toString(s.numberCrash(array)));
     }
 
+    // Condition:
+    // if stack is empty or the top element >= 0 && current value <= 0, Keep popping the previous elements whose abs value < current value,
+    // when the stack is empty or the previous number < 0, stop and put the current value onto the stack
+    // if the abs value of current number and top element is the same, pop the stack and break out of the loop.
+    // if the current abs value < top element in the stack, just break out of the loop.
+    // otherwise, push the current element on to the stack
     // Time O(n)
     // Space O(n)
     public int[] numberCrash(int[] nums) {
         Deque<Integer> stack = new ArrayDeque<>();
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] > 0) {  // pos -->
-                stack.offerFirst(nums[i]);
-            } else {    // neg  <--
+            if (nums[i] > 0) {  // pos --> move right
+                stack.offerFirst(nums[i]);  // waiting to be matched
+            } else if (stack.isEmpty() || stack.peekFirst() < 0) {  // neg  <-- move left
+                    stack.offerFirst(nums[i]);
+            } else {  // neg  <-- move left
+                // remove all pos elements on the left with smaller abs value
+                while (!stack.isEmpty() && stack.peekFirst() > 0 && stack.peekFirst() < -nums[i]) {
+                    stack.pollFirst();
+                }
                 if (stack.isEmpty() || stack.peekFirst() < 0) {
                     stack.offerFirst(nums[i]);
-                } else {
-                    while (!stack.isEmpty() && stack.peekFirst() > 0 && stack.peekFirst() < -nums[i]) {
+                } else if (stack.peekFirst() == -nums[i]) {
+                    stack.pollFirst();
+                } else if (stack.peekFirst() < -nums[i]) {
                         stack.pollFirst();
-                    }
-                    if (stack.isEmpty() || stack.peekFirst() < 0) {
                         stack.offerFirst(nums[i]);
-                    } else {
-                        int top = stack.peekFirst();    // pos
-                        if (top == -nums[i]) {
-                            stack.pollFirst();
-                        } else if (top < -nums[i]) {
-                            stack.pollFirst();
-                            stack.offerFirst(nums[i]);
-                        }
                     }
                 }
             }
-        }
         return toIntArray(stack);
     }
 

@@ -4,46 +4,67 @@ import java.util.*;
 
 public class LongestValidParentheses {
     public static void main(String[] args) {
-        System.out.println("main");
         LongestValidParentheses s = new LongestValidParentheses();
-        String input = "(()()(()";
-        System.out.println(s.longestValidParentheses(input));
-
-        input = ")()())";
-        System.out.println(s.longestValidParentheses(input));
+        String input = ")()())";
+        System.out.println(s.longestValidParentheses(input));   // 4
 
         input = ")))((";
-        System.out.println(s.longestValidParentheses(input));
+        System.out.println(s.longestValidParentheses(input));   // 0
+
+        input = "((())()))";
+        System.out.println(s.longestValidParentheses(input));   // 8
     }
 
     // Time O(n)
-    // Space O(1)
-    // chars between [left, right] is a valid substring of Parentheses
+    // Space O(n)
     public int longestValidParentheses(String input) {
-        int max = 0;
-        int i = 0;
-        int j = 0;
-        int leftNum = 0;
-        int rightNum = 0;
-        while (j < input.length()) {
-            if (input.charAt(j) == '(') {
-                j++;
-                leftNum++;
-            } else if (input.charAt(j) == ')' && leftNum > rightNum) {
-                j++;
-                rightNum++;
-            } else {
-                if (input.charAt(i) == '(') {
-                    leftNum--;
+        // index of parenthesis
+        Deque<Integer> stack = new ArrayDeque<>();
+        int longest = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == '(') {   // left parenthesis
+                stack.offerFirst(i);
+            } else {    // right parenthesis
+                // the section of current match () + previous section of match
+                // ((**)(****)
+                if (!stack.isEmpty() && input.charAt(stack.peekFirst()) == '(') {
+                    stack.pollFirst();
+                    int leftIdx = stack.isEmpty() ? 0 : stack.peekFirst() + 1;
+                    longest = Math.max(longest, i - leftIdx + 1);
                 } else {
-                    rightNum--;
+                    stack.offerFirst(i);
                 }
-                i++;
-            }
-            if (leftNum == rightNum) {
-                max = Math.max(max, j - i);
             }
         }
-        return max;
+        return longest;
+    }
+
+    // Method 1: brute force
+    // Time: O(n^3)
+    // Space: O(n)
+    public int longestValidParenthesesI(String s) {
+        int maxlen = 0;
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i + 2; j <= s.length(); j+=2) {
+                if (isValid(s.substring(i, j))) {
+                    maxlen = Math.max(maxlen, j - i);
+                }
+            }
+        }
+        return maxlen;
+    }
+
+    public boolean isValid(String input) {
+        Deque<Character> stack = new ArrayDeque<>();
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == '(') {
+                stack.push('(');
+            } else if (!stack.isEmpty() && stack.peek() == '(') {
+                stack.pollFirst();
+            } else {
+                return false;
+            }
+        }
+        return stack.isEmpty();
     }
 }

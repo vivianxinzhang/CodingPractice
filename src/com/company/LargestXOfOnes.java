@@ -3,7 +3,12 @@ package com.company;
 public class LargestXOfOnes {
     public static void main(String[] args) {
         LargestXOfOnes s = new LargestXOfOnes();
-        int[][] matrix = new int[][]{{1,1,0,1,1},{1,0,1,0,1},{1,0,1,1,1},{1,1,0,1,0},{0,0,0,1,1}};
+        int[][] matrix = new int[][]{
+                {1, 1, 0, 1, 1},
+                {1, 0, 1, 0, 1},
+                {1, 0, 1, 1, 1},
+                {1, 1, 0, 1, 0},
+                {0, 0, 0, 1, 1}};
         System.out.println(s.largest(matrix));  // 1
     }
 

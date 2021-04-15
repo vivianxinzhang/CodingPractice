@@ -21,9 +21,13 @@ public class ReOrderLinkedList {
         three.next = four;
         four.next = five;
         curr = s.reorder(one);
+        // 1 -> 5 -> 2 -> 4 -> 3
         while (curr != null) {
-            System.out.println(curr.value);
+            System.out.print(curr.value);
             curr = curr.next;
+            if (curr != null) {
+                System.out.print(" -> ");
+            }
         }
     }
 

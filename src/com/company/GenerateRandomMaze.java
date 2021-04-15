@@ -137,15 +137,15 @@ public class GenerateRandomMaze {
         return result;
     }
 
-    private void helper(int[][] result, int i, int j) {
+    private void helper(int[][] maze, int i, int j) {
         shuffle(DIRS);
         for (int[] dir : DIRS) {
             int nextX = i + 2 * dir[0];
             int nextY = j + 2 * dir[1];
-            if (validWall(result, nextX, nextY)) {
-                result[i + dir[0]][j + dir[1]] = 0;
-                result[nextX][nextY] = 0;
-                helper(result, nextX, nextY);
+            if (validWall(maze, nextX, nextY)) {
+                maze[i + dir[0]][j + dir[1]] = 0;
+                maze[nextX][nextY] = 0;
+                helper(maze, nextX, nextY);
             }
         }
     }

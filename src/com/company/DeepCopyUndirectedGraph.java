@@ -43,6 +43,7 @@ public class DeepCopyUndirectedGraph {
         }
     }
 
+    // Assumptions: The given graph is not null
     // Method 1: Breadth First Search
     // Time O(V+E)
     // Space O(V)
@@ -50,28 +51,30 @@ public class DeepCopyUndirectedGraph {
         if (graph == null) {
             return null;
         }
-        List<GraphNode> newNodes = new ArrayList<>();
+        List<GraphNode> newGraph = new ArrayList<>();
         Deque<GraphNode> queue = new ArrayDeque<>();
         Map<GraphNode, GraphNode> map = new HashMap<>();
         for (GraphNode node : graph) {
             // copy node
-            map.put(node, new GraphNode(node.key));
-            queue.offer(node);
-            newNodes.add(map.get(node));
+            if (!map.containsKey(node)) {
+                map.put(node, new GraphNode(node.key));
+                queue.offer(node);
+            }
+            newGraph.add(map.get(node));
         }
         while (!queue.isEmpty()) {
-            GraphNode old = queue.poll();
-            for (GraphNode neighbor : old.neighbors) {
+            GraphNode cur = queue.poll();
+            for (GraphNode nei : cur.neighbors) {
                 // copy node
-                if (map.get(neighbor) == null) {
-                    map.put(neighbor, new GraphNode(neighbor.key));
-                    queue.offer(neighbor);
+                if (!map.containsKey(nei)) {
+                    map.put(nei, new GraphNode(nei.key));
+                    queue.offer(nei);
                 }
                 // copy edge
-                map.get(old).neighbors.add(map.get(neighbor));
+                map.get(cur).neighbors.add(map.get(nei));
             }
         }
-        return newNodes;
+        return newGraph;
     }
 
     // Another implementation of BFS:
@@ -130,20 +133,20 @@ public class DeepCopyUndirectedGraph {
             if (!map.containsKey(node)) {
                 // copy node
                 map.put(node, new GraphNode(node.key));
-                DFS(node, map);
+                dfs(node, map);
             }
         }
         return new ArrayList<GraphNode>(map.values());
     }
 
-    private void DFS(GraphNode node, Map<GraphNode, GraphNode> map) {
+    private void dfs(GraphNode node, Map<GraphNode, GraphNode> map) {
         GraphNode copyNode = map.get(node);
         for (GraphNode nei : node.neighbors) {
             if (!map.containsKey(nei)) {
                 // copy node
                 GraphNode copyNei = new GraphNode(nei.key);
                 map.put(nei, copyNei);
-                DFS(nei, map);
+                dfs(nei, map);
             }
             // copy edge
             copyNode.neighbors.add(map.get(nei));
