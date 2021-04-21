@@ -6,6 +6,9 @@ public class LongestBitonicSequence {
         int[] array = new int[] {1, 2};
         System.out.println(s.longestBitonic(array));    // 2
 
+        array = new int[] {1, 5, 2, 4, 3};
+        System.out.println(s.longestBitonic(array));    // 4
+
         array = new int[] {1, 3, 2, 1, 4, 6, 1};
         System.out.println(s.longestBitonic(array));    // 5
     }

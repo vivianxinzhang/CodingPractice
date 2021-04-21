@@ -10,9 +10,9 @@ public class SortWithTwoStacks {
         s1.offerFirst(2);
         s1.offerFirst(3);
         s1.offerFirst(4);
-        System.out.println(s1);     // [1, 2, 3, 4
-        s.sortI(s1);
-        System.out.println(s1);     // [4, 3, 2, 1
+        System.out.println(s1);     //  4, 3, 2, 1]
+        s.sort(s1);
+        System.out.println(s1);     //  1, 2, 3, 4]
     }
 
     // sort in descending order and store result in the bottom part of input

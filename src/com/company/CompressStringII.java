@@ -3,11 +3,10 @@ package com.company;
 public class CompressStringII {
     public static void main(String[] args) {
         CompressStringII s = new CompressStringII();
-        System.out.println(s.compress("a"));
 
-        System.out.println(s.compress("cccc"));
-
-        System.out.println(s.compress("abbcccdeee"));   // "a1b2c3d1e3"
+        System.out.println(s.compress("a"));    // a1
+        System.out.println(s.compress("cccc")); // c4
+        System.out.println(s.compress("abbcccdeee"));   // a1b2c3d1e3
     }
 
     // Time O(n)

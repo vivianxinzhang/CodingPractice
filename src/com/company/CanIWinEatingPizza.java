@@ -3,13 +3,17 @@ package com.company;
 public class CanIWinEatingPizza {
     public static void main(String[] args) {
         CanIWinEatingPizza s = new CanIWinEatingPizza();
-        int[] array = new int[] {2,1,100,3};
+        int[] array = new int[] {10, 10};
         System.out.println(s.canWin(array));    // true
-        System.out.println(s.canWinI(array));   // true
+
+        array = new int[] {1, 100, 1};
+        System.out.println(s.canWin(array));    // false
+
+        array = new int[] {2, 1, 100, 3};
+        System.out.println(s.canWin(array));    // true
 
         array = new int[] {60,77,46,53,84,79,19};
         System.out.println(s.canWin(array));    // true
-        System.out.println(s.canWinI(array));   // true
     }
 
     // Method 1: optimized
@@ -35,10 +39,12 @@ public class CanIWinEatingPizza {
             for (int i = 0; i <= nums.length - length; i++) {
                 int j = i + length - 1;
                 // Case 1: if I eat i, my friend's problem become M[i+1][j]
-                // Case 2: if I eat j, my friend's problem become M[i+1][j - 1]
+                // I will get rangeSum - M[i+1][j]
+                // Case 2: if I eat j, my friend's problem become M[i][j-1]
+                // I will get rangeSum - M[i][j-1]
+                int rangeSum = getRangeSum(prefixSum, i, j, nums);
                 // I will choose i or j which give me a larger total sum in the current round
-                int sum = getRangeSum(prefixSum, i, j, nums);
-                M[i][j] = Math.max(sum - M[i + 1][j], sum - M[i][j - 1]);
+                M[i][j] = Math.max(rangeSum - M[i + 1][j], rangeSum - M[i][j - 1]);
             }
         }
         int mySum = M[0][nums.length -1];
@@ -62,8 +68,8 @@ public class CanIWinEatingPizza {
 
     // Method 1:
     // M[i][j] represents [from the ith pizza to the jth pizza] the largest total sum of
-    // total pizza I can get assuming you start first.
-    // Time O(n^2 * n)  --> can optimize query subarray sum
+    // total pizza I can get assuming I start first.
+    // Time O(n^2 * n)  --> can optimize query subArray sum
     // Space O(n^2)
     public boolean canWinI(int[] nums) {
         int[][] M = new int[nums.length][nums.length];
@@ -89,8 +95,8 @@ public class CanIWinEatingPizza {
             }
         }
         int mySum = M[0][nums.length -1];
-        int totalSum = getSum(nums, 0, nums.length - 1);
-        return mySum >= totalSum - mySum;
+        int friendSum = getSum(nums, 0, nums.length - 1) - mySum;
+        return mySum >= friendSum;
     }
 
     private int getSum(int[] nums, int start, int end) {

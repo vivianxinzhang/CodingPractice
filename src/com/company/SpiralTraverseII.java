@@ -7,14 +7,17 @@ public class SpiralTraverseII {
         int[][] matrix = new int[][] {{}, {}, {}};
         System.out.println(s.spiral(matrix));   // []
 
-        matrix = new int[][] {{1, 2}, {3, 4}};
+        matrix = new int[][] {{1, 2},
+                {3, 4}};
         System.out.println(s.spiral(matrix));   // [1, 2, 3]
 
-        matrix = new int[][] {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+        matrix = new int[][] {{1, 2,  3,  4},
+                {5, 6,  7,  8},
+                {9, 10, 11, 12}};
         System.out.println(s.spiral(matrix));   // [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]
     }
 
-    // Assumptions
+    // Assumptions:
     // The 2D array is not null and has size of M * N where M, N >= 0
     // Time O(mn)
     // Space O(1)

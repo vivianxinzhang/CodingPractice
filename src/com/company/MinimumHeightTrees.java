@@ -4,31 +4,32 @@ import java.util.*;
 public class MinimumHeightTrees {
     public static void main(String[] args) {
         MinimumHeightTrees s = new MinimumHeightTrees();
-        int[][] edges = new int[][] {{1, 0}, {1, 2}, {1, 3}};
-        List<List<Integer>> neighbors = s.getNeightbors(4, edges);
-        System.out.println(s.findMinHeightTrees(4, edges));     // 1
-
-        edges = new int[][] {{3, 0}, {3, 1}, {3, 2}, {3, 4}, {5, 4}};
-        System.out.println(s.findMinHeightTrees(6, edges));     // 3, 4
-
-        edges = new int[][] {};
+        int[][]edges = new int[][] {};
         System.out.println(s.findMinHeightTrees(1, edges));     // 0
 
         edges = new int[][] {{0, 1}};
         System.out.println(s.findMinHeightTrees(2, edges));     // 0, 1
+
+        edges = new int[][] {{1, 0}, {1, 2}, {1, 3}};
+        System.out.println(s.findMinHeightTrees(4, edges));     // 1
+
+        edges = new int[][] {{3, 0}, {3, 1}, {3, 2}, {3, 4}, {5, 4}};
+        System.out.println(s.findMinHeightTrees(6, edges));     // 3, 4
     }
+
     // Note:
     // (1) According to the definition of tree on Wikipedia: “a tree is an undirected graph in which any two vertices are connected by exactly one path.
     //  In other words, any connected graph without simple cycles is a tree.”
     // (2) The height of a rooted tree is the number of edges on the longest downward path between the root and a leaf.
+    // Method 3:
     // Time O(v + e)
     // Space O(v + e)
     public List<Integer> findMinHeightTrees(int n, int[][] edges) {
-        List<Integer> result = new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
         // base cases
         if (n == 1) {
-            result.add(0);
-            return result;
+            res.add(0);
+            return res;
         }
         Map<Integer, List<Integer>> map = new HashMap<>();
         int[] inDegree = new int[n];
@@ -48,11 +49,11 @@ public class MinimumHeightTrees {
             }
         }
         while (!queue.isEmpty()) {
-            List<Integer> list = new ArrayList<>();
+            List<Integer> curLayer = new ArrayList<>();
             int size = queue.size();
             for (int i = 0; i < size; i++) {
                 int cur = queue.poll();
-                list.add(cur);
+                curLayer.add(cur);
                 for (int nei : map.get(cur)) {
                     inDegree[nei]--;
                     if (inDegree[nei] == 1) {
@@ -60,9 +61,9 @@ public class MinimumHeightTrees {
                     }
                 }
             }
-            result = list;
+            res = curLayer;
         }
-        return result;
+        return res;
     }
 
     // Method 2:
@@ -77,19 +78,18 @@ public class MinimumHeightTrees {
             return centroids;
         }
         // Build the graph with the adjacency list
-        List<Set<Integer>> neighbors = new ArrayList<>();
+        List<Set<Integer>> graph = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            neighbors.add(new HashSet<Integer>());
+            graph.add(new HashSet<Integer>());
         }
-        for (int[] edge : edges) {
-            Integer start = edge[0], end = edge[1];
-            neighbors.get(start).add(end);
-            neighbors.get(end).add(start);
+        for (int[] pair: edges) {
+            graph.get(pair[0]).add(pair[1]);
+            graph.get(pair[1]).add(pair[0]);
         }
         // Initialize the first layer of leaves
         List<Integer> leaves = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            if (neighbors.get(i).size() == 1) {
+            if (graph.get(i).size() == 1) {
                 leaves.add(i);
             }
         }
@@ -99,12 +99,12 @@ public class MinimumHeightTrees {
             remainingNodes -= leaves.size();
             List<Integer> newLeaves = new ArrayList<>();
             // remove the current leaves along with the edges
-            for (Integer leaf : leaves) {
-                for (Integer neighbor : neighbors.get(leaf)) {
-                    neighbors.get(neighbor).remove(leaf);
+            for (int leaf : leaves) {
+                for (int nei : graph.get(leaf)) {
+                    graph.get(nei).remove(leaf);
                     // for nodes with only 1 edge are leaf nodes
-                    if (neighbors.get(neighbor).size() == 1) {
-                        newLeaves.add(neighbor);
+                    if (graph.get(nei).size() == 1) {
+                        newLeaves.add(nei);
                     }
                 }
             }
@@ -137,17 +137,17 @@ public class MinimumHeightTrees {
 
     // Time O(n + edges.length) -> O(V + E)
     // Space O(n) -> O(V)
-    private int findHeight(int root, List<List<Integer>> neighbors) {
-        Queue<Integer> queue = new ArrayDeque<>();
+    private int findHeight(int root, List<List<Integer>> map) {
+        Deque<Integer> queue = new ArrayDeque<>();
         queue.offer(root);
-        boolean[] visited = new boolean[neighbors.size()];
+        boolean[] visited = new boolean[map.size()];
         visited[root] = true;
         int level = 0;
         while (!queue.isEmpty()) {
             int size = queue.size();
             for (int j = 0; j < size; j++) {
                 int curr = queue.poll();
-                for (int nei : neighbors.get(curr)) {
+                for (int nei : map.get(curr)) {
                     if (!visited[nei]) {
                         queue.offer(nei);
                         visited[nei] = true;
@@ -172,5 +172,4 @@ public class MinimumHeightTrees {
         }
         return neighbors;
     }
-
 }

@@ -3,10 +3,29 @@ package com.company;
 import java.util.Arrays;
 
 public class MergeSort {
+    public static void main(String[] args) {
+        MergeSort s = new MergeSort();
+        // test cases to cover possible situations
+        int[] array = null;
+        array = s.mergeSort(array);
+        System.out.println(Arrays.toString(array));
+
+        array = new int[0];
+        array = s.mergeSort(array);
+        System.out.println(Arrays.toString(array));
+
+        array = new int[] { 4, 3, 2, 1};
+        array = s.mergeSort(array);
+        System.out.println(Arrays.toString(array));
+
+        array = new int[] {3, 5, 1, 2, 4, 8};
+        array = s.mergeSort(array);
+        System.out.println(Arrays.toString(array));
+    }
     // Method 2
     // Time O(nlogn)
     // Space O(n)
-    public int[] mergeSort2(int[] array) {
+    public int[] mergeSort(int[] array) {
         if (array == null || array.length <= 1) {
             return array;
         }
@@ -105,29 +124,5 @@ public class MergeSort {
             k++;
         }
         return result;
-    }
-
-    public static void main(String[] args) {
-        MergeSort s = new MergeSort();
-        // test cases to cover possible situations
-        int[] array = null;
-        array = s.mergeSort2(array);
-        System.out.println(Arrays.toString(array));
-
-        array = new int[0];
-        array = s.mergeSort2(array);
-        System.out.println(Arrays.toString(array));
-
-        array = new int[] { 1, 2, 3, 4};
-        array = s.mergeSort2(array);
-        System.out.println(Arrays.toString(array));
-
-        array = new int[] { 4, 3, 2, 1};
-        array = s.mergeSort2(array);
-        System.out.println(Arrays.toString(array));
-
-        array = new int[] { 2, 4, 1, 5, 3 };
-        array = s.mergeSort2(array);
-        System.out.println(Arrays.toString(array));
     }
 }

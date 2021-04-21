@@ -5,7 +5,9 @@ public class BuyStockIV {
         BuyStockIV s = new BuyStockIV();
         int[] array = new int[]{2, 3, 2, 1, 4, 5, 2, 11};
         System.out.println(s.maxProfit(array, 3));  // 14
-        System.out.println(s.maxProfitI(array, 3)); // 14
+
+        array = new int[]{3, 4, 1, 2, 6, 2, 3, 5, 1, 7, 3, 8};
+        System.out.println(s.maxProfit(array, 4));  // 19
     }
 
     // DP optimal solution: O(k*n)
@@ -26,16 +28,6 @@ public class BuyStockIV {
     //                    = max(M[k][i-1],
     //                      price[i] + max_{0<=j<i}(-price[j]+M[k-1][j]))
     //
-    // **optmize**
-    // at k, i, let maxDiff = max_{0<=j<i}(-price[j]+M[k-1][j])
-    // at k, i+1:   maxDiff = max_{0<=j<i+1}(-price[j]+M[k-1][j])
-    //                      = max(maxDiff, {j=i}(-price[j]+M[k-1][j]))
-    //                      = max(maxDiff, -price[i]+M[k-1][i])
-    // M[k][i] = max(M[k][i-1], max(price[i] + maxDiff))
-    // maxDiff = max(maxDiff, M[k-1][i]-price[i])
-
-
-
 
     // M[i][j]: i is total number of transactions, j is day
     // Base case:
@@ -62,6 +54,13 @@ public class BuyStockIV {
         return M[k][array.length - 1];
     }
 
+    // **optmize**
+    // at k, i, let maxDiff = max_{0<=j<i}(-price[j]+M[k-1][j])
+    // at k, i+1:   maxDiff = max_{0<=j<i+1}(-price[j]+M[k-1][j])
+    //                      = max(maxDiff, {j=i}(-price[j]+M[k-1][j]))
+    //                      = max(maxDiff, -price[i]+M[k-1][i])
+    // M[k][i] = max(M[k][i-1], max(price[i] + maxDiff))
+    // maxDiff = max(maxDiff, M[k-1][i]-price[i])
     // Base case:
     // M[0][0] = 0, M[i][0] = 0 (0 days), M[0][j] = 0 (0 transactions)
     // Induction rule:

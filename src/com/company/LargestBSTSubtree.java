@@ -14,12 +14,58 @@ public class LargestBSTSubtree {
         five.left = one;
         five.right = eight;
         fifteen.right = seven;
-        System.out.println(s.largestBSTSubtree(ten));
+        /**
+         *          10
+         *        /    \
+         *       5     15
+         *     /   \     \
+         *    1     8     7
+         * */
+        System.out.println(s.largestBSTSubtree(ten));   // 3
     }
+
+    // brute force:
+    // Time O(n*n)
+    // Space O(h) worst case O(n)
+    public int largestBSTSubtree(TreeNode root) {
+        int[] max = new int[] {0};
+        numOfNodes(root, max);
+        return max[0];
+    }
+
+    private int numOfNodes(TreeNode root, int[] max) {
+        if (root == null) {
+            return 0;
+        }
+        int leftRes = numOfNodes(root.left, max);
+        int rightRes = numOfNodes(root.right, max);
+        int numOfNodes = leftRes + rightRes + 1;
+        if (isBST(root)) {
+            max[0] = Math.max(max[0], numOfNodes);
+        }
+        return numOfNodes;
+    }
+
+    private boolean isBST(TreeNode root) {
+        return helper(root, null, null);
+    }
+
+    private boolean helper(TreeNode root, Integer min, Integer max) {
+        if (root == null) {
+            return true;
+        }
+        if ((min != null && root.key <= min) || (max != null && root.key >= max)) {
+            return false;
+        }
+        boolean leftRes = helper(root.left, min, root.key);
+        boolean rightRes = helper(root.right, root.key, max);
+        return leftRes && rightRes;
+    }
+
 
     // Time O(n)
     // Space O(height)
-    public int largestBSTSubtree(TreeNode root) {
+    public int largestBSTSubtreeI(TreeNode root) {
         // Write your solution here
         if (root == null) {
             return 0;

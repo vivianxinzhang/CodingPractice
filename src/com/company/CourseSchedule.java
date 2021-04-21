@@ -14,10 +14,65 @@ public class CourseSchedule {
         System.out.println(s.canFinish(2, prerequisites));  // false
     }
 
-    // Method 1: DFS mark nodes with different states: visiting and visited
+    // Note:
+    // 1. The input prerequisites is a graph represented by a list of edges, not adjacency matrices. Read more about how a graph is represented.
+    // 2. You may assume that there are no duplicate edges in the input prerequisites.
+    // Method 2: topological sort
+    // Time O(v + e)
+    // Space O(v)
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> graph = buildGraph(numCourses, prerequisites);
+        return topologicalSort(numCourses, graph);
+    }
+
+    private List<List<Integer>> buildGraph(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < numCourses; i++) {
+            graph.add(new ArrayList<>());
+        }
+        int[] inDegree = new int[numCourses];
+        for (int[] row : prerequisites) {
+            int course = row[0];
+            int pre = row[1];
+            graph.get(pre).add(course);
+        }
+        return graph;
+    }
+
+    private boolean topologicalSort(int numCourses, List<List<Integer>> graph) {
+        int[] inDegree = new int[numCourses];
+        for (List<Integer> courses : graph) {
+            for (int course : courses) {
+                inDegree[course]++;
+            }
+        }
+        Deque<Integer> queue = new ArrayDeque<>();
+        for (int i = 0; i < inDegree.length; i++) {
+            if (inDegree[i] == 0) {
+                queue.offer(i);
+            }
+        }
+        int[] array = new int[numCourses];
+        int index = 0;
+        while (!queue.isEmpty()) {
+            int pre = queue.poll();
+            array[index++] = pre;
+            List<Integer> courses = graph.get(pre);
+            for (int course : courses) {
+                inDegree[course]--;
+                if (inDegree[course] == 0) {
+                    queue.offer(course);
+                }
+            }
+        }
+        return index == numCourses;
+    }
+
+    // Method 1:
+    // DFS mark nodes with different states: visiting 1 and visited 2 to detect cycle
     // Time O(n)
     // Space O(n)
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
+    public boolean canFinishI(int numCourses, int[][] prerequisites) {
         List<List<Integer>> graph = new ArrayList<>();
         for (int i = 0; i < numCourses; i++) {
             graph.add(new ArrayList<>());

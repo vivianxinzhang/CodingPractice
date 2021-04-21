@@ -4,18 +4,15 @@ public class InterleaveStrings {
     public static void main(String[] args) {
         InterleaveStrings s = new InterleaveStrings();
         System.out.println(s.canMerge("", "", ""));     // true
-        System.out.println(s.canMergeIII("", "", ""));     // true
 
         System.out.println(s.canMerge("acd", "be", "abcde"));   // true
-        System.out.println(s.canMergeIII("acd", "be", "abcde"));   // true
 
         System.out.println(s.canMerge("abgcd", "bebgf", "abgcdbebg"));  // false
-        System.out.println(s.canMergeIII("abgcd", "bebgf", "abgcdbebg"));  // false
 
         System.out.println(s.canMerge("adc", "be", "abcde"));   // false
-        System.out.println(s.canMergeIII("adc", "be", "abcde"));   // false
     }
 
+    // Assumptions: none of A, B, C is null
     // DP
     // M[i][j] represents if the first i characters [0, i-1] of str1 and j characters [0, j-1] of str2 can
     // form the first (i + j) characters [0, i+j-1] in str3

@@ -3,7 +3,10 @@ package com.company;
 public class LargestSquareOfOnes {
     public static void main(String[] args) {
         LargestSquareOfOnes s = new LargestSquareOfOnes();
-        int[][] matrix = {
+        int[][] matrix = new int[][]{{1}};
+        System.out.println(s.largest(matrix));  // 1
+
+        matrix = new int[][]{
                 {0, 0, 0, 0},
                 {1, 1, 1, 1},
                 {0, 1, 1, 1},
@@ -16,9 +19,6 @@ public class LargestSquareOfOnes {
                 {1, 1, 1, 1},
                 {1, 1, 1, 1}};
         System.out.println(s.largest(matrix));  // 4
-
-        matrix = new int[][]{{1}};
-        System.out.println(s.largest(matrix));  // 1
     }
 
     // Assumption:

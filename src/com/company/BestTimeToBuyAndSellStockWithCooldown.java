@@ -3,15 +3,18 @@ package com.company;
 public class BestTimeToBuyAndSellStockWithCooldown {
     public static void main(String[] args) {
         BestTimeToBuyAndSellStockWithCooldown s = new BestTimeToBuyAndSellStockWithCooldown();
-        int[] array = new int[]{1, 2, 3, 0, 2};
+        int[] array = new int[]{};
+        System.out.println(s.maxProfit(array));  // 3
+
+        array = new int[]{1, 2, 3, 0, 2};
         System.out.println(s.maxProfit(array));  // 3
     }
 
     // Assumption:
     // 1. You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
     // 2. After you sell your stock, you cannot buy stock on next day. (ie, cooldown 1 day)
-    // hold[i]: maximum profit if hold a stock
-    // unhold[i]: maximum profit if unhold a stock
+    // hold[i]: maximum profit if hold a stock on day i
+    // unhold[i]: maximum profit if unhold a stock on day i
     // Base case:
     // hold[0] = -prices[0]
     // hold[1] = max(-prices[1], -prices[0]) on day one hold a stock, purchased either on day 0 or day 1

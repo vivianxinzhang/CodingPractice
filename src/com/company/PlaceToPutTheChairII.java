@@ -5,11 +5,19 @@ public class PlaceToPutTheChairII {
     public static void main(String[] args) {
         PlaceToPutTheChairII s = new PlaceToPutTheChairII();
         char[][] gym = new char[][] {
-                {Character.MIN_VALUE, 'E', Character.MIN_VALUE},
-                {Character.MIN_VALUE, Character.MIN_VALUE, Character.MIN_VALUE},
-                {Character.MIN_VALUE, Character.MIN_VALUE, Character.MIN_VALUE}
+                {' ', 'E', ' '},
+                {' ', ' ', ' '},
+                {' ', ' ', ' '}
         };
-        System.out.println(s.putChair(gym));
+        System.out.println(s.putChair(gym));    // [0, 1]
+
+        gym = new char[][] {
+                {'E','E',' ',' ',' '},
+                {' ','E',' ',' ','E'},
+                {' ',' ','E',' ',' '},
+                {' ',' ',' ',' ',' '}
+        };
+        System.out.println(s.putChair(gym));    // [1, 1]
     }
 
     // Assumptions:
@@ -21,17 +29,14 @@ public class PlaceToPutTheChairII {
     public List<Integer> putChair(char[][] gym) {
         int M = gym.length;
         int N = gym[0].length;
-        List<Integer> result = null;
+        List<Integer> result = Arrays.asList(-1, -1);
         int globalMin = Integer.MAX_VALUE;
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
                 int[][] cost = new int[M][N];
                 if (dijkstra(gym, cost, i, j)) {
                     int currMinDistance = computeTotaltal(gym, cost, M, N);
-                    if (result == null) {
-                        result = Arrays.asList(i, j);
-                        globalMin = currMinDistance;
-                    } else if (currMinDistance < globalMin) {
+                    if (currMinDistance < globalMin) {
                         result.set(0, i);
                         result.set(1, j);
                         globalMin = currMinDistance;

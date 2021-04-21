@@ -6,12 +6,10 @@ public class LongestSubstringWithKTypedCharacters {
         LongestSubstringWithKTypedCharacters s = new LongestSubstringWithKTypedCharacters();
 
         String input = "aabcccc";
-        System.out.println(s.longest(input, 2));
-        System.out.println(s.longestI(input, 2));
+        System.out.println(s.longest(input, 2));    // bcccc
 
         input = "aabcc";
-        System.out.println(s.longest(input, 3));
-        System.out.println(s.longestI(input, 3));
+        System.out.println(s.longest(input, 3));    // aabcc
     }
 
     // Method 2: linear scan

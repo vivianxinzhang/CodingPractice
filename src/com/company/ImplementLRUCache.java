@@ -6,12 +6,12 @@ public class ImplementLRUCache<K, V> {
         ImplementLRUCache<Integer, Integer> s = new ImplementLRUCache<>(2);
         System.out.println(s.get(1)); // null
         s.set(1, 1);      // 1: 1
-        s.set(2, 2);      // 2: 2, 1: 1
+        s.set(2, 2);      // 2: 2,  1: 1
 
         System.out.println(s.get(2)); // 2
         System.out.println(s.get(1)); // 1
 
-        s.set(3, 3);      // 3: 3, 2: 2
+        s.set(3, 3);      // 3: 3,  1: 1
 
         System.out.println(s.get(1)); // 1
         System.out.println(s.get(2)); // null

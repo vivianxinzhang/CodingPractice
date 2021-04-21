@@ -3,13 +3,16 @@ package com.company;
 public class PaintFence {
     public static void main(String[] args) {
         PaintFence s = new PaintFence();
-        System.out.println(s.numWays(1, 3));
+        System.out.println(s.numWays(0, 2));    // 0
+        System.out.println(s.numWays(1, 3));    // 3
     }
 
-    // DP: Define two DP arrays, diff[n] and same[i].
+    // Note: n and k are non-negative integers.
+    // Method 1: DP:
+    // Define two DP arrays, diff[n] and same[i].
     // same[i] means the number of ways if fence i has the same color with fence i - 1.
     // diff[i] means the number of ways for the fence i which has different color with fence i -1.
-    // Initialization:
+    // Initialize:
     //     same[0] = 0, diff[0] = k.
     // Induction rule:
     //     Case 1 : if paint i  same color with i - 1, i - 1 must be different from i - 2, then only use diff[i - 1] to computer same
@@ -18,6 +21,8 @@ public class PaintFence {
     //              there are (dp1[i - 1] + dp2[i - 1]) # of ways to paint previous i - 1, for each choice, (k - 1) ways to paint current fence
     //              diff[i] = (k - 1) * (same[i - 1] + diff[i - 1])
     // Final state: same[n - 1] + diff[n - 1].
+    // Time O(n)
+    // Space O(n)
     public int numWays(int n, int k) {
         if (n <= 0 || k <= 0) {
             return 0;
@@ -44,6 +49,9 @@ public class PaintFence {
         return same[n - 1] + diff[n - 1];
     }
 
+    // Optimize Space
+    // Time O(n)
+    // Space O(1)
     public int numWaysII(int n, int k) {
         if (n <= 0 || k <= 0) {
             return 0;
@@ -63,7 +71,7 @@ public class PaintFence {
         return preSame + preDiff;
     }
 
-    // DFS
+    // Method 1: DFS
     // Time O(k^n)
     // Space O(n)
     public int numWaysI(int n, int k) {

@@ -6,16 +6,10 @@ public class MergeKSortedArray {
         MergeKSortedArray s = new MergeKSortedArray();
         int[][] arrayOfArrays = new int[][] {{1, 3, 4, 9}, {0, 1, 4}, {1, 2, 4, 7, 8, 10}};
         // [0, 1, 1, 1, 2, 3, 4, 4, 4, 7, 8, 9, 10]
-        System.out.println(Arrays.toString(s.mergeIII(arrayOfArrays)));
-        System.out.println(Arrays.toString(s.mergeII(arrayOfArrays)));
-        System.out.println(Arrays.toString(s.mergeI(arrayOfArrays)));
         System.out.println(Arrays.toString(s.merge(arrayOfArrays)));
 
         arrayOfArrays = new int[][]{{},{1,5,7},{4},{2,3,5,11},{2,4,4,6,8}};
         // [1, 2, 2, 3, 4, 4, 4, 5, 5, 6, 7, 8, 11]
-        System.out.println(Arrays.toString(s.mergeIII(arrayOfArrays)));
-        System.out.println(Arrays.toString(s.mergeII(arrayOfArrays)));
-        System.out.println(Arrays.toString(s.mergeI(arrayOfArrays)));
         System.out.println(Arrays.toString(s.merge(arrayOfArrays)));
     }
 
@@ -92,37 +86,30 @@ public class MergeKSortedArray {
             return matrix[i];
         }
         if (i == j - 1) {
-            return merge(matrix[i], matrix[j]);
+            return mergeTwo(matrix[i], matrix[j]);
         }
         int mid = i + (j - i) / 2;
         int[] left = merge(matrix, i, mid);
         int[] right = merge(matrix, mid + 1, j);
-        return merge(left, right);
+        return mergeTwo(left, right);
     }
 
-    private int[] merge(int[] A, int[] B) {
+    private int[] mergeTwo(int[] A, int[] B) {
         int m = A.length, n = B.length;
         int[] result = new int[m + n];
         int i = 0, j = 0, k = 0;
         while (i < m && j < n) {
             if (A[i] < B[j]) {
-                result[k] = A[i];
-                i++;
+                result[k++] = A[i++];
             } else {
-                result[k] = B[j];
-                j++;
+                result[k++] = B[j++];
             }
-            k++;
         }
         while (i < m) {
-            result[k] = A[i];
-            i++;
-            k++;
+            result[k++] = A[i++];
         }
         while (j < n) {
-            result[k] = B[j];
-            j++;
-            k++;
+            result[k++] = B[j++];
         }
         return result;
     }
@@ -137,14 +124,14 @@ public class MergeKSortedArray {
         }
         int[] tmp = matrix[0];
         for (int i = 1; i < matrix.length; i++) {
-            tmp = merge(tmp, matrix[i]);
+            tmp = mergeTwo(tmp, matrix[i]);
         }
         return tmp;
     }
 
-    // Method 0:
-    // Time O(mn * log(mn))
-    // Space O(kn)
+    // Method 0: copy all element + sorting
+    // Time O(kn * log(kn))
+    // Space O(log(kn))
     public int[] merge(int[][] matrix) {
         if (matrix == null || matrix.length == 0) {
             return new int[0];
