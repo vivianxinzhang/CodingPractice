@@ -8,9 +8,11 @@ public class StringAbbreviationMatching {
         System.out.println(s.match("sophisticated", "s11d"));   // true
     }
 
-    // Assumption: input, pattern are not null
+    // Assumptions:
+    // 1. The original string only contains alphabetic characters.
+    // 2. Both input and pattern are not null.
+    // 3. Pattern would not contain invalid information like "a0a","0"
     // Method 2: Iteration:
-    // Assumption: input, pattern are not null
     // Time O(min(input.length, pattern.length))
     // Space O(1)
     public boolean match(String input, String pattern) {

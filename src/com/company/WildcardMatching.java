@@ -28,6 +28,28 @@ public class WildcardMatching {
         System.out.println(s.matchII(input, pattern));    // true
     }
 
+    /*  0 1 2
+          ? *
+    0   T F F
+    1 a F T T
+    2 b F F T
+    3 c F F T
+    * **/
+    // Base Case:
+    // M[0][0] = true
+    // M[0][j] = M[0][j - 1] if pattern[j-1] = '*'
+    // M[i][0] = false
+    // Induction rule:
+    // Case 1: if str[i-1] == pattern[j-1] || pattern[j-1] == '?'
+    // T[i][j] = T[i-1][j-1]
+    // Case 2: pattern[j] == '*'
+    // pattern.charAt(j - 1) == '*') {
+    //            * match 0  or  * match 1
+    // M[i][j] = M[i][j - 1] || M[i - 1][j];
+    // 2.1 T[i][j] = T[i][j-1] -> 0 occurrence
+    // ||
+    // 2.2 T[i][j] = T[i-1][j] if str[i] == pattern[j-1] || pattern[j-1]=='.'
+    // Case 3: otherwise
     // Method 2:
     // M[i][j represents whether the first i characters of input string
     // matches the first j characters of pattern.
@@ -114,6 +136,7 @@ public class WildcardMatching {
         for (int i = 0; i <= str.length(); i++) {
             Arrays.fill(M[i], false);
         }
+        // base case:
         // empty pattern can match with empty string
         M[0][0] = true;
         // only '*' can match with empty string
@@ -122,6 +145,7 @@ public class WildcardMatching {
                 M[0][j] = M[0][j - 1];
             }
         }
+        // induction rule:
         for (int i = 1; i <= str.length(); i++) {
             for (int j = 1; j <= pattern.length(); j++) {
                 // If current characters match, result is same as result for
