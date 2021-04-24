@@ -3,9 +3,9 @@ package com.company;
 public class MaxProductOfCuttingRope {
     public static void main(String[] args) {
         MaxProductOfCuttingRope s = new MaxProductOfCuttingRope();
-        System.out.println(s.maxProduct(2));
+        System.out.println(s.maxProduct(2));    // 1
 
-        System.out.println(s.maxProduct(12));
+        System.out.println(s.maxProduct(12));   // 81
     }
 
     // Assumptions: length >= 2
