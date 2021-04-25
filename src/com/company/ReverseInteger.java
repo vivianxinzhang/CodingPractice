@@ -13,6 +13,10 @@ public class ReverseInteger {
 
     }
 
+    // Assumptions:
+    // 1. If the integer's last digit is 0, what should the output be? ie, cases such as 10, 100.
+    // 2. Did you notice that the reversed integer might overflow? Assume the input is a 32-bit integer, then the reverse of 1000000003 overflows. How should you handle such cases?
+    // 3. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
     // Time O(1)
     // Space O(1)
     public int reverse(int x) {

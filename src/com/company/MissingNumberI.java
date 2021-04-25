@@ -64,7 +64,7 @@ public class MissingNumberI {
         return xor;
     }
 
-    // Method 2: use sum  --> may have Integer overflow issue when doing sum using int
+    // Method 2: use sum  -->  may have Integer overflow issue when doing sum using int
     // Assumption: array is not null
     // Time O(n)
     // Space O(1)

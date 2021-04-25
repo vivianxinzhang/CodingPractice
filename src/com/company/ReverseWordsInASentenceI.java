@@ -3,12 +3,17 @@ package com.company;
 public class ReverseWordsInASentenceI {
     public static void main(String[] args) {
         ReverseWordsInASentenceI s = new ReverseWordsInASentenceI();
-        System.out.println("main");
+
+        System.out.println(s.reverseWords("I love Google"));
+        // Google love I
+
+        System.out.println(s.reverseWords("Life is Happy"));
+        // Happy is Life
     }
 
     // Assumptions:
     // 1) The words are separated by one space character
-    // 2) There are no leadning or trailing spaces
+    // 2) There are no leading or trailing spaces
     // 3) input is not null
     // Time O(n)
     // Space O(n)

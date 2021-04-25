@@ -6,7 +6,7 @@ public class AllAnagrams {
         AllAnagrams s = new AllAnagrams();
         String lo = "abcbac";
         String sh = "ab";
-        System.out.println(s.allAnagrams(sh, lo));
+        System.out.println(s.allAnagrams(sh, lo));   // [0, 3]
     }
 
     // Find All anagrams of String sh in string lo, return all the starting indices

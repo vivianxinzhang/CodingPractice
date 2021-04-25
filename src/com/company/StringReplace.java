@@ -11,6 +11,12 @@ public class StringReplace {
         System.out.println(s.replace("ab", "abc", "m"));
         // ab
 
+        System.out.println(s.replace("nhd", "nhd", "gawyg"));
+        // gawyg
+
+        System.out.println(s.replace("laicode", "code", "offer"));
+        // laioffer
+
         System.out.println(s.replace("appledogapple", "apple", "cat"));
         // catdogcat
     }
@@ -35,8 +41,17 @@ public class StringReplace {
         return sb.toString();
     }
 
-    // Method 1: Not using any String/StringBuilder utility,
-    // and using char[] to do it "in place"
+    // Method 1: Not using any String/StringBuilder utility, and using char[] to do it "in place"
+    // Case 1: long -> short
+    // appledogapple  -> catdogcat  left to right
+    // Case 2: short -> long
+    // laicode -> laioffer
+    // count first, right to left
+    // Assumptions:
+    // input, S and T are not null, S is not empty string
+    // Time O((n-source)*source + (n + (target-source)*k))
+    // Space O(n + (target-source)*k)
+    // worst case short to long, and k source need to be replaced to target in input
     public String replaceI(String input, String s, String t) {
         // Assumptions: input, s, t are not null, s is not empty
         char[] array = input.toCharArray();

@@ -7,13 +7,13 @@ public class AllPermutationsII {
 
         // "" is a substring of ""
         // this should also do dfs
-        System.out.println(s.permutations(""));
+        System.out.println(s.permutations(""));     // []
 
-        System.out.println(s.permutations("aba"));
+        System.out.println(s.permutations("aba"));  // [aba, aab, baa]
     }
 
-    // Time O(n!)
-    // Space O(n^2)
+    // Time O(n!*n)
+    // Space O(n^2)  <-- O(n + n-1 + n-2 + ... + 1)
     public List<String> permutations(String input) {
         List<String> result = new ArrayList<>();
         if (input == null) {    // corner case should not include empty string ""
