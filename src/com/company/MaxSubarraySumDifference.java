@@ -6,12 +6,16 @@ public class MaxSubarraySumDifference {
         MaxSubarraySumDifference s = new MaxSubarraySumDifference();
         int[] array = new int[] {2, -2, 2, -2, 2, -2};
         System.out.println(s.maxDiff(array));   // 4
+        System.out.println(s.maxDiffII(array));   // 4
 
         array = new int[] {4, -2, 0, 3, 1, 5, -4};
         System.out.println(s.maxDiff(array));   // 15
+        System.out.println(s.maxDiffII(array));   // 15
 
         array = new int[] {1, -3, 1, -4, 3, 4 };
         System.out.println(s.maxDiff(array));   // 13
+        System.out.println(s.maxDiffII(array));   // 13
+
     }
 
     // Time O(n)
@@ -77,5 +81,72 @@ public class MaxSubarraySumDifference {
         result[1] = globalLeft;
         result[2] = globalRight;
         return result;
+    }
+
+    // Method 2: optimize calculate range sum
+    // pre-processing: prefix sum
+    // Time O(n^3)
+    // Space O(n)
+    public int maxDiffII(int[] array) {
+        int[] prefixSum = getPrefixSum(array);
+        int maxDiff = Integer.MIN_VALUE;
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                // k is the divider of two sub-arrays, first int of the right part
+                for (int k = i + 1; k <= j; k++) {
+                    int leftSum = rangeSum(prefixSum, i, k - 1, array);
+                    int rightSum = rangeSum(prefixSum, k, j, array);
+                    int currDiff = Math.abs(leftSum - rightSum);
+                    maxDiff = Math.max(maxDiff, currDiff);
+                }
+            }
+        }
+        return maxDiff;
+    }
+
+    private int rangeSum(int[] prefixSum, int left, int right, int[] array) {
+        return prefixSum[right] - prefixSum[left] + array[left];
+    }
+
+
+    private int[] getPrefixSum(int[] nums) {
+        int[] prefixSum = new int[nums.length];
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            prefixSum[i] = sum;
+        }
+        return prefixSum;
+    }
+
+
+    // Method 1: brute force
+    // Step 1: enumerate all contiguous sub-arrays of length >= 2
+    // Step 2:  enumerate all divider positions
+    // Step 3: compute leftSum and rightSum, and curr diff, update globalMaxDiff
+    // Time O(n^4)
+    // Space O(1)
+    public int maxDiffI(int[] array) {
+        int maxDiff = Integer.MIN_VALUE;
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                // k is the divider of two subarrays, first int of the right part
+                for (int k = i + 1; k <= j; k++) {
+                    int leftSum = sum(array, i, k - 1);
+                    int rightSum = sum(array, k, j);
+                    int currDiff = Math.abs(leftSum - rightSum);
+                    maxDiff = Math.max(maxDiff, currDiff);
+                }
+            }
+        }
+        return maxDiff;
+    }
+
+    private int sum(int[] array, int left, int right) {
+        int sum = 0;
+        for (int i = left; i <= right; i++) {
+            sum += array[i];
+        }
+        return sum;
     }
 }

@@ -6,12 +6,18 @@ public class LargestSubArraySum {
         LargestSubArraySum s = new LargestSubArraySum();
         int[] array = new int[] {2, -1, 4, -2, 1};
         System.out.println(Arrays.toString(s.largestSum(array)));
+        // [5, 0, 2]
 
         array = new int[] {-2, -1, -3};
         System.out.println(Arrays.toString(s.largestSum(array)));
+        // [-1, 1, 1]
+
+        array = new int[] {1, -2, 3};
+        System.out.println(Arrays.toString(s.largestSum(array)));
+        // [3, 2, 2]
     }
 
-    // Assumptions
+    // Assumptions：
     // The given array is not null and has length of at least 1.
     // M[i] represents largest SubArray Sum ending at index i
     // M[i] =  if M[i-1] > 0  M[i-1] + array[i]
