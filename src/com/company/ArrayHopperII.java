@@ -3,6 +3,7 @@ package com.company;
 public class ArrayHopperII {
     public static void main(String[] args) {
         ArrayHopperII s = new ArrayHopperII();
+
         int[] array = new int[] {1, 2, 0};
         System.out.println(s.minJump(array));   // 2
 

@@ -3,8 +3,12 @@ package com.company;
 public class DecodeWays {
     public static void main(String[] args) {
         DecodeWays s = new DecodeWays();
-        System.out.println(s.numDecodeWay("0"));
-        System.out.println(s.numDecodeWay("212"));
+
+        System.out.println(s.numDecodeWay("0"));    // 0
+        System.out.println(s.numDecodeWay("212"));  // 3
+        // 2,1,2("BAB") or 2,12("BL") or 21,2("UB")
+        System.out.println(s.numDecodeWay("624212641113981521649688221891834112776717328126106"));
+        // 54000
     }
 
     // Method 1: DP
@@ -12,7 +16,6 @@ public class DecodeWays {
     // Time O(n)
     // Space O(n)
     public int numDecodeWay(String input) {
-        // Write your solution here
         int[] M = new int[input.length() + 1];
         M[0] = 1;
         M[1] = input.charAt(0) == '0' ? 0 : 1;
@@ -23,7 +26,7 @@ public class DecodeWays {
                 M[i] += M[i - 1];
             }
             // case 2: decode curr and pre digit together
-            int twoDigits = toNumber(input, i - 2, i - 1);
+            int twoDigits = Integer.valueOf(input.substring(i - 2, i));  // [i-2, i-1]
             if (twoDigits >= 10 && twoDigits <= 26) {
                 M[i] += M[i - 2];
             }

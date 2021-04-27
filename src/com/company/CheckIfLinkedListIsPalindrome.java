@@ -1,6 +1,6 @@
 package com.company;
 
-public class CheckIfLinkedListIsPalindrome {
+public class    CheckIfLinkedListIsPalindrome {
     public static void main(String[] args) {
         CheckIfLinkedListIsPalindrome s = new CheckIfLinkedListIsPalindrome();
         ListNode one = new ListNode(1);
@@ -12,7 +12,8 @@ public class CheckIfLinkedListIsPalindrome {
         two.next = three;
         three.next = two2;
 //        two2.next = one2;
-        System.out.println(s.isPalindrome(one));
+//        System.out.println(s.isPalindrome(one));    // true
+        System.out.println(s.isPalindrome(one));    // false
 
     }
 
