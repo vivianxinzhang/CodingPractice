@@ -9,17 +9,18 @@ public class MedianOfTwoSortedArrays {
         // 1th = 1
         int[] A = new int[] {1, 4};
         int[] B = new int[] {2, 3};
-        System.out.println(s.median(A, B)); // 3.0
-        System.out.println(s.medianI(A, B));   // 3.0
+        System.out.println(s.median(A, B)); // 2.5
 
         A = new int[] {1};
         B = new int[] {2, 3};
         System.out.println(s.median(A, B));   // 2.0
-        System.out.println(s.medianI(A, B));   // 2.0
     }
 
+    // Assumptions:
+    // 1. The two given array are not null and at least one of them is not empty
+    // 2. The two given array are guaranteed to be sorted
     // Time O(logk + logk) = O(logk))
-    // Space O(1)
+    // Space O(logk)
     public double median(int[] A, int[] B) {
         int totalLength = A.length + B.length;
         return totalLength % 2 == 1 ? findKth(A, B, (totalLength + 1) / 2)

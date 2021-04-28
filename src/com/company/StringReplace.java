@@ -7,16 +7,12 @@ public class StringReplace {
 
         System.out.println(s.replace("a", "ab", "m"));
         // a
-
         System.out.println(s.replace("ab", "abc", "m"));
         // ab
-
         System.out.println(s.replace("nhd", "nhd", "gawyg"));
         // gawyg
-
         System.out.println(s.replace("laicode", "code", "offer"));
         // laioffer
-
         System.out.println(s.replace("appledogapple", "apple", "cat"));
         // catdogcat
     }

@@ -11,6 +11,11 @@ public class NQueens {
         // [[1, 3, 0, 2], [2, 0, 3, 1]]
     }
 
+    // Assumptions:
+    // N > 0
+    // Return:
+    // A list of ways of putting the N Queens
+    // Each way is represented by a list of the Queen's y index for x indices of 0 to (N - 1)
     // Method 1: validate the queen position in O(1) each time.
     // Time O(n!)
     // Space O(n)

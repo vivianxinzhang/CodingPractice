@@ -3,83 +3,51 @@ package com.company;
 public class FormARingWithWords {
     public static void main(String[] args) {
         FormARingWithWords s = new FormARingWithWords();
+
         String[] input = {"a","bc","c","ddb","cd","ba","aad"};
-        System.out.println(s.formRing(input));
+        System.out.println(s.formRing(input));  // false
 
         input = new String[] {"aab","aa"};
-        System.out.println(s.formRing(input));
+        System.out.println(s.formRing(input));  // false
 
         input = new String[] {"aab"};
-        System.out.println(s.formRing(input));
+        System.out.println(s.formRing(input));  // false
 
         input = new String[] {"a"};
-        System.out.println(s.formRing(input));
+        System.out.println(s.formRing(input));  // true
     }
 
-    // Time O(n)
-    // Space O(n)
-    public String rightShift(String input, int k) {
-        // Write your solution here
-        if (input == null || input.length() == 0) {
-            return input;
-        }
-        k %= input.length();
-        if (k == 0) {
-            return input;
-        }
-        char[] array = input.toCharArray();
-        reverse(array, 0, array.length - 1);
-        reverse(array, 0, k - 1);
-        reverse(array, k, array.length - 1);
-        return new String(array);
-    }
 
-    private void reverse(char[] array, int i, int j) {
-        while (i < j) {
-            char tmp = array[i];
-            array[i] = array[j];
-            array[j] = tmp;
-            i++;
-            j--;
-        }
-    }
-
+    // Assumptions:
+    // 1. The given array is not null or empty.
+    // 2. None of the strings in the array is null or empty.
     // Time O(n!)
     // Space O(n)
     public boolean formRing(String[] input) {
-        // Write your solution here
-        if (input == null || input.length == 0) {
-            return true;
-        }
-        if (input.length == 1) {
-            return input[0].charAt(input[0].length() - 1) == input[0].charAt(0);
-        }
-        boolean[] canFormRing = new boolean[1];
-        for (int i = 1; i < input.length; i++) {
-            if (input[i].charAt(0) == input[0].charAt(input[0].length() - 1)) {
-                dfs(input, 1, canFormRing);
-            }
-        }
-        return canFormRing[0];
+        return dfs(input, 1);
     }
 
-    private void dfs(String[] input, int index, boolean[] canFormRing) {
+    private boolean dfs(String[] input, int index) {
         if (index == input.length) {
-            char endChar = input[index - 1].charAt(input[index - 1].length() - 1);
-            if (endChar == input[0].charAt(0)) {
-                canFormRing[0] = true;
+            String last = input[input.length - 1];
+            String first = input[0];
+            if (last.charAt(last.length() - 1) == first.charAt(0)) {
+                return true;
             }
-            return;
+            return false;
         }
-        char preEnd = input[index - 1].charAt(input[index - 1].length() - 1);
+        String pre = input[index - 1];
         for (int i = index; i < input.length; i++) {
-            char currStart = input[i].charAt(0);
-            if (currStart == preEnd) {
-                swap(input, i, index);
-                dfs(input, index + 1, canFormRing);
-                swap(input, i, index);
+            String cur = input[i];
+            if (cur.charAt(0) == pre.charAt(pre.length() - 1)) {
+                swap(input, index, i);
+                if (dfs(input, index + 1)) {
+                    return true;
+                }
+                swap(input, index, i);
             }
         }
+        return false;
     }
 
     private void swap(String[] input, int i, int j) {
