@@ -9,22 +9,22 @@ public class SortedArrayToBinarySearchTree {
     }
 
     // Time O(n)
-    // Space O(1)
+    // Space O(h) worst case O(n)
     public TreeNode sortedArrayToBST(int[] num) {
-        return sortedArrayToBST(num, 0, num.length - 1);
+        if (num == null || num.length == 0) {
+            return null;
+        }
+        return helper(num, 0, num.length - 1);
     }
 
-    private TreeNode sortedArrayToBST(int[] num, int left, int right) {
+    private TreeNode helper(int[] num, int left, int right) {
         if (left > right) {
             return null;
         }
-        if (left == right) {
-            return new TreeNode(num[left]);
-        }
-        int mid = (right - left + 1) % 2 == 0 ? left + (right - left) / 2 + 1 : left + (right - left) / 2;
+        int mid = left + (right - left + 1) / 2;
         TreeNode root = new TreeNode(num[mid]);
-        root.left = sortedArrayToBST(num, left, mid - 1);
-        root.right = sortedArrayToBST(num, mid + 1, right);
+        root.left = helper(num, left, mid - 1);
+        root.right = helper(num, mid + 1, right);
         return root;
     }
 }

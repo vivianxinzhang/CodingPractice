@@ -6,13 +6,13 @@ public class LongestValidParentheses {
     public static void main(String[] args) {
         LongestValidParentheses s = new LongestValidParentheses();
         String input = ")()())";
-        System.out.println(s.longestValidParentheses(input));   // 4
+        System.out.println(s.longestValidParentheses(input));   // 4  ()()
 
         input = ")))((";
         System.out.println(s.longestValidParentheses(input));   // 0
 
         input = "((())()))";
-        System.out.println(s.longestValidParentheses(input));   // 8
+        System.out.println(s.longestValidParentheses(input));   // 8  ((())())
     }
 
     // Time O(n)
@@ -25,8 +25,14 @@ public class LongestValidParentheses {
             if (input.charAt(i) == '(') {   // left parenthesis
                 stack.offerFirst(i);
             } else {    // right parenthesis
-                // the section of current match () + previous section of match
-                // ((**)(****)
+                // previous section of match + the current section of match
+                // ( (**)  ((()))
+                // ( (**)  ((**))
+                // ( (**)  (****)
+                //         \--6-/
+                // how to get length of previous section of match?
+                // the matched section is not in the stack, but know the nearest unmatched left bracket
+                // 中间的空隙代表之前对消掉了合法的左右括号substring
                 if (!stack.isEmpty() && input.charAt(stack.peekFirst()) == '(') {
                     stack.pollFirst();
                     int leftIdx = stack.isEmpty() ? 0 : stack.peekFirst() + 1;

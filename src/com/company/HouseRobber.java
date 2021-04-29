@@ -10,10 +10,49 @@ public class HouseRobber {
         System.out.println(s.rob(array));   // 45
     }
 
+    // Method 3: optimize space
+    // Time O(n)
+    // Space O(1)
+    public int rob(int[] array) {
+        if (array == null || array.length == 0) {
+            return 0;
+        }
+        int n = array.length;
+        int rob = 0;
+        int notRob = 0;
+        for (int i = 0; i < n; i++) {
+            int robTmp = rob;
+            int notRobTmp = notRob;
+            rob = array[i] + notRobTmp;
+            notRob = Math.max(robTmp, notRobTmp);
+        }
+        return Math.max(rob, notRob);
+    }
+
+    // Method 2:
+    // Time O(n)
+    // Space O(n)
+    public int robII(int[] array) {
+        if (array == null || array.length == 0) {
+            return 0;
+        }
+        int n = array.length;
+        int[] rob = new int[n];
+        int[] notRob = new int[n];
+        rob[0] = array[0];
+        notRob[0] = 0;
+        for (int i = 1; i < n; i++) {
+            rob[i] = array[i] + notRob[i - 1];
+            notRob[i] = Math.max(rob[i - 1], notRob[i - 1]);
+        }
+        return Math.max(rob[n - 1], notRob[n - 1]);
+    }
+
+    // Method 1:
     // M[i] represents maximum amount of gold you can rob without being caught between [0, i]
     // Time O(n)
     // Space O(n)
-    public int rob(int[] array) {
+    public int robI(int[] array) {
         if (array == null || array.length == 0) {
             return 0;
         }
