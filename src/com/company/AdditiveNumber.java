@@ -4,29 +4,22 @@ public class AdditiveNumber {
     public static void main(String[] args) {
         AdditiveNumber s = new AdditiveNumber();
 
-        String str = "112";
-        System.out.println(s.isAdditiveNumber(str));
+        String str = "15423";
+        System.out.println(s.isAdditiveNumber(str));    // false
 
-        str = "112358";
-        System.out.println(s.isAdditiveNumber(str));
-
-        str = "12436160";
-        System.out.println(s.isAdditiveNumber(str));
-
-        str = "100100200";
-        System.out.println(s.isAdditiveNumber(str));
     }
 
+    // Note: Numbers in the additive sequence cannot have leading zeros,
+    // so sequence 1, 2, 03 or 1, 02, 3 is invalid.
+    // Method 1: Recursion
     // Time O(n^3)
     // Space O(n)
-    public boolean isAdditiveNumber(String num) {
-        // Write your solution here
-        int[] array = toIntArray(num);
-        for (int i = 1; i < num.length(); i++){
-            for (int j = i + 1; j < num.length(); j++) {
-                int num1 = getNumber(array, 0, i);
-                int num2 = getNumber(array, i, j);
-                if (dfs(array, i, j, num1, num2)) {
+    public boolean isAdditiveNumber(String input) {
+        for (int i = 1; i < input.length(); i++) {
+            for (int j = i + 1; j < Math.min(i + 10, input.length()); j++) {
+                int num1 = Integer.valueOf(input.substring(0, i));
+                int num2 = Integer.valueOf(input.substring(i, j));
+                if (isAdditiveHelper(num1, num2, input, j)) {
                     return true;
                 }
             }
@@ -34,43 +27,24 @@ public class AdditiveNumber {
         return false;
     }
 
-    private boolean dfs(int[] array, int i, int j, int num1, int num2) {
-        if (j == array.length) {
+    private boolean isAdditiveHelper(int num1, int num2, String input, int fromIndex) {
+        if (fromIndex == input.length()) {
             return true;
         }
-        int nextNumber = num1 + num2;
-        int nextIdx = getDigits(nextNumber) + j;
-        if (nextIdx <= array.length && getNumber(array, j, nextIdx) == nextNumber) {
-            return dfs(array, j, nextIdx, num2, nextNumber);
+        int num3 = num1 + num2;
+        int nextIdx = fromIndex + getNumberOfDigits(num3);
+        if (nextIdx <= input.length() && Integer.valueOf(input.substring(fromIndex, nextIdx)) == num3) {
+            return isAdditiveHelper(num2, num3, input, nextIdx);
         }
         return false;
     }
 
-    private int getDigits(int nextNumber) {
+    private int getNumberOfDigits(int num) {
         int count = 0;
-        while (nextNumber > 0) {
-            nextNumber /= 10;
+        while (num > 0) {
+            num /= 10;
             count++;
         }
         return count;
-    }
-
-
-    //digits in range [left, right) is the number
-    private int getNumber(int[] array, int left, int right) {
-        int result = 0;
-        for (int i = left; i <= right - 1; i++) {
-            result *= 10;
-            result += array[i];
-        }
-        return result;
-    }
-
-    private int[] toIntArray(String num) {
-        int[] result = new int[num.length()];
-        for (int i = 0; i < num.length(); i++) {
-            result[i] = num.charAt(i) - '0';
-        }
-        return result;
     }
 }
