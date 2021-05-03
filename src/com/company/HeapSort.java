@@ -5,12 +5,21 @@ public class HeapSort {
     public static void main(String[] args) {
         HeapSort s = new HeapSort();
         int[] array = {4, 6, 1, 3};
-        System.out.println(Arrays.toString(s.heapsort(array))); // [1, 3, 4, 6]
+        System.out.println(Arrays.toString(s.heapsort(array)));
+        // [1, 3, 4, 6]
 
         array = new int[]{1, 2, 1, 2, 1};
-        System.out.println(Arrays.toString(s.heapsort(array))); // [1, 1, 1, 2, 2]
+        System.out.println(Arrays.toString(s.heapsort(array)));
+        // [1, 1, 1, 2, 2]
+
+        array = new int[]{2, 1, 3, 5, 4};
+        System.out.println(Arrays.toString(s.heapsort(array)));
+        // [1, 1, 1, 2, 2]
     }
 
+    // Requirements:
+    // 1. You have to do it in place, extra space used is no more than O(1).
+    //Time complexity is O(nlogn).
     // Time O(nlogn)
     // Space O(1)
     public int[] heapsort(int[] array) {

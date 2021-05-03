@@ -31,8 +31,10 @@ public class PlaceToPutTheChairI {
     private static final char OB = 'O';
 
     // Method 2:
-    // Time O()
-    // Space O()
+    // Step 1: bfs from k equipments
+    // Step 2: sum up all costs on chairs
+    // Time O(k*n^2)
+    // Space O(n^2)
     public List<Integer> putChair(char[][] gym) {
         // Assumptions: gym is not null, has size M * N, where M >= 1 and N >= 1,
         // return null if you can not put the chair anywhere
@@ -143,7 +145,9 @@ public class PlaceToPutTheChairI {
     }
 
     // Method 1:
-    // Time O(n^4 * logn)  <- O(n^2 * n^2 * log(n^2))
+    // Step 1: bfs from each chair
+    // Step 2: sum up all costs on chairs
+    // Time O(n^4)
     // Space O(n^2)
     public List<Integer> putChairI(char[][] gym) {
         // Assumptions: gym is not null, has size M * N, where M >= 1 and N >= 1,

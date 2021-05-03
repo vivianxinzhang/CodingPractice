@@ -4,72 +4,75 @@ import java.util.*;
 public class BestMeetingPoint {
     public static void main(String[] args) {
         BestMeetingPoint s = new BestMeetingPoint();
-        int[][] grid = new int[][]{{1, 0, 0, 0, 1}, {0, 0, 0, 0, 0}, {0, 0, 1, 0, 0}};
-        System.out.println(s.minTotalDistance(grid));
-        System.out.println(s.minTotalDistanceI(grid));
+        int[][] grid = new int[][]{
+                    {1, 0, 0, 0, 1},
+                    {0, 0, 0, 0, 0},
+                    {0, 0, 1, 0, 0}};
+        System.out.println(s.minTotalDistance(grid));   // 6
+        // The point (0,2) is an ideal meeting point, as the total travel distance of 2+2+2=6 is minimal. So return 6.
+        System.out.println(s.minTotalDistanceI(grid));  // 6
     }
 
+    // The distance is calculated using Manhattan Distance, where distance(p1, p2) = |p2.x - p1.x| + |p2.y - p1.y|.
     // Method 1: breadth first search
     // Time O(n^4)
     // Space O(mn)
     public int minTotalDistance(int[][] grid) {
-        // Write your solution here
-        if (grid == null || grid.length == 0 || grid[0].length == 0) {
-            return 0;
-        }
         int min = Integer.MAX_VALUE;
+        if (grid == null || grid.length == 0 || grid[0].length == 0) {
+            return min;
+        }
+        int m = grid.length;
+        int n = grid[0].length;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
-                int currMin = BFS(grid, i, j);
+                int currMin = BFS(grid, i, j, m, n);
                 min = Math.min(currMin, min);
             }
         }
         return min;
     }
 
-    private int BFS(int[][] grid, int i, int j) {
-        Queue<Pair> queue = new ArrayDeque<>();
+    private static final int[][] DIRS = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    private int BFS(int[][] grid, int i, int j, int m, int n) {
+        Deque<Pair> queue = new ArrayDeque<>();
         queue.offer(new Pair(i, j));
-        int distance = 0;
+        int totalDistance = 0;
         int step = 0;
         boolean[][] visited = new boolean[grid.length][grid[0].length];
         visited[i][j] = true;
         while (!queue.isEmpty()) {
             int size = queue.size();
             for (int k = 0; k < size; k++) {
-                Pair curr = queue.poll();
-                if (grid[curr.row][curr.col] == 1) {
-                    distance += step;
+                Pair cur = queue.poll();
+                if (grid[cur.x][cur.y] == 1) {
+                    totalDistance += step;
                 }
-                if (curr.row - 1 >= 0 && !visited[curr.row - 1][curr.col]) {
-                    queue.offer(new Pair(curr.row - 1, curr.col));
-                    visited[curr.row - 1][curr.col] = true;
-                }
-                if (curr.row + 1 < grid.length && !visited[curr.row + 1][curr.col]) {
-                    queue.offer(new Pair(curr.row + 1, curr.col));
-                    visited[curr.row + 1][curr.col] = true;
-                }
-                if (curr.col - 1 >= 0 && !visited[curr.row][curr.col - 1]) {
-                    queue.offer(new Pair(curr.row, curr.col - 1));
-                    visited[curr.row][curr.col - 1] = true;
-                }
-                if (curr.col + 1 < grid[0].length && !visited[curr.row][curr.col + 1]) {
-                    queue.offer(new Pair(curr.row, curr.col + 1));
-                    visited[curr.row][curr.col + 1] = true;
+                for (int[] dir : DIRS) {
+                    int nextX = cur.x + dir[0];
+                    int nextY = cur.y + dir[1];
+                    if (valid(visited, nextX, nextY, m, n)) {
+                        queue.offer(new Pair(nextX, nextY));
+                        visited[nextX][nextY] = true;
+                    }
                 }
             }
             step++;
         }
-        return distance;
+        return totalDistance;
+    }
+
+    private boolean valid(boolean[][] visited, int nextX, int nextY, int m, int n) {
+        return nextX >= 0 && nextX < m && nextY >= 0 && nextY < n && !visited[nextX][nextY];
     }
 
     class Pair {
-        int col;
-        int row;
+        int x;
+        int y;
 
-        public Pair(int row, int col) {
-            this.row = row;
-            this.col = col;
+        public Pair(int x, int y) {
+            this.x = x;
+            this.y = y;
         }
     }
 
@@ -77,7 +80,6 @@ public class BestMeetingPoint {
     // Time O(n^4)
     // Space O(1)
     public int minTotalDistanceI(int[][] grid) {
-        // Write your solution here
         if (grid == null || grid.length == 0 || grid[0].length == 0) {
             return 0;
         }

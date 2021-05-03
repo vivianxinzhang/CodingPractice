@@ -4,46 +4,40 @@ import java.util.*;
 public class SuperUglyNumber {
     public static void main(String[] args) {
         SuperUglyNumber s = new SuperUglyNumber();
-        int[] result = new int[12];
-        for (int i = 0; i < result.length; i++) {
-            result[i] = s.nthSuperUglyNumber(i + 1, new int[] {2, 7, 13, 19});
+        int[] primes = new int[] {2, 7, 13, 19};
+        for (int i = 0; i < 12; i++) {
+            System.out.print(s.nthSuperUglyNumber(i + 1, primes) + " ");
         }
-        System.out.println(Arrays.toString(result));
+        // 1 2 4 7 8 13 14 16 19 26 28 32
+        System.out.println();
 
-        int[] primes = new int[] {2,59,83,131,157,383,409,443,457,487,557,593,607,653,683,701,727,739,823,839,863,881,907,911,967};
+        primes = new int[] {2,59,83,131,157,383,409,443,457,487,557,593,607,653,683,701,727,739,823,839,863,881,907,911,967};
         System.out.println(s.nthSuperUglyNumber(9800, primes));
+        // 358743059
     }
 
-    // Time O(n)
-    // Space O(n * primes.length)
+    // Note:
+    // (1) 1 is a super ugly number for any given primes.
+    // (2) The given numbers in primes are in ascending order.
+    // (3) 0 < k ≤ 100, 0 < n ≤ 106, 0 < primes[i] < 1000.
+    // (4) The nth super ugly number is guaranteed to fit in a 32-bit signed integer.
+    // Time O(nlog(nk))     primes.length = k
+    // Space O(nk)
     public int nthSuperUglyNumber(int n, int[] primes) {
-        // Write your solution here
-        PriorityQueue<int[]> minHeap = new PriorityQueue<>(new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                if (o1[o1.length - 1] == o2[o2.length - 1]) {
-                    return 0;
-                }
-                return o1[o1.length - 1] < o2[o2.length - 1] ? -1 : 1;
-            }
-        });
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
         Set<Integer> visited = new HashSet<>();
-        int[] curr = new int[primes.length + 1];
-        Arrays.fill(curr, 0);;
-        curr[curr.length - 1] = 1;
-        minHeap.offer(curr);
-        for (int i = 0; i < n; i++) {
-            curr = minHeap.poll();
+        minHeap.offer(1);
+        visited.add(1);
+        for (int i = 0; i < n - 1; i++) {
+            int tmp = minHeap.poll();
             for (int j = 0; j < primes.length; j++) {
-                double nextUglyNumber = (double) curr[curr.length - 1] * primes[j];
-                if (!visited.contains(curr[curr.length - 1] * primes[j]) && nextUglyNumber < Integer.MAX_VALUE) {
-                    int[] next = Arrays.copyOf(curr, curr.length);
-                    next[next.length - 1] = curr[curr.length - 1] * primes[j];
-                    minHeap.offer(next);
-                    visited.add(curr[curr.length - 1] * primes[j]);
+                double nextUglyNumber = (double) tmp * primes[j];
+                if (nextUglyNumber < Integer.MAX_VALUE && !visited.contains(primes[j] * tmp)) {
+                    minHeap.offer(primes[j] * tmp);
+                    visited.add(primes[j] * tmp);
                 }
             }
         }
-        return curr[curr.length - 1];
+        return minHeap.peek();
     }
 }
