@@ -12,52 +12,41 @@ public class BinaryTreeLongestConsecutiveSequence {
         three.left = two;
         three.right = four;
         four.right = five;
-        System.out.println(s.longestConsecutive(one));
+        /**
+         *      1
+         *        \
+         *         3
+         *        /  \
+         *       2    4
+         *             \
+         *              5
+         * */
+        System.out.println(s.longestConsecutive(one));  // 3
+        // [3, 4, 5]
     }
 
     // Time O(n)
-    // Space O(height)
+    // Space O(height) worst case O(n)
     public int longestConsecutive(TreeNode root) {
-        // Write your solution here
         if (root == null) {
             return 0;
         }
-        int[] max = new int[1];
-        longestConsecutive(root, max);
+        int[] max = new int[] {1};
+        preOrder(root, null, 0, max);
         return max[0];
     }
 
-    private int longestConsecutive(TreeNode root, int[] max) {
+    private void preOrder(TreeNode root, Integer pre, int curMax, int[] max) {
         if (root == null) {
-            return 0;
+            return;
         }
-        int left = longestConsecutive(root.left, max);
-        int right = longestConsecutive(root.right, max);
-        if (left == 0 && right == 0) {
-            max[0] = Math.max(1, max[0]);
-            return 1;
-        } else if (left == 0) {
-            if (root.key == root.right.key - 1) {
-                max[0] = Math.max(right + 1, max[0]);
-            }
-            return root.key == root.right.key - 1 ? right + 1 : 1;
-        } else if (right == 0) {
-            if (root.key == root.left.key - 1) {
-                max[0] = Math.max(left + 1, max[0]);
-            }
-            return root.key == root.left.key - 1 ? left + 1 : 1;
+        if (pre == null || root.key != pre + 1) {
+            curMax = 1;
         } else {
-            int leftRes = 1;
-            if (root.key == root.left.key - 1) {
-                leftRes = left + 1;
-                max[0] = Math.max(left + 1, max[0]);
-            }
-            int rightRes = 1;
-            if (root.key == root.right.key - 1) {
-                rightRes = right + 1;
-                max[0] = Math.max(right + 1, max[0]);
-            }
-            return Math.max(leftRes, rightRes);
+            curMax++;
         }
+        max[0] = Math.max(max[0], curMax);
+        preOrder(root.left, root.key, curMax, max);
+        preOrder(root.right, root.key, curMax, max);
     }
 }

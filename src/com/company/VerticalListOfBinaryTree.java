@@ -5,26 +5,81 @@ import java.util.*;
 public class VerticalListOfBinaryTree {
     public static void main(String[] args) {
         VerticalListOfBinaryTree s = new VerticalListOfBinaryTree();
-        TreeNode two = new TreeNode(2);
-        TreeNode one = new TreeNode(1);
         TreeNode three = new TreeNode(3);
+        TreeNode nine = new TreeNode(9);
+        TreeNode eight = new TreeNode(8);
+        three.left = nine;
+        three.right = eight;
         TreeNode four = new TreeNode(4);
-        two.left = one;
-        two.right = three;
-        one.right = four;
-        System.out.println(s.verticalPrint(two));
+        TreeNode zero = new TreeNode(0);
+        nine.left = four;
+        nine.right = zero;
+        TreeNode one = new TreeNode(1);
+        TreeNode seven = new TreeNode(7);
+        eight.left = one;
+        eight.right = seven;
+        /**
+         *               3
+         *             /   \
+         *          9       8
+         *         /  \   /  \
+         *        4    0 1    7
+         * */
+        System.out.println(s.verticalPrint(three));
+        // [4, 9, 3, 0, 1, 8, 7]
+    }
+
+    // bfs
+    // Time O(n)
+    // Space O(n)
+    public List<List<Integer>> verticalPrint(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        Map<TreeNode, Integer> colMap = new HashMap<>();
+        Map<Integer, List<Integer>> resMap = new HashMap<>();
+        Deque<TreeNode> queue = new ArrayDeque<>();
+        queue.offer(root);
+        colMap.put(root, 0);
+        while (!queue.isEmpty()) {
+            TreeNode cur = queue.poll();
+            int colIdx = colMap.get(cur);
+            List<Integer> curList = resMap.getOrDefault(colIdx, new ArrayList<>());
+            curList.add(cur.key);
+            resMap.put(colIdx, curList);
+            if (cur.left != null) {
+                queue.offer(cur.left);
+                colMap.put(cur.left, colIdx - 1);
+            }
+            if (cur.right != null) {
+                queue.offer(cur.right);
+                colMap.put(cur.right, colIdx + 1);
+            }
+        }
+        return toList(resMap);
+    }
+
+    private List<List<Integer>> toList(Map<Integer, List<Integer>> resMap) {
+        List<List<Integer>> res = new ArrayList<>();
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        for (int colIdx : resMap.keySet()) {
+            minHeap.offer(colIdx);
+        }
+        while (!minHeap.isEmpty()) {
+            res.add(resMap.get(minHeap.poll()));
+        }
+        return res;
     }
 
     // Time O(n)
     // Space O(n)
-    public List<List<Integer>> verticalPrint(TreeNode root) {
-        // Write your solution here
+    public List<List<Integer>> verticalPrintI(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
         if (root == null) {
             return result;
         }
         Map<Integer, List<Pair>> map = new HashMap<>();
-        Queue<Pair> queue = new ArrayDeque<>();
+        Deque<Pair> queue = new ArrayDeque<>();
         queue.offer(new Pair(root, 0, 0));
         int leftMostCol = 0;
         int rightMostCol = 0;
@@ -53,7 +108,6 @@ public class VerticalListOfBinaryTree {
                     }
                     //otherwise don't change the order as BFS guarantees that top nodes are visited first
                     return 0;
-
                 }
             });
             List<Integer> list = new ArrayList<>();
@@ -74,77 +128,6 @@ public class VerticalListOfBinaryTree {
             this.node = node;
             this.x = x;
             this.y = y;
-        }
-    }
-
-    public static class LargestRectangleOfOnes {
-        public static void main(String[] args) {
-            LargestRectangleOfOnes s = new LargestRectangleOfOnes();
-            int[][] matrix = new int[][] {
-                    {0, 0, 0, 0},
-                    {1, 1, 1, 1},
-                    {0, 1, 1, 1},
-                    {1, 0, 1, 1} };
-            System.out.println(s.largest(matrix));
-        }
-
-        // Time O(mn)
-        // Space O(mn)
-        public int largest(int[][] matrix) {
-            if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-                return 0;
-            }
-            // Step 1: find longest consecutive 1s from top to bottom - O(mn)
-            int[][] M = preProcess(matrix);
-            // Step 2: enumerate all the bottom line and find the largest rectangle in the histogram
-            int largest = 0;
-            for (int i = 0; i < M.length; i++) {
-                // find the largest
-                int currMax = findMax(M[i]);
-                largest = Math.max(largest, currMax);
-            }
-            return largest;
-        }
-
-        // Time O(n)
-        // Space O(n)
-        private int findMax(int[] array) {
-            // Assumptions: array is not null, array.length >= 1
-            // all the values in the array are non-negative
-            int result = 0;
-            // Note that the stack contains the "index", not the "value" of the array
-            Deque<Integer> stack = new ArrayDeque<>();
-            for (int i = 0; i <= array.length; i++) {
-                // we need a way of popping out all the elements in the stack at last,
-                // so that we explicitly add a bar of height 0
-                int cur = i == array.length ? 0 : array[i];
-                while (!stack.isEmpty() && array[stack.peekFirst()] >= cur) {
-                    int height = array[stack.pollFirst()];
-                    // determine the left boundary of the largest rectangle
-                    // with height array[i]
-                    int left = stack.isEmpty() ? 0 : stack.peekFirst() + 1;
-                    // determine the right boundary of the largest rectangle with height of the popped element
-                    result = Math.max(result, height * (i - left));
-                }
-                stack.offerFirst(i);
-            }
-            return result;
-        }
-
-        private int[][] preProcess(int[][] matrix) {
-            int[][] M = new int[matrix.length][matrix[0].length];
-            for (int i = 0; i < matrix.length; i++) {
-                for (int j = 0; j < matrix[0].length; j++) {
-                    if (i == 0) {
-                        M[i][j] = matrix[i][j];
-                    } else if (matrix[i][j] == 0){
-                        M[i][j] = 0;
-                    } else {
-                        M[i][j] = M[i - 1][j] + 1;
-                    }
-                }
-            }
-            return M;
         }
     }
 }

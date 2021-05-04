@@ -11,11 +11,19 @@ public class BorderViewOfBinaryTree {
         two.left = one;
         two.right = three;
         one.right = four;
+        /**
+         *               2
+         *             /   \
+         *          1       3
+         *           \
+         *            4
+         * */
         System.out.println(s.borderView(two));
+        // [2, 1, 4, 3]
     }
 
     // Time O(n)
-    // Space O(height)
+    // Space O(height) worst case O(n)
     public List<Integer> borderView(TreeNode root) {
         // Write your solution here
         List<Integer> result = new ArrayList<>();

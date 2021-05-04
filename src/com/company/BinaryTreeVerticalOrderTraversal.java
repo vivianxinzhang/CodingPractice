@@ -2,33 +2,59 @@ package com.company;
 import java.util.*;
 
 public class BinaryTreeVerticalOrderTraversal {
+    public static void main(String[] args) {
+        BinaryTreeVerticalOrderTraversal s = new BinaryTreeVerticalOrderTraversal();
+        TreeNode three = new TreeNode(3);
+        TreeNode nine = new TreeNode(9);
+        TreeNode eight = new TreeNode(8);
+        three.left = nine;
+        three.right = eight;
+        TreeNode four = new TreeNode(4);
+        TreeNode zero = new TreeNode(0);
+        nine.left = four;
+        nine.right = zero;
+        TreeNode one = new TreeNode(1);
+        TreeNode seven = new TreeNode(7);
+        eight.left = one;
+        eight.right = seven;
+        /**
+         *               3
+         *             /   \
+         *          9       8
+         *         /  \   /  \
+         *        4    0 1    7
+         * */
+        System.out.println(s.verticalOrder(three));
+        // [4, 9, 3, 0, 1, 8, 7]
+    }
+
+    // bfs
     // Time O(n)
     // Space O(n)
     public List<Integer> verticalOrder(TreeNode root) {
-        // Write your solution here
         List<Integer> result = new ArrayList<>();
         if (root == null) {
             return result;
         }
         Map<Integer, List<Integer>> map = new HashMap<>();
-        Map<TreeNode, Integer> seen = new HashMap<>();
-        Queue<TreeNode> queue = new ArrayDeque<>();
-        seen.put(root, 0);
+        Map<TreeNode, Integer> cols = new HashMap<>();
+        Deque<TreeNode> queue = new ArrayDeque<>();
+        cols.put(root, 0);
         queue.offer(root);
         while (!queue.isEmpty()) {
-            TreeNode curr = queue.poll();
-            int col = seen.get(curr);
+            TreeNode cur = queue.poll();
+            int col = cols.get(cur);
             if (!map.containsKey(col)) {
                 map.put(col, new ArrayList<>());
             }
-            map.get(col).add(curr.key);
-            if (curr.left != null) {
-                queue.offer(curr.left);
-                seen.put(curr.left, col - 1);
+            map.get(col).add(cur.key);
+            if (cur.left != null) {
+                queue.offer(cur.left);
+                cols.put(cur.left, col - 1);
             }
-            if (curr.right != null) {
-                queue.offer(curr.right);
-                seen.put(curr.right, col + 1);
+            if (cur.right != null) {
+                queue.offer(cur.right);
+                cols.put(cur.right, col + 1);
             }
         }
         result = getResult(map);
@@ -37,7 +63,7 @@ public class BinaryTreeVerticalOrderTraversal {
 
     private List<Integer> getResult(Map<Integer, List<Integer>> map) {
         List<Integer> result = new ArrayList<>();
-        Queue<Integer> minHeap = new PriorityQueue<>();
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
         for (Integer key : map.keySet()) {
             minHeap.offer(key);
         }

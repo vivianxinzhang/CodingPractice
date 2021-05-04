@@ -98,20 +98,6 @@ public class LargestBSTSubtree {
         }
     }
 
-    class Value {
-        int size = 0;
-        boolean isBST = false;
-        int min = Integer.MAX_VALUE;
-        int max = Integer.MIN_VALUE;
-
-        public Value(int size, boolean isBST, int min, int max) {
-            this.size = size;
-            this.isBST = isBST;
-            this.min = min;
-            this.max = max;
-        }
-    }
-
     // Method 1: brute force
     // Time O(n*n)
     // Space O(h) worst case O(n)
