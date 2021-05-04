@@ -3,34 +3,67 @@ package com.company;
 public class ConvertBinaryTreeToDoublyLinkedList {
     public static void main(String[] args) {
         ConvertBinaryTreeToDoublyLinkedList s = new ConvertBinaryTreeToDoublyLinkedList();
-//        TreeNode ten = new TreeNode(10);
-//        TreeNode five = new TreeNode(5);
-//        TreeNode fifteen = new TreeNode(15);
-//        TreeNode two = new TreeNode(2);
-//        ten.left = five;
-//        ten.right = fifteen;
-//        five.left = two;
-        TreeNode one = new TreeNode(1);
+        TreeNode ten = new TreeNode(10);
+        TreeNode five = new TreeNode(5);
+        TreeNode fifteen = new TreeNode(15);
         TreeNode two = new TreeNode(2);
-        TreeNode three = new TreeNode(3);
-        one.left = two;
-        two.left = three;
-        TreeNode result = s.toDoubleLinkedList(one);
-        TreeNode curr = result;
-        while (curr != null) {
-            System.out.println(curr.key);
-            curr = curr.left;
+        ten.left = five;
+        ten.right = fifteen;
+        five.left = two;
+        /**          10
+         *         /    \
+         *        5      15
+         *      /
+         *     2
+         * */
+        TreeNode result = s.toDoubleLinkedList(ten);
+        TreeNode left = result;
+        while (left.left != null) {
+            left = left.left;
         }
-        curr = result;
-        while (curr != null) {
-            System.out.println(curr.key);
-            curr = curr.right;
+        while (left != null) {
+            System.out.print(left.key);
+            left = left.right;
+            if (left != null) {
+                System.out.print(" <-> ");
+            }
         }
+        // 2 <-> 5 <-> 10 <-> 15
     }
+
+    // Method 2：
+    // Time O(n)
+    // Space O(height) worst case O(n)
+    public TreeNode toDoubleLinkedList(TreeNode root) {
+        TreeNode dummy = new TreeNode(0);
+        TreeNode[] pre = new TreeNode[1];
+        pre[0] = dummy;
+        inOrder(root, pre);
+        TreeNode res = dummy.right;
+        dummy.right = null;
+        if (res != null) {
+            res.left = null;
+        }
+        return res;
+    }
+
+    private void inOrder(TreeNode root, TreeNode[] pre) {
+        if (root == null) {
+            return;
+        }
+        TreeNode leftChild = root.left;
+        TreeNode rightChild = root.right;
+        inOrder(leftChild, pre);
+        pre[0].right = root;
+        root.left = pre[0];
+        pre[0] = root;
+        inOrder(rightChild, pre);
+    }
+
+    // Method 1：
     // Time O(nlogn) best case O(n)
     // Space O(height) average O(logn) worst case O(n)
-    public TreeNode toDoubleLinkedList(TreeNode root) {
-        // Write your solution here.
+    public TreeNode toDoubleLinkedListI(TreeNode root) {
         if (root == null) {
             return null;
         }
@@ -39,7 +72,6 @@ public class ConvertBinaryTreeToDoublyLinkedList {
     }
 
     public TreeNode helper(TreeNode root) {
-        // Write your solution here.
         if (root == null) {
             return null;
         }
@@ -71,5 +103,4 @@ public class ConvertBinaryTreeToDoublyLinkedList {
         }
         return root;
     }
-
 }

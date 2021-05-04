@@ -1,5 +1,8 @@
 package com.company;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class SecondMinimumValueInBinaryTree {
     public static void main(String[] args) {
         SecondMinimumValueInBinaryTree s = new SecondMinimumValueInBinaryTree();
@@ -33,13 +36,13 @@ public class SecondMinimumValueInBinaryTree {
          *   10   10
          * */
         System.out.println(s.secondMinimumBT(ten0));
-        // 10
+        // -1
     }
 
     // Method 1: find smallest larger than root.key
     // Time O(n)
     // Space O(h)
-    public int secondMinimumBT(TreeNode root) {
+    public int secondMinimumBTI(TreeNode root) {
         int[] result = new int[] {Integer.MAX_VALUE};
         helper(root, root.key, result);
         return result[0] == Integer.MAX_VALUE ? -1 : result[0];
@@ -49,23 +52,35 @@ public class SecondMinimumValueInBinaryTree {
         if (root == null) {
             return;
         }
-        if (root.key > target && Math.abs(root.key - target) < Math.abs(result[0] - target)) {
+        if (root.key > target && root.key < result[0]) {
             result[0] = root.key;
         }
         helper(root.left, target, result);
         helper(root.right, target, result);
     }
 
-    // Method 2:I
-    // Time O(1)
-    // Space O(1)
-    public int secondMinimumBTI(TreeNode root) {
+    // Method 1: find smallest larger than root.key
+    // Time O(n)
+    // Space O(n)
+    public int secondMinimumBT(TreeNode root) {
         if (root == null || root.left == null) {
             return -1;
         }
-        if (root.left.key == root.right.key) {
-            return -1;
+        int res = Integer.MAX_VALUE;
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        stack.offerFirst(root);
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.pollFirst();
+            if (cur.key > root.key && cur.key < res) {
+                res = cur.key;
+            }
+            if (cur.right != null) {
+                stack.offerFirst(cur.right);
+            }
+            if (cur.left != null) {
+                stack.offerFirst(cur.left);
+            }
         }
-        return Math.max(root.left.key, root.right.key);
+        return res == Integer.MAX_VALUE ? -1 : res;
     }
 }

@@ -11,27 +11,30 @@ public class ConnectRightPointerToSuccessor {
         TreeNode one = new TreeNode(1);
         three.left = two;
         two.left = one;
+        /**     3
+         *    /   \
+         *   2     1
+         * */
         s.connect(one);
     }
 
     // Time O(n)
     // Space O(height) worst case O(n)
     public void connect(TreeNode root) {
-        // Write your solution here.
         if (root == null) {
             return;
         }
         Deque<TreeNode> stack = new ArrayDeque<>();
         pushLeft(root, stack);
-        TreeNode prev = null;
+        TreeNode pre = null;
         while (!stack.isEmpty()) {
-            TreeNode curr = stack.pollFirst();
-            if (prev != null && prev.right == null) {
-                prev.right = curr;
+            TreeNode cur = stack.pollFirst();
+            // Connect the node whose right child is NULL to the successor node
+            if (pre != null && pre.right == null) {
+                pre.right = cur;
             }
-            prev = curr;
-            curr = curr.right;
-            pushLeft(curr, stack);
+            pushLeft(cur.right, stack);
+            pre = cur;
         }
     }
 

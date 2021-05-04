@@ -14,13 +14,45 @@ public class LongestAscendingPathBinaryTree {
         three.left = one;
         three.right = zero;
         two.right = eleven;
-        System.out.println(s.longest(five));
+        /**
+         *          5
+         *        /   \
+         *       3     2
+         *     /   \    \
+         *    1    0    11
+         * */
+        System.out.println(s.longest(five));    // 2
+        System.out.println(s.longestI(five));    // 2
+        // [2, 11]
     }
 
+    // Method 2: top down
     // Time O(n)
     // Space O(height) worst case O(n)
     public int longest(TreeNode root) {
-        // Write your solution here
+        int[] globalMax = new int[] {0};
+        preOrder(root, null, 0, globalMax);
+        return globalMax[0];
+    }
+
+    private void preOrder(TreeNode root, Integer pre, int currMax, int[] globalMax) {
+        if (root == null) {
+            return;
+        }
+        if (pre == null || root.key <= pre) {
+            currMax = 1;
+        } else {
+            currMax++;
+        }
+        globalMax[0] = Math.max(globalMax[0], currMax);
+        preOrder(root.left, root.key, currMax, globalMax);
+        preOrder(root.right, root.key, currMax, globalMax);
+    }
+
+    // Method 1: bottom up
+    // Time O(n)
+    // Space O(height) worst case O(n)
+    public int longestI(TreeNode root) {
         int[] max = new int[1];
         longestPathFromRoot(root, max);
         return max[0];
@@ -31,33 +63,16 @@ public class LongestAscendingPathBinaryTree {
         if (root == null) {
             return 0;
         }
-        int left = longestPathFromRoot(root.left, max);
-        int right = longestPathFromRoot(root.right, max);
-        if (left == 0 && right == 0) {
-            max[0] = Math.max(1, max[0]);
-            return 1;
-        } else if (left == 0) {
-            if (root.key < root.right.key) {
-                max[0] = Math.max(right + 1, max[0]);
-            }
-            return root.key < root.right.key ? right + 1 : 1;
-        } else if (right == 0) {
-            if (root.key < root.left.key) {
-                max[0] = Math.max(left + 1, max[0]);
-            }
-            return root.key < root.left.key ? left + 1 : 1;
-        } else {
-            int leftRes = 1;
-            if (root.key < root.left.key) {
-                leftRes = left + 1;
-                max[0] = Math.max(left + 1, max[0]);
-            }
-            int rightRes = 1;
-            if (root.key < root.right.key) {
-                rightRes = right + 1;
-                max[0] = Math.max(right + 1, max[0]);
-            }
-            return Math.max(leftRes, rightRes);
+        int leftRes = longestPathFromRoot(root.left, max);
+        int rightRes = longestPathFromRoot(root.right, max);
+        int currMax = 1;
+        if (root.left != null && root.key < root.left.key) {
+            currMax = Math.max(currMax, 1 + leftRes);
         }
+        if (root.right != null && root.key < root.right.key) {
+            currMax = Math.max(currMax, 1 + rightRes);
+        }
+        max[0] = Math.max(max[0], currMax);
+        return currMax;
     }
 }

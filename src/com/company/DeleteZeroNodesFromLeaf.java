@@ -14,14 +14,32 @@ public class DeleteZeroNodesFromLeaf {
         zero2.left = zero3;
         zero3.left = zero4;
         three.right = seven;
+        /**
+         *            0
+         *          /   \
+         *         0     3
+         *       / \    / \
+         *     0   0   0   7
+         *    /
+         *   0
+         *    \
+         *     0
+         * */
         TreeNode root = s.deleteZero(zero1);
+        /**
+         *            0
+         *              \
+         *               3
+         *                \
+         *                 7
+         * */
         System.out.println(root.key);
     }
 
+    // post-order traversal
     // Time O(n)
     // Space O(height) worst case O(n)
     public TreeNode deleteZero(TreeNode root) {
-        // Write your solution here
         if (root == null) {
             return null;
         }
