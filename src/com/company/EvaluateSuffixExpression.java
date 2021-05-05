@@ -6,18 +6,21 @@ public class EvaluateSuffixExpression {
     public static void main(String[] args) {
         EvaluateSuffixExpression s = new EvaluateSuffixExpression();
         String[] suffix = new String[]{"2","12","4","+","*"};
+        // --> 2 * (12 + 4) = 32
         System.out.println(s.evaluate(suffix));
     }
 
+    // Assumptions:
+    // The expression array is not null and it is guaranteed to be a valid infix expression.
+    // Time O(n)
+    // Space O(n)
     public int evaluate(String[] suffix) {
-        // Write your solution here
-        int result = 0;
         Deque<Integer> stack = new ArrayDeque<>();
         for (String token : suffix) {
             if ("+-*/".indexOf(token) >= 0) {
-                int nRight = stack.pollFirst();
-                int nLeft = stack.pollFirst();
-                int tmp = calculate(nLeft, nRight, token);
+                int rightNum = stack.pollFirst();
+                int leftNum = stack.pollFirst();
+                int tmp = calculate(leftNum, token, rightNum);
                 stack.push(tmp);
             } else {
                 stack.offerFirst(Integer.valueOf(token));
@@ -26,7 +29,7 @@ public class EvaluateSuffixExpression {
         return stack.peekFirst();
     }
 
-    private int calculate(int nLeft, int nRight, String operator) {
+    private int calculate(int nLeft, String operator, int nRight) {
         if (operator == "+") {
             return nLeft + nRight;
         } else if (operator == "-") {
@@ -38,9 +41,8 @@ public class EvaluateSuffixExpression {
         }
     }
 
+
     public int evaluateI(String[] suffix) {
-        // Write your solution here
-        int result = 0;
         Deque<Integer> stack = new ArrayDeque<>();
         for (String token : suffix) {
             if ("+-*/".indexOf(token) >= 0) {
@@ -64,7 +66,7 @@ public class EvaluateSuffixExpression {
                         break;
                     }
                 }
-                int tmp = calculate(nLeft, nRight, token);
+                int tmp = calculate(nLeft, token, nRight);
                 stack.push(tmp);
             } else {
                 stack.offerFirst(Integer.valueOf(token));
@@ -74,7 +76,6 @@ public class EvaluateSuffixExpression {
     }
 
     public int evaluateII(String[] s) {
-        // Write your solution here
         if (s == null || s.length == 0) {
             return 0;
         }

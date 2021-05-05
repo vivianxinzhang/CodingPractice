@@ -1,6 +1,7 @@
 package com.company;
 
 public class BinaryTreeDiameter {
+    // The diameter is defined as the longest distance from one leaf node to another leaf node.
     // Any path can be written as two arrows (in different directions) from some node,
     // where an arrow is a path that starts at some node and only travels down to child nodes.
     // If we knew the maximum length arrows L, R for each child,
