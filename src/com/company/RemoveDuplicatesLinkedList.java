@@ -7,25 +7,23 @@ public class RemoveDuplicatesLinkedList {
     public static void main(String[] args) {
         RemoveDuplicatesLinkedList s = new RemoveDuplicatesLinkedList();
         ListNode one = new ListNode(1);
+        ListNode one1 = new ListNode(1);
         ListNode two = new ListNode(2);
         ListNode three = new ListNode(3);
         ListNode three2 = new ListNode(3);
-        one.next = two;
+        one.next = one1;
+        one1.next = two;
         two.next = three;
         three.next = three2;
+        // Input List:  1 -> 1 -> 2 -> 3 -> 3
+        // Output List: 2
         ListNode curr = s.removeDup(one);
-        while (curr != null) {
-            System.out.print(curr.value);
-            curr = curr.next;
-        }
+        Printer.printLinkedList(curr);
     }
 
-    // Remove Extra Duplicates from Sorted List
+    // Time O(n)
+    // Space O(1)
     public ListNode removeDupII(ListNode head) {
-        // Write your solution here
-        if (head == null || head.next == null) {
-            return head;
-        }
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode prev = dummy, curr = head;
@@ -37,46 +35,31 @@ public class RemoveDuplicatesLinkedList {
                 }
                 prev.next = curr;
             } else {
-                curr = curr.next;
                 prev = prev.next;
+                curr = curr.next;
             }
         }
         return dummy.next;
     }
 
-    // Remove Duplicates from Sorted List
-    public ListNode removeDup(ListNode head) {
-        // Write your solution here
-        if (head == null || head.next == null) {
-            return head;
-        }
-        ListNode prev = head, curr = head.next;
-        while (prev != null && prev.next != null) {
-            curr = prev.next;
-            if (curr.value == prev.value) {
-                while (curr != null && curr.value == prev.value) {
-                    curr = curr.next;
-                }
-                prev.next = curr;
-            }
-            prev = curr;
-        }
-        return head;
-    }
-
+    // Time O(n)
+    // Space O(1)
     public ListNode removeDupI(ListNode head) {
-        // Write your solution here
-        if (head == null || head.next == null) {
-            return head;
-        }
-        ListNode prev = head;
-        while (prev.next != null) {
-            if (prev.next.value == prev.value) {
-                prev.next = prev.next.next;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode pre = dummy;
+        while (head != null && head.next != null) {
+            ListNode next = head.next;
+            if (next.value == head.value) {
+                while (next != null && next.value == head.value) {
+                    next = next.next;
+                }
+                pre.next = next;
             } else {
-                prev = prev.next;
+                pre = head;
             }
+            head = next;
         }
-        return head;
+        return dummy.next;
     }
 }

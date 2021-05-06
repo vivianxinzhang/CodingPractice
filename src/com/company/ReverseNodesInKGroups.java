@@ -12,17 +12,18 @@ public class ReverseNodesInKGroups {
         two.next = three;
         three.next = four;
         four.next = five;
+        Printer.printLinkedList(one);
+        System.out.println();
+        // Input List:  1 -> 2 -> 3 -> 4 -> 5
+        // Output List: 2 -> 1 -> 4 -> 3 -> 5
         ListNode curr = s.reverseKGroup(one, 2);
-        while (curr != null) {
-            System.out.print(curr.value);
-            curr = curr.next;
-        }
+        Printer.printLinkedList(curr);
     }
 
+    // Method 1: iteration
     // Time O(n)
-    // Space O(n)
+    // Space O(1)
     public ListNode reverseKGroup(ListNode head, int k) {
-        // Write your solution here
         if (head == null || k <= 1) {
             return head;
         }
@@ -56,6 +57,7 @@ public class ReverseNodesInKGroups {
         }
         return head;
     }
+
     private ListNode reverse(ListNode head) {
         if (head == null || head.next == null) {
             return head;
@@ -70,21 +72,24 @@ public class ReverseNodesInKGroups {
         return prev;
     }
 
+    // Method 1: recursion
+    // Time O(n)
+    // Space O(n/k)
     public ListNode reverseKGroupI(ListNode head, int k) {
-        // Write your solution here
         if (head == null) {
-            return head;
+            return null;
         }
-        ListNode curr = head;
-        // find k-th node
+        // find tail of the current k elements
+        // move k - 1 steps from head
+        ListNode tail = head;
         for (int i = 1; i < k; i++) {
-            if (curr == null || curr.next == null) {
+            tail = tail.next;
+            if (tail == null) {
                 return head;
             }
-            curr = curr.next;
         }
-        ListNode subHead = reverseKGroup(curr.next, k);
-        curr.next = null;
+        ListNode subHead = reverseKGroup(tail.next, k);
+        tail.next = null;
         ListNode newHead = reverse(head);
         head.next = subHead;
         return newHead;
