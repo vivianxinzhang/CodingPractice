@@ -2,16 +2,16 @@ package com.company;
 
 import java.util.Arrays;
 
-public class SpiralGenerateI {
+public class SpiralOrderGenerateI {
     public static void main(String[] args) {
-        SpiralGenerateI s = new SpiralGenerateI();
+        SpiralOrderGenerateI s = new SpiralOrderGenerateI();
         int[][] result = s.spiralGenerate(3);
         for (int[] row : result) {
             System.out.println(Arrays.toString(row));
         }
     }
 
-    // Recursive
+    // Recursive:
     // Time O(n^2)
     // Space O(n)
     public int[][] spiralGenerate(int n) {
@@ -24,7 +24,6 @@ public class SpiralGenerateI {
     }
 
     private void helper(int[][] matrix, int start, int end, int firstNumber) {
-        //
         if (start > end) {
             return;
         }

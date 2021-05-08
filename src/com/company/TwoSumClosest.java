@@ -20,23 +20,21 @@ public class TwoSumClosest {
     // Time O(nlogn)
     // Space O(1)
     public List<Integer> closest(int[] array, int target) {
-        int n = array.length;
-        List<Integer> res = Arrays.asList(array[0], array[n - 1]);
         Arrays.sort(array);
         int left = 0;
-        int right = n - 1;
-        int minDiff = Integer.MAX_VALUE;
+        int right = array.length - 1;
+        List<Integer> res = Arrays.asList(array[0], array[right]);
+        int closestTwoSum = array[left] + array[right];
         while (left < right) {
-            int twoSum = array[left] + array[right];
-            int currDiff = Math.abs(twoSum - target);
-            if (currDiff < minDiff) {
-                minDiff = currDiff;
+            int curTwoSum = array[left] + array[right];
+            if (Math.abs(curTwoSum - target) < Math.abs(closestTwoSum - target)) {
+                closestTwoSum = curTwoSum;
                 res.set(0, array[left]);
                 res.set(1, array[right]);
             }
-            if (twoSum == target) {
+            if (curTwoSum == target) {
                 return res;
-            } else if (twoSum < target) {
+            } else if (curTwoSum < target) {
                 left++;
             } else {
                 right--;

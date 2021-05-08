@@ -23,7 +23,7 @@ public class RemoveDuplicatesLinkedList {
 
     // Time O(n)
     // Space O(1)
-    public ListNode removeDupII(ListNode head) {
+    public ListNode removeDup(ListNode head) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode prev = dummy, curr = head;

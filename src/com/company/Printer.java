@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Arrays;
+
 public class Printer {
     public static void printLinkedList(ListNode cur) {
         while (cur != null) {
@@ -8,6 +10,12 @@ public class Printer {
             if (cur != null) {
                 System.out.print(" -> ");
             }
+        }
+    }
+
+    public static void printMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            System.out.println(Arrays.toString(row));
         }
     }
 }

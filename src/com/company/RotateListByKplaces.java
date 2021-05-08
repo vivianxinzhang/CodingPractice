@@ -7,25 +7,28 @@ public class RotateListByKplaces {
         ListNode one = new ListNode(1);
         ListNode two = new ListNode(2);
         ListNode three = new ListNode(3);
+        ListNode four = new ListNode(4);
+        ListNode five = new ListNode(5);
         one.next = two;
         two.next = three;
-        ListNode curr = s.rotateKplace(one, 2);
-        while (curr != null) {
-            System.out.print(curr.value);
-            curr = curr.next;
-        }
+        three.next = four;
+        four.next = five;
+        Printer.printLinkedList(one);
         System.out.println();
-        curr = s.rotateKplaceI(one, 6);
-        while (curr != null) {
-            System.out.print(curr.value);
-            curr = curr.next;
-        }
+        // Input List:  1 -> 2 -> 3 -> 4 -> 5
+        // Output List: 4 -> 5 -> 1 -> 2 -> 3
+        ListNode curr = s.rotateKplace(one, 2);
+        Printer.printLinkedList(curr);
     }
 
     // slow fast pointer
+    // Step 1: find length
+    // Step 2: move k %= length position
+    // Step 3: find divider position, delink and relink
+    // Time O(n)
+    // Space O(1)
     public ListNode rotateKplace(ListNode head, int k) {
-        // Write your solution here
-        if (head == null || head.next == null || k < 1) {
+        if (head == null || head.next == null || k <= 1) {
             return head;
         }
         int length = getLength(head);
@@ -35,13 +38,19 @@ public class RotateListByKplaces {
         }
         ListNode fast = head;
         ListNode slow = head;
+        // 1 -> 2 -> 3  ->  4 -> 5
+        // s         f
         for (int i = 0; i < k; i++) {
             fast = fast.next;
         }
+        // 1 -> 2 -> 3  ->  4 -> 5
+        //           s           f
         while (fast.next != null) {
             slow = slow.next;
             fast = fast.next;
         }
+        // 1 -> 2 -> 3      4 -> 5
+        // head      s   newHead f
         ListNode newHead = slow.next;
         slow.next = null;
         fast .next = head;
@@ -56,68 +65,5 @@ public class RotateListByKplaces {
         }
         return count;
     }
-
-
-    // Time O(n)
-    // Space O(1)
-    // Step 1: find length
-    // Step 2: move n %= length position
-    // Step 3: find n - length, delink and relink
-    public ListNode rotateKplaceII(ListNode head, int k) {
-        // Write your solution here
-        if (head == null || head.next == null) {
-            return head;
-        }
-        ListNode curr = head, tail = null;
-        int length = 0;
-        while (curr != null) {
-            length++;
-            tail = curr;
-            curr = curr.next;
-
-        }
-        k %= length;
-        if (k == 0) {
-            return head;
-        }
-        int count = length - k;
-        ListNode newTail = null, newHead = head;
-        for (int i = 0; i < count; i++) {
-            newTail = newHead;
-            newHead = newHead.next;
-        }
-        newTail.next = null;
-        tail.next = head;
-        return newHead;
-    }
-
-    public ListNode rotateKplaceI(ListNode head, int k) {
-        // Write your solution here
-        if (head == null || head.next == null) {
-            return head;
-        }
-        ListNode curr = head, tail = null;
-        int length = 0;
-        while (curr != null) {
-            length++;
-            tail = curr;
-            curr = curr.next;
-
-        }
-        k %= length;
-        if (k == 0) {
-            return head;
-        }
-        int count = length - k;
-        ListNode newTail = null, newHead = head;
-        for (int i = 0; i < k; i++) {
-            newTail = newHead;
-            newHead = newHead.next;
-        }
-        newTail.next = null;
-        tail.next = head;
-        return newHead;
-    }
-
 }
 
