@@ -1,35 +1,45 @@
 package com.company;
-import java.util.*;
 
-public class ValidSquare {
+import java.util.Arrays;
+
+public class CheckSquare {
     public static void main(String[] args) {
-        ValidSquare s = new ValidSquare();
+        CheckSquare s = new CheckSquare();
         int[] p1 = new int[]{0, 0};
         int[] p2 = new int[]{0, 0};
         int[] p3 = new int[]{0, 0};
         int[] p4 = new int[]{0, 0};
-        System.out.println(s.validSquare(p1, p2, p3, p4));
+        System.out.println(s.validSquare(p1, p2, p3, p4));  // false
 
         p1 = new int[]{0, 0};
         p2 = new int[]{1, 1};
         p3 = new int[]{1, 0};
         p4 = new int[]{0, 1};
-        System.out.println(s.validSquare(p1, p2, p3, p4));
+        //       (0,1) ----- (1,1)
+        //         |           |
+        //         |           |
+        //       (0,0) ----- (1,0)
+        System.out.println(s.validSquare(p1, p2, p3, p4));  // true
     }
 
+    // Note:
+    // 1. All the input integers are in the range [-10000, 10000].
+    // 2. A valid square has four equal sides with positive length and four equal angles (90-degree angles).
+    // 3. Input points have no order.
     // Method 2: sort and then validate
     // Time O(1)
     // Space O(1)
     public boolean validSquare(int[] p1, int[] p2, int[] p3, int[] p4) {
-        int[][] p={p1,p2,p3,p4};
+        int[][] p={p1, p2, p3, p4};
         // sort the given set of points based on their x-coordinate values, and in the case of a tie,
         // based on their y-coordinate value, we can obtain an arrangement,
         // which directly reflects the arrangement of points on a valid square boundary possible
-        Arrays.sort(p, (l1, l2) -> l2[0] == l1[0] ? l1[1] - l2[1] : l1[0] - l2[0]);
+        Arrays.sort(p, (l1, l2) -> l1[0] == l2[0] ? l1[1] - l2[1] : l1[0] - l2[0]);
         // After sorting
-        // p0p1, p1p3, p3p2, p2p0 form the four sides of any valid square.
-        // p0p3, p1p2 form the diagonals of the square.
-        return dist(p[0], p[1]) != 0 && dist(p[0], p[1]) == dist(p[1], p[3]) && dist(p[1], p[3]) == dist(p[3], p[2]) && dist(p[3], p[2]) == dist(p[2], p[0])   && dist(p[0],p[3])==dist(p[1],p[2]);
+        // 1. four sides are equal: p0p1, p1p3, p3p2, p2p0 form the four sides of any valid square.
+        // 2. two diagonals are equal: p0p3, p1p2 form the diagonals of the square.
+        return dist(p[0], p[1]) != 0 && dist(p[0], p[1]) == dist(p[1], p[3]) && dist(p[1], p[3]) == dist(p[3], p[2]) && dist(p[3], p[2]) == dist(p[2], p[0])
+                && dist(p[0],p[3])==dist(p[1],p[2]);
     }
 
     // Method 1: brute force
@@ -56,13 +66,14 @@ public class ValidSquare {
         if (index == 4) {
             return check(p[0], p[1], p[2], p[3]);
         } else {
-            boolean res = false;
             for (int i = index; i < 4; i++) {
                 swap(p, index, i);
-                res |= checkAllPermutations(p, index + 1);
+                if (checkAllPermutations(p, index + 1)) {
+                    return true;
+                }
                 swap(p, index, i);
             }
-            return res;
+            return false;
         }
     }
 

@@ -43,7 +43,6 @@ public class SearchInBitonicArray {
 
 
     public int findLocalMaximum(int[] array) {
-        // Write your solution here
         if (array == null || array.length == 0) {
             return -1;
         }

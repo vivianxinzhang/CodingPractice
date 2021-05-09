@@ -3,24 +3,23 @@ package com.company;
 public class SearchInShiftedSortedArrayII {
     public static void main(String[] args) {
         SearchInShiftedSortedArrayII s = new SearchInShiftedSortedArrayII();
-        System.out.println();
         int[] array = new int[] {3, 1};
-        System.out.println(s.search(array, 3)); // 0
+        System.out.println(s.search(array, 3));     // 0
 
         array = new int[] {1, 1, 3, 3, 3};
-        System.out.println(s.search(array, 3)); // 2
+        System.out.println(s.search(array, 3));     // 2
 
         array = new int[] {1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1};
-        System.out.println(s.search(array, 2)); // 6
+        System.out.println(s.search(array, 2));     // 6
 
         array = new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1};
-        System.out.println(s.search(array, 2)); // 12
+        System.out.println(s.search(array, 2));     // 12
     }
 
     // Assumptions:
     // 1. There could be duplicate elements in the array.
     // 2. Return the smallest index if target has multiple occurrence.
-    // Time O(logn)
+    // Time O(n)
     // Space O(1)
     public int search(int[] array, int target) {
         if (array == null || array.length == 0) {
@@ -28,12 +27,15 @@ public class SearchInShiftedSortedArrayII {
         }
         int left = 0;
         int right = array.length - 1;
+        // need to make sure search space decrease in each iteration  → to avoid 死循环
+        // either move left, move right, or return
         while (left < right - 1) {
             int mid = left + (right - left) / 2;
             // 左边sorted
             if (array[mid] > array[left] && withInRange(array, target, left, mid)) {
-                right = mid; // 右边sorted
+                right = mid;
             } else if (array[mid] < array[right] && !withInRange(array, target, mid, right)) {
+                // 右边sorted
                 right = mid;
             } else if (array[left] == target) {
                 return left;

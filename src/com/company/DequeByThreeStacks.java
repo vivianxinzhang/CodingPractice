@@ -15,18 +15,6 @@ public class DequeByThreeStacks {
         deque.pollFirst();              // 2
         System.out.println(deque.peekFirst());   // 2
         System.out.println(deque.peekLast());    // 2
-
-//        Solution s = new Solution();
-//        System.out.println();
-//        s.offerFirst(1);
-//        s.offerFirst(2);
-//        s.offerFirst(3);
-//        System.out.println(s.peekLast());           // 1
-//        s.pollLast();
-//        System.out.println(s.peekLast());           // 2
-//        s.pollFirst();
-//        System.out.println(s.peekFirst());          // 2
-//        System.out.println(s.peekLast());           // 2
     }
 
     private Deque<Integer> left;
