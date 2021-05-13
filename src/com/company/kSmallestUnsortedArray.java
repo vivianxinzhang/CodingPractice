@@ -1,10 +1,20 @@
 package com.company;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.PriorityQueue;
+
+import java.util.*;
 
 public class kSmallestUnsortedArray {
+    public static void main(String[] args) {
+        kSmallestUnsortedArray s = new kSmallestUnsortedArray();
+        int[] array = new int[] {3, 4, 1, 2, 5};
+        System.out.println(Arrays.toString(s.kSmallest(array, 3)));
+        // [1, 2, 3]
 
+        array = new int[] {3, 1, 5, 2, 4};
+        System.out.println(Arrays.toString(s.kSmallest(array, 4)));
+        // [1, 2, 3, 4]
+    }
+
+    // Assume k >= 0 and k <= array.length
     // Method 1: sorting
     // Time = O(nlogn)
     // Space = O(1)
@@ -16,20 +26,42 @@ public class kSmallestUnsortedArray {
         return k >= array.length ? array : Arrays.copyOf(array, k);
     }
 
-    // Assume k >= 0 and k <= array.length
-    // Method 2: heap
-    // Implementation 1: n sized minHeap -- offline algorithm
+    // Method 2: minHeap
+    // n sized minHeap -- offline algorithm
     // Step 1: heapify the whole array with minHeap
     // Step 2: pop out the smallest k elements
     // Time = O(n + klogn)
+    // Space = O(1)
+    public int[] kSmallest(int[] array, int k) {
+        if (array == null || array.length == 0) {
+            return array;
+        }
+        List<Integer> list = toList(array);
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(list);
+        int[] res = new int[k];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = minHeap.poll();
+        }
+        return res;
+    }
+
+    private List<Integer> toList(int[] array) {
+        List<Integer> list = new ArrayList<>();
+        for (int num : array) {
+            list.add(num);
+        }
+        return list;
+    }
+
+
+    // Time = O(logn)
     // Space = O(n)
-    public int[] kSmallestII(int[] array, int k) {
-        // Write your solution here
+    public int[] kSmallestIII(int[] array, int k) {
         if (array == null || array.length == 0) {
             return array;
         }
         PriorityQueue<Integer> minHeap = new PriorityQueue<>();
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < array.length; i++) {      // O(nlogn)
             minHeap.offer(array[i]);
         }
         int[] result = new int[k];
@@ -39,6 +71,7 @@ public class kSmallestUnsortedArray {
         return result;
     }
 
+    // Method 3: max heap
     // Implementation 2: k sized maxHeap  -- online algorithm
     // Step 1: heapify the first k elements with maxHeap
     // Step 2: traverse through the rest and compare each element with top of maxHeap
@@ -49,8 +82,7 @@ public class kSmallestUnsortedArray {
     // Time  O(k + (n - k)*logk + klogk) ？？O(nlogk + K) ??
     // Space O(k)
     // Assumptions: 1) array is not null 2) k >= 0 and k <= array.length
-    public int[] kSmallest(int[] array, int k) {
-        // Write your solution here
+    public int[] kSmallestII(int[] array, int k) {
         // handle all possible corner cases at the very beginning
         if (array.length == 0 || k == 0) {
             return new int[0];
@@ -137,5 +169,4 @@ public class kSmallestUnsortedArray {
         array[i] = array[j];
         array[j] = tmp;
     }
-
 }

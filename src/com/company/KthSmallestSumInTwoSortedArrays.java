@@ -27,6 +27,7 @@ public class KthSmallestSumInTwoSortedArrays {
     // Space O(k + m * n)
     public int kthSum(int[] A, int[] B, int k) {
         // Best First Search, need a minHeap on the value of each Pair
+        // PriorityQueue<Solution.Cell> minHeap = new PriorityQueue<>((c1, c2) -> (c1.sum - c2.sum));
         PriorityQueue<Pair> minHeap = new PriorityQueue<>(k, new MyComparator());
         // all the generated cells will be marked true to avoid being generated more than once
         boolean[][] visited = new boolean[A.length][B.length];

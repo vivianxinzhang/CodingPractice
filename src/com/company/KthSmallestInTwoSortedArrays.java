@@ -6,16 +6,10 @@ public class KthSmallestInTwoSortedArrays {
         int[] A = new int[] {1, 4, 6};
         int[] B = new int[] {2, 3};
         System.out.println(s.kth(A, B, 3));  // 3
-        System.out.println(s.kthI(A, B, 3));  // 3
-        System.out.println(s.kthII(A, B, 3));  // 3
-        System.out.println(s.kthIII(A, B, 3));  // 3
 
         A = new int[] {1, 2, 3, 4};
         B = new int[] {1};
-        System.out.println(s.kth(A, B, 2));  // 2
-        System.out.println(s.kthI(A, B, 2));  // 2
-        System.out.println(s.kthII(A, B, 2));  // 2
-        System.out.println(s.kthIII(A, B, 2));  // 2
+        System.out.println(s.kth(A, B, 2));  // 1
     }
 
     // Assumptions:
