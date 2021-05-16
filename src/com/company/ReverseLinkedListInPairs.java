@@ -19,11 +19,11 @@ public class ReverseLinkedListInPairs {
         }
     }
 
-    // iterative
-    // Time O(n)
-    // Space O(1)
-    // 1->2->3		2->1->3
-    // 1->2->3->4	2->1->4->3
+    // 1->2->3
+    // 2->1->3
+    // 1->2->3->4
+    // 2->1->4->3
+    // iterative:
     // Time O(n)
     // Space O(1)
     public ListNode reverseInPairs(ListNode head) {
@@ -56,13 +56,14 @@ public class ReverseLinkedListInPairs {
     public ListNode reverseInPairsII(ListNode head) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode pre = dummy;
+        ListNode tail = dummy;
         while (head != null && head.next != null) {
             ListNode next = head.next.next;
-            pre.next = head.next;
-            pre.next.next = head;
+            ListNode subHead = head.next;
+            tail.next = subHead;
+            subHead.next = head;
             head.next = next;
-            pre = head;
+            tail = head;
             head = next;
         }
         return dummy.next;

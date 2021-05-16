@@ -5,9 +5,19 @@ public class QuickSort {
     public static void main(String[] args) {
         QuickSort s = new QuickSort();
         int[] array = new int[] {4, 2, -3, 6, 1};
-        System.out.println(Arrays.toString(s.quickSort(array)));    // [-3, 1, 2, 4, 6]
+        System.out.println(Arrays.toString(s.quickSort(array)));
+        // [-3, 1, 2, 4, 6]
+
+        array = new int[] {3, 2, 1};
+        System.out.println(Arrays.toString(s.quickSort(array)));
+        // [1, 2, 3]
     }
 
+    // Corner Cases:
+    // 1. What if the given array is null? In this case, we do not need to do anything.
+    // 2. What if the given array is of length zero? In this case, we do not need to do anything.
+    // Time O(nlogn)  worst case O(n^2)
+    // Space O(logn) worst case O(n)
     public int[] quickSort(int[] array) {
         if (array == null || array.length == 0) {
             return array;

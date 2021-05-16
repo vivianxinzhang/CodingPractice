@@ -22,25 +22,30 @@ public class ReOrderLinkedList {
         four.next = five;
         curr = s.reorder(one);
         // 1 -> 5 -> 2 -> 4 -> 3
-        while (curr != null) {
-            System.out.print(curr.value);
-            curr = curr.next;
-            if (curr != null) {
-                System.out.print(" -> ");
-            }
-        }
+        Printer.printLinkedList(curr);
     }
 
+    // 1 -> 2               1 -> 2
+    // 1 -> 2 -> 3          1 -> 3 -> 2
+    // 1 -> 2 -> 3 ->4      1 -> 4 -> 2 -> 3
+    // Step 1: find middle
+    // Step 2: reverse right part
+    // Step 3: merge together
     // Time O(n)
     // Space O(1)
     public ListNode reorder(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
-        ListNode middle = findMiddle(head);
-        ListNode one = head, two = middle.next;
-        middle.next = null;
+        // 1. find the middle node
+        ListNode mid = findMiddle(head);
+        ListNode one = head;
+        ListNode two = mid.next;
+        // de-link the second half from the list
+        mid.next = null;
+        // 2. reverse the second half
         ListNode reverseTwo = reverse(two);
+        // 3. merge the two halves
         return merge(one, reverseTwo);
     }
 
@@ -57,36 +62,28 @@ public class ReOrderLinkedList {
     }
 
     private ListNode reverse(ListNode head) {
-//        if (head == null || head.next == null) {
-//            return head;
-//        }
-        ListNode curr = head, prev = null, next = null;
-        while (curr != null) {
-            next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
+        ListNode pre = null;
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = pre;
+            pre = head;
+            head = next;
         }
-        return prev;
+        return pre;
     }
 
-    private ListNode merge(ListNode one, ListNode two) {
+    private ListNode merge(ListNode left, ListNode right) {
         ListNode dummy = new ListNode(0);
-        ListNode curr = dummy;
-        ListNode curr1 = one, curr2 = two;
-        while (curr1 != null && curr2 != null) {
-            curr.next = curr1;
-            curr1 = curr1.next;
-            curr = curr.next;
-            curr.next = curr2;
-            curr2 = curr2.next;
-            curr = curr.next;
-        }
-        if (curr1 != null) {
-            curr.next = curr1;
-        }
-        if (curr2 != null) {
-            curr.next = curr2;
+        ListNode tail = dummy;
+        while (left != null) {
+            tail.next = left;
+            left = left.next;
+            tail = tail.next;
+            if (right != null) {
+                tail.next = right;
+                right = right.next;
+                tail = tail.next;
+            }
         }
         return dummy.next;
     }
