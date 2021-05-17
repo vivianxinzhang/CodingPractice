@@ -1,8 +1,27 @@
 package com.company;
 
 public class MergeSortLinkedList {
+    public static void main(String[] args) {
+        MergeSortLinkedList s = new MergeSortLinkedList();
+        ListNode five = new ListNode(5);
+        ListNode one = new ListNode(1);
+        ListNode four = new ListNode(4);
+        ListNode two = new ListNode(2);
+        ListNode three = new ListNode(3);
+        five.next = one;
+        one.next = four;
+        four.next = two;
+        two.next = three;
+        Printer.printLinkedList(five);
+        // Input List:  5 -> 1 -> 4 -> 2 -> 3
+        // Output List: 1 -> 2 -> 3 -> 4 -> 5
+        ListNode res = s.mergeSort(five);
+        Printer.printLinkedList(res);
+    }
+
+    // Time O(nlogn)
+    // Space O(logn)
     public ListNode mergeSort(ListNode head) {
-        // Write your solution here
         if (head == null || head.next == null) {
             return head;
         }
@@ -32,7 +51,8 @@ public class MergeSortLinkedList {
     private ListNode merge(ListNode one, ListNode two) {
         ListNode dummy = new ListNode(0);
         ListNode curr = dummy;
-        ListNode curr1 = one, curr2 = two;
+        ListNode curr1 = one;
+        ListNode curr2 = two;
         while (curr1 != null && curr2 != null) {
             if (curr1.value < curr2.value) {
                 curr.next = curr1;

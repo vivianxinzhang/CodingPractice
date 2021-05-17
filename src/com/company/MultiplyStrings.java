@@ -3,11 +3,32 @@ import java.util.*;
 
 public class MultiplyStrings {
     public static void main(String[] args) {
-        System.out.println("main");
         MultiplyStrings s = new MultiplyStrings();
+
         String num1 = "12";
         String num2 = "12";
-        System.out.println(s.multiply(num1, num2));
+        System.out.println(s.multiply(num1, num2));     // 144
+
+        num1 = "123";
+        num2 = "0";
+        System.out.println(s.multiply(num1, num2));     // 0
+
+        num1 = "123";
+        num2 = "45";
+        /**           1   2   3       index i
+         *                4   5       index j
+         *  -------------------
+         *                1   5       index[i + j, i + j + 1]
+         *            1   0
+         *        0   5
+         *            1   2
+         *        0   8
+         *    0   4
+         *  -------------------
+         *    0   1   2   3   4     index
+         *    0   5   5   3   5
+         * */
+        System.out.println(s.multiply(num1, num2));     // 5535
     }
 
     // The product of two numbers cannot exceed the sum of the two lengths.
@@ -15,49 +36,58 @@ public class MultiplyStrings {
     // int d1 = num1.charAt(i) - '0';
     // int d2 = num2.charAt(j) - '0';
     // products[i + j + 1] += d1 * d2;
-    // Time O(m + n)
+    // Time O(mn)
     // Space O(m + n)
-    public String multiply(String num1, String num2) {
-        int n1 = num1.length(), n2 = num2.length();
-        int[] products = new int[n1 + n2];
-        for (int i = n1 - 1; i >= 0; i--) {
-            for (int j = n2 - 1; j >= 0; j--) {
+    public String multiplyI(String num1, String num2) {
+        if (num1 == null || num2 == null) {
+            return "0";
+        }
+        int[] products = new int[num1.length() + num2.length()];
+        for (int i = num1.length() - 1; i >= 0; i--) {
+            for (int j = num2.length() - 1; j >= 0; j--) {
                 int d1 = num1.charAt(i) - '0';
                 int d2 = num2.charAt(j) - '0';
                 products[i + j + 1] += d1 * d2;
             }
         }
-        int carry = 0;
+        int num = 0;
         for (int i = products.length - 1; i >= 0; i--) {
-            int tmp = (products[i] + carry) % 10;
-            carry = (products[i] + carry) / 10;
-            products[i] = tmp;
+            num += products[i];
+            products[i] = num % 10;
+            num /= 10;
         }
         StringBuilder sb = new StringBuilder();
-        for (int num : products) sb.append(num);
-        while (sb.length() != 0 && sb.charAt(0) == '0') sb.deleteCharAt(0);
+        for (int digit : products) {
+            sb.append(digit);
+        }
+        if (sb.charAt(0) == '0') {
+            sb.deleteCharAt(0);
+        }
         return sb.length() == 0 ? "0" : sb.toString();
     }
 
-    public String multiplyII(String num1, String num2) {
-        int len1 = num1.length();
-        int len2 = num2.length();
-        int[] product = new int[len1 + len2];
-        for (int i = len1 - 1; i >= 0; i--) {
-            for (int j = len2 - 1; j >= 0; j--) {
-                int index = len1 + len2 - i - j - 2;
-                product[index] += (num1.charAt(i) - '0') * (num2.charAt(j) - '0');
-                product[index + 1] += product[index] / 10;
-                product[index] %= 10;
+    // Time O(mn)
+    // Space O(m + n)
+    public String multiply(String num1, String num2) {
+        int[] res = new int[num1.length() + num2.length()];
+        for (int i = num1.length() - 1; i >= 0; i--) {
+            for (int j = num2.length() - 1; j >= 0; j--) {
+                int x = num1.charAt(i) - '0';
+                int y = num2.charAt(j) - '0';
+                int pos1 = i + j;
+                int pos2 = i + j + 1;
+                int sum = x * y + res[pos1] * 10 + res[pos2];
+                res[pos2] = sum % 10;
+                res[pos1] = sum / 10;
             }
         }
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = product.length - 1; i > 0; i--) {
-            if (stringBuilder.length() == 0 && product[i] == 0)
+        StringBuilder sb = new StringBuilder();
+        for (int digit : res) {
+            if (digit == 0 && sb.length() == 0) {
                 continue;
-            stringBuilder.append(product[i]);
+            }
+            sb.append(digit);
         }
-        stringBuilder.append(product[0]);
-        return stringBuilder.toString();
+        return sb.toString();
     }
 }
