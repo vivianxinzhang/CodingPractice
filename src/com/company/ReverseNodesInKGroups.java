@@ -27,35 +27,26 @@ public class ReverseNodesInKGroups {
         if (head == null || k <= 1) {
             return head;
         }
-        ListNode curr = findKth(head, k);
-        if (curr == null) {
-            return head;
-        }
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode prev = dummy;
-        while (curr != null) {
-            ListNode subHead = curr.next;
-            curr.next = null;
-            // reverse first k nodes
-            ListNode newHead = reverse(head);
-            prev.next = newHead;
-            head.next = subHead;
-            prev = head;
-            head = subHead;
-            curr = findKth(head, k);
+        ListNode pre = dummy;
+        while (head != null) {
+            ListNode curTail = head;
+            for (int i = 0; i < k - 1; i++) {
+                curTail = curTail.next;
+                if (curTail == null) {
+                    return dummy.next;
+                }
+            }
+            ListNode next = curTail.next;
+            curTail.next = null;
+            ListNode newSubHead = reverse(head);
+            pre.next = newSubHead;
+            head.next = next;
+            pre = head;
+            head = next;
         }
         return dummy.next;
-    }
-
-    private ListNode findKth(ListNode head, int k) {
-        for (int i = 1; i < k; i++) {
-            if (head == null || head.next == null) {
-                return null;
-            }
-            head = head.next;
-        }
-        return head;
     }
 
     private ListNode reverse(ListNode head) {

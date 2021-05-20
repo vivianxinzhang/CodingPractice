@@ -4,6 +4,15 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class DequeByThreeStacks {
+    private Deque<Integer> left;
+    private Deque<Integer> right;
+    private Deque<Integer> buffer;
+    public DequeByThreeStacks() {
+        left = new ArrayDeque<>();
+        right = new ArrayDeque<>();
+        buffer = new ArrayDeque<>();
+    }
+
     public static void main(String[] args) {
         DequeByThreeStacks deque = new DequeByThreeStacks();
         deque.offerFirst(1);    // 1
@@ -15,16 +24,6 @@ public class DequeByThreeStacks {
         deque.pollFirst();              // 2
         System.out.println(deque.peekFirst());   // 2
         System.out.println(deque.peekLast());    // 2
-    }
-
-    private Deque<Integer> left;
-    private Deque<Integer> right;
-    private Deque<Integer> buffer;
-
-    public DequeByThreeStacks() {
-        left = new ArrayDeque<>();
-        right = new ArrayDeque<>();
-        buffer = new ArrayDeque<>();
     }
 
     // Amortized time O(1)

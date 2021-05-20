@@ -1,11 +1,20 @@
 package com.company;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
-// Method 1:
-public class StackWithMin {
+public class StackWithMinII {
+    Deque<Integer> stack;
+    // min used to store elements contribute to min
+    Deque<Integer> minStack;
+
+    public StackWithMinII() {
+        minStack = new ArrayDeque<>();
+        stack = new ArrayDeque<>();
+    }
+
     public static void main(String[] args) {
-        StackWithMin s = new StackWithMin();
+        StackWithMinII s = new StackWithMinII();
         s.push(6);
         System.out.println(s.min());    // 6
         s.push(5);
@@ -20,26 +29,15 @@ public class StackWithMin {
         System.out.println(s.min());    // 6
     }
 
-
-    // min used to store elements contribute to min
-    Deque<Integer> min;
-    Deque<Integer> stack;
-
-    public StackWithMin() {
-        // write your solution here
-        min = new ArrayDeque<>();
-        stack = new ArrayDeque<>();
-    }
-
     public int pop() {
         // when the popped value is the same as top value of minStack, the value
         // need to be popped from minStack as well.
         if (stack.isEmpty()) {
             return -1;
         }
-        int tmp = stack.pop();
-        if (tmp == min.peek()) {
-            min.pop();
+        int tmp = stack.pollFirst();
+        if (tmp == minStack.peek()) {
+            minStack.pollFirst();
         }
         return tmp;
     }
@@ -47,17 +45,17 @@ public class StackWithMin {
     public void push(int element) {
         // when value <= current min value in stack,
         // need to push the value to minStack.
-        stack.push(element);
-        if (min.isEmpty() || element <= min.peek()) {
-            min.push(element);
+        stack.offerFirst(element);
+        if (minStack.isEmpty() || element <= minStack.peekFirst()) {
+            minStack.offerFirst(element);
         }
     }
 
     public int top() {
-        return stack.isEmpty() ? -1 : stack.peek();
+        return stack.isEmpty() ? -1 : stack.peekFirst();
     }
 
     public int min() {
-        return min.isEmpty() ? -1 : min.peek();
+        return minStack.isEmpty() ? -1 : minStack.peekFirst();
     }
 }
