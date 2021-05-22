@@ -1,8 +1,8 @@
 package com.company;
 
-public class MyLinkedList {
+public class MyLinkedListDoubly {
     public static void main(String[] args) {
-        MyLinkedList list = new MyLinkedList();
+        MyLinkedListDoubly list = new MyLinkedListDoubly();
         list.addAtHead(1);
         // 1
         list.addAtTail(3);
@@ -17,21 +17,22 @@ public class MyLinkedList {
 
     private class ListNode {
         public int val;
+        public ListNode pre;
         public ListNode next;
 
         public ListNode(int val) {
             this.val = val;
-            next = null;
         }
     }
 
     public ListNode head;
+    public ListNode tail;
     private int size;
 
     /**
      * Initialize your data structure here.
      */
-    public MyLinkedList() {
+    public MyLinkedListDoubly() {
     }
 
     /**
@@ -53,9 +54,15 @@ public class MyLinkedList {
      */
     public void addAtHead(int val) {
         size++;
-        ListNode newHead = new ListNode(val);
-        newHead.next = head;
-        head = newHead;
+        if (head == null) {
+            head = new ListNode(val);
+            tail = head;
+        } else {
+            ListNode newHead = new ListNode(val);
+            newHead.next = head;
+            head.pre = newHead;
+            head = newHead;
+        }
     }
 
     /**
@@ -63,16 +70,10 @@ public class MyLinkedList {
      */
     public void addAtTail(int val) {
         size++;
-        ListNode node = new ListNode(val);
-        if (head == null) {
-            head = node;
-        } else {
-            ListNode pre = head;
-            while (pre.next != null) {
-                pre = pre.next;
-            }
-            pre.next = node;
-        }
+        ListNode newTail = new ListNode(val);
+        tail.next = newTail;
+        newTail.pre = tail;
+        tail = newTail;
     }
 
     /**
@@ -80,7 +81,8 @@ public class MyLinkedList {
      */
     public void addAtIndex(int index, int val) {
         if (index < 0 || index > size) {
-            throw new IllegalArgumentException();
+            // throw new IllegalArgumentException();
+            return;
         }
         if (index == 0) {
             addAtHead(val);
@@ -92,9 +94,12 @@ public class MyLinkedList {
             for (int i = 0; i < index - 1; i++) {
                 pre = pre.next;
             }
+            ListNode next = pre.next;
             ListNode node = new ListNode(val);
-            node.next = pre.next;
             pre.next = node;
+            node.next = next;
+            next.pre = node;
+            node.pre = pre;
         }
     }
 
@@ -103,27 +108,20 @@ public class MyLinkedList {
      */
     public void deleteAtIndex(int index) {
         if (index < 0 || index >= size) {
-            throw new IllegalArgumentException();
+            // throw new IllegalArgumentException();
+            return;
         }
         size--;
         if (index == 0) {
             head = head.next;
+            head.pre = null;
         }
         ListNode pre = head;
         for (int i = 0; i < index - 1; i++) {
             pre = pre.next;
         }
-        pre.next = pre.next.next;
-
+        ListNode next = pre.next.next;
+        pre.next = next;
+        next.pre = pre;
     }
 }
-
-/**
- * Your MyLinkedList object will be instantiated and called as such:
- * MyLinkedList obj = new MyLinkedList();
- * int param_1 = obj.get(index);
- * obj.addAtHead(val);
- * obj.addAtTail(val);
- * obj.addAtIndex(index,val);
- * obj.deleteAtIndex(index);
- */

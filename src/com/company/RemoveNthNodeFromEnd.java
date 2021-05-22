@@ -12,11 +12,11 @@ public class RemoveNthNodeFromEnd {
         two.next = three;
         three.next = four;
         four.next = five;
-        ListNode curr = s.removeNthFromEnd(one, 5);
-        while (curr != null) {
-            System.out.print(curr.value);
-            curr = curr.next;
-        }
+        Printer.printLinkedList(one);
+        // 1 -> 2 -> 3 -> 4 -> 5
+        ListNode res = s.removeNthFromEnd(one, 5);
+        // 2 -> 3 -> 4 -> 5
+        Printer.printLinkedList(res);
     }
 
     // Assumptions:
@@ -25,13 +25,41 @@ public class RemoveNthNodeFromEnd {
     // Examples
     // dummy -> 1 -> 2 -> 3 -> 4 -> 5 -> null, and n = 2.
     //                   slow
-    //                                   fast
+    //                             fast
     // n nodes between slow and fast points,
-    // Step 1: move fast pointer n + 1 steps first
-    // Step 2: move slow and fast together, when fast hits null, slow is the previous node of node that to be deleted
+    // Step 1: move fast pointer n steps first
+    // Step 2: move slow and fast together, when fast.next hits null, slow is the previous node of node that to be deleted
     // Time O(n)
     // Space O(1)
     public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode fast = dummy;
+        for (int i = 0; i < n; i++) {
+            fast = fast.next;
+            if (fast == null) {
+                return head;
+            }
+        }
+        ListNode slow = dummy;
+        while (fast.next != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        slow.next = slow.next.next;
+        return dummy.next;
+    }
+
+    // Examples
+    // dummy -> 1 -> 2 -> 3 -> 4 -> 5 -> null, and n = 2.
+    //                   slow
+    //                                   fast
+    // n nodes between slow and fast points,
+    // Step 1: move fast pointer n steps first
+    // Step 2: move slow and fast together, when fast hits null, slow is the previous node of node that to be deleted
+    // Time O(n)
+    // Space O(1)
+    public ListNode removeNthFromEndI(ListNode head, int n) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         while (n > 0 && head != null) {
@@ -48,27 +76,6 @@ public class RemoveNthNodeFromEnd {
             // when head == null, prev.next is the node to remove
             prev.next = prev.next.next;
         }
-        return dummy.next;
-    }
-
-    // Time O(n)
-    // Space O(1)
-    public ListNode removeNthFromEndI(ListNode head, int n) {
-        // Write your solution here
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-        ListNode fast = dummy, slow = dummy;
-        for (int i = 0; i <= n; i++) {
-            if (fast == null) {
-                return dummy.next;
-            }
-            fast = fast.next;
-        }
-        while (fast != null) {
-            slow = slow.next;
-            fast = fast.next;
-        }
-        slow.next = slow.next.next;
         return dummy.next;
     }
 }
