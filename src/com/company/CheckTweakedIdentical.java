@@ -2,13 +2,13 @@ package com.company;
 
 public class CheckTweakedIdentical {
     public static void main(String[] args) {
-        CheckBalancedTree s = new CheckBalancedTree();
+        CheckTweakedIdentical s = new CheckTweakedIdentical();
         TreeNode one = new TreeNode(1);
         TreeNode two = new TreeNode(2);
         TreeNode three = new TreeNode(3);
         one.left = two;
         two.left = three;
-        System.out.println(s.isBalanced(one));
+        System.out.println();
     }
 
     // Time O(n^2) <-- assume the input tree is balanced

@@ -41,10 +41,11 @@ public class CycleNodeInLinkedList {
     // Cycle is very small:
     //               slow move a + b, fast move a + b + k(c + b)
     //               => a + b + k(c + b) = 2 * (a + b)
-    //               => K(c + b) = a + b
+    //               => k(c + b) = a + b
     //               thus a = k(c + b) - b = kc + kb - b = (k - 1 + 1)c + (k - 1)b = (k - 1)(c + b) + c
+    //               head move a will reach cycle node
+    //               slow move (k-1)(c+b) + c also reach cycle node
     // Time O(n)
-    // Space O(1)
     public ListNode cycleNode(ListNode head) {
         // write your solution here
         if (head == null || head.next == null) {

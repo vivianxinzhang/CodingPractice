@@ -2,13 +2,13 @@ package com.company;
 
 public class InsertBST {
     public static void main(String[] args) {
-        CheckBalancedTree s = new CheckBalancedTree();
+        InsertBST s = new InsertBST();
         TreeNode one = new TreeNode(1);
         TreeNode two = new TreeNode(2);
         TreeNode three = new TreeNode(3);
         one.left = two;
         two.left = three;
-        System.out.println(s.isBalanced(one));
+        System.out.println();
     }
 
     // Time O(height) worst case O(n)
