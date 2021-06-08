@@ -19,7 +19,7 @@ public class RainbowSortIII {
     // 1. The input array is not null.
     // 2. k is guaranteed to be >= 1.
     // 3. k << logn.
-    // Implementation 1:
+    // Method 1:
     // sort two colors each time until all the colors are sorted
     //          leftColor and rightColor
     // 1st round     1    and    k
@@ -56,9 +56,7 @@ public class RainbowSortIII {
         return array;
     }
 
-    // Implementation 2:
-    // Time O(nk)
-    // Space O(k)
+    // Method 2:
     // Time O(nk)
     // Space O(k)
     public int[] rainbowSortIII(int[] array, int k) {

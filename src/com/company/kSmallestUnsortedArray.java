@@ -14,100 +14,11 @@ public class kSmallestUnsortedArray {
         // [1, 2, 3, 4]
     }
 
-    // Assume k >= 0 and k <= array.length
-    // Method 1: sorting
-    // Time = O(nlogn)
-    // Space = O(1)
-    public int[] kSmallestI(int[] array, int k) {
-        if (array == null || array.length == 0) {
-            return array;
-        }
-        Arrays.sort(array);
-        return k >= array.length ? array : Arrays.copyOf(array, k);
-    }
-
-    // Method 2: minHeap
-    // n sized minHeap -- offline algorithm
-    // Step 1: heapify the whole array with minHeap
-    // Step 2: pop out the smallest k elements
-    // Time = O(n + klogn)
-    // Space = O(1)
-    public int[] kSmallest(int[] array, int k) {
-        if (array == null || array.length == 0) {
-            return array;
-        }
-        List<Integer> list = toList(array);
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>(list);
-        int[] res = new int[k];
-        for (int i = 0; i < res.length; i++) {
-            res[i] = minHeap.poll();
-        }
-        return res;
-    }
-
-    private List<Integer> toList(int[] array) {
-        List<Integer> list = new ArrayList<>();
-        for (int num : array) {
-            list.add(num);
-        }
-        return list;
-    }
-
-
-    // Time = O(logn)
-    // Space = O(n)
-    public int[] kSmallestIII(int[] array, int k) {
-        if (array == null || array.length == 0) {
-            return array;
-        }
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
-        for (int i = 0; i < array.length; i++) {      // O(nlogn)
-            minHeap.offer(array[i]);
-        }
-        int[] result = new int[k];
-        for (int i = 0; i < k; i++) {
-            result[i] = minHeap.poll();
-        }
-        return result;
-    }
-
-    // Method 3: max heap
-    // Implementation 2: k sized maxHeap  -- online algorithm
-    // Step 1: heapify the first k elements with maxHeap
-    // Step 2: traverse through the rest and compare each element with top of maxHeap
-    //    Case 1: new element < top of maxHeap
-    //            pop out top of maxHeap and insert new element into maxHeap
-    //    Case 2: new element >= top of maxHeap
-    //		      continue
-    // Time  O(k + (n - k)*logk + klogk) ？？O(nlogk + K) ??
-    // Space O(k)
-    // Assumptions: 1) array is not null 2) k >= 0 and k <= array.length
-    public int[] kSmallestII(int[] array, int k) {
-        // handle all possible corner cases at the very beginning
-        if (array.length == 0 || k == 0) {
-            return new int[0];
-        }
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(k, Collections.reverseOrder());
-        // offer the first k elements into the max heap O(k)
-        for (int i = 0; i < k; i++) {
-            maxHeap.offer(array[i]);
-        }
-        // for the other elements, only offer it into the max heap
-        // if it is smaller than the max value in the max heap  O((n-k)logk)
-        for (int i = k; i < array.length; i++) {
-            if (array[i] < maxHeap.peek()) {
-                maxHeap.poll();
-                maxHeap.offer(array[i]);
-            }
-        }
-        int[] result = new int[k];
-        // result is stored in ascending order, start to fill from the last spot
-        for (int i = k - 1; i >= 0; i--) {
-            result[i] = maxHeap.poll();
-        }
-        return result;
-    }
-
+    // Assumptions:
+    // A is not null
+    // K is >= 0 and smaller than or equal to size of A
+    // Return:
+    // an array with size K containing the K smallest numbers in ascending order
     // Method 4: quick select
     // Time O(n) => if want answer to be sorted O(n + k + klogk)
     // worst case O(n^2)  => if want answer to be sorted O(n^2 + k + k^2)
@@ -168,5 +79,97 @@ public class kSmallestUnsortedArray {
         int tmp = array[i];
         array[i] = array[j];
         array[j] = tmp;
+    }
+
+    // Method 1: sorting
+    // Time = O(nlogn)
+    // Space = O(1)
+    public int[] kSmallestI(int[] array, int k) {
+        if (array == null || array.length == 0) {
+            return array;
+        }
+        Arrays.sort(array);
+        return k >= array.length ? array : Arrays.copyOf(array, k);
+    }
+
+    // Method 2: minHeap
+    // n sized minHeap -- offline algorithm
+    // Step 1: heapify the whole array with minHeap
+    // Step 2: pop out the smallest k elements
+    // Time = O(n + klogn)
+    // Space = O(1)
+    public int[] kSmallest(int[] array, int k) {
+        if (array == null || array.length == 0) {
+            return array;
+        }
+        List<Integer> list = toList(array);
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(list);
+        int[] res = new int[k];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = minHeap.poll();
+        }
+        return res;
+    }
+
+    private List<Integer> toList(int[] array) {
+        List<Integer> list = new ArrayList<>();
+        for (int num : array) {
+            list.add(num);
+        }
+        return list;
+    }
+
+    // Time = O(logn)
+    // Space = O(n)
+    public int[] kSmallestIII(int[] array, int k) {
+        if (array == null || array.length == 0) {
+            return array;
+        }
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        for (int i = 0; i < array.length; i++) {      // O(nlogn)
+            minHeap.offer(array[i]);
+        }
+        int[] result = new int[k];
+        for (int i = 0; i < k; i++) {
+            result[i] = minHeap.poll();
+        }
+        return result;
+    }
+
+    // Method 3: max heap
+    // Implementation 2: k sized maxHeap  -- online algorithm
+    // Step 1: heapify the first k elements with maxHeap
+    // Step 2: traverse through the rest and compare each element with top of maxHeap
+    //    Case 1: new element < top of maxHeap
+    //            pop out top of maxHeap and insert new element into maxHeap
+    //    Case 2: new element >= top of maxHeap
+    //		      continue
+    // Time  O(k + (n - k)*logk + klogk) ？？O(nlogk + K) ??
+    // Space O(k)
+    // Assumptions: 1) array is not null 2) k >= 0 and k <= array.length
+    public int[] kSmallestII(int[] array, int k) {
+        // handle all possible corner cases at the very beginning
+        if (array.length == 0 || k == 0) {
+            return new int[0];
+        }
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(k, Collections.reverseOrder());
+        // offer the first k elements into the max heap O(k)
+        for (int i = 0; i < k; i++) {
+            maxHeap.offer(array[i]);
+        }
+        // for the other elements, only offer it into the max heap
+        // if it is smaller than the max value in the max heap  O((n-k)logk)
+        for (int i = k; i < array.length; i++) {
+            if (array[i] < maxHeap.peek()) {
+                maxHeap.poll();
+                maxHeap.offer(array[i]);
+            }
+        }
+        int[] result = new int[k];
+        // result is stored in ascending order, start to fill from the last spot
+        for (int i = k - 1; i >= 0; i--) {
+            result[i] = maxHeap.poll();
+        }
+        return result;
     }
 }
