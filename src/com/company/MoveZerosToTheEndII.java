@@ -5,10 +5,10 @@ public class MoveZerosToTheEndII {
     public static void main(String[] args) {
         MoveZerosToTheEndII s = new MoveZerosToTheEndII();
         int[] array = new int[] {1};
-        System.out.println(Arrays.toString(s.moveZeroe(array)));
+        System.out.println(Arrays.toString(s.moveZero(array)));    // [1]
 
         array = new int[] {1, 0, 3, 0, 1};
-        System.out.println(Arrays.toString(s.moveZeroe(array)));
+        System.out.println(Arrays.toString(s.moveZero(array)));    // [1, 3, 1, 0, 0]
     }
 
     // Data structure: two pointers
@@ -25,7 +25,7 @@ public class MoveZerosToTheEndII {
     // Step 2: Post-processing: append 0 for [slow, n-1]
     // Time O(n)
     // Space O(1)
-    public int[] moveZeroe(int[] nums) {
+    public int[] moveZero(int[] nums) {
         if (nums == null || nums.length <= 1) {
             return nums;
         }

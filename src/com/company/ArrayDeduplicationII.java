@@ -6,10 +6,10 @@ public class ArrayDeduplicationII {
     public static void main(String[] args) {
         ArrayDeduplicationII s = new ArrayDeduplicationII();
         int[] array = new int[] {};
-        System.out.println(Arrays.toString(s.dedup(array)));
+        System.out.println(Arrays.toString(s.dedup(array)));    // []
 
         array = new int[] {1, 2, 2, 3, 3, 3};
-        System.out.println(Arrays.toString(s.dedup(array)));
+        System.out.println(Arrays.toString(s.dedup(array)));    // [1, 2, 2, 3, 3]
     }
 
     // 1, 2, 2, 3, 3, 3

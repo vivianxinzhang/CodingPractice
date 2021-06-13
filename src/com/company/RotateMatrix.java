@@ -5,7 +5,7 @@ public class RotateMatrix {
     public static void main(String[] args) {
         RotateMatrix s = new RotateMatrix();
         int[][] matrix = new int[][] {{1, 2, 3}, {8, 9, 4}, {7, 6, 5}};
-        s.rotateII(matrix);
+        s.rotate(matrix);
         for (int[] row : matrix) {
             System.out.println(Arrays.toString(row));
         }
@@ -16,11 +16,32 @@ public class RotateMatrix {
         * */
     }
 
-    // Method 1: Split into levels and for each level split it into four partitions
+    // Method 3: iteration
+    // Split into levels and for each level split it into four partitions
+    // Time O(n^2)
+    // Space O(1)
+    public void rotate(int[][] matrix) {
+        int start = 0;
+        int end = matrix.length - 1;
+        while (start < end) {
+            for (int i = 0; i < end - start; i++) {
+                int tmp = matrix[start][start + i];
+                matrix[start][start + i] = matrix[end - i][start];
+                matrix[end - i][start] = matrix[end][end - i];
+                matrix[end][end - i] = matrix[start + i][end];
+                matrix[start + i][end] = tmp;
+            }
+            start++;
+            end--;
+        }
+    }
+
+    // Method 2: Recursion
+    // Split into levels and for each level split it into four partitions
     // Assumptions: matrix is not null and has size of N * N, N >= 0
     // Time O(N*N)
     // Space O(n)
-    public void rotate(int[][] matrix) {
+    public void rotateII(int[][] matrix) {
         if (matrix == null || matrix.length <= 1 || matrix[0].length <= 1) {
             return;
         }
@@ -54,12 +75,12 @@ public class RotateMatrix {
         helper(matrix, start + 1, end - 1);
     }
 
-    // Method 2: Rotate a point by 90 degree clockwise ==
+    // Method 1: Rotate a point by 90 degree clockwise ==
     // 1. Mirror the point according to y axis, then
     // 2. Mirror the point according the line of y = x.
     // Time O()
     // Space O()
-    public void rotateII(int[][] matrix) {
+    public void rotateI(int[][] matrix) {
         int n = matrix.length;
         if (n <= 1) {
             return;

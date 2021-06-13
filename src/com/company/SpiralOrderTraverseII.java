@@ -1,17 +1,21 @@
 package com.company;
-import java.util.*;
 
-public class SpiralTraverseII {
+import java.util.ArrayList;
+import java.util.List;
+
+public class SpiralOrderTraverseII {
     public static void main(String[] args) {
-        SpiralTraverseII s = new SpiralTraverseII();
+        SpiralOrderTraverseII s = new SpiralOrderTraverseII();
         int[][] matrix = new int[][] {{}, {}, {}};
         System.out.println(s.spiral(matrix));   // []
 
-        matrix = new int[][] {{1, 2},
-                {3, 4}};
-        System.out.println(s.spiral(matrix));   // [1, 2, 3]
+        matrix = new int[][] {
+                        {1, 2},
+                        {3, 4}};
+        System.out.println(s.spiral(matrix));   // [1, 2, 4, 3]
 
-        matrix = new int[][] {{1, 2,  3,  4},
+        matrix = new int[][] {
+                {1, 2,  3,  4},
                 {5, 6,  7,  8},
                 {9, 10, 11, 12}};
         System.out.println(s.spiral(matrix));   // [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]
@@ -19,48 +23,50 @@ public class SpiralTraverseII {
 
     // Assumptions:
     // The 2D array is not null and has size of M * N where M, N >= 0
+    // Method 2: iteration
     // Time O(mn)
     // Space O(1)
     public List<Integer> spiral(int[][] matrix) {
-        List<Integer> result = new ArrayList<>();
-        int startR = 0;
-        int endR = matrix.length - 1;
-        int startC = 0;
-        int endC = matrix[0].length - 1;
-        while (startR < endR && startC < endC) {
+        List<Integer> res = new ArrayList<>();
+        int startRow = 0;
+        int endRow = matrix.length - 1;
+        int startCol = 0;
+        int endCol = matrix[0].length - 1;
+        while (startRow < endRow && startCol < endCol) {
             // top
-            for (int i = startC; i < endC; i++) {
-                result.add(matrix[startR][i]);
+            for (int i = startCol; i < endCol; i++) {
+                res.add(matrix[startRow][i]);
             }
             // right
-            for (int i = startR; i < endR; i++) {
-                result.add(matrix[i][endC]);
+            for (int i = startRow; i < endRow; i++) {
+                res.add(matrix[i][endCol]);
             }
             // bottom
-            for (int i = endC; i > startC; i--) {
-                result.add(matrix[endR][i]);
+            for (int i = endCol; i > startCol; i--) {
+                res.add(matrix[endRow][i]);
             }
             // left
-            for (int i = endR; i > startR; i--) {
-                result.add(matrix[i][startC]);
+            for (int i = endRow; i > startRow; i--) {
+                res.add(matrix[i][startCol]);
             }
-            startR++;
-            endR--;
-            startC++;
-            endC--;
+            startRow++;
+            endRow--;
+            startCol++;
+            endCol--;
         }
-        if (startR == endR) {
-            for (int i = startC; i <= endC; i++) {
-                result.add(matrix[startR][i]);
+        if (startRow == endRow) {
+            for (int i = startCol; i <= endCol; i++) {
+                res.add(matrix[startRow][i]);
             }
-        } else if (startC == endC) {
-            for (int i = startR; i < endR; i++) {
-                result.add(matrix[i][endC]);
+        } else if (startCol == endCol) {
+            for (int i = startRow; i <= endRow; i++) {
+                res.add(matrix[i][startCol]);
             }
         }
-        return result;
+        return res;
     }
 
+    // Method 1: Recursion
     // Time O(mn)
     // Space O(min(m, n))  Recursion 层数 n/2 or n/2 + 1 or m/2 or m/2 -1   每层 size -2 所以一共 n/2 层
     public List<Integer> spiralI(int[][] matrix) {

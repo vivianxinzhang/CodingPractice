@@ -6,27 +6,27 @@ public class SetMatrixZero {
     public static void main(String[] args) {
         SetMatrixZero s = new SetMatrixZero();
         int[][] matrix = {{1, 0}, {0, 1}};
-        for (int[] row : matrix) {
-            System.out.println(Arrays.toString(row));
-        }
+        Printer.printMatrix(matrix);
+        System.out.println();
         s.setZero(matrix);
-        for (int[] row : matrix) {
-            System.out.println(Arrays.toString(row));
-        }
+        Printer.printMatrix(matrix);
     }
 
+    // first row (excluding matrix[0][0]) is used to flag each col, mark the first element to 0 if there is 0 in the col
+    // first col (including matrix[0][0]) is used to flag each row, mark the first element to 0 if there is 0 in the row
+    // Time O(mn)
+    // Space O(1)
     public void setZero(int[][] matrix) {
-        // Write your solution here
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return;
         }
-        boolean flagFristRowZero = false;
+        boolean markFristColZero = false;
         for (int i = 0; i < matrix.length; i++) {
-            if (matrix[i][0] == 0) {
-                flagFristRowZero = true;
-            }
-            for (int j = 1; j < matrix[0].length; j++) {
-                if (matrix[i][j] == 0) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                // check elements of first col
+                if (j == 0 && matrix[i][j] == 0) {
+                    markFristColZero = true;
+                } else if (matrix[i][j] == 0) {   // check other elements
                     matrix[i][0] = 0;
                     matrix[0][j] = 0;
                 }
@@ -39,11 +39,13 @@ public class SetMatrixZero {
                 }
             }
         }
+        // first row
         if (matrix[0][0] == 0) {
-            setColZero(matrix, 0);
-        }
-        if (flagFristRowZero) {
             setRowZero(matrix, 0);
+        }
+        // first col
+        if (markFristColZero) {
+            setColZero(matrix, 0);
         }
     }
 

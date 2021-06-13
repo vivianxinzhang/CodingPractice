@@ -5,24 +5,28 @@ import java.util.Arrays;
 public class MergeSort {
     public static void main(String[] args) {
         MergeSort s = new MergeSort();
-        // test cases to cover possible situations
+
         int[] array = null;
         array = s.mergeSort(array);
-        System.out.println(Arrays.toString(array));
+        System.out.println(Arrays.toString(array));     // null
 
         array = new int[0];
         array = s.mergeSort(array);
-        System.out.println(Arrays.toString(array));
+        System.out.println(Arrays.toString(array));     // []
 
         array = new int[] { 4, 3, 2, 1};
         array = s.mergeSort(array);
-        System.out.println(Arrays.toString(array));
+        System.out.println(Arrays.toString(array));     // [1, 2, 3, 4]
 
         array = new int[] {3, 5, 1, 2, 4, 8};
         array = s.mergeSort(array);
-        System.out.println(Arrays.toString(array));
+        System.out.println(Arrays.toString(array));     // [1, 2, 3, 4, 5, 8]
     }
-    // Method 2
+
+    // Corner Cases:
+    // 1. What if the given array is null? In this case, we do not need to do anything.
+    // 2. What if the given array is of length zero? In this case, we do not need to do anything.
+    // Method 2:
     // Time O(nlogn)
     // Space O(n)
     public int[] mergeSort(int[] array) {

@@ -12,6 +12,7 @@ public class SpiralOrderGenerateII {
         // [9,  8,   7, 6]
     }
 
+    // Assumptions: M >= 0, N >= 0
     // Method 2: Iteration
     // Time O(mn)
     // Space O(1)
