@@ -1,9 +1,24 @@
 package com.company;
 
+import java.util.Arrays;
+
 public class SearchInSortedMatrixI {
+    public static void main(String[] args) {
+        SearchInSortedMatrixI s = new SearchInSortedMatrixI();
+        int[][] matrix = new int[][] {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        System.out.println(Arrays.toString(s.search(matrix, 3)));
+    }
+
+    // Assumptions:
+    // The given matrix is not null.
     // convert the 2D array to 1D array and do binary search
+    // Time O(log(mn))
+    // Space O(1)
     public int[] search(int[][] matrix, int target) {
-        // Write your solution here
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return new int[] {-1, -1};
         }

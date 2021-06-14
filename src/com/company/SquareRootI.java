@@ -9,6 +9,8 @@ public class SquareRootI {
         System.out.println(s.sqrt(18));     // 4
     }
 
+    // Assumption:
+    // n is guaranteed to be >= 0.
     // binary search largest smaller x such that: x * x <= n
     // Time O(logn)
     // Space O(1)

@@ -3,12 +3,21 @@ package com.company;
 public class SearchInSortedShiftedArrayI {
     public static void main(String[] args) {
         SearchInSortedShiftedArrayI s = new SearchInSortedShiftedArrayI();
-        int[] array = new int[] {1, 3, 3, 5};
-        System.out.println(s.search(array, 11));
+        int[] array = new int[] {3, 4, 5, 1, 2};
+        System.out.println(s.search(array, 4));     // 1
+
+        array = new int[] {1, 2, 3, 4, 5};
+        System.out.println(s.search(array, 4));     // 3
+
+        array = new int[] {3, 5, 6, 1, 2};
+        System.out.println(s.search(array, 4));     // -1
     }
 
+    // Assumptions:
+    // There are no duplicate elements in the array.
+    // Time O(logn)
+    // Space O(1)
     public int search(int[] array, int target) {
-        // Write your solution here
         if (array == null || array.length == 0) {
             return -1;
         }

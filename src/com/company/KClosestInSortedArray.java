@@ -5,19 +5,17 @@ import java.util.Arrays;
 public class KClosestInSortedArray {
     public static void main(String[] args) {
         KClosestInSortedArray s = new KClosestInSortedArray();
+
         int[] array = new int[] {1, 2, 3};
         System.out.println(Arrays.toString(s.kClosest(array, 2, 3)));
-        System.out.println(Arrays.toString(s.kClosestIII(array, 2, 3)));
         // [2, 1, 3]
 
         array = new int[] {1, 3, 5};
         System.out.println(Arrays.toString(s.kClosest(array, 10, 3)));
-        System.out.println(Arrays.toString(s.kClosestIII(array, 10, 3)));
-        // [1, 3, 5]
+        // [5, 3, 1]
 
         array = new int[] {1, 4, 6, 8};
         System.out.println(Arrays.toString(s.kClosest(array, 5, 2)));
-        System.out.println(Arrays.toString(s.kClosestIII(array, 5, 2)));
         // [4, 6]
     }
 
@@ -76,7 +74,7 @@ public class KClosestInSortedArray {
         int[] right = new int[] {left[0] + 1};
         // binary search            O(logk)
         kCloest(array, target, k, left, right);
-        // (left[0], right[0])
+        // result: [left[0] + 1, right[0] - 1] --> [left[0] + 1, right[0])
         int[] res = Arrays.copyOfRange(array, left[0] + 1, right[0]);
         return res;
     }
@@ -100,8 +98,8 @@ public class KClosestInSortedArray {
             }
             return;
         }
-        int leftMid = left[0] - (k / 2 - 1);
-        int rightMid = right[0] + (k / 2 - 1);
+        int leftMid = left[0] - (k / 2 - 1);        // diff between left and target
+        int rightMid = right[0] + (k / 2 - 1);      // diff between right and target
         int leftMidVal = leftMid < 0 ? Integer.MAX_VALUE : Math.abs(array[left[0]] - target);
         int rightMidVal = rightMid >= array.length ? Integer.MAX_VALUE : Math.abs(array[right[0]] - target);
         if (leftMidVal <= rightMidVal) {

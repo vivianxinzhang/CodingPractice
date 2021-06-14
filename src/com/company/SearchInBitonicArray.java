@@ -1,10 +1,17 @@
 package com.company;
 
 public class SearchInBitonicArray {
+    public static void main(String[] args) {
+        SearchInBitonicArray s = new SearchInBitonicArray();
+
+        int[] array = new int[] {1, 4, 7, 11, 6, 2, -3, -8};
+        System.out.println(s.search(array, 2));     // 5
+    }
+
+    // Assumptions: The array is not null.
     // Time O(logn)
     // Space O(1)
     public int search(int[] array, int target) {
-        // Write your solution here
         if (array == null || array.length == 0) {
             return -1;
         }
@@ -40,7 +47,6 @@ public class SearchInBitonicArray {
         }
         return -1;
     }
-
 
     public int findLocalMaximum(int[] array) {
         if (array == null || array.length == 0) {

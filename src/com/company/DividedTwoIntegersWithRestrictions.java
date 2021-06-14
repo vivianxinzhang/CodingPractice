@@ -51,7 +51,7 @@ public class DividedTwoIntegersWithRestrictions {
 
     // Assuming any number divided by 0 is Integer.MAX_VALUE.
     // Method 1:
-    // Binary Search: find largest smaller n
+    // Binary Search: find largest smaller n, such that
     //                divisor * n <= dividend
     // Time O(log(dividend))
     // Space O(1)
