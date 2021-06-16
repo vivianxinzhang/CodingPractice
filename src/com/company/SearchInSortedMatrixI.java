@@ -11,6 +11,7 @@ public class SearchInSortedMatrixI {
                 {7, 8, 9}
         };
         System.out.println(Arrays.toString(s.search(matrix, 3)));
+        // [0, 2]
     }
 
     // Assumptions:

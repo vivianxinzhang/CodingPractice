@@ -38,7 +38,7 @@ public class MaximumWidthOfBinaryTree {
     // We can assign an id to each node.
     // root index is i, left child index = 2*i + 1, right child index = 2*i + 2
     // Similar to a heap (complete binary tree)
-    // width = max_h -min_h + 1
+    // width = lastIdx - firstIdx + 1
     // Method 2: dfs
     // Time O(n)
     // Space O(h)
@@ -47,26 +47,26 @@ public class MaximumWidthOfBinaryTree {
             return 0;
         }
         int[] maxWidth = new int[] {Integer.MIN_VALUE};
-        List<Integer> firstIdx = new ArrayList<>();
-        dfs(root, 0, 0, firstIdx, maxWidth);
+        List<Integer> firstIndices = new ArrayList<>();
+        dfs(root, 0, 0, firstIndices, maxWidth);
         return maxWidth[0];
     }
 
-    private void dfs(TreeNode root, int level, int index, List<Integer> firstIdx, int[] maxWidth) {
+    private void dfs(TreeNode root, int level, int index, List<Integer> firstIndices, int[] maxWidth) {
         if (root == null) {
             return;
         }
-        if (level == firstIdx.size()) {
-            firstIdx.add(index);
+        if (level == firstIndices.size()) {
+            firstIndices.add(index);
         }
-        maxWidth[0] = Math.max(maxWidth[0], index - firstIdx.get(level) + 1);
-        dfs(root.left, level + 1, index * 2 + 1, firstIdx, maxWidth);
-        dfs(root.right, level + 1, index * 2 + 2, firstIdx, maxWidth);
+        maxWidth[0] = Math.max(maxWidth[0], index - firstIndices.get(level) + 1);
+        dfs(root.left, level + 1, index * 2 + 1, firstIndices, maxWidth);
+        dfs(root.right, level + 1, index * 2 + 2, firstIndices, maxWidth);
     }
 
     // Method 1: bfs
     // Time O(n)
-    // Space O(h)
+    // Space O(n)
     public int maxWidthOfBinaryTreeI(TreeNode root) {
         if (root == null) {
             return 0;
@@ -78,15 +78,15 @@ public class MaximumWidthOfBinaryTree {
         int maxWidth = 0;
         while (!queue.isEmpty()) {
             int size = queue.size();
-            int startIdx = 0;
-            int endIdx = 0;
+            int firstIdx = 0;
+            int lastIdx = 0;
             for (int i = 0; i < size; i++) {
                 TreeNode curr = queue.poll();
                 if (i == 0) {
-                    startIdx = map.get(curr);
+                    firstIdx = map.get(curr);
                 }
                 if (i == size - 1) {
-                    endIdx = map.get(curr);
+                    lastIdx = map.get(curr);
                 }
                 if (curr.left != null) {
                     queue.offer(curr.left);
@@ -97,7 +97,7 @@ public class MaximumWidthOfBinaryTree {
                     map.put(curr.right, map.get(curr) * 2 + 2);
                 }
             }
-            int currWidth = endIdx - startIdx + 1;
+            int currWidth = lastIdx - firstIdx + 1;
             maxWidth = Math.max(maxWidth, currWidth);
         }
         return maxWidth;

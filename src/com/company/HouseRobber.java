@@ -19,40 +19,21 @@ public class HouseRobber {
         }
         int n = array.length;
         int rob = 0;
-        int notRob = 0;
+        int noRob = 0;
         for (int i = 0; i < n; i++) {
             int robTmp = rob;
-            int notRobTmp = notRob;
+            int notRobTmp = noRob;
             rob = array[i] + notRobTmp;
-            notRob = Math.max(robTmp, notRobTmp);
+            noRob = Math.max(robTmp, notRobTmp);
         }
-        return Math.max(rob, notRob);
+        return Math.max(rob, noRob);
     }
 
     // Method 2:
-    // Time O(n)
-    // Space O(n)
-    public int robII(int[] array) {
-        if (array == null || array.length == 0) {
-            return 0;
-        }
-        int n = array.length;
-        int[] rob = new int[n];
-        int[] notRob = new int[n];
-        rob[0] = array[0];
-        notRob[0] = 0;
-        for (int i = 1; i < n; i++) {
-            rob[i] = array[i] + notRob[i - 1];
-            notRob[i] = Math.max(rob[i - 1], notRob[i - 1]);
-        }
-        return Math.max(rob[n - 1], notRob[n - 1]);
-    }
-
-    // Method 1:
     // M[i] represents maximum amount of gold you can rob without being caught between [0, i]
     // Time O(n)
     // Space O(n)
-    public int robI(int[] array) {
+    public int robII(int[] array) {
         if (array == null || array.length == 0) {
             return 0;
         }
@@ -69,5 +50,28 @@ public class HouseRobber {
             M[i] = Math.max(M[i - 1], M[i - 2] + array[i]);
         }
         return M[array.length - 1];
+    }
+
+    // Method 1:
+    // rob[i] represents maximum amount of gold you can rob if rob house i
+    // rob[i] = array[i] + notRob[i - 1];
+    // noRob[i] represents maximum amount of gold you can rob if not rob house i
+    // notRob[i] = Math.max(rob[i - 1], notRob[i - 1]);
+    // Time O(n)
+    // Space O(n)
+    public int robI(int[] array) {
+        if (array == null || array.length == 0) {
+            return 0;
+        }
+        int n = array.length;
+        int[] rob = new int[n];
+        int[] notRob = new int[n];
+        rob[0] = array[0];
+        notRob[0] = 0;
+        for (int i = 1; i < n; i++) {
+            rob[i] = array[i] + notRob[i - 1];
+            notRob[i] = Math.max(rob[i - 1], notRob[i - 1]);
+        }
+        return Math.max(rob[n - 1], notRob[n - 1]);
     }
 }

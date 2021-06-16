@@ -11,9 +11,9 @@ public class ExecutionTimeOfFunctions {
         logs.add("1:end:5");
         logs.add("0:end:7");
         // 0   1   2   3   4   5   6    7   8
-        // 0-------|           |------------0
-        //         |1---------1|
-        System.out.println(Arrays.toString(s.executeTime(2, logs)));    // [4, 3]
+        // 0-------|               |--------0
+        //         |1-------------1|
+        System.out.println(Arrays.toString(s.executeTime(2, logs)));    // [4, 4]
 
         logs = new ArrayList<>();
         logs.add("0:start:0");
@@ -24,9 +24,9 @@ public class ExecutionTimeOfFunctions {
         logs.add("0:end:7");
         // 0   1   2   3   4   5   6   7   8
         // 0-------|                   |---0
-        //         |1-------------1|
+        //         |1--------------1|
         //                         |2-2|
-        System.out.println(Arrays.toString(s.executeTime(3, logs)));    // [4, 3, 1]
+        System.out.println(Arrays.toString(s.executeTime(3, logs)));    // [3, 4, 1]
 
         logs = new ArrayList<>();
         logs.add("0:start:0");
@@ -35,11 +35,11 @@ public class ExecutionTimeOfFunctions {
         logs.add("0:end:4");
         logs.add("0:end:5");
         logs.add("0:end:7");
-        // 0   1   2   3   4   5   6   7
-        // 0-------|           |-------0
+        // 0   1   2   3   4   5   6   7   8
+        // 0-------|           |-----------0
         //         0---|   |---0
         //             0---|
-        System.out.println(Arrays.toString(s.executeTime(1, logs)));    // [7]
+        System.out.println(Arrays.toString(s.executeTime(1, logs)));    // [8]
     }
 
     // Note:
@@ -47,6 +47,10 @@ public class ExecutionTimeOfFunctions {
     // 2. Your output should be sorted by function id, which means the 0th element of your output corresponds to the exclusive time of function 0.
     // 3. Two functions won’t start or end at the same time.
     // 4. Functions could be called recursively, and will always end.
+    // For example,
+    // "0:start:1" means function 0 starts at timestamp 1;
+    // "0:end:0" means function 0 ends at timestamp 0 + 1.
+    // total operation time for function 0 is 1
     // 5. 1 <= n <= 100
     // Time O(n)
     // Space O(n)
