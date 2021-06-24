@@ -4,7 +4,7 @@ public class LongestConsecutiveOnes {
     public static void main(String[] args) {
         LongestConsecutiveOnes s = new LongestConsecutiveOnes();
         int[] array = {0, 1, 0, 1, 1, 1, 0};
-        System.out.println(s.longest(array));
+        System.out.println(s.longest(array));    // 3
     }
 
     // Time O(n)

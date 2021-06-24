@@ -4,7 +4,9 @@ import java.util.*;
 public class AllUniqueCharactersII {
     public static void main(String[] args) {
         AllUniqueCharactersII s = new AllUniqueCharactersII();
-        System.out.println();
+
+        System.out.println(s.allUnique("abca+/"));  // false
+        System.out.println(s.allUnique("abA8"));    // true
     }
 
     // Assumption:

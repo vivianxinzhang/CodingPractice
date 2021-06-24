@@ -13,6 +13,7 @@ public class CombinationsOfCoins {
         // [[0, 0, 9], [0, 1, 7], [0, 2, 5], [0, 3, 3], [0, 4, 1], [1, 0, 4], [1, 1, 2], [1, 2, 0]]
     }
 
+    // Method 2:
     // Time and Space complexity depend on int[] coins and target number, for 99 cents example
     // Time O(99^4) general O(target/min(coins)^coins.length)
     // Space O(1) general O(1)  recursion 有n层 但 in reality coins.length 不会特别长  n 不会趋向于无穷大
@@ -57,5 +58,40 @@ public class CombinationsOfCoins {
             helper(target - coins[index] * i, coins, index + 1, cur, result);
             cur.remove(cur.size() - 1);
         }
+    }
+
+    // Method 1:
+    // Time O(4^99)
+    // Space O(9)
+    public List<List<Integer>> combinationsI(int target, int[] coins) {
+        List<List<Integer>> res = new ArrayList<>();
+        int[] cur = new int[coins.length];
+        helper(coins, 0, target, cur, res);
+        return res;
+    }
+
+    private void helper(int[] coins, int index, int target, int[] array, List<List<Integer>> res) {
+        if (index == coins.length) {
+            if (target == 0) {
+                res.add(toList(array));
+            }
+            return;
+        }
+        // use one
+        if (target - coins[index] >= 0) {
+            array[index] += 1;
+            helper(coins, index, target - coins[index], array, res);
+            array[index] -= 1;
+        }
+        // do not use
+        helper(coins, index + 1, target, array, res);
+    }
+
+    private List<Integer> toList(int[] array) {
+        List<Integer> list = new ArrayList<>();
+        for (int num : array) {
+            list.add(num);
+        }
+        return list;
     }
 }

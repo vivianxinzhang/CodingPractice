@@ -10,11 +10,11 @@ public class AllPermutationsOfSubsets {
     }
 
     // Assumption:
-    // no duplicate characters in input,
+    // 1. input string is not null
+    // 2. no duplicate characters in input
     // Time O(n!*n)
     // Space O(n)
     public List<String> allPermutationsOfSubsets(String set) {
-        // Write your solution here
         List<String> result = new ArrayList<>();
         if (set == null) {
             return result;

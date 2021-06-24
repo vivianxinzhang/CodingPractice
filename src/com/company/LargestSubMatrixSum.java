@@ -25,7 +25,7 @@ public class LargestSubMatrixSum {
     // Step 2: enumerate all top row and bottom rows
     //         can use O(1) get sum for each col between top row and bottom row
     //         run largest subarray sum for in between values
-    // Time O(n^3)
+    // Time O(m^2 * n)
     // Space O(n^2)
     public int largest(int[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {

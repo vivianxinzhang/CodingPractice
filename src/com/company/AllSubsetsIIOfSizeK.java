@@ -16,10 +16,9 @@ public class AllSubsetsIIOfSizeK {
 
     // Method 1:
     // DFS solution select and not select
-    // Time O(n! * k)
-    // Space O(k)
+    // Time O(2^n * k)
+    // Space O(n)
     public List<String> subSetsIIOfSizeKI(String set, int k) {
-        // Write your solution here
         List<String> result = new ArrayList<>();
         if (set == null) {
             return result;

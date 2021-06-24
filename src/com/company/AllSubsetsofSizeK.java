@@ -14,6 +14,8 @@ public class AllSubsetsofSizeK {
         // [ab, bb, ba, ab, aa, ab]
     }
 
+    // Assumptions:
+    // There are no duplicate characters in the original set.
     // Time O(2^n * k)
     // Space O(n)
     public List<String> subSetsOfSizeK(String set, int k) {

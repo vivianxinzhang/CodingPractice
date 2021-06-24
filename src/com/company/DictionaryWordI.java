@@ -75,7 +75,7 @@ public class DictionaryWordI {
         for (int i = 1; i < canBreak.length; i++) {
             for (int j = 0; j < i; j++) {
                 // j == 0 canBreak[j] represents empty string
-                // input.substring(j, i) represents substring [0, i-1]  which is the first i characters
+                // input.substring(0, i) represents substring [0, i-1]  which is the first i characters
                 if (canBreak[j] && dictSet.contains(input.substring(j, i))) {
                     canBreak[i] = true;
                     break;

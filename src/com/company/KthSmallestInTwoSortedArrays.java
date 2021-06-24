@@ -10,6 +10,10 @@ public class KthSmallestInTwoSortedArrays {
         A = new int[] {1, 2, 3, 4};
         B = new int[] {1};
         System.out.println(s.kth(A, B, 2));  // 1
+
+        A = new int[] {1, 4, 5, 5, 8, 12, 12, 12};
+        B = new int[] {2, 2, 3, 7, 9, 9, 9};
+        System.out.println(s.kth(A, B, 14));  // 12
     }
 
     // Assumptions:
