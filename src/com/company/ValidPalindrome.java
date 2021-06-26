@@ -3,7 +3,12 @@ package com.company;
 public class ValidPalindrome {
     public static void main(String[] args) {
         ValidPalindrome s = new ValidPalindrome();
-        System.out.println();
+
+        System.out.println(s.valid("FQJKY$jB3Qd-fSOUAI`^iAUOSfdQ3BjyKJQF"));   // true
+
+        System.out.println(s.valid("an apple, :) elp pana#"));  // true
+        System.out.println(s.valid("dia monds dn dia"));        // false
+
     }
 
     // Time O(n)

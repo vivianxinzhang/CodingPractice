@@ -3,7 +3,10 @@ package com.company;
 public class ReverseBitsOfInteger {
     public static void main(String[] args) {
         ReverseBitsOfInteger s = new ReverseBitsOfInteger();
-        System.out.println(s.reverseBits(15));
+
+        System.out.println(s.reverseBits(15));      // 4026531840
+        System.out.println(s.reverseBits(1234));    // 1260388352
+
         System.out.println(s.reverseBitsI(15));
         System.out.println(s.reverseBitsII(15));
     }
