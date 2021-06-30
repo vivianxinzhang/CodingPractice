@@ -49,7 +49,7 @@ public class PaintFence {
         return same[n - 1] + diff[n - 1];
     }
 
-    // Optimize Space
+    // Optimize Space:
     // Time O(n)
     // Space O(1)
     public int numWaysII(int n, int k) {
