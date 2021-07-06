@@ -104,11 +104,10 @@ public class KClosestInSortedArray {
         int rightMidVal = rightMid >= array.length ? Integer.MAX_VALUE : Math.abs(array[right[0]] - target);
         if (leftMidVal <= rightMidVal) {
             left[0] = leftMid - 1;
-            kCloest(array, target, k - k / 2, left, right);
         } else {
             right[0] = rightMid + 1;
-            kCloest(array, target, k - k / 2, left, right);
         }
+        kCloest(array, target, k - k / 2, left, right);
     }
 
     // Method 1:
