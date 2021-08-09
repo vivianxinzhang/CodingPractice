@@ -100,8 +100,8 @@ public class KClosestInSortedArray {
         }
         int leftMid = left[0] - (k / 2 - 1);        // diff between left and target
         int rightMid = right[0] + (k / 2 - 1);      // diff between right and target
-        int leftMidVal = leftMid < 0 ? Integer.MAX_VALUE : Math.abs(array[left[0]] - target);
-        int rightMidVal = rightMid >= array.length ? Integer.MAX_VALUE : Math.abs(array[right[0]] - target);
+        int leftMidVal = leftMid < 0 ? Integer.MAX_VALUE : Math.abs(array[leftMid] - target);
+        int rightMidVal = rightMid >= array.length ? Integer.MAX_VALUE : Math.abs(array[rightMid] - target);
         if (leftMidVal <= rightMidVal) {
             left[0] = leftMid - 1;
         } else {

@@ -4,19 +4,19 @@ import java.util.*;
 public class LargestSetOfPointsWithPositiveSlope {
     public static void main(String[] args) {
         LargestSetOfPointsWithPositiveSlope s = new LargestSetOfPointsWithPositiveSlope();
-        Point[] points = new Point[4];
-        points[0] = new Point(0, 0);
-        points[1] = new Point(1, 1);
-        points[2] = new Point(2, 3);
-        points[3] = new Point(3, 3);
-        System.out.println(s.largest(points));      // 3
-        System.out.println(s.largestI(points));     // 3
 
         Point[] points1 = new Point[3];
         points1[0] = new Point(0, 10);
         points1[1] = new Point(1, 3);
         points1[2] = new Point(2, 5);
         System.out.println(s.largest(points1));      // 2
+
+        Point[] points = new Point[4];
+        points[0] = new Point(0, 0);
+        points[1] = new Point(1, 1);
+        points[2] = new Point(2, 3);
+        points[3] = new Point(3, 3);
+        System.out.println(s.largest(points));      // 3
     }
 
     // Assumptions: points is not null

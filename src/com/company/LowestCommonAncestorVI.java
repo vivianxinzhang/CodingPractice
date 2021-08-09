@@ -28,8 +28,8 @@ public class LowestCommonAncestorVI {
         nodes.add(four);
         nodes.add(eleven);
         System.out.println(s.lowestCommonAncestor(five, nodes).key);    // 5
-
     }
+
     static class KnaryTreeNode {
         int key;
         List<KnaryTreeNode> children;

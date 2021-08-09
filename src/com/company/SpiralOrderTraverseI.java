@@ -14,6 +14,10 @@ public class SpiralOrderTraverseI {
         matrix = new int[][] {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         System.out.println(s.spiral(matrix));
         // [1, 2, 3, 6, 9, 8, 7, 4, 5]
+
+        matrix = new int[][] {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}};
+        System.out.println(s.spiral(matrix));
+        // [1, 2, 3, 4, 5, 10, 9, 8, 7, 6]
     }
 
     // Assumptions:
@@ -23,29 +27,38 @@ public class SpiralOrderTraverseI {
     // Space O(1)
     public List<Integer> spiral(int[][] matrix) {
         List<Integer> res = new ArrayList<>();
-        int start = 0;
-        int end = matrix.length - 1;
-        while (start < end) {
-            for (int i = start; i < end; i++) {
-                res.add(matrix[start][i]);
+        int top = 0;
+        int bottom = matrix.length - 1;
+        int left = 0;
+        int right = matrix[0].length - 1;
+        while (top < bottom && left < right) {
+            for (int i = left; i < right; i++) {
+                res.add(matrix[top][i]);
             }
-            for (int i = start; i < end; i++) {
-                res.add(matrix[i][end]);
+            for (int i = top; i < bottom; i++) {
+                res.add(matrix[i][right]);
             }
-            for (int i = end; i > start; i--) {
-                res.add(matrix[end][i]);
+            for (int i = right; i > left; i--) {
+                res.add(matrix[bottom][i]);
             }
-            for (int i = end; i > start; i--) {
-                res.add(matrix[i][start]);
+            for (int i = bottom; i > top; i--) {
+                res.add(matrix[i][left]);
             }
-            start++;
-            end--;
+            left++;
+            right--;
+            top++;
+            bottom--;
         }
-        if (start == end) {
-            res.add(matrix[start][start]);
+        if (top == bottom) {
+            for (int i = left; i <= right; i++) {
+                res.add(matrix[top][i]);
+            }
+        } else if (left == right) {
+            for (int i = top; i < bottom; i++) {
+                res.add(matrix[right][i]);
+            }
         }
         return res;
-
     }
 
     // Method 1: Recursion

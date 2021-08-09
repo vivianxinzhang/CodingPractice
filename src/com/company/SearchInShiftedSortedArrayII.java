@@ -3,7 +3,11 @@ package com.company;
 public class SearchInShiftedSortedArrayII {
     public static void main(String[] args) {
         SearchInShiftedSortedArrayII s = new SearchInShiftedSortedArrayII();
-        int[] array = new int[] {3, 1};
+
+        int[] array = new int[]{};
+        System.out.println(s.search(array, 3));     // -1
+
+        array = new int[] {3, 1, 1};
         System.out.println(s.search(array, 3));     // 0
 
         array = new int[] {1, 1, 3, 3, 3};
@@ -27,7 +31,8 @@ public class SearchInShiftedSortedArrayII {
         }
         int left = 0;
         int right = array.length - 1;
-        // need to make sure search space decrease in each iteration  → to avoid 死循环
+        // need to make sure search space decrease in each iteration
+        // → to avoid 死循环
         // either move left, move right, or return
         while (left < right - 1) {
             int mid = left + (right - left) / 2;

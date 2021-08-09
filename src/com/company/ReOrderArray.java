@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class ReOrderArray {
     public static void main(String[] args) {
         ReOrderArray s = new ReOrderArray();
+
         int[] array = new int[] {1, 2, 3, 4};
         System.out.println(Arrays.toString(s.reorder(array)));
         // [1, 3, 2, 4]
@@ -16,6 +17,10 @@ public class ReOrderArray {
         array = new int[] {1, 2, 3, 4, 5, 6, 7};
         System.out.println(Arrays.toString(s.reorder(array)));
         // [1, 4, 2, 5, 3, 6, 7]
+
+        array = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+        System.out.println(Arrays.toString(s.reorder(array)));
+        // [1, 8, 2, 9, 3, 10, 4, 11, 5, 12, 6, 13, 7, 14]
     }
 
     /**
@@ -27,6 +32,7 @@ public class ReOrderArray {
      * 2). [c1, c2, ... c2k]
      * --> [c1, ck+1, c2, ck+2, ... , ck, c2k, c2k+1]
      */
+    // Assumptions: The given array is not null
     // size = r - l + 1
     // m = l + size / 2
     // lm = l + (size/2) / 2 = l + size/4
@@ -36,7 +42,6 @@ public class ReOrderArray {
     // Time O(nlogn)
     // Space O(logn)
     public int[] reorder(int[] array) {
-        // Assumptions: array is not null
         if (array.length % 2 == 0) {
             reorder(array, 0, array.length - 1);
         } else {

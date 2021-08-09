@@ -3,6 +3,7 @@ package com.company;
 public class ReverseBinaryTreeUpsideDown {
     public static void main(String[] args) {
         ReverseBinaryTreeUpsideDown s = new ReverseBinaryTreeUpsideDown();
+
         TreeNode root = s.reverse(null);
 
         TreeNode one = new TreeNode(1);
@@ -10,7 +11,15 @@ public class ReverseBinaryTreeUpsideDown {
         TreeNode five = new TreeNode(5);
         one.left = two;
         one.right = five;
+        /**         1
+         *        /   \
+         *       2     5
+         * */
         root = s.reverse(one);
+        /**         2
+         *        /   \
+         *       1     5
+         * */
     }
 
     // Method 1: Recursion

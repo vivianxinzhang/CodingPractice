@@ -3,6 +3,7 @@ package com.company;
 public class QuickSortLinkedList {
     public static void main(String[] args) {
         QuickSortLinkedList s = new QuickSortLinkedList();
+
         ListNode five = new ListNode(5);
         ListNode four = new ListNode(4);
         ListNode one = new ListNode(1);
@@ -15,18 +16,12 @@ public class QuickSortLinkedList {
         two.next = six;
         six.next = three;
         ListNode head = five;
-        while (head != null) {
-            System.out.print(head.value);
-            head = head.next;
-        }
-        // 541263
+        Printer.printLinkedList(head);
+        // 5 -> 4 -> 1 -> 2 -> 6 -> 3
         System.out.println();
         ListNode curr = s.quickSort(five);
-        while (curr != null) {
-            System.out.print(curr.value);
-            curr = curr.next;
-        }
-        // 123456
+        Printer.printLinkedList(curr);
+        // 5 -> 4 -> 1 -> 2 -> 6 -> 3
     }
 
     // Corner Cases:

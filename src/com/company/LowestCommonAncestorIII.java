@@ -1,6 +1,31 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LowestCommonAncestorIII {
+    public static void main(String[] args) {
+        LowestCommonAncestorIII s = new LowestCommonAncestorIII();
+        TreeNode five = new TreeNode(5);
+        TreeNode three = new TreeNode(3);
+        TreeNode eight = new TreeNode(8);
+        five.left = three;
+        five.right = eight;
+        TreeNode one = new TreeNode(1);
+        TreeNode seven = new TreeNode(7);
+        TreeNode eleven = new TreeNode(11);
+        three.left = one;
+        three.right = seven;
+        eight.right = eleven;
+        /*               5
+                      /     \
+                    3        8
+                 /     \      \
+               1        7      11
+        * */
+        System.out.println(s.lowestCommonAncestor(five, one, eleven).key);    // 5
+    }
+
     // one and two are not necessarily on the tree
     // if return c: then we know that
     //              BOTH    a and b 不直接隶属

@@ -3,7 +3,11 @@ package com.company;
 public class BuyStockIV {
     public static void main(String[] args) {
         BuyStockIV s = new BuyStockIV();
-        int[] array = new int[]{2, 3, 2, 1, 4, 5, 2, 11};
+
+        int[] array = new int[]{3, 4, 1, 2, 7, 6};
+        System.out.println(s.maxProfit(array, 5));  // 7
+
+        array = new int[]{2, 3, 2, 1, 4, 5, 2, 11};
         System.out.println(s.maxProfit(array, 3));  // 14
 
         array = new int[]{3, 4, 1, 2, 6, 2, 3, 5, 1, 7, 3, 8};
@@ -29,15 +33,18 @@ public class BuyStockIV {
     //                      price[i] + max_{0<=j<i}(-price[j]+M[k-1][j]))
     //
 
-    // M[i][j]: i is total number of transactions, j is day
+    // Method 1:
+    // M[i][j]: i is maximum number of transactions, j is # of days
     // Base case:
     // M[0][0] = 0, M[i][0] = 0 (0 days), M[0][j] = 0 (0 transactions)
     // Induction rule:
-    // case 1: not transacting on jth day
-    //         M[i][j-1]
+    // M[i][j] the maximum profit can make with at most i transaction and j days
+    // case 1: no transaction on jth day
+    //         = M[i][j-1]
     // case 2: complete transaction on jth day -> sell on the jth day
     //         buy on mth day, 0 <= m < j
-    //         price[j] - price[m] + M[i - 1][m]
+    //         (if sell on the jth day, need to buy on one of the days before jth day)
+    //         = price[j] - price[m] + M[i - 1][m]   (m = 0, ... j-1)
     // M[i][j] = max(case 1, case 2)
     // Time O(m^2*n)
     // Space O(mn)
@@ -45,7 +52,10 @@ public class BuyStockIV {
         int[][] M = new int[k + 1][array.length];
         for (int i = 1; i < M.length; i++) {
             for (int j = 1; j < M[0].length; j++) {
+                // Case 1: no transaction on jth day
                 M[i][j] = M[i][j - 1];
+                // Case 2: complete transaction on jth day -> sell on the jth day
+                //         buy on mth day, 0 <= m < j
                 for (int m = 0; m < j; m++) {
                     M[i][j] = Math.max(M[i][j], array[j] - array[m] + M[i - 1][m]);
                 }

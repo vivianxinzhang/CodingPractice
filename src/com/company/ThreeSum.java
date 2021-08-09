@@ -4,14 +4,15 @@ import java.util.*;
 public class ThreeSum {
     public static void main(String[] args) {
         ThreeSum s = new ThreeSum();
+
         int[] array = new int[] {3, 4, 0, -1, 2, 0, 5};
-        System.out.println(s.allTriples(array, 4)); // [[-1, 0, 5], [-1, 2, 3], [0, 0, 4]]
+        System.out.println(s.allTriples(array, 4));     // [[0, 0, 4], [-1, 0, 5], [-1, 2, 3]]
 
         array = new int[] {2, 1, 3, 2, 4, 3, 4, 2};
-        System.out.println(s.allTriples(array, 8)); // [[2, 3, 3]]
+        System.out.println(s.allTriples(array, 8));     // [[2, 3, 3], [1, 3, 4], [2, 2, 4]]
 
         array = new int[] {1, 2, 3, 2, 1, 2, 3, 2, 1};
-        System.out.println(s.allTriples(array, 6)); // [[2, 2, 2]]
+        System.out.println(s.allTriples(array, 6));     // [[1, 2, 3], [2, 2, 2]]
     }
 
     // Method 2: cannot sort the array, use Set and sorting to deduplicate
@@ -32,12 +33,12 @@ public class ThreeSum {
                 if (num * 2 == twoSum && count == 1) {
                     List<Integer> currRes = Arrays.asList(array[i], num, num);
                     Collections.sort(currRes);
-                    System.out.println(currRes);
+                    // System.out.println(currRes);
                     set.add(new ArrayList<>(currRes));
                 } else if (count == 0 && map.containsKey(twoSum - array[j])) {
                     List<Integer> currRes = Arrays.asList(array[i], twoSum - num, num);
                     Collections.sort(currRes);
-                    System.out.println(currRes);
+                    // System.out.println(currRes);
                     set.add(new ArrayList<>(currRes));
                 }
                 map.put(num, count + 1);

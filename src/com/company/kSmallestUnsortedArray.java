@@ -5,7 +5,12 @@ import java.util.*;
 public class kSmallestUnsortedArray {
     public static void main(String[] args) {
         kSmallestUnsortedArray s = new kSmallestUnsortedArray();
-        int[] array = new int[] {3, 4, 1, 2, 5};
+
+        int[] array = new int[] {1};
+        System.out.println(Arrays.toString(s.kSmallest(array, 0)));
+        // [1, 2, 3]
+
+        array = new int[] {3, 4, 1, 2, 5};
         System.out.println(Arrays.toString(s.kSmallest(array, 3)));
         // [1, 2, 3]
 
@@ -23,10 +28,10 @@ public class kSmallestUnsortedArray {
     // Time O(n) => if want answer to be sorted O(n + k + klogk)
     // worst case O(n^2)  => if want answer to be sorted O(n^2 + k + k^2)
     // Space O(1) <= O(logk) worst case O(k)
-    // O(n + n/2 + n/4 + ... 1) if pivot separates array 1/2 and 1/2
-    // = O(1/(1-1/2) * n) = O(2n) = O(n)
-    // O(n + (9/10)n + (9/10)^2*n + ... + 1  if pivot separates array to 1/10 and 9/10
-    // = O(1/(1-9/10) * n) = O(10n) = O(n)
+    // if pivot separates array 1/2 and 1/2
+    // O(n + n/2 + n/4 + ... 1) = O(1/(1-1/2) * n) = O(2n) = O(n)
+    // if pivot separates array to 1/10 and 9/10
+    // O(n + (9/10)n + (9/10)^2*n + ... + 1 = O(1/(1-9/10) * n) = O(10n) = O(n)
     public int[] kSmallestIV(int[] array, int k) {
         // corner case
         if (array == null || array.length == 0 || k == 0) {

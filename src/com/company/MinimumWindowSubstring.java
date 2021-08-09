@@ -4,13 +4,14 @@ import java.util.*;
 public class MinimumWindowSubstring {
     public static void main(String[] args) {
         MinimumWindowSubstring s = new MinimumWindowSubstring();
+
         System.out.println(s.minWindow("A", ""));    // ""
         System.out.println(s.minWindow("", "a"));    // ""
         System.out.println(s.minWindow("ADOBECODEBANC", "ABC"));    // BANC
         System.out.println(s.minWindow("acbba", "aab"));    // acbba
     }
 
-    // Method 1: brute force
+    // Method 2: two-pointers
     // Time: O(n)
     // Space: O(m)
     public String minWindow(String source, String target) {
@@ -44,6 +45,7 @@ public class MinimumWindowSubstring {
                 slow++;
             }
             if (match == map.size()) {
+                // window [slow, fast)
                 int curWindow = fast - slow;
                 if (curWindow < minWindow) {
                     minWindow = curWindow;
@@ -64,8 +66,8 @@ public class MinimumWindowSubstring {
     }
 
     // Method 1: brute force
-    // Time: O(n^3*m)
-    // Space: O(n^2*m)
+    // Time: O(n^3 * m)  source length - n,   target length - m
+    // Space: O(m)
     public String minWindowI(String source, String target) {
         if (target.isEmpty()) {
             return "";
@@ -88,7 +90,6 @@ public class MinimumWindowSubstring {
 
     private boolean match(String source, int left, int right, String target) {
         Map<Character, Integer> map = toMap(target);     // O(m)
-        int match = 0;
         for (int i = left; i <= right; i++) {   // O(n)
             Integer count = map.get(source.charAt(i));
             if (count != null) {

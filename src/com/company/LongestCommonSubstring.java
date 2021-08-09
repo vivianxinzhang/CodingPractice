@@ -3,15 +3,14 @@ package com.company;
 public class LongestCommonSubstring {
     public static void main(String[] args) {
         LongestCommonSubstring s = new LongestCommonSubstring();
+
         String one = "abcde";
         String two = "cdf";
         System.out.println(s.longestCommon(one, two));  // cd
-        System.out.println(s.longestCommonI(one, two));  // cd
 
         one = "sigh";
         two = "asith";
         System.out.println(s.longestCommon(one, two));  // si
-        System.out.println(s.longestCommonI(one, two));  // si
     }
 
     // Assumptions:

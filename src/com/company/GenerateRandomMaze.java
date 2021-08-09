@@ -12,12 +12,13 @@ import java.util.*;
 public class GenerateRandomMaze {
     public static void main(String[] args) {
         GenerateRandomMaze s = new GenerateRandomMaze();
-        int[][] res = s.maze(3);
-        for (int[] row : res) {
-            System.out.println(Arrays.toString(row));
-        }
-        System.out.println();
-        res = s.maze(5);
+        int[][]
+//                res = s.maze(3);
+//        for (int[] row : res) {
+//            System.out.println(Arrays.toString(row));
+//        }
+//        System.out.println();
+        res = s.mazeI(5);
         for (int[] row : res) {
             System.out.println(Arrays.toString(row));
         }
@@ -137,13 +138,15 @@ public class GenerateRandomMaze {
         return result;
     }
 
-    private void helper(int[][] maze, int i, int j) {
+    private void helper(int[][] maze, int x, int y) {
         shuffle(DIRS);
         for (int[] dir : DIRS) {
-            int nextX = i + 2 * dir[0];
-            int nextY = j + 2 * dir[1];
+            int nextX = x + 2 * dir[0];
+            int nextY = y + 2 * dir[1];
             if (validWall(maze, nextX, nextY)) {
-                maze[i + dir[0]][j + dir[1]] = 0;
+                Printer.printMatrix(maze);
+                // System.out.println();
+                maze[x + dir[0]][y + dir[1]] = 0;
                 maze[nextX][nextY] = 0;
                 helper(maze, nextX, nextY);
             }

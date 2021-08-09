@@ -9,7 +9,6 @@ public class BinaryTreeDiameter {
     // Time O(n)
     // Space O(h)
     public int diameter(TreeNode root) {
-        // Write your solution here
         int[] maximum = new int[1];
         helper(root, maximum);
         return maximum[0];

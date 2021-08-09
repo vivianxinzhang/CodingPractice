@@ -4,7 +4,13 @@ import java.util.*;
 public class MostPointsOnALine {
     public static void main(String[] args) {
         MostPointsOnALine s = new MostPointsOnALine();
-        Point[] array = new Point[4];
+
+        Point[] array = new Point[2];
+        array[0] = new Point(1, 1);
+        array[1] = new Point(2, 2);
+        System.out.println(s.most(array));  // 2
+
+        array = new Point[4];
         array[0] = new Point(0, 0);
         array[1] = new Point(1, 1);
         array[2] = new Point(2, 3);

@@ -7,6 +7,9 @@ public class LargestAndSmallest {
         int[] array = new int[] {1};
         System.out.println(Arrays.toString(s.largestAndSmallest(array)));   // [1, 1]
 
+        array = new int[] {2, 3, 1};
+        System.out.println(Arrays.toString(s.largestAndSmallest(array)));   // [3, 1]
+
         array = new int[] {1, 2, 3, 3, 3, 2, 2};
         System.out.println(Arrays.toString(s.largestAndSmallest(array)));   // [3, 1]
     }

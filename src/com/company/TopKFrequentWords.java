@@ -4,8 +4,15 @@ import java.util.*;
 public class TopKFrequentWords {
     public static void main(String[] args) {
         TopKFrequentWords s = new TopKFrequentWords();
-        String [] array = new String[] {"a", "a", "b", "b", "b", "b", "c", "c", "c", "d"};
-        System.out.println(Arrays.toString(s.topKFrequent(array, 2)));
+
+        String [] array = null;
+        System.out.println(Arrays.toString(s.topKFrequent(array, 2)));  // []
+
+        array = new String[] {"a", "a", "b", "c", "c", "c", "d"};
+        System.out.println(Arrays.toString(s.topKFrequent(array, 1)));  // [c]
+
+        array = new String[] {"a", "a", "b", "b", "b", "b", "c", "c", "c", "d"};
+        System.out.println(Arrays.toString(s.topKFrequent(array, 2)));  // [b, c]
     }
 
     // Assumptions: combo is not null, and k >= 1

@@ -3,6 +3,7 @@ package com.company;
 public class ReverseLinkedListInPairs {
     public static void main(String[] args) {
         ReverseLinkedListInPairs s = new ReverseLinkedListInPairs();
+
         ListNode one = new ListNode(1);
         ListNode two = new ListNode(2);
         ListNode three = new ListNode(3);
@@ -13,10 +14,8 @@ public class ReverseLinkedListInPairs {
         three.next = four;
         four.next = five;
         ListNode curr = s.reverseInPairs(one);
-        while (curr != null) {
-            System.out.println(curr.value);
-            curr = curr.next;
-        }
+        Printer.printLinkedList(curr);
+        // 2 -> 1 -> 4 -> 3 -> 5
     }
 
     // 1->2->3

@@ -5,6 +5,7 @@ import java.util.*;
 public class MaxWaterTrappedII {
     public static void main(String[] args) {
         MaxWaterTrappedII s = new MaxWaterTrappedII();
+
         int[][] matrix = new int[][]{
                 {3, 5, 6, 4},
                 {2, 2, 3, 5},

@@ -1,6 +1,28 @@
 package com.company;
 
 public class LowestCommonAncestorI {
+    public static void main(String[] args) {
+        LowestCommonAncestorI s = new LowestCommonAncestorI();
+        TreeNode five = new TreeNode(5);
+        TreeNode three = new TreeNode(3);
+        TreeNode eight = new TreeNode(8);
+        five.left = three;
+        five.right = eight;
+        TreeNode one = new TreeNode(1);
+        TreeNode seven = new TreeNode(7);
+        TreeNode eleven = new TreeNode(11);
+        three.left = one;
+        three.right = seven;
+        eight.right = eleven;
+        /*               5
+                      /     \
+                    3        8
+                 /     \      \
+               1        7      11
+        * */
+        System.out.println(s.lowestCommonAncestor(five, one, eleven).key);    // 5
+    }
+
     // Assumptions:
     // 1. There is no parent pointer for the nodes in the binary tree
     // 2. The given two nodes are guaranteed to be in the binary tree

@@ -5,7 +5,20 @@ import java.util.Arrays;
 public class SetMatrixZero {
     public static void main(String[] args) {
         SetMatrixZero s = new SetMatrixZero();
-        int[][] matrix = {{1, 0}, {0, 1}};
+
+        int[][] matrix = {};
+        Printer.printMatrix(matrix);
+        System.out.println();
+        s.setZero(matrix);
+        Printer.printMatrix(matrix);
+
+        matrix = new int[][]{{1, 0}, {0, 1}};
+        Printer.printMatrix(matrix);
+        System.out.println();
+        s.setZero(matrix);
+        Printer.printMatrix(matrix);
+
+        matrix = new int[][]{{0, 1, 2, 0}, {3, 4, 5, 2}, {1, 3, 1, 5}};
         Printer.printMatrix(matrix);
         System.out.println();
         s.setZero(matrix);
@@ -22,13 +35,15 @@ public class SetMatrixZero {
         }
         boolean markFristColZero = false;
         for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                // check elements of first col
-                if (j == 0 && matrix[i][j] == 0) {
-                    markFristColZero = true;
-                } else if (matrix[i][j] == 0) {   // check other elements
-                    matrix[i][0] = 0;
+            // check elements of first col, must be outside of next for loop
+            if (matrix[i][0] == 0) {
+                markFristColZero = true;
+            }
+            // check other columns
+            for (int j = 1; j < matrix[0].length; j++) {
+                if (matrix[i][j] == 0) {
                     matrix[0][j] = 0;
+                    matrix[i][0] = 0;
                 }
             }
         }

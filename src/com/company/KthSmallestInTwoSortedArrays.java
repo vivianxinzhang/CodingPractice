@@ -3,6 +3,7 @@ package com.company;
 public class KthSmallestInTwoSortedArrays {
     public static void main(String[] args) {
         KthSmallestInTwoSortedArrays s = new KthSmallestInTwoSortedArrays();
+
         int[] A = new int[] {1, 4, 6};
         int[] B = new int[] {2, 3};
         System.out.println(s.kth(A, B, 3));  // 3

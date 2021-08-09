@@ -21,26 +21,15 @@ public class DeepCopyUndirectedGraph {
         graph.add(node3);
         graph.add(node4);
         graph.add(node5);
-        printGraph(graph);
+        Printer.printGraph(graph);
         // 1 --> 2  5
         // 2 --> 3
         // 3 -->
         // 4 --> 5
         // 5 --> 4
-
         System.out.println();
         List<GraphNode> newGraph = s.copy(graph);
-        printGraph(newGraph);
-    }
-
-    private static void printGraph(List<GraphNode> graph) {
-        for (GraphNode node : graph) {
-            System.out.print(node.key + " --> ");
-            for (GraphNode nei : node.neighbors) {
-                System.out.print(nei.key + "  ");
-            }
-            System.out.println();
-        }
+        Printer.printGraph(newGraph);
     }
 
     // Assumptions: The given graph is not null
@@ -55,8 +44,8 @@ public class DeepCopyUndirectedGraph {
         Deque<GraphNode> queue = new ArrayDeque<>();
         Map<GraphNode, GraphNode> map = new HashMap<>();
         for (GraphNode node : graph) {
-            // copy node
             if (!map.containsKey(node)) {
+                // copy node
                 map.put(node, new GraphNode(node.key));
                 queue.offer(node);
             }
@@ -65,8 +54,8 @@ public class DeepCopyUndirectedGraph {
         while (!queue.isEmpty()) {
             GraphNode cur = queue.poll();
             for (GraphNode nei : cur.neighbors) {
-                // copy node
                 if (!map.containsKey(nei)) {
+                    // copy nei
                     map.put(nei, new GraphNode(nei.key));
                     queue.offer(nei);
                 }
@@ -98,23 +87,23 @@ public class DeepCopyUndirectedGraph {
         Deque<GraphNode> queue = new ArrayDeque<>();
         queue.offer(node);
         while (!queue.isEmpty()) {
-            GraphNode curr = queue.poll();
+            GraphNode cur = queue.poll();
             // copy node
-            GraphNode copyCurr = getOrCreate(curr, map);
-            for (GraphNode nei : curr.neighbors) {
+            GraphNode copyCur = getOrCreate(cur, map);
+            for (GraphNode nei : cur.neighbors) {
                 // copy node
                 GraphNode copyNei = getOrCreate(nei, map);
                 // copy edge
-                copyCurr.neighbors.add(copyNei);
+                copyCur.neighbors.add(copyNei);
             }
         }
     }
 
-    private GraphNode getOrCreate(GraphNode curr, Map<GraphNode, GraphNode> map) {
-        if (!map.containsKey(curr)) {
-            map.put(curr, new GraphNode(curr.key));
+    private GraphNode getOrCreate(GraphNode cur, Map<GraphNode, GraphNode> map) {
+        if (!map.containsKey(cur)) {
+            map.put(cur, new GraphNode(cur.key));
         }
-        return map.get(curr);
+        return map.get(cur);
     }
 
     // Assumptions: The given graph is not null
@@ -143,9 +132,8 @@ public class DeepCopyUndirectedGraph {
         GraphNode copyNode = map.get(node);
         for (GraphNode nei : node.neighbors) {
             if (!map.containsKey(nei)) {
-                // copy node
-                GraphNode copyNei = new GraphNode(nei.key);
-                map.put(nei, copyNei);
+                // copy nei
+                map.put(nei, new GraphNode(nei.key));
                 dfs(nei, map);
             }
             // copy edge

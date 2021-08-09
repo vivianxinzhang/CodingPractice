@@ -3,6 +3,7 @@ package com.company;
 public class LongestCommonSubsequence {
     public static void main(String[] args) {
         LongestCommonSubsequence s = new LongestCommonSubsequence();
+
         String one = "abcde";
         String two = "cbabdfe";
         System.out.println(s.longest(one, two));  // 4

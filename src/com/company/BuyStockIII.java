@@ -3,6 +3,7 @@ package com.company;
 public class BuyStockIII {
     public static void main(String[] args) {
         BuyStockIII s = new BuyStockIII();
+
         int[] array = new int[] {3, 4, 1, 2, 6, 2, 3, 5, 1, 7, 3, 8};
         System.out.println(s.maxProfit(array));
         // (4 - 3) + (7 - 1) = 12

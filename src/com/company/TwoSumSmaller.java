@@ -5,10 +5,22 @@ import java.util.Arrays;
 public class TwoSumSmaller {
     public static void main(String[] args) {
         TwoSumSmaller s = new TwoSumSmaller();
-        int[] array = new int[] {1, 2, 2, 4, 7};
+
+        int[] array = new int[] {1, 1, 1};
+        System.out.println(s.smallerPairs(array, 3));   // 3
+
+        array = new int[] {3, 2, 4};
+        System.out.println(s.smallerPairs(array, 7));   // 2
+
+        array = new int[] {1, 2, 2, 4, 7};
+        System.out.println(s.smallerPairs(array, 7));   // 6
+
+        array = new int[] {2, 1, 2, 4, 7};
         System.out.println(s.smallerPairs(array, 7));   // 6
     }
 
+    // Assumptions:
+    // The given array is not null and has length of at least 2
     // Method 2:
     // Time O(nlogn)
     // Space O(1)

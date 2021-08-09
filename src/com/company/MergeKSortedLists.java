@@ -42,11 +42,8 @@ public class MergeKSortedLists {
         // 2 6
 
         head = s.mergeII(listOfLists);
-        while (head != null) {
-            System.out.print(head.value + " ");
-            head = head.next;
-        }
-        // 0 1 2 3 5 6 7
+        Printer.printLinkedList(head);
+        // 0 -> 1 -> 2 -> 3 -> 5 -> 6 -> 7
     }
 
     // Assumptions:

@@ -4,7 +4,11 @@ import java.util.*;
 public class PlaceToPutTheChairI {
     public static void main(String[] args) {
         PlaceToPutTheChairI s = new PlaceToPutTheChairI();
-        char[][] gym = new char[][] {
+
+        char[][]gym = new char[][] {{'O'}};
+        System.out.println(s.putChair(gym));    // [-1, -1]
+
+        gym = new char[][] {
                 {'E', 'O', 'C'},
                 {'C', 'E', 'C'},
                 {'C', 'C', 'C'}

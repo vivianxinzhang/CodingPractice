@@ -3,24 +3,24 @@ package com.company;
 public class RecoverBinarySearchTree {
     public static void main(String[] args) {
         RecoverBinarySearchTree s = new RecoverBinarySearchTree();
+
         TreeNode one = new TreeNode(1);
         TreeNode two = new TreeNode(2);
         TreeNode three = new TreeNode(3);
         one.left = two;
         one.right = three;
-        InOrder inOrderPrinter = new InOrder();
-        System.out.println(inOrderPrinter.inOrder(one));
         /*
-              1
-            /   \
-            2    3
+               1
+             /   \
+            2     3
         * **/
         TreeNode res = s.recover(one);
+        InOrder inOrderPrinter = new InOrder();
         System.out.println(inOrderPrinter.inOrder(res));
         /*
-              2
-            /   \
-            1    3
+               2
+             /   \
+            1     3
         * **/
 
         TreeNode four = new TreeNode(4);
@@ -32,7 +32,6 @@ public class RecoverBinarySearchTree {
         TreeNode two2 = new TreeNode(2);
         eight.left = six;
         eight.right = two2;
-        System.out.println(inOrderPrinter.inOrder(four));
         /*
               4
             /   \
@@ -92,5 +91,34 @@ public class RecoverBinarySearchTree {
         prev = root;
         //search right tree
         inOrder(root.right);
+    }
+
+    // another implementation:
+    // Time O(n)
+    // Space O(h) worst case O(n)
+    public TreeNode recoverI(TreeNode root) {
+        TreeNode[] pre = new TreeNode[] {null};
+        TreeNode[] first = new TreeNode[] {null};
+        TreeNode[] second = new TreeNode[] {null};
+        helper(root, pre, first, second);
+        int tmp = first[0].key;
+        first[0].key = second[0].key;
+        second[0].key = tmp;
+        return root;
+    }
+
+    private void helper(TreeNode root, TreeNode[] pre, TreeNode[] first, TreeNode[] second) {
+        if (root == null) {
+            return;
+        }
+        helper(root.left, pre, first, second);
+        if (pre[0] != null && root.key <= pre[0].key) {
+            if (first[0] == null) {
+                first[0] = pre[0];
+            }
+            second[0] = root;
+        }
+        pre[0] = root;
+        helper(root.right, pre, first, second);
     }
 }

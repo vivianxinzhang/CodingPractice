@@ -6,19 +6,28 @@ import java.util.List;
 public class SpiralOrderTraverseII {
     public static void main(String[] args) {
         SpiralOrderTraverseII s = new SpiralOrderTraverseII();
+
         int[][] matrix = new int[][] {{}, {}, {}};
-        System.out.println(s.spiral(matrix));   // []
+        System.out.println(s.spiral(matrix));
+        // []
+
+        matrix = new int[][] {
+                {1}, {2}, {3}};
+        System.out.println(s.spiral(matrix));
+        // [1, 2, 3]
 
         matrix = new int[][] {
                         {1, 2},
                         {3, 4}};
-        System.out.println(s.spiral(matrix));   // [1, 2, 4, 3]
+        System.out.println(s.spiral(matrix));
+        // [1, 2, 4, 3]
 
         matrix = new int[][] {
                 {1, 2,  3,  4},
                 {5, 6,  7,  8},
                 {9, 10, 11, 12}};
-        System.out.println(s.spiral(matrix));   // [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]
+        System.out.println(s.spiral(matrix));
+        // [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]
     }
 
     // Assumptions:

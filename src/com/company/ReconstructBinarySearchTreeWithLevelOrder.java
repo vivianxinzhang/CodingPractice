@@ -9,11 +9,27 @@ public class ReconstructBinarySearchTreeWithLevelOrder {
 
         level = new int[]{5, 3, 8, 1, 4, 11};
         TreeNode root = s.reconstruct(level);
-        System.out.println(s.reconstruct(level));
+        System.out.println(s.reconstructI(level));
+        /**
+         *           5
+         *        /    \
+         *      3        8
+         *    /   \        \
+         *  1      4        11
+         * */
 
         level = new int[]{8, 4, 10, 2, 6, 9, 15, 3, 12, 16};
         root = s.reconstruct(level);
         System.out.println(s.reconstruct(level));
+        /**
+         *           8
+         *        /    \
+         *      4        10
+         *    /   \     /  \
+         *  2      6   9    15
+         *   \             /   \
+         *    3           12   16
+         * */
     }
 
     // Assumptions:

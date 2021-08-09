@@ -3,6 +3,7 @@ package com.company;
 public class SelectionSortLinkedList {
     public static void main(String[] args) {
         SelectionSortLinkedList s = new SelectionSortLinkedList();
+
         ListNode one = new ListNode(1);
         ListNode two = new ListNode(2);
         ListNode three = new ListNode(3);
@@ -22,7 +23,8 @@ public class SelectionSortLinkedList {
 
     // The selection sort algorithm sorts an array by repeatedly finding
     // the minimum element (considering ascending order)
-    // from unsorted part and putting it at the beginning.
+    // from unsorted part and moves it to its final location.
+    // The run time is Θ(n²), where n is the number of elements. The number of swaps is O(n).
     // Time O(n^2)
     // Space O(1)
     public ListNode selectionSort(ListNode head) {
@@ -32,7 +34,6 @@ public class SelectionSortLinkedList {
             ListNode smallest = findSmallest(head);
             head = deleteSmallest(head, smallest);
             tail.next = smallest;
-            smallest.next = head;
             tail = tail.next;
         }
         return dummy.next;

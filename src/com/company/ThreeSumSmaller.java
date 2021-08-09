@@ -5,11 +5,12 @@ import java.util.*;
 public class ThreeSumSmaller {
     public static void main(String[] args) {
         ThreeSumSmaller s = new ThreeSumSmaller();
+
         int[] array = new int[] {-1, 1, -1, -1};
-        System.out.println(s.threeSumSmaller(array, -1));
+        System.out.println(s.threeSumSmaller(array, -1));   // 1
 
         array = new int[] {-2, 0, 1, 3};
-        System.out.println(s.threeSumSmaller(array, 2));
+        System.out.println(s.threeSumSmaller(array, 2));    // 2
     }
 
     // given nums = [-2, 0, 1, 3], and target = 2.

@@ -4,6 +4,9 @@ public class NumberOfDifferentBits {
     public static void main(String[] args) {
         NumberOfDifferentBits s = new NumberOfDifferentBits();
 
+        // maximum  2147483647    binary 0111 1111 1111 1111
+        // minimum -2147483648           1111 1111 1111 1111
+        System.out.println(s.diffBits(-1, 2147483647));
         System.out.println(s.diffBits(2147483647, -2147483648));
         System.out.println(s.diffBits(5, 8));
     }

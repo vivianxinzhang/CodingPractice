@@ -3,13 +3,15 @@ package com.company;
 public class CompressString {
     public static void main(String[] args) {
         CompressString s = new CompressString();
-        System.out.println(s.compress("a"));
 
-        System.out.println(s.compress("cccc"));
-
-        System.out.println(s.compress("abbcccdeee"));   // "ab2c3de3"
+        System.out.println(s.compress("a"));              // a
+        System.out.println(s.compress("cccccccccccc"));   // c12
+        System.out.println(s.compress("abbcccdeee"));     // "ab2c3de3"
     }
 
+    // Assumptions:
+    // 1. The string is not null
+    // 2. The characters used in the original string are guaranteed to be ‘a’ - ‘z’
     // Time O(n)
     // Space O(n)
     public String compress(String input) {

@@ -3,12 +3,15 @@ package com.company;
 public class RemoveAdjacentRepeatedCharactersIII {
     public static void main(String[] args) {
         RemoveAdjacentRepeatedCharactersIII s = new RemoveAdjacentRepeatedCharactersIII();
-        System.out.println("main");
+
         String input = "aa";
-        System.out.println(s.deDup(input));
+        System.out.println(s.deDup(input));     //
 
         input = "aaaabbbc";
-        System.out.println(s.deDup(input));
+        System.out.println(s.deDup(input));     // c
+
+        input = "abbccde";
+        System.out.println(s.deDup(input));     // abbccde
     }
 
     // Time O(n)

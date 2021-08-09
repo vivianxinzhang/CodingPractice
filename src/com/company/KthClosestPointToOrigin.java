@@ -4,6 +4,7 @@ import java.util.*;
 public class KthClosestPointToOrigin {
     public static void main(String[] args) {
         KthClosestPointToOrigin s = new KthClosestPointToOrigin();
+
         int[] A = {1, 3, 5};
         int[] B = {2, 4};
         int[] C = {3, 6};

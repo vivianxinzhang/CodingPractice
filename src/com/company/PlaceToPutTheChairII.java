@@ -4,6 +4,7 @@ import java.util.*;
 public class PlaceToPutTheChairII {
     public static void main(String[] args) {
         PlaceToPutTheChairII s = new PlaceToPutTheChairII();
+
         char[][] gym = new char[][] {
                 {' ', 'E', ' '},
                 {' ', ' ', ' '},
@@ -24,7 +25,7 @@ public class PlaceToPutTheChairII {
     // 1. There is at least one equipment in the gym
     // 2. The given gym is represented by a char matrix of size M * N, where M >= 1 and N >= 1, it is guaranteed to be not null
     // Method 1:
-    // Time O(n^4 * logn)  <- O(n^2 * n^2 * log(n^2))
+    // Time O((mn)^2)  <- O(mn * mn)
     // Space O(n^2)
     public List<Integer> putChair(char[][] gym) {
         int M = gym.length;
@@ -34,20 +35,19 @@ public class PlaceToPutTheChairII {
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
                 int[][] cost = new int[M][N];
-                if (dijkstra(gym, cost, i, j)) {
-                    int currMinDistance = computeTotaltal(gym, cost, M, N);
-                    if (currMinDistance < globalMin) {
-                        result.set(0, i);
-                        result.set(1, j);
-                        globalMin = currMinDistance;
-                    }
+                dijkstra(gym, cost, i, j);
+                int currMinDistance = computeTotaltal(gym, cost, M, N);
+                if (currMinDistance < globalMin) {
+                    result.set(0, i);
+                    result.set(1, j);
+                    globalMin = currMinDistance;
                 }
             }
         }
         return result;
     }
 
-    private boolean dijkstra(char[][] gym, int[][] cost, int i, int j) {
+    private void dijkstra(char[][] gym, int[][] cost, int i, int j) {
         boolean[][] visited = new boolean[gym.length][gym[0].length];
         cost[i][j] = 0;
         visited[i][j] = true;
@@ -70,15 +70,6 @@ public class PlaceToPutTheChairII {
             }
             pathCost++;
         }
-
-        for (int l = 0; l < gym.length; l++) {
-            for (int m = 0; m < gym[0].length; m++) {
-                if (!visited[l][m] && gym[l][m] == 'E') {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     private List<Pair> getNeis(Pair cur, char[][] gym) {

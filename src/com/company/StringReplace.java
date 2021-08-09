@@ -15,6 +15,8 @@ public class StringReplace {
         // laioffer
         System.out.println(s.replace("appledogapple", "apple", "cat"));
         // catdogcat
+        System.out.println(s.replace("xyxyxyxyxyx", "xyx", "uv"));
+        // uvyuvyuv
     }
 
     // Method 2: Using Java's StringBuilder utility and String's indexof(),

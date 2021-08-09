@@ -4,8 +4,11 @@ import java.util.*;
 public class AllValidPermutationsOfParenthesesII {
     public static void main(String[] args) {
         AllValidPermutationsOfParenthesesII s = new AllValidPermutationsOfParenthesesII();
+
         System.out.println(s.validParentheses(1, 1, 0));
         // [()<>, (<>), <()>, <>()]
+        System.out.println(s.validParentheses(0, 1, 1));
+        // [<>{}, <{}>, {<>}, {}<>]
     }
 
     // Assumptions:

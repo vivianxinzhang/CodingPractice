@@ -3,11 +3,12 @@ package com.company;
 public class PossiblePathsWithObstacles {
     public static void main(String[] args) {
         PossiblePathsWithObstacles s = new PossiblePathsWithObstacles();
-        int[][] matrix = new int[][]{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}};
-        System.out.println(s.possiblepath(matrix));     // 2
 
-        matrix = new int[][]{{0, 0, 0}, {0, 1, 0}, {0, 0, 1}};
+        int[][]  matrix = new int[][]{{0, 0, 0}, {0, 1, 0}, {0, 0, 1}};
         System.out.println(s.possiblepath(matrix));     // 0
+
+        matrix = new int[][]{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}};
+        System.out.println(s.possiblepath(matrix));     // 2
 
         matrix = new int[][] {{0, 1, 0, 1, 0, 1},
                               {0, 0, 1, 0, 0, 1},

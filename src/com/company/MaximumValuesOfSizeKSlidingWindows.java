@@ -4,15 +4,12 @@ import java.util.*;
 public class MaximumValuesOfSizeKSlidingWindows {
     public static void main(String[] args) {
         MaximumValuesOfSizeKSlidingWindows s = new MaximumValuesOfSizeKSlidingWindows();
+
         int[] array = new int[] {1, 2, 3, 2, 4, 2, 1};
         System.out.println(s.maxWindows(array, 3));     // [3, 3, 4, 4, 4]
-        System.out.println(s.maxWindowsI(array, 3));
-        System.out.println(s.maxWindowsII(array, 3));
 
         array = new int[] {5, 2, 1, 4, 3, 6, 2, 8, 3, 1, 4};
         System.out.println(s.maxWindows(array, 4));     // [5, 4, 6, 6, 8, 8, 8, 8]
-        System.out.println(s.maxWindowsI(array, 4));
-        System.out.println(s.maxWindowsII(array, 4));
     }
 
     // Assumptions:

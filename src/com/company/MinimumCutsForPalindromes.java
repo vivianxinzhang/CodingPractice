@@ -3,8 +3,12 @@ package com.company;
 public class MinimumCutsForPalindromes {
     public static void main(String[] args) {
         MinimumCutsForPalindromes s = new MinimumCutsForPalindromes();
+
         System.out.println(s.minCuts("aba"));    // 0
         System.out.println(s.minCuts("ababbbab"));    // 1
+        //                                  a | babbbab
+        System.out.println(s.minCuts("aaaaaabbabb"));    // 1
+        //                                  aaaaaa | bbabb
         System.out.println(s.minCuts("ababbbabbababa"));    // 3
     }
 

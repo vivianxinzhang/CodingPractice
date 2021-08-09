@@ -4,9 +4,10 @@ import java.util.*;
 public class DecompressStringII {
     public static void main(String[] args) {
         DecompressStringII s = new DecompressStringII();
-        System.out.println(s.decompress("a1"));     // a
 
-        System.out.println(s.decompress("a1b3"));   // abbb
+        System.out.println(s.decompress("a1"));         // a
+        System.out.println(s.decompress("a1b3"));       // abbb
+        System.out.println(s.decompress("a1c0b2c4"));   // abbcccc
     }
 
     // Method 1: "in place"

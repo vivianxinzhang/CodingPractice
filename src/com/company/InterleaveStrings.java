@@ -3,6 +3,7 @@ package com.company;
 public class InterleaveStrings {
     public static void main(String[] args) {
         InterleaveStrings s = new InterleaveStrings();
+
         System.out.println(s.canMerge("", "", ""));     // true
 
         System.out.println(s.canMerge("acd", "be", "abcde"));   // true
@@ -14,7 +15,8 @@ public class InterleaveStrings {
 
     // Assumptions: none of A, B, C is null
     // DP
-    // M[i][j] represents if the first i characters [0, i-1] of str1 and j characters [0, j-1] of str2 can
+    // M[i][j] represents if the first i characters [0, i-1] of str1
+    // and the first j characters [0, j-1] of str2 can
     // form the first (i + j) characters [0, i+j-1] in str3
     // Base case:
     // M[0][0] = true

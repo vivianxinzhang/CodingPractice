@@ -8,11 +8,13 @@ public class ReconstructBinaryTreeWithPreorderAndInorder {
         int[] inOrder = new int[] {1, 3, 4, 5, 8, 11};
         TreeNode root = s.reconstruct(inOrder, preOrder);
         TreePrinter.print(root);
-        /*
-            5
-            3 8
-            1 4 11
-        **/
+        /**
+         *           5
+         *        /    \
+         *      3        8
+         *    /   \        \
+         *  1      4        11
+         * */
     }
 
     //    			        5

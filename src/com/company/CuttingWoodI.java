@@ -5,6 +5,9 @@ public class CuttingWoodI {
         CuttingWoodI s = new CuttingWoodI();
         int[] cuts = new int[] {2, 4, 7};
         System.out.println(s.minCost(cuts, 10));    // 20
+
+        cuts = new int[] {2, 4, 5, 8};
+        System.out.println(s.minCost(cuts, 10));    // 23
     }
 
     // Base case: (size = 1) the shortest wood piece that cannot be cut any further.

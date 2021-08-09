@@ -3,23 +3,15 @@ package com.company;
 public class MaxWaterTrappedI {
     public static void main(String[] args) {
         MaxWaterTrappedI s = new MaxWaterTrappedI();
-        int[] array = new int[]{3, 1, 3};   // 2
+
+        int[] array = new int[]{3, 1, 3};         // 2
         System.out.println(s.maxTrapped(array));
-        System.out.println(s.maxTrappedI(array));
-        System.out.println(s.maxTrappedII(array));
-        System.out.println(s.maxTrappedIII(array));
+
+        array = new int[]{2, 1, 3, 2, 4};         // 2
+        System.out.println(s.maxTrapped(array));
 
         array = new int[]{2, 1, 3, 4, 5, 2, 6};   // 4
         System.out.println(s.maxTrapped(array));
-        System.out.println(s.maxTrappedI(array));
-        System.out.println(s.maxTrappedII(array));
-        System.out.println(s.maxTrappedIII(array));
-
-        array = new int[]{2, 1, 3, 2, 4};   // 2
-        System.out.println(s.maxTrapped(array));
-        System.out.println(s.maxTrappedI(array));
-        System.out.println(s.maxTrappedII(array));
-        System.out.println(s.maxTrappedIII(array));
     }
 
     // Assumptions: The given array is not null
@@ -33,7 +25,7 @@ public class MaxWaterTrappedI {
     // each round:
     // update leftMax and rightMax
     // if leftMax < rightMax, calculate water trapped on leftIdx, then left++;
-    // else                 , calculate water trapped on rightIdx, then righ--;
+    // else                 , calculate water trapped on rightIdx, then right--;
     // Time O(n)
     // Space O(1)
     public int maxTrapped(int[] A) {
@@ -103,27 +95,29 @@ public class MaxWaterTrappedI {
     }
 
     private int[] findRightMax(int[] array) {
-        int[] M = new int[array.length];
+        int n = array.length;
+        int[] M = new int[n];
         // M[i] represents the maxHeight in [i, n - 1]
-        M[array.length - 1] = array[array.length - 1];
+        M[n - 1] = array[n - 1];
         // induction rule:
         // M[i] = array[i]    if array[i] > M[i+1]
         //      = M[i+1]      otherwise
-        for (int i = M.length - 2; i >= 0; i--) {
+        for (int i = n - 2; i >= 0; i--) {
             M[i] = array[i] > M[i + 1] ? array[i] : M[i + 1];
         }
         return M;
     }
 
     private int[] findLeftMax(int[] array) {
-        int[] M = new int[array.length];
+        int n = array.length;
+        int[] M = new int[n];
         // M[i] represents the maxHeight in [0, i]
         // base case:
         M[0] = array[0];
         // induction rule:
         // M[i] = array[i]    if array[i] > M[i-1]
         //      = M[i-1]      otherwise
-        for (int i = 1; i < M.length; i++) {
+        for (int i = 1; i < n; i++) {
             M[i] = array[i] > M[i - 1] ? array[i] : M[i - 1];
         }
         return M;
