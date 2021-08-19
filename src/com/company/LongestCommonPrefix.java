@@ -3,6 +3,7 @@ package com.company;
 public class LongestCommonPrefix {
     public static void main(String[] args) {
         LongestCommonPrefix s = new LongestCommonPrefix();
+
         String[] strs = {""};
         System.out.println(s.longestCommonPrefix(strs));    // ""
 
@@ -26,7 +27,7 @@ public class LongestCommonPrefix {
 
     private boolean existInAllRows(String[] array, int index, char ch) {
         for (int row = 1; row < array.length; row++) {
-            if (index >= array[row].length() && array[row].charAt(index) != ch) {
+            if (index >= array[row].length() || array[row].charAt(index) != ch) {
                 return false;
             }
         }

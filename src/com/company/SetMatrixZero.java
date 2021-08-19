@@ -23,6 +23,12 @@ public class SetMatrixZero {
         System.out.println();
         s.setZero(matrix);
         Printer.printMatrix(matrix);
+
+        matrix = new int[][]{{0,1,2,0},{3,4,5,2},{1,3,1,5}};
+        Printer.printMatrix(matrix);
+        System.out.println();
+        s.setZero(matrix);
+        Printer.printMatrix(matrix);
     }
 
     // first row (excluding matrix[0][0]) is used to flag each col, mark the first element to 0 if there is 0 in the col

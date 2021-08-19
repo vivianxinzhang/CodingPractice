@@ -17,6 +17,9 @@ public class TwoSumSmaller {
 
         array = new int[] {2, 1, 2, 4, 7};
         System.out.println(s.smallerPairs(array, 7));   // 6
+
+        array = new int[] {3, 4, 0, -1, 2, 0, 5};
+        System.out.println(s.smallerPairs(array, 7));   // 17
     }
 
     // Assumptions:

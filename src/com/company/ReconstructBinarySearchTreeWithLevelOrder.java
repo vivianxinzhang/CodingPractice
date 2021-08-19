@@ -4,6 +4,7 @@ import java.util.*;
 public class ReconstructBinarySearchTreeWithLevelOrder {
     public static void main(String[] args) {
         ReconstructBinarySearchTreeWithLevelOrder s = new ReconstructBinarySearchTreeWithLevelOrder();
+
         int[] level = new int[]{};
         System.out.println(s.reconstruct(level));   // null
 

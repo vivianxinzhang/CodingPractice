@@ -3,6 +3,7 @@ package com.company;
 public class ReverseNodesInKGroups {
     public static void main(String[] args) {
         ReverseNodesInKGroups s = new ReverseNodesInKGroups();
+
         ListNode one = new ListNode(1);
         ListNode two = new ListNode(2);
         ListNode three = new ListNode(3);

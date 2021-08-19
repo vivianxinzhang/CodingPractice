@@ -4,6 +4,7 @@ import java.util.*;
 public class NQueens {
     public static void main(String[] args) {
         NQueens s = new NQueens();
+
         System.out.println(s.nqueens(1));
         // [[0]]
 

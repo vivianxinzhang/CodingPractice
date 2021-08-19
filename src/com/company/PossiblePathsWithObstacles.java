@@ -4,10 +4,14 @@ public class PossiblePathsWithObstacles {
     public static void main(String[] args) {
         PossiblePathsWithObstacles s = new PossiblePathsWithObstacles();
 
-        int[][]  matrix = new int[][]{{0, 0, 0}, {0, 1, 0}, {0, 0, 1}};
+        int[][]  matrix = new int[][]{{0, 0, 0},
+                                      {0, 1, 0},
+                                      {0, 0, 1}};
         System.out.println(s.possiblepath(matrix));     // 0
 
-        matrix = new int[][]{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}};
+        matrix = new int[][]{{0, 0, 0},
+                             {0, 1, 0},
+                             {0, 0, 0}};
         System.out.println(s.possiblepath(matrix));     // 2
 
         matrix = new int[][] {{0, 1, 0, 1, 0, 1},
@@ -29,20 +33,14 @@ public class PossiblePathsWithObstacles {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (i == 0 && j == 0) {
-                    if (matrix[i][j] != 1) {
-                        M[i][j] = 1;
-                    }
+                    M[i][j] = matrix[i][j] == 1 ? 0 : 1;
                 } else if (i == 0) {
-                    if (matrix[i][j] != 1) {
-                        M[i][j] = M[i][j - 1];
-                    }
+                    M[i][j] = matrix[i][j] == 1 ? 0 : M[i][j - 1];
                 } else if (j == 0) {
-                    if (matrix[i][j] != 1) {
-                        M[i][j] = M[i - 1][j];
-                    }
-                } else if (matrix[i][j] != 1) {
-                        M[i][j] += M[i - 1][j];
-                        M[i][j] += M[i][j - 1];
+                    M[i][j] = matrix[i][j] == 1 ? 0 : M[i - 1][j];
+                } else if (matrix[i][j] == 0) {
+                    M[i][j] += M[i - 1][j];
+                    M[i][j] += M[i][j - 1];
                 }
             }
         }

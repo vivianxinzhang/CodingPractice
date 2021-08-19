@@ -2,6 +2,12 @@ package com.company;
 import java.util.*;
 
 public class BinaryTreePathSumToTargetIII {
+    public static void main(String[] args) {
+        BinaryTreePathSumToTargetIII s = new BinaryTreePathSumToTargetIII();
+
+
+    }
+
     // Method 1:
     // Time O(n)
     // Space O(n)

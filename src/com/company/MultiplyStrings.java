@@ -28,7 +28,11 @@ public class MultiplyStrings {
          *    0   1   2   3   4     index
          *    0   5   5   3   5
          * */
-        System.out.println(s.multiply(num1, num2));     // 5535
+        System.out.println(s.multiply(num1, num2));     // 891
+
+        num1 = "9";
+        num2 = "99";
+        System.out.println(s.multiply(num1, num2));     // 0
     }
 
     // The product of two numbers cannot exceed the sum of the two lengths.

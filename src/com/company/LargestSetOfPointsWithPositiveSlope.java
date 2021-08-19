@@ -23,7 +23,7 @@ public class LargestSetOfPointsWithPositiveSlope {
     // Step1: Sort all points according to their x-coordinates. --Time = O(nlogn)
     // Step2: Use the solution of longest ascending subsequence to find solutions with respect to the y-coordinates.
     // Time O(n^2)
-    // Space O(n)
+    // Space O(nlogn) <- O(nlogn + n)
     public int largest(Point[] points) {
         // we need to sort the points by x ascending and y descending
         // y descending 为了避免把 相同x不同y slope==infinity 的 points 加入结果

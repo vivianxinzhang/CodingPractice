@@ -7,6 +7,9 @@ import java.util.Set;
 
 public class Printer {
     public static void printLinkedList(ListNode cur) {
+        if (cur == null) {
+            System.out.print("NULL");
+        }
         while (cur != null) {
             System.out.print(cur.value);
             cur = cur.next;

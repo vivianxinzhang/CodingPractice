@@ -11,6 +11,10 @@ public class LongestCommonSubsequence {
         one = "sigh";
         two = "asith";
         System.out.println(s.longest(one, two));  // 3
+
+        one = "abcdefg";
+        two = "babcgfegh";
+        System.out.println(s.longest(one, two));  // 5
     }
 
     // Assumptions:
@@ -40,5 +44,31 @@ public class LongestCommonSubsequence {
             }
         }
         return longest[source.length()][target.length()];
+    }
+
+    // another implementation:
+    // Time O(mn)
+    // Space O(mn)
+    public int longestI(String source, String target) {
+        int[][] M = new int[source.length()][target.length()];
+        int longest = 0;
+        for (int i = 0; i < source.length(); i++) {
+            for (int j = 0; j < target.length(); j++) {
+                if (source.charAt(i) == target.charAt(j)) {
+                    M[i][j] = getNum(M, i - 1, j - 1) + 1;
+                } else {
+                    M[i][j] = Math.max(getNum(M, i - 1, j), getNum(M, i, j - 1));
+                }
+                longest = Math.max(longest, M[i][j]);
+            }
+        }
+        return longest;
+    }
+
+    private int getNum(int[][] m, int i, int j) {
+        if (i < 0 || j < 0) {
+            return 0;
+        }
+        return m[i][j];
     }
 }

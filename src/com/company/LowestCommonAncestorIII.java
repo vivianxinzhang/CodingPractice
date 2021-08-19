@@ -6,6 +6,7 @@ import java.util.List;
 public class LowestCommonAncestorIII {
     public static void main(String[] args) {
         LowestCommonAncestorIII s = new LowestCommonAncestorIII();
+
         TreeNode five = new TreeNode(5);
         TreeNode three = new TreeNode(3);
         TreeNode eight = new TreeNode(8);
@@ -23,7 +24,12 @@ public class LowestCommonAncestorIII {
                  /     \      \
                1        7      11
         * */
+        System.out.println(s.lowestCommonAncestor(five, one, three).key);
+        System.out.println(s.lowestCommonAncestor(five, one, eight).key);
         System.out.println(s.lowestCommonAncestor(five, one, eleven).key);    // 5
+
+        TreeNode notInTheTree = new TreeNode(100);
+        System.out.println(s.lowestCommonAncestor(five, one, notInTheTree));
     }
 
     // one and two are not necessarily on the tree
@@ -38,7 +44,6 @@ public class LowestCommonAncestorIII {
     // Space O(n)
     public TreeNode lowestCommonAncestor(TreeNode root,
                                          TreeNode one, TreeNode two) {
-        // write your solution here
         TreeNode result = LCA(root, one, two);
         if (result == one) {
             if (LCA(one, two, two) == null) {

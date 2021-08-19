@@ -4,11 +4,18 @@ import java.util.*;
 public class TwoSumAllPairI {
     public static void main(String[] args) {
         TwoSumAllPairI s = new TwoSumAllPairI();
+
         int[] array = new int[] {1, 3, 2, 4};
         System.out.println(s.allPairs(array, 5));
+        // [[1, 2], [0, 3]]
 
         array = new int[] {1, 2, 2, 4};
         System.out.println(s.allPairs(array, 6));
+        // [[1, 3], [2, 3]]
+
+        array = new int[] {3, 5, 3, 2, 4, 4};
+        System.out.println(s.allPairs(array, 7));
+        // [[1, 3], [0, 4], [2, 4], [0, 5], [2, 5]]
     }
 
     // Assumptions: array is not null, array.length >= 2

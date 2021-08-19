@@ -7,6 +7,7 @@ public class MinimumWindowSubstring {
 
         System.out.println(s.minWindow("A", ""));    // ""
         System.out.println(s.minWindow("", "a"));    // ""
+        System.out.println(s.minWindow("b", "a"));    // ""
         System.out.println(s.minWindow("ADOBECODEBANC", "ABC"));    // BANC
         System.out.println(s.minWindow("acbba", "aab"));    // acbba
     }
