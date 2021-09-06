@@ -3,6 +3,7 @@ package com.company;
 public class LargestSubMatrixProduct {
     public static void main(String[] args) {
         LargestSubMatrixProduct s = new LargestSubMatrixProduct();
+
         double[][] matrix = new double[][] { {1.0}, {2.0}};
         System.out.println(s.largest(matrix));  // 2.0
 

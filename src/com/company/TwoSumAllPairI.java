@@ -13,6 +13,10 @@ public class TwoSumAllPairI {
         System.out.println(s.allPairs(array, 6));
         // [[1, 3], [2, 3]]
 
+        array = new int[] {3, 9, 1, 2, 3};
+        System.out.println(s.allPairs(array, 4));
+        // [[0, 2], [2, 4]]
+
         array = new int[] {3, 5, 3, 2, 4, 4};
         System.out.println(s.allPairs(array, 7));
         // [[1, 3], [0, 4], [2, 4], [0, 5], [2, 5]]

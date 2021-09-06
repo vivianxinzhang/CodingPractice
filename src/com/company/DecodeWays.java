@@ -10,8 +10,8 @@ public class DecodeWays {
 
         System.out.println(s.numDecodeWay("0"));    // 0
         System.out.println(s.numDecodeWay("212"));  // 3
-        System.out.println(s.numDecodeWay("106"));
         // 2,1,2("BAB") or 2,12("BL") or 21,2("UB")
+        System.out.println(s.numDecodeWay("106"));  // 1
         System.out.println(s.numDecodeWay("624212641113981521649688221891834112776717328126106"));
         // 54000
     }

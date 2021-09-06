@@ -1,53 +1,82 @@
 package com.company;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class AddTwoNumbers {
     public static void main(String[] args) {
         AddTwoNumbers s = new AddTwoNumbers();
-//        ListNode l1 = new ListNode(2);
-//        ListNode four = new ListNode(4);
-//        l1.next = four;
-//        ListNode three = new ListNode(3);
-//        four.next = three;
-//        ListNode curr1 = l1;
-//        while (curr1 != null) {
-//            System.out.print(curr1.value);
-//            curr1 = curr1.next;
-//        }
-//        System.out.println();
-//        ListNode l2 = new ListNode(5);
-//        ListNode six = new ListNode(6);
-//        l2.next = six;
-//        ListNode four2 = new ListNode(4);
-//        six.next = four2;
-//        ListNode curr2 = l2;
-//        while (curr2 != null) {
-//            System.out.print(curr2.value);
-//            curr2 = curr2.next;
-//        }
-//        System.out.println();
-//        ListNode curr = s.addTwoNumbers(l1, l2);
-//        while (curr != null) {
-//            System.out.print(curr.value);
-//            curr = curr.next;
-//        }
+        ListNode l1 = new ListNode(2);
+        ListNode four = new ListNode(4);
+        l1.next = four;
+        ListNode three = new ListNode(3);
+        four.next = three;
+        ListNode cur1 = l1;
+        Printer.printLinkedList(cur1);
+        ListNode l2 = new ListNode(5);
+        ListNode six = new ListNode(6);
+        l2.next = six;
+        ListNode four2 = new ListNode(4);
+        six.next = four2;
+        ListNode cur2 = l2;
+        Printer.printLinkedList(cur2);
+        ListNode cur = s.addTwoNumbers(l1, l2);
+        Printer.printLinkedList(cur);
+        System.out.println();
 
         ListNode one = new ListNode(5);
         ListNode two = new ListNode(5);
-        ListNode curr = s.addTwoNumbers(one, two);
-        while (curr != null) {
-            System.out.print(curr.value);
-            curr = curr.next;
-        }
+        cur = s.addTwoNumbers(one, two);
+        Printer.printLinkedList(cur);
     }
+
     // You are given two non-empty linked lists representing two non-negative integers.
     // The most significant digit comes first and each of their nodes contain a single digit.
     // Add the two numbers and return it as a linked list.
     //You may assume the two numbers do not contain any leading zero, except the number 0 itself.
     // Follow up:
-    //What if you cannot modify the input lists? In other words, reversing the lists is not allowed.
+    // What if you cannot modify the input lists? In other words, reversing the lists is not allowed.
+    // num1: 3 -> 4 -> 2
+    // num1: 4 -> 6 -> 5
+    // res:  8 -> 0 -> 7
+    // Method 1:
     // Time O(max(m,n))
     // Space O(1)
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        Deque<Integer> s1 = new ArrayDeque<>();
+        Deque<Integer> s2 = new ArrayDeque<>();
+        while (l1 != null) {
+            s1.offerFirst(l1.value);
+            l1 = l1.next;
+        }
+        while (l2 != null) {
+            s2.offerFirst(l2.value);
+            l2 = l2.next;
+        }
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+        int num = 0;
+        while (!s1.isEmpty() || !s2.isEmpty()) {
+            if (!s1.isEmpty()) {
+                num += s1.pollFirst();
+            }
+            if (!s2.isEmpty()) {
+                num += s2.pollFirst();
+            }
+            tail.next = new ListNode(num % 10);
+            num /= 10;
+            tail = tail.next;
+        }
+        if (num != 0) {
+            tail.next = new ListNode(num);
+        }
+        return reverse(dummy.next);
+    }
+
+    // Method 1:
+    // Time O(max(m,n))
+    // Space O(1)
+    public ListNode addTwoNumbersII(ListNode l1, ListNode l2) {
         ListNode reverseL1 = reverse(l1);
         ListNode reverseL2 = reverse(l2);
         return reverse(add(reverseL1, reverseL2));

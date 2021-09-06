@@ -5,11 +5,8 @@ public class InterleaveStrings {
         InterleaveStrings s = new InterleaveStrings();
 
         System.out.println(s.canMerge("", "", ""));     // true
-
         System.out.println(s.canMerge("acd", "be", "abcde"));   // true
-
         System.out.println(s.canMerge("abgcd", "bebgf", "abgcdbebg"));  // false
-
         System.out.println(s.canMerge("adc", "be", "abcde"));   // false
     }
 

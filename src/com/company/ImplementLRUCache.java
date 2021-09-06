@@ -4,6 +4,7 @@ import java.util.*;
 public class ImplementLRUCache<K, V> {
     public static void main(String[] args) {
         ImplementLRUCache<Integer, Integer> s = new ImplementLRUCache<>(2);
+
         System.out.println(s.get(1));    // null
         s.set(1, 1);   // 1: 1
         s.set(2, 2);   // 2: 2,  1: 1
@@ -16,6 +17,37 @@ public class ImplementLRUCache<K, V> {
         System.out.println(s.get(1));    // 1
         System.out.println(s.get(2));    // null
         System.out.println(s.get(3));    // 3
+        System.out.println();
+
+        s = new ImplementLRUCache<>(5);
+
+        System.out.println(s.get(1));    // null
+        s.set(1, 1);   // 1: 1
+        System.out.println(s.get(1));    // 1
+
+        s.set(2, 2);   // 2: 2,  1: 1
+        System.out.println(s.get(1));    // 1
+        System.out.println(s.get(2));    // 2
+
+        s.set(3, 3);   // 3: 3,  1: 1
+        s.set(4, 4);   // 3: 3,  1: 1
+        System.out.println(s.get(3));    // 3
+
+        s.set(5, 5);   // 3: 3,  1: 1
+        System.out.println(s.get(5));    // 5
+        System.out.println(s.get(1));    // 1
+
+        s.set(6, 6);   // 3: 3,  1: 1
+        System.out.println(s.get(2));    // null
+        System.out.println(s.get(4));    // 4
+
+        s.set(7, 7);
+        System.out.println(s.get(3));    // null
+        System.out.println(s.get(5));    // 5
+
+        s.set(8, 8);
+        System.out.println(s.get(1));    // null
+        System.out.println(s.get(6));    // 6
     }
 
     // each node contains the key, value pair,

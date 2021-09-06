@@ -4,8 +4,11 @@ import java.util.*;
 public class CombinationsForTelephonePadI {
     public static void main(String[] args) {
         CombinationsForTelephonePadI s = new CombinationsForTelephonePadI();
+
         System.out.println(Arrays.toString(s.combinations(231)));
+        // [ad, ae, af, bd, be, bf, cd, ce, cf]
         System.out.println(Arrays.toString(s.combinations(78)));
+        // [pt, pu, pv, qt, qu, qv, rt, ru, rv, st, su, sv]
     }
 
     // Assumptions: The given number >= 0.

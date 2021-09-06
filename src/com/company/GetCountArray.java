@@ -4,29 +4,24 @@ import java.util.Arrays;
 public class GetCountArray {
     public static void main(String[] args) {
         GetCountArray s = new GetCountArray();
+
         int[] array = null;
-        System.out.println(Arrays.toString(s.countArray(array)));
-        System.out.println(Arrays.toString(s.countArrayI(array)));
+        System.out.println(Arrays.toString(s.countArray(array)));   // []
 
         array = new int[]{1};
-        System.out.println(Arrays.toString(s.countArray(array)));
-        System.out.println(Arrays.toString(s.countArrayI(array)));
+        System.out.println(Arrays.toString(s.countArray(array)));   // [0]
 
         array = new int[]{1, 2, 3};
-        System.out.println(Arrays.toString(s.countArray(array)));
-        System.out.println(Arrays.toString(s.countArrayI(array)));
+        System.out.println(Arrays.toString(s.countArray(array)));   // [0, 0, 0]
 
         array = new int[]{3, 2, 1};
-        System.out.println(Arrays.toString(s.countArray(array)));
-        System.out.println(Arrays.toString(s.countArrayI(array)));
+        System.out.println(Arrays.toString(s.countArray(array)));   // [2, 1, 0]
 
         array = new int[]{3, 3, 3};
-        System.out.println(Arrays.toString(s.countArray(array)));
-        System.out.println(Arrays.toString(s.countArrayI(array)));
+        System.out.println(Arrays.toString(s.countArray(array)));   // [0, 0, 0]
 
         array = new int[]{4, 1, 6, 6, 2};
-        System.out.println(Arrays.toString(s.countArray(array)));
-        System.out.println(Arrays.toString(s.countArrayI(array)));
+        System.out.println(Arrays.toString(s.countArray(array)));   // [2, 0, 1, 1, 0]
     }
 
     // Implementation 1:

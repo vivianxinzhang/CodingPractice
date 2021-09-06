@@ -4,55 +4,58 @@ import java.util.Arrays;
 public class WildcardMatching {
     public static void main(String[] args) {
         WildcardMatching s = new WildcardMatching();
+
         String input = "aabbbcaa";
         String pattern = "?a?bc";
         System.out.println(s.match(input, pattern));    // false
-        System.out.println(s.matchI(input, pattern));    // false
-        System.out.println(s.matchII(input, pattern));    // false
 
         input = "baaabab";
         pattern = "******ba*****ab";
         System.out.println(s.match(input, pattern));    // true
-        System.out.println(s.matchI(input, pattern));    // true
-        System.out.println(s.matchII(input, pattern));    // true
 
         pattern = "******ba*****ab";
         System.out.println(s.match(input, pattern));    // true
-        System.out.println(s.matchI(input, pattern));    // true
-        System.out.println(s.matchII(input, pattern));    // true
-
 
         pattern = "******ba*****ab";
         System.out.println(s.match(input, pattern));    // true
-        System.out.println(s.matchI(input, pattern));    // true
-        System.out.println(s.matchII(input, pattern));    // true
     }
 
-    /*  0 1 2
-          ? *
-    0   T F F
-    1 a F T T
-    2 b F F T
-    3 c F F T
-    * **/
-    // Base Case:
-    // M[0][0] = true
-    // M[0][j] = M[0][j - 1] if pattern[j-1] = '*'
-    // M[i][0] = false
-    // Induction rule:
-    // Case 1: if str[i-1] == pattern[j-1] || pattern[j-1] == '?'
-    // T[i][j] = T[i-1][j-1]
-    // Case 2: pattern[j] == '*'
-    // pattern.charAt(j - 1) == '*') {
-    //            * match 0  or  * match 1
-    // M[i][j] = M[i][j - 1] || M[i - 1][j];
-    // 2.1 T[i][j] = T[i][j-1] -> 0 occurrence
-    // ||
-    // 2.2 T[i][j] = T[i-1][j] if str[i] == pattern[j-1] || pattern[j-1]=='.'
-    // Case 3: otherwise
+    // * matches 0 or more sequence
+    // ? match any one character
+    // Examples:
+    // a*b      ab, aab, acb, axyb      true
+    //          b, a, ac, abc           false
+    // a?b      aab, abb, acb           true
+    //          ab, b, cb               false
+    // x?y*z    xayz, xaybcz, xaylmnz   true
+    //          xyz, ayz, xaz           false
+    // Assumptions:
+    // 1. The two strings are both not null.
+    // 2. Assume there is no more than one '*' adjacent to each other.
     // Method 2:
     // M[i][j represents whether the first i characters of input string
     // matches the first j characters of pattern.
+    // Base Case:
+    //         M[0][0] = true
+    //         M[0][j] = M[0][j - 1] if pattern[j-1] = '*'
+    //         M[i][0] = false
+    // Induction rule:
+    // Case 1: if str[i-1] == pattern[j-1] || pattern[j-1] == '?'
+    //         M[i][j] = M[i-1][j-1]
+    // Case 2: pattern[j-1] == '*'
+    //         * match 0  or  * match 1
+    //         M[i][j] = M[i][j - 1] || M[i - 1][j];
+    // 2.1 T[i][j] = T[i][j-1] -> 0 occurrence
+    // ||
+    // 2.2 T[i][j] = T[i-1][j] if str[i] == pattern[j-1] || pattern[j-1]=='.'
+    // Case 3: otherwise, false
+    /*      0 1 2
+              ? *
+        0   T F F
+        1 a F T T
+        2 b F F T
+        3 c F F T
+    * **/
     // Time O(mn)
     // Space O(mn)
     public boolean match(String input, String pattern) {
@@ -68,8 +71,6 @@ public class WildcardMatching {
                     // can match at current position
                     if (pattern.charAt(j - 1) == '*') {
                         M[i][j] = M[i][j - 1];
-                    } else {
-                        M[i][j] = false;
                     }
                 } else {
                     if (pattern.charAt(j - 1) == input.charAt(i - 1) || pattern.charAt(j - 1) == '?') {
@@ -77,8 +78,6 @@ public class WildcardMatching {
                     } else if (pattern.charAt(j - 1) == '*') {
                         //         * match 1  or  * match 0
                         M[i][j] = M[i - 1][j] || M[i][j - 1];
-                    } else {
-                        M[i][j] = false;
                     }
                 }
             }
@@ -102,8 +101,6 @@ public class WildcardMatching {
                     // can match at current position
                     if (pattern.charAt(j - 1) == '*') {
                         M[i][j] = M[i][j - 1];
-                    } else {
-                        M[i][j] = false;
                     }
                 } else {
                     if (pattern.charAt(j - 1) == input.charAt(i - 1) || pattern.charAt(j - 1) == '?') {
@@ -119,8 +116,6 @@ public class WildcardMatching {
                                 M[i][j] = true;
                             }
                         }
-                    } else {
-                        M[i][j] = false;
                     }
                 }
             }

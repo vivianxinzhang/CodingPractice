@@ -4,14 +4,13 @@ import java.util.*;
 public class KeepDistanceForIdenticalElements {
     public static void main(String[] args) {
         KeepDistanceForIdenticalElements s = new KeepDistanceForIdenticalElements();
+
         System.out.println("Put [1, 1]:");
         System.out.println(Arrays.toString(s.keepDistance(1)));
         // null
-
         System.out.println("Put [1, 1], [2, 2]:");
         System.out.println(Arrays.toString(s.keepDistance(2)));
         // null
-
         System.out.println("Put [1, 1], [2, 2], [3, 3]:");
         System.out.println(Arrays.toString(s.keepDistance(3)));
         // [3, 1, 2, 1, 3, 2]

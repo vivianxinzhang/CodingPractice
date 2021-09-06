@@ -14,37 +14,33 @@ public class ReverseNodesInKGroups {
         three.next = four;
         four.next = five;
         Printer.printLinkedList(one);
-        System.out.println();
         // Input List:  1 -> 2 -> 3 -> 4 -> 5
-        // Output List: 2 -> 1 -> 4 -> 3 -> 5
         ListNode curr = s.reverseKGroup(one, 2);
         Printer.printLinkedList(curr);
+        // Output List: 2 -> 1 -> 4 -> 3 -> 5
     }
 
     // Method 1: iteration
     // Time O(n)
     // Space O(1)
     public ListNode reverseKGroup(ListNode head, int k) {
-        if (head == null || k <= 1) {
-            return head;
-        }
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode pre = dummy;
+        ListNode tail = dummy;
         while (head != null) {
-            ListNode curTail = head;
+            ListNode pre = head;
             for (int i = 0; i < k - 1; i++) {
-                curTail = curTail.next;
-                if (curTail == null) {
+                pre = pre.next;
+                if (pre == null) {
                     return dummy.next;
                 }
             }
-            ListNode next = curTail.next;
-            curTail.next = null;
-            ListNode newSubHead = reverse(head);
-            pre.next = newSubHead;
+            ListNode next = pre.next;
+            pre.next = null;
+            reverse(head);
+            tail.next = pre;
             head.next = next;
-            pre = head;
+            tail = head;
             head = next;
         }
         return dummy.next;

@@ -3,6 +3,7 @@ package com.company;
 public class EditDistance {
     public static void main(String[] args) {
         EditDistance s = new EditDistance();
+
         String one = "";
         String two = "";
         System.out.println(s.editDistance(one, two));   // 0

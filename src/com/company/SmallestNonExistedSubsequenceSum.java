@@ -15,19 +15,18 @@ public class SmallestNonExistedSubsequenceSum {
 
     // We can solve this problem in O(n) time using a simple loop.
     // Let the input array be arr[0..n-1].
-    // We initialize the result as 1 (smallest possible outcome) and traverse the given array.
     // Let the smallest element that cannot be represented by elements at indexes from 0 to (i-1) be ‘res’,
+    // We initialize the res as 1 (smallest possible outcome) and traverse the given array.
     // there are following two possibilities when we consider element at index i:
     // 1) If arr[i] is greater than ‘res’:
-    //    'res’ is the final result,
-    //    we found the gap which is ‘res’ because the elements after arr[i] are also going to be greater than ‘res’.
-    //    [0, i-1]  represents -> [0, res-1]
-    //    + num     represents -> [0, res-1] ...gap...  [num,res+num-1]
-    //    num > res, then there is a gap between res-1 and num, the first missing number is res
+    //    res’ is the final result,
+    //    then we found the gap which is ‘res’ because the elements after arr[i] are also going to be greater than ‘res’.
     // 2) The value of ‘res’ is incremented after considering arr[i]:
     //    The value of ‘res’ is incremented by arr[i]
-    //    (why? If elements from 0 to (i-1) can represent 1 to ‘res-1′, then elements from 0 to i can represent from 1
-    //    to ‘res + arr[i] – 1′ be adding ‘arr[i]’ to all subsets that represent 1 to ‘res’)
+    //    (why? If elements from 0 to (i-1) can represent 1 to ‘res-1′,
+    //    no gap between res and array[i]
+    //    then elements from 0 to i can represent 1 to ‘res + arr[i] – 1′
+    //    by adding ‘arr[i]’ to all subsets that represent 1 to ‘res - 1’)
     // Time O(n)
     // Space O(1)
     public int firstMissing(int[] array) {

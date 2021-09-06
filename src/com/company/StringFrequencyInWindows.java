@@ -4,10 +4,20 @@ import java.util.*;
 public class StringFrequencyInWindows {
     public static void main(String[] args) {
         StringFrequencyInWindows s = new StringFrequencyInWindows();
+
         String input = "ABCDABCDD";
+        // output: ABCD: 2 BCDA: 1 CDAB: 1 DABC: 1
         List<Frequency> res = s.frequency(input);
         for (Frequency freq : res) {
-            System.out.println(freq.str + ": " + freq.freq);
+            System.out.print(freq.str + ": " + freq.freq + " ");
+        }
+        System.out.println();
+
+        input = "CABDACBCCDADCB";
+        // output: ADCB: 1 BDAC: 1 CABD: 1 DACB: 1
+        res = s.frequency(input);
+        for (Frequency freq : res) {
+            System.out.print(freq.str + ": " + freq.freq + " ");
         }
     }
 
@@ -70,5 +80,27 @@ public class StringFrequencyInWindows {
             list.add(freq);
         }
         return list;
+    }
+
+    // another implementation
+    private List<Frequency> toListI(Map<String, Integer> map) {
+        PriorityQueue<Map.Entry<String, Integer>> maxHeap = new PriorityQueue<>(new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                if (o1.getValue() == o2.getValue()) {
+                    return o1.getKey().compareTo(o2.getKey());
+                }
+                return o1.getValue() > o2.getValue() ? -1 : 1;
+            }
+        });
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            maxHeap.offer(entry);
+        }
+        List<Frequency> res = new ArrayList<>();
+        while (!maxHeap.isEmpty()) {
+            Map.Entry<String, Integer> tmp = maxHeap.poll();
+            res.add(new Frequency(tmp.getKey(), tmp.getValue()));
+        }
+        return res;
     }
 }

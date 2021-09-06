@@ -12,10 +12,50 @@ public class LongestSubstringWithKTypedCharacters {
         System.out.println(s.longest(input, 3));    // aabcc
     }
 
+    // Assumptions:
+    // 1. The given string is not null and guaranteed to have at least k different characters.
+    // 2. k > 0.
     // Method 2: linear scan
+    // another implementation
     // Time O(n)
     // Space O(n)
-    public String longestI(String s, int k) {
+    public String longest(String input, int k) {
+        Map<Character, Integer> map = new HashMap<>();
+        int slow = 0;
+        int fast = 0;
+        int maxLength = 0;
+        int globalLeft = 0;
+        while (fast < input.length()) {
+            Integer countFast = map.get(input.charAt(fast));
+            if (countFast != null) {
+                map.put(input.charAt(fast), countFast + 1);
+                fast++;
+            } else if (map.size() < k) {
+                map.put(input.charAt(fast), 1);
+                fast++;
+            } else {
+                int countSlow = map.get(input.charAt(slow));
+                if (countSlow == 1) {
+                    map.remove(input.charAt(slow));
+                } else {
+                    map.put(input.charAt(slow), countSlow - 1);
+                }
+                slow++;
+            }
+            if (map.size() == k) {
+                int curLength = fast - slow;
+                if (curLength > maxLength) {
+                    maxLength = curLength;
+                    globalLeft = slow;
+                }
+            }
+        }
+        return input.substring(globalLeft, globalLeft + maxLength);
+    }
+
+    // Time O(n)
+    // Space O(n)
+    public String longestII(String s, int k) {
         int countOfUniqueChar = 0; // number of unique characters
 
         // Associative array to store the count of characters
@@ -71,7 +111,7 @@ public class LongestSubstringWithKTypedCharacters {
     // to do a check on each one. Thus overall it would go O(n3).
     // Time O(n^3)
     // Space O(n)
-    public String longest(String input, int k) {
+    public String longestI(String input, int k) {
         int globalLeft = 0;
         int globalRight = 0;
         int maxLength = 0;
@@ -96,10 +136,7 @@ public class LongestSubstringWithKTypedCharacters {
         return set.size() == k;
     }
 
-    // The given string is not null and guaranteed to have
-    // at least k different characters.
-    // k > 0.
-    public String longestII(String input, int k) {
+    public String longestIII(String input, int k) {
         char[] array = input.toCharArray();
         int slow = 0;
         int fast = 0;

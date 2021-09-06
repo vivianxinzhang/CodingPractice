@@ -3,7 +3,16 @@ package com.company;
 public class RegularExpressionMatching {
     public static void main(String[] args) {
         RegularExpressionMatching s = new RegularExpressionMatching();
-        System.out.println(s.isMatch("xaabyc", "xa*b.c"));
+
+        System.out.println(s.isMatch("aa", "a"));             // false
+        System.out.println(s.isMatch("aa", "aa"));            // true
+        System.out.println(s.isMatch("aaa", "aa"));           // false
+        System.out.println(s.isMatch("aa", "a*"));            // true
+        System.out.println(s.isMatch("aa", "."));             // false
+        System.out.println(s.isMatch("ab", "."));             // false
+        System.out.println(s.isMatch("", "z*c*a*"));          // true
+        System.out.println(s.isMatch("xaabyc", "xa*b.c"));    // true
+        System.out.println(s.isMatch("abcdef", ".......*"));  // true
         /*  0 1 2 3 4 5 6
               x a * b . c
         0   T F F F F F F
@@ -16,19 +25,31 @@ public class RegularExpressionMatching {
         * **/
     }
 
+    // * matches 0 or more occurrence of the character before *
+    // . matches any single character
+    // Examples:
+    // a.b      acb, aab, axb         -> true  (. match any single character)
+    //          ab, acby, cb          -> false
+    // a*b      b, ab, aab, aaab      -> true  (* matches 0 or more occurrence of the character a before *)
+    //          a, acb                -> false
+    // a*b.*y   by, bly, ably, ablmy  -> true
+    //          ay, ab                -> false
+    // a*  0 or more occurrence of a
+    // .*  0 or more occurrence of any character
+    // M[i][j] represents if text[0,i-1] and pattern[0,j-1] match
     // Base Case:
-    // M[0][0] = true
-    // M[0][j] = M[0][j - 2] if pattern[j-1] = '*'
-    // M[i][0] = false
+    //          M[0][0] = true
+    //          M[0][j] = M[0][j - 2] if pattern[j-1] = '*'
+    //          M[i][0] = false
     // Induction rule:
     // Case 1: if str[i-1] == pattern[j-1] || pattern[j-1] == '.'
-    // T[i][j] = T[i-1][j-1]
+    //         M[i][j] = M[i-1][j-1]
     // Case 2: pattern[j] == '*'
-    // 2.1 T[i][j] = T[i][j-2] -> 0 occurrence
-    // ||
-    // 2.2 T[i][j] = T[i-1][j] if str[i-1] == pattern[j-2] || pattern[j-1]=='.'
+    //         2.1 M[i][j] = M[i][j-2] -> 0 occurrence
+    //             ||
+    //         2.2 M[i][j] = M[i-1][j] if str[i-1] == pattern[j-2] || pattern[j-1]=='.'
     // Case 3: otherwise
-    // T[i][j] = false
+    //         M[i][j] = false
     // Time O(mn)
     // Space O(mn)
     public boolean isMatch(String text, String pattern) {
@@ -52,8 +73,6 @@ public class RegularExpressionMatching {
                         if (pattern.charAt(j - 2) == '.' || pattern.charAt(j - 2) == text.charAt(i - 1)) {
                             M[i][j] = M[i][j] || M[i - 1][j];
                         }
-                    }  else {
-                        M[i][j] = false;
                     }
                 }
             }

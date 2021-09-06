@@ -7,11 +7,12 @@ public class RomanToInteger {
     public static void main(String[] args) {
         RomanToInteger s = new RomanToInteger();
 
-        System.out.println(s.romanToInt("III"));        // 3
-        System.out.println(s.romanToInt("IV"));         // 4
-        System.out.println(s.romanToInt("IX"));         // 9
-        System.out.println(s.romanToInt("LVIII"));      // 58
-        System.out.println(s.romanToInt("MCMXCIV"));    // 1995
+        System.out.println(s.romanToInt("III"));         // 3
+        System.out.println(s.romanToInt("IV"));          // 4
+        System.out.println(s.romanToInt("IX"));          // 9
+        System.out.println(s.romanToInt("LVIII"));       // 58
+        System.out.println(s.romanToInt("MCMXCIV"));     // 1994
+        System.out.println(s.romanToInt("MMMCMXCIX"));   // 3999
     }
 
     // Solution:
@@ -30,11 +31,10 @@ public class RomanToInteger {
     // X    10
     // XI   11
     // XII  12
-    // "ab" pattern, if b is larger than a
-    // the value changes from a + b to b - a
+    // "ab" pattern, if a is smaller than b, the value changes from a + b to b - a
     // Sum all the symbols up, when encounter "ab pattern", minus 2 * a
     // "IV"
-    // I: 0 + 1     V: 5
+    // I: 1     V: 5
     // IV = 1 + 5 - 2 * 1 = 6 - 2 = 4
     // "VX"
     // V: 5         X: 10

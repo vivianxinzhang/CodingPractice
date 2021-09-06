@@ -24,12 +24,12 @@ public class LowestCommonAncestorIII {
                  /     \      \
                1        7      11
         * */
-        System.out.println(s.lowestCommonAncestor(five, one, three).key);
-        System.out.println(s.lowestCommonAncestor(five, one, eight).key);
+        System.out.println(s.lowestCommonAncestor(five, one, three).key);     // 3
+        System.out.println(s.lowestCommonAncestor(five, one, eight).key);     // 5
         System.out.println(s.lowestCommonAncestor(five, one, eleven).key);    // 5
 
         TreeNode notInTheTree = new TreeNode(100);
-        System.out.println(s.lowestCommonAncestor(five, one, notInTheTree));
+        System.out.println(s.lowestCommonAncestor(five, one, notInTheTree));  // null
     }
 
     // one and two are not necessarily on the tree

@@ -71,8 +71,8 @@ public class KSmallestInUnsortedArray {
     }
 
     // Method 2: k sized max heap
-    // Time O(n) worst case O(n^2)
-    // Space O(logn) worst case O(n)
+    // Time O(nlogk)
+    // Space O(k)
     public int[] kSmallestI(int[] array, int k) {
         // handle all possible corner cases at the very beginning.
         if (array == null || array.length == 0 || k == 0) {

@@ -4,6 +4,13 @@ import java.util.*;
 public class TotalAreaOfSkyline {
     public static void main(String[] args) {
         TotalAreaOfSkyline s = new TotalAreaOfSkyline();
+
+        List<Building> list0 = null;
+        System.out.println(s.totalArea(list0));    // 0
+
+        list0 = Arrays.asList(new Building(0, 1, 2));
+        System.out.println(s.totalArea(list0));    // 2
+
         List<Building> list1 = new ArrayList<>();
         List<Building> list2 = new ArrayList<>();
         Building b4 = new Building(3, 4, 5);
@@ -12,7 +19,7 @@ public class TotalAreaOfSkyline {
         list2.add(b4);
         list2.add(b5);
         list2.add(b6);
-        System.out.println(s.totalArea(list2)); // 15
+        System.out.println(s.totalArea(list2));    // 15
 
         Building b2 = new Building(2, 4, 2);
         Building b1 = new Building(1, 3, 1);
@@ -20,7 +27,7 @@ public class TotalAreaOfSkyline {
         list1.add(b2);
         list1.add(b1);
         list1.add(b3);
-        System.out.println(s.totalArea(list1)); // 5
+        System.out.println(s.totalArea(list1));    // 5
     }
 
     class Point {
@@ -61,30 +68,30 @@ public class TotalAreaOfSkyline {
         // for each point x <left_x, right_x, h_x, yes/not>
         int totalArea = 0;
         while (!pointsMinHeap.isEmpty()){
-            Point curr = pointsMinHeap.poll();
+            Point cur = pointsMinHeap.poll();
             //	before calculating the area, we need to do a while loop to pop out invalid height:
             //	if top element, right < current x’s value
             //	keep popping …		// lazy deletion
-            int currX = curr.isStart ? curr.start : curr.end;
-            while (!heightMaxHeap.isEmpty() && heightMaxHeap.peek().end < currX) {
+            int curX = cur.isStart ? cur.start : cur.end;
+            while (!heightMaxHeap.isEmpty() && heightMaxHeap.peek().end < curX) {
                 heightMaxHeap.poll();
             }
             //	Case 2.1: if it is a left point,
-            //		Calculate the area by using |left_x - prev_x| x maxHeap.top()
+            //		Calculate the area by using |left_x - prev_x| * maxHeap.top()
             //						width			height
             //		insert the left point into the maxHeap;
-            int currHeight = heightMaxHeap.isEmpty() ? 0 : heightMaxHeap.peek().height;
-            if (curr.isStart) {
-                totalArea += (currX - preX) * currHeight;
-                preX = currX;
-                heightMaxHeap.offer(curr);
+            int curMaxHeight = heightMaxHeap.isEmpty() ? 0 : heightMaxHeap.peek().height;
+            if (cur.isStart) {
+                totalArea += (curX - preX) * curMaxHeight;
+                preX = curX;
+                heightMaxHeap.offer(cur);
             } else {
                 //	Case 2.2: if it is right point,
-                //		Calculate the area by using |right_x - prev_x| x maxHeap.top()
+                //		Calculate the area by using |right_x - prev_x| * maxHeap.top()
                 //						                   width			height
-                //		DO NOT insert the left point into the maxHeap;
-                totalArea += (currX - preX) * currHeight;
-                preX = currX;
+                //		DO NOT insert the right point into the maxHeap;
+                totalArea += (curX - preX) * curMaxHeight;
+                preX = curX;
             }
         }
         return totalArea;

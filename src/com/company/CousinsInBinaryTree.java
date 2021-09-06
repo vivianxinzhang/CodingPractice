@@ -6,6 +6,7 @@ import java.util.Deque;
 public class CousinsInBinaryTree {
     public static void main(String[] args) {
         CousinsInBinaryTree s = new CousinsInBinaryTree();
+
         TreeNode root = null;
         System.out.println(s.isCousin(root, 1, 2));     // false
 
@@ -46,7 +47,7 @@ public class CousinsInBinaryTree {
         TreeNode parentA = null;
         TreeNode parentB = null;
         Deque<TreeNode> queue = new ArrayDeque<>();
-        queue.offerFirst(root);
+        queue.offer(root);
         while (!queue.isEmpty()) {
             int size = queue.size();
             for (int i = 0; i < size; i++) {

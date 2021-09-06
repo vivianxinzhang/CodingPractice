@@ -42,17 +42,17 @@ public class ReverseBinaryTreeUpsideDown {
     // Time O(n)
     // Space O(1)
     public TreeNode reverseI(TreeNode root) {
-        TreeNode prev = null;
+        TreeNode prevRoot = null;
         TreeNode prevRight = null;
         while (root != null) {
-            TreeNode next = root.left;
+            TreeNode left = root.left;
             TreeNode right = root.right;
+            root.left = prevRoot;
             root.right = prevRight;
-            root.left = prev;
             prevRight = right;
-            prev = root;
-            root = next;
+            prevRoot = root;
+            root = left;
         }
-        return prev;
+        return prevRoot;
     }
 }

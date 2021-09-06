@@ -84,12 +84,11 @@ public class MergeKSortedLists {
     // Method 2: binary reduction
     // 2.1 iteration:
     // Time O(kn * logk)
-    // Space O(logk)
+    // Space O(1)
     public ListNode mergeII(List<ListNode> listOfLists) {
         if (listOfLists == null || listOfLists.size() == 0) {
             return null;
         }
-        List<ListNode> result = new ArrayList<>();
         int size = listOfLists.size();
         while (size > 1) {
             List<ListNode> newList = new ArrayList<>();

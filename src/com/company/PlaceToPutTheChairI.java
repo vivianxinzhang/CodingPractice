@@ -31,14 +31,13 @@ public class PlaceToPutTheChairI {
     // 2) 'E' denotes equipment, 'O' denotes obstacle, 'C' denotes empty cell
     // 3) The chair can not be put on equipment or obstacle
     // 4) Each 'C' cell is reachable from all 'E' cells
-    private static final char EQUIP = 'E';
-    private static final char OB = 'O';
-
     // Method 2:
     // Step 1: bfs from k equipments
     // Step 2: sum up all costs on chairs
     // Time O(k*n^2)
     // Space O(n^2)
+    private static final char EQUIP = 'E';
+    private static final char OB = 'O';
     public List<Integer> putChair(char[][] gym) {
         // Assumptions: gym is not null, has size M * N, where M >= 1 and N >= 1,
         // return null if you can not put the chair anywhere
@@ -148,6 +147,11 @@ public class PlaceToPutTheChairI {
         }
     }
 
+    // Assumptions
+    // There is at least one equipment in the gym
+    // The given gym is represented by a char matrix of size M * N, where M >= 1 and N >= 1, it is guaranteed to be not null
+    // It is guaranteed that each 'C' cell is reachable from all 'E' cells.
+    // If there does not exist such place to put the chair, just return {-1, -1}
     // Method 1:
     // Step 1: bfs from each chair
     // Step 2: sum up all costs on chairs
