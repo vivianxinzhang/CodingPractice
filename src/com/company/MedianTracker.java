@@ -4,6 +4,19 @@ import java.util.Collections;
 import java.util.PriorityQueue;
 
 public class MedianTracker {
+    public static void main(String[] args) {
+        MedianTracker s = new MedianTracker();
+
+        System.out.println(s.median());     // null
+        System.out.println(s.median());     // 1.0
+        s.read(1);
+        System.out.println(s.median());     // 1.0
+        s.read(2);
+        System.out.println(s.median());     // 1.0
+        s.read(2);
+        System.out.println(s.median());     // 1.5
+    }
+
     // we care about the smallest number of the larger half and the largest number of the smaller half
     // so for the smaller half we use a max heap and for the larger half we use a min heap
     // we maintain the property:
