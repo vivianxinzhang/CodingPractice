@@ -48,7 +48,7 @@ public class TwoDifferenceInSortedArray {
         return new int[0];
     }
 
-    // Method 2: Use HashMap, no need to take sign in this method
+    // Method 2: Use HashMap, no need to consider sign in this method
     // Time O(n)
     // Space O(n)
     public int[] twoDiffII(int[] array, int target) {

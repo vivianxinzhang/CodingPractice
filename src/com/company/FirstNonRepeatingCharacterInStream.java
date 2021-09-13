@@ -17,7 +17,14 @@ import java.util.*;
 public class FirstNonRepeatingCharacterInStream {
     public static void main(String[] args) {
         FirstNonRepeatingCharacterInStream s = new FirstNonRepeatingCharacterInStream();
-        System.out.println();
+
+        System.out.println(s.firstNonRepeating());      // null
+        s.read('a');
+        System.out.println(s.firstNonRepeating());      // a
+        s.read('b');
+        System.out.println(s.firstNonRepeating());      // a
+        s.read('a');
+        System.out.println(s.firstNonRepeating());      // b
     }
 
     static class Node {

@@ -15,7 +15,7 @@ public class SortWithThreeStacks {
         stack.offerFirst(2);
         System.out.println(stack);     //  2, 1, 3, 4, 1]
         s.sort(stack);
-        System.out.println(stack);     //  4, 3, 2, 1, 1]
+        System.out.println(stack);     //  1, 1, 2, 3, 4]
     }
 
     // Assumptions:

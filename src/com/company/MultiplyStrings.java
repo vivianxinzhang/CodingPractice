@@ -5,6 +5,7 @@ public class MultiplyStrings {
     public static void main(String[] args) {
         MultiplyStrings s = new MultiplyStrings();
 
+        System.out.println(s.multiply("9", "99"));     // 891
         System.out.println(s.multiply("12", "12"));     // 144
         System.out.println(s.multiply("123", "0"));     // 144
         System.out.println(s.multiply("123", "45"));     // 144
@@ -21,7 +22,6 @@ public class MultiplyStrings {
          *    0   1   2   3   4     index
          *    0   5   5   3   5
          * */
-        System.out.println(s.multiply("9", "99"));     // 891
     }
 
     // The product of two numbers cannot exceed the sum of the two lengths.

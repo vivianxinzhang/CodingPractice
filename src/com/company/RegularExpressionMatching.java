@@ -27,6 +27,8 @@ public class RegularExpressionMatching {
 
     // * matches 0 or more occurrence of the character before *
     // . matches any single character
+    // a*  0 or more occurrence of a
+    // .*  0 or more occurrence of any character
     // Examples:
     // a.b      acb, aab, axb         -> true  (. match any single character)
     //          ab, acby, cb          -> false
@@ -34,8 +36,6 @@ public class RegularExpressionMatching {
     //          a, acb                -> false
     // a*b.*y   by, bly, ably, ablmy  -> true
     //          ay, ab                -> false
-    // a*  0 or more occurrence of a
-    // .*  0 or more occurrence of any character
     // M[i][j] represents if text[0,i-1] and pattern[0,j-1] match
     // Base Case:
     //          M[0][0] = true

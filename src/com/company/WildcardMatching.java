@@ -5,8 +5,12 @@ public class WildcardMatching {
     public static void main(String[] args) {
         WildcardMatching s = new WildcardMatching();
 
-        String input = "aabbbcaa";
-        String pattern = "?a?bc";
+        String input = "abcdefg";
+        String pattern = "a*?e?g*";
+        System.out.println(s.match(input, pattern));    // true
+
+        input = "aabbbcaa";
+        pattern = "?a?bc";
         System.out.println(s.match(input, pattern));    // false
 
         input = "baaabab";
