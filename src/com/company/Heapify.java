@@ -5,19 +5,14 @@ import java.util.Arrays;
 public class Heapify {
     public static void main(String[] args) {
         Heapify s = new Heapify();
-        System.out.println();
+
         int[] array = new int[] {3, 5, 2, 1};
-        System.out.println(Arrays.toString(array));
-        // [3, 5, 2, 1]
         System.out.println(Arrays.toString(s.heapify(array)));
         // [1, 3, 2, 5]
 
-        array = new int[] {-32,38,71,40,87,16,77,-57,-83,-72,-21,-2,54,-52,-33,54,-68};
-        System.out.println(Arrays.toString(array));
-        // [-32,38,71,40,87,16,77,-57,-83,-72,-21,-2,54,-52,-33,54,-68]
-        // [[-32,38,71,40,87,16,77,-57,-83]]
+        array = new int[] {-3, 1, 5, 2, 0, -10};
         System.out.println(Arrays.toString(s.heapify(array)));
-        // [-83, -72, -52, -68, -32, -2, -33, -57, 40, 87, -21, 16, 54, 77, 71, 54, 38]
+        // [-10, 0, -3, 2, 1, 5]
     }
 
     // Heap is a (binary) tree based data structure

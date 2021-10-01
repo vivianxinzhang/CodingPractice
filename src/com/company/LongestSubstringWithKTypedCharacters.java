@@ -5,11 +5,10 @@ public class LongestSubstringWithKTypedCharacters {
     public static void main(String[] args) {
         LongestSubstringWithKTypedCharacters s = new LongestSubstringWithKTypedCharacters();
 
-        String input = "aabcccc";
-        System.out.println(s.longest(input, 2));    // bcccc
-
-        input = "aabcc";
-        System.out.println(s.longest(input, 3));    // aabcc
+        System.out.println(s.longest("aabcccc", 2));    // bcccc
+        System.out.println(s.longest("aabcc", 3));      // aabcc
+        System.out.println(s.longest("aaabbcbbb", 2));  // bbcbbb
+        System.out.println(s.longest("dabaaebac", 4));  // dabaaeba
     }
 
     // Assumptions:

@@ -8,6 +8,10 @@ public class TwoSumTwoArrays {
         int[] A = new int[] {3, 1, 5};
         int[] B = new int[] {2, 8};
         System.out.println(s.existSum(A, B, 7));    // true
+
+        A = new int[] {-1, 0, 1};
+        B = new int[] {7, 3};
+        System.out.println(s.existSum(A, B, 8));    // true
     }
 
     // Assumptions:

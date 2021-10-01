@@ -3,7 +3,9 @@ package com.company;
 public class DividedTwoIntegersWithRestrictions {
     public static void main(String[] args) {
         DividedTwoIntegersWithRestrictions s = new DividedTwoIntegersWithRestrictions();
+
         // Examples:
+        System.out.println(s.divide(0, 0));     // 2147483647
         // 0 / 1 = 0
         System.out.println(s.divide(0, 1));     // 0
         // 1 / 0 = Integer.MAX_VALUE

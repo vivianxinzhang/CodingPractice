@@ -34,6 +34,8 @@ public class LargestProductOfLength {
         // each of the bit represents one of the characters in 'a' - 'z'
         Map<String, Integer> bitMasks = getBitMasks(dict);
         // sort the dict by length of the words in descending order
+        // Lambda expression (since Java 8, recommended at work)
+        // Arrays.sort(dict, (s1, s2) -> -(s1.length() - s2.length()));
         Arrays.sort(dict, new Comparator<String>(){
             @Override
             public int compare(String s0, String s1) {

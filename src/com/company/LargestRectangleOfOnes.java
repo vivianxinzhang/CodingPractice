@@ -5,14 +5,17 @@ public class LargestRectangleOfOnes {
     public static void main(String[] args) {
         LargestRectangleOfOnes s = new LargestRectangleOfOnes();
 
-        int[][] matrix = new int[][]{{0,1,1,1},{1,1,0,1},{0,1,0,1},{1,1,1,1}};
+        int[][] matrix = new int[][]{{0, 1, 1, 1}, {1, 1, 0, 1}, {0, 1, 0, 1}, {1, 1, 1, 1}};
         System.out.println(s.largest(matrix));  // 4
 
         matrix = new int[][]{{0, 0, 0, 0}, {1, 1, 1, 1}, {0, 1, 1, 1}, {1, 0, 1, 1}};
         System.out.println(s.largest(matrix));  // 6
 
-        matrix = new int[][]{{1,1,1,1},{0,0,1,1},{1,0,1,1},{1,1,1,1}};
+        matrix = new int[][]{{1, 1, 1, 1}, {0, 0, 1, 1}, {1, 0, 1, 1}, {1, 1, 1, 1}};
         System.out.println(s.largest(matrix));  // 8
+
+        matrix = new int[][]{{1, 1, 1, 1}, {1, 1, 1, 1}, {1, 1, 1, 1}, {1, 1, 1, 1}};
+        System.out.println(s.largest(matrix));  // 16
     }
 
     // Assumptions:

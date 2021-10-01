@@ -5,23 +5,11 @@ public class WildcardMatching {
     public static void main(String[] args) {
         WildcardMatching s = new WildcardMatching();
 
-        String input = "abcdefg";
-        String pattern = "a*?e?g*";
-        System.out.println(s.match(input, pattern));    // true
-
-        input = "aabbbcaa";
-        pattern = "?a?bc";
-        System.out.println(s.match(input, pattern));    // false
-
-        input = "baaabab";
-        pattern = "******ba*****ab";
-        System.out.println(s.match(input, pattern));    // true
-
-        pattern = "******ba*****ab";
-        System.out.println(s.match(input, pattern));    // true
-
-        pattern = "******ba*****ab";
-        System.out.println(s.match(input, pattern));    // true
+        System.out.println(s.match("aabbbcaa", "a*??c*"));          // true
+        System.out.println(s.match("abcdefg", "a*?e?g*"));          // true
+        System.out.println(s.match("aabbbcaa", "?a?bc"));           // false
+        System.out.println(s.match("", "******ba*****ab"));         // false
+        System.out.println(s.match("baaabab", "******ba*****ab"));  // true
     }
 
     // * matches 0 or more sequence
@@ -80,8 +68,8 @@ public class WildcardMatching {
                     if (pattern.charAt(j - 1) == input.charAt(i - 1) || pattern.charAt(j - 1) == '?') {
                         M[i][j] = M[i - 1][j - 1];
                     } else if (pattern.charAt(j - 1) == '*') {
-                        //         * match 1  or  * match 0
-                        M[i][j] = M[i - 1][j] || M[i][j - 1];
+                        //        * match 0   or   * match 1
+                        M[i][j] = M[i][j - 1] || M[i - 1][j];
                     }
                 }
             }

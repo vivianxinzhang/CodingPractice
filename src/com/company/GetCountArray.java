@@ -6,6 +6,9 @@ public class GetCountArray {
         GetCountArray s = new GetCountArray();
 
         int[] array = null;
+        System.out.println(Arrays.toString(s.countArray(array)));   // null
+
+        array = new int[0];
         System.out.println(Arrays.toString(s.countArray(array)));   // []
 
         array = new int[]{1};
@@ -24,12 +27,14 @@ public class GetCountArray {
         System.out.println(Arrays.toString(s.countArray(array)));   // [2, 0, 1, 1, 0]
     }
 
+    // Assumptions:
+    // The given array A is not null.
     // Implementation 1:
     // Time O(nlogn)
     // Space O(n)
     public int[] countArray(int[] array) {
-        if (array == null || array.length == 0) {
-            return new int[0];
+        if (array == null) {
+            return null;
         }
         // The indexArray contains the indices in the original array
         // and it will be sorted by the corresponding number in the original array

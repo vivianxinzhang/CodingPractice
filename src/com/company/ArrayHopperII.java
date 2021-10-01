@@ -13,8 +13,11 @@ public class ArrayHopperII {
         array = new int[] {2, 1, 1, 0, 2};
         System.out.println(s.minJump(array));   // -1
 
-        array = new int[] {10,0,0,0};
+        array = new int[] {10, 0, 0, 0};
         System.out.println(s.minJump(array));   // 1
+
+        array = new int[] {5, 6, 0, 0, 0, 10, 0, 0, 0};
+        System.out.println(s.minJump(array));   // 2
     }
 
     // Assumptions: array is not null and is not empty
@@ -29,7 +32,6 @@ public class ArrayHopperII {
     // Time O(n^2)
     // Space O(n)
     public int minJump(int[] array) {
-        // Write your solution here
         // Assumptions: array is not null and is not empty
         int length = array.length;
         int[] minJump = new int[length];

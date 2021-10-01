@@ -7,7 +7,8 @@ public class ReverseInteger {
         System.out.println(s.reverse(-12)); // -21
         System.out.println(s.reverse(123)); // 321
         System.out.println(s.reverse(100)); // 1
-        System.out.println(s.reverse(1000000003));  // overflow
+        System.out.println(s.reverse(1000000003));  // 0 - overflow
+        System.out.println(s.reverse(-2147483648)); // 0 - overflow
     }
 
     // Assumptions:

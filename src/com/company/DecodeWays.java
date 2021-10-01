@@ -14,10 +14,22 @@ public class DecodeWays {
         System.out.println(s.numDecodeWay("106"));  // 1
         System.out.println(s.numDecodeWay("624212641113981521649688221891834112776717328126106"));
         // 54000
+        System.out.println(s.numDecodeWay("624212641113981521649688221891834112776717328126106"));
+        // 0
     }
 
     // Method 1: DP
     // M[i] represents total number of ways to decode the first number of i chars, [0, i - 1]
+    // Base case:
+    // M[0] = 1
+    // M[1] = 0 if first char is '0', cannot decode the first char
+    //        1 if first char is not '0', can decode the first char
+    // Induction rule:
+    // Case 1: if can decode last one char, last one char is not '0':
+    //         M[i] += M[i - 1]
+    // Case 2: if can decode last two chars, num > 10 && num < 26
+    //         M[i] += M[i - 2]
+    // M[i] = Case 1 + Case 2
     // Time O(n)
     // Space O(n)
     public int numDecodeWayI(String input) {

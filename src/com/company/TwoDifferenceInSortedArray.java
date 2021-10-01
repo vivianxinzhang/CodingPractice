@@ -10,10 +10,8 @@ public class TwoDifferenceInSortedArray {
         int[] array = new int[] {1, 2, 3, 6, 9};
         System.out.println(Arrays.toString(s.twoDiff(array, 2)));   // [0, 2]
         System.out.println(Arrays.toString(s.twoDiff(array, -2)));  // [2, 0]
-
         array = new int[] {1, 4, 4, 8, 14};
         System.out.println(Arrays.toString(s.twoDiff(array, 0)));   // [1, 2]
-
         array = new int[] {1, 2, 3, 4, 5};
         System.out.println(Arrays.toString(s.twoDiff(array, 0)));   // []
     }

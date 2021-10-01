@@ -4,6 +4,7 @@ import java.util.Arrays;
 public class LargestAndSmallest {
     public static void main(String[] args) {
         LargestAndSmallest s = new LargestAndSmallest();
+
         int[] array = new int[] {1};
         System.out.println(Arrays.toString(s.largestAndSmallest(array)));   // [1, 1]
 

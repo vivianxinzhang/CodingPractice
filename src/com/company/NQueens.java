@@ -7,7 +7,6 @@ public class NQueens {
 
         System.out.println(s.nqueens(1));
         // [[0]]
-
         System.out.println(s.nqueens(4));
         // [[1, 3, 0, 2], [2, 0, 3, 1]]
     }

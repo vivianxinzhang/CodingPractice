@@ -11,6 +11,8 @@ public class MaxWeightsSumOfIntervals {
         System.out.println(s.maxWeightSum(intervals));      // 5
     }
 
+    // Assumptions:
+    // The given array of intervals is not null and has length of > 0
     // Method 1: dp
     // M[i] represents maximum weight for non overlapping intervals ending at index i (including i)
     // base case:
@@ -31,11 +33,10 @@ public class MaxWeightsSumOfIntervals {
                 return o1.end < o2.end ? -1 : 1;
             }
         });
-        int n = intervals.length;
-        int[] M = new int[n];
+        int[] M = new int[intervals.length];
         M[0] = intervals[0].weight;
         int res = intervals[0].weight;
-        for (int i = 1; i < n; i++) {
+        for (int i = 1; i < intervals.length; i++) {
             M[i] = intervals[i].weight;
             // check all intervals before i
             for (int j = 0; j < i; j++) {
@@ -49,6 +50,8 @@ public class MaxWeightsSumOfIntervals {
     }
 
     // Method 1: dfs
+    // how many levels: n
+    // each level decide add or not add the current interval to result
     // Time O(2^n * n)
     // Space O(n)
     public int maxWeightSumI(IntervalW[] intervals) {
@@ -56,27 +59,26 @@ public class MaxWeightsSumOfIntervals {
             return 0;
         }
         List<IntervalW> list = new ArrayList<>();
-        int[] maxWeightsSum = new int[1];
-        maxWeightsSum[0] = Integer.MIN_VALUE;
-        dfs(intervals, 0, 0, list, maxWeightsSum);
-        return maxWeightsSum[0];
+        int[] max = new int[] {Integer.MIN_VALUE};
+        dfs(intervals, 0, 0, list, max);
+        return max[0];
     }
 
-    private void dfs(IntervalW[] intervals, int index, int weightSum, List<IntervalW> currSet, int[] max) {
+    private void dfs(IntervalW[] intervals, int index, int weightSum, List<IntervalW> curSet, int[] max) {
         if (index == intervals.length) {
             max[0] = Math.max(max[0], weightSum);
             return;
         }
         // add
-        if (nonOverLap(intervals[index], currSet)) {
-            currSet.add(intervals[index]);
+        if (nonOverLap(intervals[index], curSet)) {         // O(n)
+            curSet.add(intervals[index]);
             weightSum += intervals[index].weight;
-            dfs(intervals, index + 1, weightSum, currSet, max);
+            dfs(intervals, index + 1, weightSum, curSet, max);
             weightSum -= intervals[index].weight;
-            currSet.remove(currSet.size() - 1);
+            curSet.remove(curSet.size() - 1);
         }
         // not add
-        dfs(intervals, index + 1, weightSum, currSet, max);
+        dfs(intervals, index + 1, weightSum, curSet, max);
     }
 
     private boolean nonOverLap(IntervalW interval, List<IntervalW> list) {

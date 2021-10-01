@@ -255,7 +255,6 @@ public class SmallestRange {
         return false;
     }
 
-
     // Method 1: brute force
     // pick any two numbers from all of the numbers
     // find the smallest range

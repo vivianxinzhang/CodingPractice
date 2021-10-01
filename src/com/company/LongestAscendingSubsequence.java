@@ -4,21 +4,25 @@ public class LongestAscendingSubsequence {
     public static void main(String[] args) {
         LongestAscendingSubsequence s = new LongestAscendingSubsequence();
 
-        int[] array = new int[] {3, 1, 2, 0, 3, 4, 5};
-        System.out.println(s.longest(array));  // 5
+        int[] array = new int[]{};
+        System.out.println(s.longest(array));    // 0
+
+        array = new int[] {3, 1, 2, 0, 3, 4, 5};
+        System.out.println(s.longest(array));    // 5
 
         array = new int[] {5, 2, 6, 3, 4, 7, 5};
-        System.out.println(s.longest(array));  // 4
+        System.out.println(s.longest(array));    // 4
 
         array = new int[] {123, 236, 227, 258, 138, 441, 496, 479, 124, 389, 84, 104, 143, 24, 363, 379, 304, 317, 10, 121, 179, 179, 267};
-        System.out.println(s.longest(array));  // 5
+        System.out.println(s.longest(array));    // 5
     }
 
+    // Assumptions: A is not null
     // Method 2:
     // Time: O(nlogn)
     // Space: O(n)
     public int longest(int[] array) {
-        if (array.length == 0) {
+        if (array == null || array.length == 0) {
             return 0;
         }
         // tbl[i]: the smallest ending value of all the ascending subsequences with length i.

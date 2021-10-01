@@ -7,7 +7,16 @@ public class SortWithThreeStacks {
     public static void main(String[] args) {
         SortWithThreeStacks s = new SortWithThreeStacks();
 
-        Deque<Integer> stack = new ArrayDeque<>();
+        Deque<Integer> stack = null;
+        System.out.println(stack);
+        s.sort(stack);
+        System.out.println(stack);
+
+        stack = new ArrayDeque<>();
+        System.out.println(stack);
+        s.sort(stack);
+        System.out.println(stack);
+
         stack.offerFirst(1);
         stack.offerFirst(4);
         stack.offerFirst(3);
@@ -25,6 +34,9 @@ public class SortWithThreeStacks {
     // Time O(nlogn)
     // Space O(logn)
     public void sort(Deque<Integer> s1) {
+        if (s1 == null || s1.size() <= 1) {
+            return;
+        }
         Deque<Integer> s2 = new ArrayDeque<>();
         Deque<Integer> s3 = new ArrayDeque<>();
         mergeSort(s1, s2, s3, s1.size());

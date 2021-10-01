@@ -4,20 +4,23 @@ import java.util.*;
 public class MaxSubarraySumDifference {
     public static void main(String[] args) {
         MaxSubarraySumDifference s = new MaxSubarraySumDifference();
-        int[] array = new int[] {2, -2, 2, -2, 2, -2};
-        System.out.println(s.maxDiff(array));   // 4
-        System.out.println(s.maxDiffII(array));   // 4
+
+        int[] array = new int[] {1, 1};
+        System.out.println(s.maxDiffI(array));   // 0
+
+        array = new int[] {2, -2, 2, -2, 2, -2};
+        System.out.println(s.maxDiffI(array));   // 4
 
         array = new int[] {4, -2, 0, 3, 1, 5, -4};
-        System.out.println(s.maxDiff(array));   // 15
-        System.out.println(s.maxDiffII(array));   // 15
+        System.out.println(s.maxDiffI(array));   // 15
 
         array = new int[] {1, -3, 1, -4, 3, 4 };
-        System.out.println(s.maxDiff(array));   // 13
-        System.out.println(s.maxDiffII(array));   // 13
-
+        System.out.println(s.maxDiffI(array));   // 13
     }
 
+    // Assumptions:
+    // The given array is not null and has length of at least 2.
+    // Method 2: dp
     // Time O(n)
     // Space O(n)
     public int maxDiff(int[] array) {
@@ -25,35 +28,21 @@ public class MaxSubarraySumDifference {
         int[] maxResult = maxSubArraySum(array);
         if (maxResult[2] - maxResult[1] + 1== array.length) {
             int smallestSubArraySum = Math.min(array[0], array[array.length - 1]);
-            return Math.abs(maxResult[0] - smallestSubArraySum - smallestSubArraySum);
+            int maxSubarraySum = maxResult[0] - smallestSubArraySum;
+            return Math.abs(maxSubarraySum - smallestSubArraySum);
         }
+        int maxLeft = maxResult[0];
+        int maxRight = maxResult[1];
         int minSubArraySum = Integer.MAX_VALUE;
-        if (maxResult[1] > 0) {
-            int leftMin = minSubArraySum(array, 0, maxResult[1] - 1);
+        if (maxLeft > 0) {
+            int leftMin = minSubArraySum(array, 0, maxLeft - 1);
             minSubArraySum = Math.min(minSubArraySum, leftMin);
         }
-        if (maxResult[2] < array.length - 1) {
-            int rightMin = minSubArraySum(array, maxResult[2] + 1, array.length - 1);
+        if (maxRight < array.length - 1) {
+            int rightMin = minSubArraySum(array, maxRight + 1, array.length - 1);
             minSubArraySum = Math.min(minSubArraySum, rightMin);
         }
         return Math.abs(maxResult[0] - minSubArraySum);
-    }
-
-    private int minSubArraySum(int[] array, int left, int right) {
-        if (left == right) {
-            return array[left];
-        }
-        int minSum = array[left];
-        int minCur = array[left];
-        for (int i = left + 1; i <= right; i++) {
-            if (minCur < 0) {
-                minCur = minCur + array[i];
-            } else {
-                minCur = array[i];
-            }
-            minSum = Math.min(minSum, minCur);
-        }
-        return minSum;
     }
 
     public int[] maxSubArraySum(int[] array) {
@@ -83,7 +72,24 @@ public class MaxSubarraySumDifference {
         return result;
     }
 
-    // Method 2: optimize calculate range sum
+    private int minSubArraySum(int[] array, int left, int right) {
+        if (left == right) {
+            return array[left];
+        }
+        int minSum = array[left];
+        int minCur = array[left];
+        for (int i = left + 1; i <= right; i++) {
+            if (minCur < 0) {
+                minCur = minCur + array[i];
+            } else {
+                minCur = array[i];
+            }
+            minSum = Math.min(minSum, minCur);
+        }
+        return minSum;
+    }
+
+    // Method 1: optimize calculate range sum
     // pre-processing: prefix sum
     // Time O(n^3)
     // Space O(n)
@@ -108,7 +114,6 @@ public class MaxSubarraySumDifference {
         return prefixSum[right] - prefixSum[left] + array[left];
     }
 
-
     private int[] getPrefixSum(int[] nums) {
         int[] prefixSum = new int[nums.length];
         int sum = 0;
@@ -118,7 +123,6 @@ public class MaxSubarraySumDifference {
         }
         return prefixSum;
     }
-
 
     // Method 1: brute force
     // Step 1: enumerate all contiguous sub-arrays of length >= 2
@@ -130,7 +134,7 @@ public class MaxSubarraySumDifference {
         int maxDiff = Integer.MIN_VALUE;
         for (int i = 0; i < array.length - 1; i++) {
             for (int j = i + 1; j < array.length; j++) {
-                // k is the divider of two subarrays, first int of the right part
+                // k is the divider of two subarrays, first idx of the right part
                 for (int k = i + 1; k <= j; k++) {
                     int leftSum = sum(array, i, k - 1);
                     int rightSum = sum(array, k, j);

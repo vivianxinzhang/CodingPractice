@@ -4,6 +4,7 @@ import java.util.*;
 public class MergeKSortedLists {
     public static void main(String[] args) {
         MergeKSortedLists s = new MergeKSortedLists();
+
         // 1 -> 3 -> 5
         ListNode one = new ListNode(1);
         ListNode three = new ListNode(3);
@@ -82,7 +83,7 @@ public class MergeKSortedLists {
     }
 
     // Method 2: binary reduction
-    // 2.1 iteration:
+    // 2.1 iteration: space optimization
     // Time O(kn * logk)
     // Space O(1)
     public ListNode mergeII(List<ListNode> listOfLists) {
@@ -130,7 +131,10 @@ public class MergeKSortedLists {
         return dummy.next;
     }
 
-    // recursion:
+    // binary reduction
+    // 2.2 recursion: space optimization
+    // Time O(kn * logk)
+    // Space O(logk)
     public ListNode mergeIII(List<ListNode> listOfLists) {
         if (listOfLists == null || listOfLists.size() == 0) {
             return null;

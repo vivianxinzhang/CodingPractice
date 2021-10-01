@@ -6,18 +6,18 @@ public class StringFrequencyInWindows {
         StringFrequencyInWindows s = new StringFrequencyInWindows();
 
         String input = "ABCDABCDD";
-        // output: ABCD: 2 BCDA: 1 CDAB: 1 DABC: 1
+        // output: ABCD: 2   BCDA: 1   CDAB: 1   DABC: 1
         List<Frequency> res = s.frequency(input);
         for (Frequency freq : res) {
-            System.out.print(freq.str + ": " + freq.freq + " ");
+            System.out.print(freq.str + ": " + freq.freq + "   ");
         }
         System.out.println();
 
         input = "CABDACBCCDADCB";
-        // output: ADCB: 1 BDAC: 1 CABD: 1 DACB: 1
+        // output: ADCB: 1   BDAC: 1   CABD: 1   DACB: 1
         res = s.frequency(input);
         for (Frequency freq : res) {
-            System.out.print(freq.str + ": " + freq.freq + " ");
+            System.out.print(freq.str + ": " + freq.freq + "   ");
         }
     }
 
@@ -84,6 +84,7 @@ public class StringFrequencyInWindows {
 
     // another implementation
     private List<Frequency> toListI(Map<String, Integer> map) {
+        // PriorityQueue<Frequency> maxHeap = new PriorityQueue<>((f1, f2) -> (f1.freq == f2.freq ? f1.str.compareTo(f2.str) : f2.freq - f1.freq));
         PriorityQueue<Map.Entry<String, Integer>> maxHeap = new PriorityQueue<>(new Comparator<Map.Entry<String, Integer>>() {
             @Override
             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {

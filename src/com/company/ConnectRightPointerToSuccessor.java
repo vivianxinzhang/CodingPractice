@@ -6,21 +6,45 @@ import java.util.Deque;
 public class ConnectRightPointerToSuccessor {
     public static void main(String[] args) {
         ConnectRightPointerToSuccessor s = new ConnectRightPointerToSuccessor();
-        TreeNode three = new TreeNode(3);
-        TreeNode two = new TreeNode(2);
+
         TreeNode one = new TreeNode(1);
-        three.left = two;
+        TreeNode two = new TreeNode(2);
+        TreeNode three = new TreeNode(3);
         two.left = one;
-        /**     3
+        two.right = three;
+        two.left = one;
+        /**     2
          *    /   \
-         *   2     1
+         *   1     3
          * */
-        s.connect(one);
+        s.connect(two);
+        System.out.println(one.right.key);
     }
 
+    // Method 1: recursion
     // Time O(n)
     // Space O(height) worst case O(n)
     public void connect(TreeNode root) {
+        TreeNode[] pre = new TreeNode[] {null};
+        inOrder(root, pre);
+    }
+
+    private void inOrder(TreeNode root, TreeNode[] pre) {
+        if (root == null) {
+            return;
+        }
+        inOrder(root.left, pre);
+        if (pre[0] != null && pre[0].right == null) {
+            pre[0].right = root;
+        }
+        pre[0] = root;
+        inOrder(root.right, pre);
+    }
+
+    // Method 1: stack
+    // Time O(n)
+    // Space O(height) worst case O(n)
+    public void connectI(TreeNode root) {
         if (root == null) {
             return;
         }

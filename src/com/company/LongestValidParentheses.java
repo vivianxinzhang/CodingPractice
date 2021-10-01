@@ -6,14 +6,12 @@ public class LongestValidParentheses {
     public static void main(String[] args) {
         LongestValidParentheses s = new LongestValidParentheses();
 
-        String input = ")))((";
-        System.out.println(s.longestValidParentheses(input));   // 0
-
-        input = ")()())";
-        System.out.println(s.longestValidParentheses(input));   // 4  ()()
-
-        input = "((())()))";
-        System.out.println(s.longestValidParentheses(input));   // 8  ((())())
+        System.out.println(s.longestValidParentheses(")))(("));
+        // 0
+        System.out.println(s.longestValidParentheses(")()())"));
+        // 4  ()()
+        System.out.println(s.longestValidParentheses("((())()))"));
+        // 8  ((())())
     }
 
     // Time O(n)

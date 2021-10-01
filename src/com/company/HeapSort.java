@@ -4,6 +4,7 @@ import java.util.Arrays;
 public class HeapSort {
     public static void main(String[] args) {
         HeapSort s = new HeapSort();
+
         int[] array = {4, 6, 1, 3};
         System.out.println(Arrays.toString(s.heapsort(array)));
         // [1, 3, 4, 6]
@@ -14,7 +15,7 @@ public class HeapSort {
 
         array = new int[]{2, 1, 3, 5, 4};
         System.out.println(Arrays.toString(s.heapsort(array)));
-        // [1, 1, 1, 2, 2]
+        // [1, 2, 3, 4, 5]
     }
 
     // Requirements:

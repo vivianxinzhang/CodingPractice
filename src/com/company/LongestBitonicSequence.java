@@ -3,15 +3,15 @@ package com.company;
 public class LongestBitonicSequence {
     public static void main(String[] args) {
         LongestBitonicSequence s = new LongestBitonicSequence();
+
         int[] array = new int[] {1, 2};
         System.out.println(s.longestBitonic(array));    // 2
-
         array = new int[] {1, 5, 2, 4, 3};
         System.out.println(s.longestBitonic(array));    // 4
-
         array = new int[] {1, 3, 2, 1, 4, 6, 1};
         System.out.println(s.longestBitonic(array));    // 5
     }
+
     // Assumptions:
     // The given array is not null.
     // Corner Cases:
@@ -19,6 +19,8 @@ public class LongestBitonicSequence {
     // decreasing order sequence is considered Bitonic with the increasing part as empty.
     // Step 1: get length of longest increasing subsequence on left of i and on right of i for each index
     // Step 2: update length of Longest Bitonic Sequence with i as the peak
+    // Time O(n^2)
+    // Space O(n)
     public int longestBitonic(int[] array) {
         if (array == null || array.length == 0) {
             return 0;

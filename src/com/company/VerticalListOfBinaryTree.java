@@ -21,12 +21,12 @@ public class VerticalListOfBinaryTree {
         /**
          *               3
          *             /   \
-         *          9       8
+         *           9      8
          *         /  \   /  \
          *        4    0 1    7
          * */
         System.out.println(s.verticalPrint(three));
-        // [4, 9, 3, 0, 1, 8, 7]
+        // [[4], [9], [3, 0, 1], [8], [7]]
     }
 
     // bfs

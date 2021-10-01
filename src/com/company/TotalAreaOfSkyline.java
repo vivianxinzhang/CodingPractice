@@ -27,7 +27,7 @@ public class TotalAreaOfSkyline {
         list1.add(b2);
         list1.add(b1);
         list1.add(b3);
-        System.out.println(s.totalArea(list1));    // 5
+        System.out.println(s.totalArea(list1));    // 6
     }
 
     class Point {
@@ -44,6 +44,8 @@ public class TotalAreaOfSkyline {
         }
     }
 
+    // Assumptions:
+    // The given array of buildings is not null, the buildings are not null.
     // Time O(nlogn)
     // Space O(n)
     public int totalArea(List<Building> buildings) {
@@ -52,6 +54,7 @@ public class TotalAreaOfSkyline {
         }
         // Step 1: convert List<Building> to points in a pointsMinHeap
         PriorityQueue<Point> pointsMinHeap = convert(buildings);
+        // PriorityQueue<Solution.Point> heightMaxHeap = new PriorityQueue<>((s1, s2) -> (s2.height - s1.height));
         PriorityQueue<Point> heightMaxHeap = new PriorityQueue<>(new Comparator<Point>() {
             @Override
             public int compare(Point p1, Point p2) {
@@ -111,7 +114,7 @@ public class TotalAreaOfSkyline {
             }
         });
         for (Building x : buildings) {
-            System.out.println("building height is " + x.height);
+            // System.out.println("building height is " + x.height);
             points.add(new Point(x.start, x.end, x.height, true));
             points.add(new Point(x.start, x.end, x.height, false));
         }

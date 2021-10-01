@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class DifferentElementsInTwoSortedArrays {
     public static void main(String[] args) {
         DifferentElementsInTwoSortedArrays s = new DifferentElementsInTwoSortedArrays();
+
         int[] a = new int[] {1, 2, 2, 3, 4, 5};
         int[] b = new int[] {2, 2, 2, 4, 4, 6};
         Printer.printMatrix(s.diff(a, b));
