@@ -3,12 +3,11 @@ package com.company;
 public class ReplacementsOfAAndB {
     public static void main(String[] args) {
         ReplacementsOfAAndB s = new ReplacementsOfAAndB();
+
         String input = "ba";
         System.out.println(s.minReplacements(input));   // 1
-
         input = "abaab";
         System.out.println(s.minReplacements(input));   // 1
-
         input = "abbabbaab";
         System.out.println(s.minReplacements(input));   // 3
     }

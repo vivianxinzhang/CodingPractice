@@ -4,7 +4,17 @@ import java.util.*;
 public class MaxWeightsSumOfIntervals {
     public static void main(String[] args) {
         MaxWeightsSumOfIntervals s = new MaxWeightsSumOfIntervals();
-        IntervalW[] intervals = new IntervalW[3];
+
+        IntervalW[] intervals = new IntervalW[1];
+        intervals[0] = new IntervalW(0, 1, 3);
+        System.out.println(s.maxWeightSum(intervals));      // 3
+
+        intervals = new IntervalW[3];
+        intervals[0] = new IntervalW(4, 5, 1);
+        intervals[1] = new IntervalW(0, 6, 1);
+        intervals[2] = new IntervalW(2, 5, 3);
+        System.out.println(s.maxWeightSum(intervals));      // 3
+
         intervals[0] = new IntervalW(4, 5, 2);
         intervals[1] = new IntervalW(0, 1, 1);
         intervals[2] = new IntervalW(2, 3, 2);
@@ -13,7 +23,7 @@ public class MaxWeightsSumOfIntervals {
 
     // Assumptions:
     // The given array of intervals is not null and has length of > 0
-    // Method 1: dp
+    // Method 2: dp
     // M[i] represents maximum weight for non overlapping intervals ending at index i (including i)
     // base case:
     // M[0] = intervals[0].weight

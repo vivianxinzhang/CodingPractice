@@ -9,11 +9,9 @@ public class KClosestInSortedArray {
         int[] array = new int[] {1, 2, 3};
         System.out.println(Arrays.toString(s.kClosest(array, 2, 3)));
         // [2, 1, 3]
-
         array = new int[] {1, 3, 5};
         System.out.println(Arrays.toString(s.kClosest(array, 10, 3)));
         // [5, 3, 1]
-
         array = new int[] {1, 4, 6, 8};
         System.out.println(Arrays.toString(s.kClosest(array, 5, 2)));
         // [4, 6]

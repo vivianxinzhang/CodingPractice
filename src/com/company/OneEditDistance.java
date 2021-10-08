@@ -4,8 +4,11 @@ import java.util.*;
 public class OneEditDistance {
     public static void main(String[] args) {
         OneEditDistance s = new OneEditDistance();
-        System.out.println(s.oneEditDistance("abc", "ab"));     // true
-        System.out.println(s.oneEditDistance("abc", "bcd"));    // false
+
+        System.out.println(s.oneEditDistance("xoppx", "doppx"));    // true
+        System.out.println(s.oneEditDistance("x", ""));             // true
+        System.out.println(s.oneEditDistance("abc", "ab"));         // true
+        System.out.println(s.oneEditDistance("abc", "bcd"));        // false
     }
 
     // A Simple Solution is to find Edit Distance using Dynamic programming.
@@ -13,7 +16,7 @@ public class OneEditDistance {
     // Time complexity of this solution is O(n2)
     // An Efficient Solution is to simultaneously traverse both strings and keep track of count
     // of different characters. Below is complete algorithm.
-    // Time O(n)
+    // Time O(m + n)
     // Space O(1)
     public boolean oneEditDistance(String source, String target) {
         // Find lengths of given strings

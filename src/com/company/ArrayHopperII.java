@@ -6,16 +6,12 @@ public class ArrayHopperII {
 
         int[] array = new int[] {1, 2, 0};
         System.out.println(s.minJump(array));   // 2
-
         array = new int[] {3, 3, 1, 0, 4};
         System.out.println(s.minJump(array));   // 2
-
         array = new int[] {2, 1, 1, 0, 2};
         System.out.println(s.minJump(array));   // -1
-
         array = new int[] {10, 0, 0, 0};
         System.out.println(s.minJump(array));   // 1
-
         array = new int[] {5, 6, 0, 0, 0, 10, 0, 0, 0};
         System.out.println(s.minJump(array));   // 2
     }

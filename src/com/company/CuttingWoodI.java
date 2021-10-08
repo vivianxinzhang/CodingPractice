@@ -6,10 +6,8 @@ public class CuttingWoodI {
 
         int[] cuts = new int[] {2, 4, 7};
         System.out.println(s.minCost(cuts, 10));    // 20
-
         cuts = new int[] {2, 4, 5, 8};
         System.out.println(s.minCost(cuts, 10));    // 23
-
         cuts = new int[] {3, 16, 19, 28, 37, 44, 47, 48, 51, 52, 62};
         System.out.println(s.minCost(cuts, 67));    // 229
     }

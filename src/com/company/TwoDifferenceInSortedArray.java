@@ -21,7 +21,7 @@ public class TwoDifferenceInSortedArray {
     // 2. If more than one pair of index exits, return the one with ascending order.
     // Method 3: two pointers
     // Time O(n)
-    // Space O(n)
+    // Space O(1)
     public int[] twoDiff(int[] array, int target) {
         // only need to take sign in this method
         int sign = target >= 0 ? 1 : -1;

@@ -3,6 +3,7 @@ package com.company;
 public class ConvertBinaryTreeToDoublyLinkedList {
     public static void main(String[] args) {
         ConvertBinaryTreeToDoublyLinkedList s = new ConvertBinaryTreeToDoublyLinkedList();
+
         TreeNode ten = new TreeNode(10);
         TreeNode five = new TreeNode(5);
         TreeNode fifteen = new TreeNode(15);
@@ -51,13 +52,11 @@ public class ConvertBinaryTreeToDoublyLinkedList {
         if (root == null) {
             return;
         }
-        TreeNode leftChild = root.left;
-        TreeNode rightChild = root.right;
-        inOrder(leftChild, pre);
-        pre[0].right = root;
+        inOrder(root.left, pre);
         root.left = pre[0];
+        pre[0].right = root;
         pre[0] = root;
-        inOrder(rightChild, pre);
+        inOrder(root.right, pre);
     }
 
     // Method 1：

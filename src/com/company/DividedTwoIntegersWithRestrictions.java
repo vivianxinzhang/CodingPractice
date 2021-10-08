@@ -5,21 +5,15 @@ public class DividedTwoIntegersWithRestrictions {
         DividedTwoIntegersWithRestrictions s = new DividedTwoIntegersWithRestrictions();
 
         // Examples:
-        System.out.println(s.divide(0, 0));     // 2147483647
-        // 0 / 1 = 0
-        System.out.println(s.divide(0, 1));     // 0
-        // 1 / 0 = Integer.MAX_VALUE
-        System.out.println(s.divide(1, 0));     // 2147483647
-        // -1 / 0 = Integer.MAX_VALUE
-        System.out.println(s.divide(-1, 0));    // 2147483647
-        // 11 / 2 = 5
-        System.out.println(s.divide(11, 2));    // 5
-        // -11 / 2 = -5
-        System.out.println(s.divide(-11, 2));   // -5
-        // 11 / -2 = -5
-        System.out.println(s.divide(11, -2));   // -5
-        // -11 / -2 = 5
-        System.out.println(s.divide(-11, -2));  // 5
+        System.out.println(s.divide(0, 0));       // 2147483647
+        System.out.println(s.divide(0, 1));       // 0 = 0 / 1
+        System.out.println(s.divide(1, 0));       // 2147483647 = 1 / 0
+        System.out.println(s.divide(-1, 0));      // 2147483647 = -1 / 0
+        System.out.println(s.divide(11, 2));      // 5 = 11 / 2
+        System.out.println(s.divide(-11, 2));     // -5 = -11 / 2
+        System.out.println(s.divide(11, -2));     // -5 = 11 / -2
+        System.out.println(s.divide(-11, -2));    // 5 = -11 / -2
+        System.out.println(s.divide(-51, 51));    // -1
     }
 
     // Method 2: bit operation

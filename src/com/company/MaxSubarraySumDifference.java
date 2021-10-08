@@ -6,16 +6,13 @@ public class MaxSubarraySumDifference {
         MaxSubarraySumDifference s = new MaxSubarraySumDifference();
 
         int[] array = new int[] {1, 1};
-        System.out.println(s.maxDiffI(array));   // 0
-
+        System.out.println(s.maxDiff(array));     // 0
         array = new int[] {2, -2, 2, -2, 2, -2};
-        System.out.println(s.maxDiffI(array));   // 4
-
-        array = new int[] {4, -2, 0, 3, 1, 5, -4};
-        System.out.println(s.maxDiffI(array));   // 15
-
+        System.out.println(s.maxDiff(array));     // 4
         array = new int[] {1, -3, 1, -4, 3, 4 };
-        System.out.println(s.maxDiffI(array));   // 13
+        System.out.println(s.maxDiff(array));     // 13
+        array = new int[] {4, -2, 0, 3, 1, 5, -4};
+        System.out.println(s.maxDiff(array));     // 15
     }
 
     // Assumptions:
