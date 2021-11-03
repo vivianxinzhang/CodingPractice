@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class CoinChange {
     public static void main(String[] args) {
         CoinChange s = new CoinChange();
+
         int[] coins = new int[] {2};
         System.out.println(s.coinChange(coins, 3));     // -1
 
@@ -43,5 +44,28 @@ public class CoinChange {
             }
         }
         return M[amount] == Integer.MAX_VALUE ? -1 : M[amount];
+    }
+
+    // Method 1: dfs
+    // levels coins.length      branching factor: target/min(coins)
+    // Time O((target/min(coins))^coins.length)
+    // Space O(coins.length)
+    public int coinChangeI(int[] coins, int target) {
+        int[] min = new int[] {Integer.MAX_VALUE};
+        dfs(coins, 0, target, 0, min);
+        return min[0] == Integer.MAX_VALUE ? -1 : min[0];
+    }
+
+    private void dfs(int[] coins, int index, int target, int count, int[] min) {
+        if (index == coins.length) {
+            if (target == 0) {
+                min[0] = Math.min(min[0], count);
+            }
+            return;
+        }
+        int max = target / coins[index];
+        for (int i = 0; i <= max; i++) {
+            dfs(coins, index + 1, target - i * coins[index], count + i, min);
+        }
     }
 }

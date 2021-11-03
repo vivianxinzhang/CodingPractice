@@ -8,13 +8,11 @@ public class MaxWeightsSumOfIntervals {
         IntervalW[] intervals = new IntervalW[1];
         intervals[0] = new IntervalW(0, 1, 3);
         System.out.println(s.maxWeightSum(intervals));      // 3
-
         intervals = new IntervalW[3];
         intervals[0] = new IntervalW(4, 5, 1);
         intervals[1] = new IntervalW(0, 6, 1);
         intervals[2] = new IntervalW(2, 5, 3);
         System.out.println(s.maxWeightSum(intervals));      // 3
-
         intervals[0] = new IntervalW(4, 5, 2);
         intervals[1] = new IntervalW(0, 1, 1);
         intervals[2] = new IntervalW(2, 3, 2);

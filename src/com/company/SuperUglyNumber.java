@@ -4,6 +4,7 @@ import java.util.*;
 public class SuperUglyNumber {
     public static void main(String[] args) {
         SuperUglyNumber s = new SuperUglyNumber();
+
         int[] primes = new int[] {2, 7, 13, 19};
         for (int i = 0; i < 12; i++) {
             System.out.print(s.nthSuperUglyNumber(i + 1, primes) + " ");
@@ -31,7 +32,9 @@ public class SuperUglyNumber {
         for (int i = 0; i < n - 1; i++) {
             int tmp = minHeap.poll();
             for (int j = 0; j < primes.length; j++) {
+                // use double to avoid Integer overflow
                 double nextUglyNumber = (double) tmp * primes[j];
+                // need to de-dup using visited
                 if (nextUglyNumber < Integer.MAX_VALUE && !visited.contains(primes[j] * tmp)) {
                     minHeap.offer(primes[j] * tmp);
                     visited.add(primes[j] * tmp);

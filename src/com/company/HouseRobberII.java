@@ -3,8 +3,9 @@ package com.company;
 public class HouseRobberII {
     public static void main(String[] args) {
         HouseRobberII s = new HouseRobberII();
-        int[]  array = new int[] {1, 5, 6};
-        System.out.println(s.rob(array));   // 6
+
+        int[]  array = new int[] {5};
+        System.out.println(s.rob(array));   // 5
 
         array = new int[] {1, 5, 6, 7};
         System.out.println(s.rob(array));   // 12
@@ -16,7 +17,7 @@ public class HouseRobberII {
         System.out.println(s.rob(array));   // 45
     }
 
-    // Method 1:
+    // Method 2: dp
     // avoid rob both 0 and n-1 at the same time
     // Case 1: not rob house 0, dp between [1, n-1]
     //         0  [1       ...     n-1]
@@ -63,5 +64,37 @@ public class HouseRobberII {
         }
         int notRobEndRes = Math.max(rob, noRob);
         return Math.max(notRobStartRes, notRobEndRes);
+    }
+
+    // Method 1: dfs
+    // Time O(2^n)
+    // Space O(n)
+    public int robI(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        boolean[] status = new boolean[nums.length];
+        int[] max = new int[1];
+        dfs(nums, 0, 0, status, max);
+        return max[0];
+    }
+
+    private void dfs(int[] num, int index, int cur, boolean[] status, int[] max) {
+        if (index == num.length) {
+            max[0] = Math.max(max[0], cur);
+            return;
+        }
+        status[index] = false;
+        dfs(num, index + 1, cur, status, max);
+        if ((index == 0) || (index < num.length - 1 &&status[index - 1] == false)) {
+            status[index] = true;
+            dfs(num, index + 1, cur + num[index], status, max);
+        }
+        if (index == num.length - 1 && (status[index - 1] == false && status[0] == false)) {
+            dfs(num, index + 1, cur + num[index], status, max);
+        }
     }
 }

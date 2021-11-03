@@ -7,10 +7,12 @@ public class CompactDivide {
     public static void main(String[] args) {
         CompactDivide s = new CompactDivide();
 
-        System.out.println(s.divide(1, 0));     // NaN
-        System.out.println(s.divide(1, 2));     // 0.5
-        System.out.println(s.divide(2, 3));     // 0.(6)
-        System.out.println(s.divide(32, 666));  // 0.(048)
+        System.out.println(s.divide(1, 0));       // NaN
+        System.out.println(s.divide(1, 2));       // 0.5
+        System.out.println(s.divide(2, 3));       // 0.(6)
+        System.out.println(s.divide(22, -7));     // -3.(142857)
+        System.out.println(s.divide(32, 666));    // 0.(048)
+        System.out.println(s.divide(2, 100100));  // 0.00(001998)
     }
 
     // Time O(1) 最长是O(10)

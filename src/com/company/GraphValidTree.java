@@ -5,6 +5,7 @@ import java.util.*;
 public class GraphValidTree {
     public static void main(String[] args) {
         GraphValidTree s = new GraphValidTree();
+
         int[][] edges = new int[][] {{0, 1}, {0, 2}, {0, 3}, {1, 4}};
         /**
          *          1 - 0 - 2
@@ -12,7 +13,6 @@ public class GraphValidTree {
          *          4   3
          * */
         System.out.println(s.validTree(5, edges));      // true
-
         edges = new int[][] {{0, 1}, {1, 2}, {2, 3}, {1, 3}, {1, 4}};
         /**
          *          0 - 1 - 2

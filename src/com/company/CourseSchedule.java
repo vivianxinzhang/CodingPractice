@@ -4,13 +4,17 @@ import java.util.*;
 public class CourseSchedule {
     public static void main(String[] args) {
         CourseSchedule s = new CourseSchedule();
-        int[][] prerequisites = new int[][]{{1,0},{0,2}};
+
+        int[][] prerequisites = new int[][]{{1, 0}, {0, 2}};
         System.out.println(s.canFinish(3, prerequisites));  // true 2 -> 0 -> 1
 
-        prerequisites = new int[][]{{1,0}};
+        prerequisites = new int[][]{{1, 0}};
         System.out.println(s.canFinish(2, prerequisites));  // true 0 -> 1
 
-        prerequisites = new int[][]{{1,0},{0,1}};
+        prerequisites = new int[][]{{1, 0}, {2, 0}};
+        System.out.println(s.canFinish(3, prerequisites));  // true 0 -> 1, 2
+
+        prerequisites = new int[][]{{1, 0}, {0, 1}};
         System.out.println(s.canFinish(2, prerequisites));  // false
     }
 
@@ -77,9 +81,9 @@ public class CourseSchedule {
         for (int i = 0; i < numCourses; i++) {
             graph.add(new ArrayList<>());
         }
-        for (int i = 0; i < prerequisites.length; i++) {
-            int course = prerequisites[i][0];
-            int pre = prerequisites[i][1];
+        for (int[] pair : prerequisites) {
+            int course = pair[0];
+            int pre = pair[1];
             graph.get(course).add(pre);
         }
         int[] visited = new int[numCourses];

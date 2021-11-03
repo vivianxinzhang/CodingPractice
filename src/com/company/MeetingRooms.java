@@ -7,7 +7,9 @@ public class MeetingRooms {
     public static void main(String[] args) {
         MeetingRooms s = new MeetingRooms();
 
-        int[][] intervals = new int[][] {{0, 30}, {5, 10}, {15, 20}};
+        int[][] intervals = new int[][] {{23, 27}};
+        System.out.println(s.canAttendMeetings(intervals));     // true
+        intervals = new int[][] {{0, 30}, {5, 10}, {15, 20}};
         System.out.println(s.canAttendMeetings(intervals));     // false
     }
 

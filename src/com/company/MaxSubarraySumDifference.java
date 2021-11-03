@@ -7,6 +7,8 @@ public class MaxSubarraySumDifference {
 
         int[] array = new int[] {1, 1};
         System.out.println(s.maxDiff(array));     // 0
+        array = new int[] {-2, -3, -1};
+        System.out.println(s.maxDiff(array));     // 4
         array = new int[] {2, -2, 2, -2, 2, -2};
         System.out.println(s.maxDiff(array));     // 4
         array = new int[] {1, -3, 1, -4, 3, 4 };
@@ -24,20 +26,20 @@ public class MaxSubarraySumDifference {
         // int[] {maxSum, left, right}
         int[] maxResult = maxSubArraySum(array);
         if (maxResult[2] - maxResult[1] + 1== array.length) {
-            int smallestSubArraySum = Math.min(array[0], array[array.length - 1]);
-            int maxSubarraySum = maxResult[0] - smallestSubArraySum;
-            return Math.abs(maxSubarraySum - smallestSubArraySum);
+            int minSubArraySum = Math.min(array[0], array[array.length - 1]);
+            int maxSubarraySum = maxResult[0] - minSubArraySum;
+            return Math.abs(maxSubarraySum - minSubArraySum);
         }
-        int maxLeft = maxResult[0];
-        int maxRight = maxResult[1];
+        int maxLeft = maxResult[1];
+        int maxRight = maxResult[2];
         int minSubArraySum = Integer.MAX_VALUE;
         if (maxLeft > 0) {
-            int leftMin = minSubArraySum(array, 0, maxLeft - 1);
-            minSubArraySum = Math.min(minSubArraySum, leftMin);
+            int leftMinSubArraySum = minSubArraySum(array, 0, maxLeft - 1);
+            minSubArraySum = Math.min(minSubArraySum, leftMinSubArraySum);
         }
         if (maxRight < array.length - 1) {
-            int rightMin = minSubArraySum(array, maxRight + 1, array.length - 1);
-            minSubArraySum = Math.min(minSubArraySum, rightMin);
+            int rightMinSubArraySum = minSubArraySum(array, maxRight + 1, array.length - 1);
+            minSubArraySum = Math.min(minSubArraySum, rightMinSubArraySum);
         }
         return Math.abs(maxResult[0] - minSubArraySum);
     }

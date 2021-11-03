@@ -3,18 +3,24 @@ package com.company;
 public class SmallestRectangleEnclosingBlackPixels {
     public static void main(String[] args) {
         SmallestRectangleEnclosingBlackPixels s = new SmallestRectangleEnclosingBlackPixels();
+
         int[][] matrix = null;
         System.out.println(s.minArea(matrix, -1, -1));    // 0
 
         matrix = new int[][]{{1}, {1}};
-        Printer.printMatrix(matrix);
-        System.out.println(s.minArea(matrix, 1, 0));      // 2
+        System.out.println(s.minArea(matrix, 0, 0));      // 2
+
+        matrix = new int[][]{{0, 0, 0, 0}, {1, 1, 1, 0}, {1, 1, 0, 0}};
+        System.out.println(s.minArea(matrix, 2, 0));      // 6
+
+        matrix = new int[][]{{0, 0, 0, 0}, {1, 1, 1, 0}, {0, 1, 0, 0}};
+        System.out.println(s.minArea(matrix, 1, 0));      // 6
 
         matrix = new int[][]{{0, 0, 1, 0}, {0, 1, 1, 0}, {0, 1, 0, 0}};
-        Printer.printMatrix(matrix);
         System.out.println(s.minArea(matrix, 0, 2));      // 6
     }
 
+    // Assumption:
     // There is only one black region. Pixels are connected horizontally and vertically.
     // Method 2: binary search
     // Time O(mlogn + nlogm)

@@ -9,13 +9,12 @@ public class ShortestSubstringWithKTypedCharacters {
         System.out.println(s.shortest(input, 3));   // ""
         input = "aabbbccc";
         System.out.println(s.shortest(input, 4));   // ""
-        input = "aaaaabbdaaaacccdddddeeffbbbbbbf";
-        System.out.println(s.shortest(input, 5));   // "cdddddeeffb"
-        // "aaaaabbdaaaacc cdddddeeffb bbbbbf"
-        input = "aabbbcccc";
-        System.out.println(s.shortest(input, 3));   // "abbbc"
         input = "aabcc";
         System.out.println(s.shortest(input, 3));   // "abc"
+        input = "aabbbcccc";
+        System.out.println(s.shortest(input, 3));   // "abbbc"
+        input = "aaaaabbdaaaacccdddddeeffbbbbbbf";
+        System.out.println(s.shortest(input, 5));   // "cdddddeeffb"
     }
 
     // Assumptions:

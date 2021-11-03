@@ -6,7 +6,6 @@ public class ReverseWordsInASentenceII {
 
         System.out.println(s.reverseWords("   I love    Google"));
         // Google love I
-
         System.out.println(s.reverseWords("  Life    is Happy   "));
         // Happy is Life
     }

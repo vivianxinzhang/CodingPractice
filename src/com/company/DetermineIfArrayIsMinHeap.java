@@ -4,8 +4,14 @@ public class DetermineIfArrayIsMinHeap {
     public static void main(String[] args) {
         DetermineIfArrayIsMinHeap s = new DetermineIfArrayIsMinHeap();
 
-        int[] array = new int[] {2, 2, 3, 3, 3, 4, 5};
+        int[] array = new int[] {1, 2};
         System.out.println(s.isMinHeap(array));     // true
+        array = new int[] {2, 2, 3, 3, 3};
+        System.out.println(s.isMinHeap(array));     // true
+        array = new int[] {2, 2, 3, 3, 3, 4, 5};
+        System.out.println(s.isMinHeap(array));     // true
+        array = new int[] {2, 2, 3, 3, 3, 4, 1};
+        System.out.println(s.isMinHeap(array));     // false
     }
 
     // Time O(n)

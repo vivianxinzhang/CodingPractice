@@ -5,10 +5,11 @@ public class OneEditDistance {
     public static void main(String[] args) {
         OneEditDistance s = new OneEditDistance();
 
-        System.out.println(s.oneEditDistance("xoppx", "doppx"));    // true
-        System.out.println(s.oneEditDistance("x", ""));             // true
-        System.out.println(s.oneEditDistance("abc", "ab"));         // true
-        System.out.println(s.oneEditDistance("abc", "bcd"));        // false
+        System.out.println(s.oneEditDistance("xoppx", "doppx"));       // true
+        System.out.println(s.oneEditDistance("bartera", "bartterr"));  // false
+        System.out.println(s.oneEditDistance("x", ""));                // true
+        System.out.println(s.oneEditDistance("abc", "ab"));            // true
+        System.out.println(s.oneEditDistance("abc", "bcd"));           // false
     }
 
     // A Simple Solution is to find Edit Distance using Dynamic programming.

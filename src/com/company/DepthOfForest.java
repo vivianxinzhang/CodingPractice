@@ -25,6 +25,9 @@ public class DepthOfForest {
     // The given array is not null or empty, all the elements in the array are in the range of [-1, N - 1] where N is the length of the array.
     // Corner Cases:
     // You should be able to identify that there could be a cycle in the forest, what if that is the case? Return -1
+
+    // Method 3: union find
+
     // Method 2: dfs + memo
 
     // Method 1: dfs

@@ -33,22 +33,6 @@ public class HappyNumber {
         return sum;
     }
 
-    public boolean isHappyII(int n) {
-        Set<Integer> set = new HashSet<>();
-        while (n != 1) {
-            int tmp = 0;
-            while (n != 0) {
-                int digit = n % 10;
-                tmp += digit * digit;
-                n /= 10;
-            }
-            if (!set.add(tmp)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     // T O(logn)
     // S O(1)
     public boolean isHappyI(int n) {

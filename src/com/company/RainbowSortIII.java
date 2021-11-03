@@ -5,10 +5,10 @@ import java.util.Arrays;
 public class RainbowSortIII {
     public static void main(String[] args) {
         RainbowSortIII s = new RainbowSortIII();
+
         int[] array = new int[] {1, 3, 1, 2};
         System.out.println(Arrays.toString(s.rainbowSortIII(array, 3)));
         // [1, 1, 2, 3]
-
         array = new int[] {3, 1, 5, 5, 1, 4, 2};
         System.out.println(Arrays.toString(s.rainbowSortIII(array, 5)));
         // [1, 1, 2, 3, 4, 5, 5]

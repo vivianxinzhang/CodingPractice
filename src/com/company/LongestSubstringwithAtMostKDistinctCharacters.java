@@ -4,17 +4,15 @@ import java.util.*;
 public class LongestSubstringwithAtMostKDistinctCharacters {
     public static void main(String[] args) {
         LongestSubstringwithAtMostKDistinctCharacters s = new LongestSubstringwithAtMostKDistinctCharacters();
+
         String input = "";
-        System.out.println(s.lengthOfLongestSubstringKDistinct(input, 1));  // 0
-
-        input = "xiisbqgbtjai";
-        System.out.println(s.lengthOfLongestSubstringKDistinct(input, 12));  // 4
-
-        input = "abcedde";
-        System.out.println(s.lengthOfLongestSubstringKDistinct(input, 2));  // 4
-
+        System.out.println(s.lengthOfLongestSubstringKDistinct(input, 1));   // 0
         input = "eceba";
-        System.out.println(s.lengthOfLongestSubstringKDistinct(input, 2));  // 3
+        System.out.println(s.lengthOfLongestSubstringKDistinct(input, 2));   // 3
+        input = "abcedde";
+        System.out.println(s.lengthOfLongestSubstringKDistinct(input, 2));   // 4
+        input = "xiisbqgbtjai";
+        System.out.println(s.lengthOfLongestSubstringKDistinct(input, 12));  // 12
     }
 
     // [slow, fast)

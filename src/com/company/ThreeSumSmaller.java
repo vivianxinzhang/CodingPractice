@@ -8,7 +8,6 @@ public class ThreeSumSmaller {
 
         int[] array = new int[] {-1, 1, -1, -1};
         System.out.println(s.threeSumSmaller(array, -1));   // 1
-
         array = new int[] {-2, 0, 1, 3};
         System.out.println(s.threeSumSmaller(array, 2));    // 2
     }
@@ -17,6 +16,7 @@ public class ThreeSumSmaller {
     // Return 2. Because there are two triplets which sums are less than 2:
     // [-2, 0, 1]
     // [-2, 0, 3]
+    // Method 2:
     // Time O(n^2)
     // Space O(logn)
     public int threeSumSmaller(int[] num, int target) {
@@ -41,6 +41,23 @@ public class ThreeSumSmaller {
                 j++;
             } else {
                 k--;
+            }
+        }
+        return count;
+    }
+
+    // Method 1:
+    // Time O(n^2)
+    // Space O(logn)
+    public int threeSumSmallerI(int[] num, int target) {
+        int count = 0;
+        for (int i = 0; i <= num.length - 3; i++) {
+            for (int j = i + 1; j <= num.length - 2; j++) {
+                for (int k = j + 1; k <= num.length - 1; k++) {
+                    if (num[i] + num[j] + num[k] < target) {
+                        count++;
+                    }
+                }
             }
         }
         return count;

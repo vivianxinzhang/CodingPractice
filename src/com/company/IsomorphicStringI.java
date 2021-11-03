@@ -15,6 +15,7 @@ public class IsomorphicStringI {
     public static void main(String[] args) {
         IsomorphicStringI s = new IsomorphicStringI();
 
+        System.out.println(s.isomorphic("fgh", "ghf"));     // true
         System.out.println(s.isomorphic("abca", "xyzx"));   // true
         System.out.println(s.isomorphic("abba", "cccc"));   // false
     }

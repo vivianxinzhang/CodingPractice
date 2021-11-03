@@ -4,6 +4,7 @@ import java.util.*;
 public class WordSearchII {
     public static void main(String[] args) {
         WordSearchII s = new WordSearchII();
+
         char[][] board = new char[][] {{'o'}};
         String[] words = new String[] {"o"};
         System.out.println(s.findWords(board, words));  // ["o"]
@@ -15,8 +16,7 @@ public class WordSearchII {
                 {'i','f','l','v'}
         };
         words = new String[] {"oath","pea","eat","rain"};
-        System.out.println(s.findWords(board, words));  // [oath, eat]
-        System.out.println(s.findWordsI(board, words)); // [oath, eat]
+        System.out.println(s.findWordsI(board, words));  // [oath, eat]
     }
 
     // Method 2: using trie to do branch trimming in DFS

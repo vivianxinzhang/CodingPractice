@@ -4,9 +4,18 @@ public class AdditiveNumber {
     public static void main(String[] args) {
         AdditiveNumber s = new AdditiveNumber();
 
-        String str = "15423";
+        String str = "13";
         System.out.println(s.isAdditiveNumber(str));    // false
-
+        str = "15423";
+        System.out.println(s.isAdditiveNumber(str));    // false
+        str = "100100200";
+        System.out.println(s.isAdditiveNumber(str));    // true
+        str = "112358";
+        System.out.println(s.isAdditiveNumber(str));    // true
+        str = "199100199";
+        System.out.println(s.isAdditiveNumber(str));    // true
+        str = "2500250050007500";
+        System.out.println(s.isAdditiveNumber(str));    // true
     }
 
     // Note: Numbers in the additive sequence cannot have leading zeros,

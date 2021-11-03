@@ -3,6 +3,7 @@ package com.company;
 public class BurstBalloons {
     public static void main(String[] args) {
         BurstBalloons s = new BurstBalloons();
+
         int[] array = new int[] {4, 1, 3, 0};
         System.out.println(s.maxCoins(array));    // 28
 
@@ -36,13 +37,34 @@ public class BurstBalloons {
         for (int window = 1; window <= array.length; window++) {
             for (int left = 1; left + window < nums.length; left++) {
                 int right = left + window - 1;
-                for (int k = left; k <= right; k++) {   // k is the last baloon to burst between [i,j]
+                for (int k = left; k <= right; k++) {   // k is the last balloon to burst between [i,j]
                     M[left][right] = Math.max(M[left][right],
                             M[left][k - 1] + nums[left - 1] * nums[k] * nums[right + 1] + M[k + 1][right]);
                 }
             }
         }
         return M[1][array.length];
+    }
+
+    // another implementation of dp
+    // Time O(n^3)
+    // Space O(n)
+    public int maxCoinsII(int[] nums) {
+        int[] array = new int[nums.length + 2];
+        array[0] = 1;
+        array[array.length - 1] = 1;
+        for (int i = 0; i < nums.length; i++) {
+            array[i + 1] = nums[i];
+        }
+        int[][] M = new int[array.length][array.length];
+        for (int right = 1; right < array.length - 1; right++) {
+            for (int left = right; left > 0; left--) {
+                for (int k = left; k <= right; k++) {
+                    M[left][right] = Math.max(M[left][right], M[left][k - 1] + M[k + 1][right] + array[left - 1] * array[k] * array[right + 1]);
+                }
+            }
+        }
+        return M[1][array.length - 2];
     }
 
     public int maxCoinsI(int[] nums) {

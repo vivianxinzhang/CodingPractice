@@ -3,18 +3,20 @@ import java.util.*;
 
 public class RemoveCertainCharacters {
     public static void main(String[] args) {
-        System.out.println("main");
         RemoveCertainCharacters s = new RemoveCertainCharacters();
 
         String input = "abcdefg";
         String target = "af";
         System.out.println(s.remove(input, target));
     }
+
+    // Assumptions:
+    // 1. The given input string is not null.
+    // 2. The characters to be removed is given by another string, it is guaranteed to be not null.
     // input length n, target length m
     // Time average O(m + n + n)    worst case O(m^2 + mn + n)
     // Space O(m)
     public String remove(String input, String target) {
-        // Write your solution here
         if (input == null || input.length() == 0 || target == null || target.length() == 0) {
             return input;
         }

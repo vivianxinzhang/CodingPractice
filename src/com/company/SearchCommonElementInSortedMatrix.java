@@ -3,6 +3,7 @@ package com.company;
 public class SearchCommonElementInSortedMatrix {
     public static void main(String[] args) {
         SearchCommonElementInSortedMatrix s = new SearchCommonElementInSortedMatrix();
+
         int[][] matrix = new int[][] {{0}};
         System.out.println(s.search(matrix));    // -1
 
@@ -11,7 +12,6 @@ public class SearchCommonElementInSortedMatrix {
                     {4, 5, 6, 7},
                     {2, 3, 4, 8}
                 };
-        // System.out.println(s.searchI(matrix));   // 4
         System.out.println(s.search(matrix));    // 4
 
         matrix = new int[][] {
@@ -61,7 +61,6 @@ public class SearchCommonElementInSortedMatrix {
             for (int i = 0; i < m; i++) {
                 int curVal = matrix[i][lastCol[i]];
                 // decrease lastCol index of a row whose value is more than min
-
                 if (curVal == minVal) {
                     equalCount++;
                 } else {
@@ -84,7 +83,7 @@ public class SearchCommonElementInSortedMatrix {
     // for each element in row 0, do a binary search in following rows
     // Time O(n * m * logn)
     // Space O(1)
-    public int searchI(int[][] matrix) {
+    public int searchII(int[][] matrix) {
         if (matrix == null || matrix.length <= 1) {
             return -1;
         }
@@ -119,6 +118,37 @@ public class SearchCommonElementInSortedMatrix {
                 left = mid + 1;
             } else {
                 right = mid - 1;
+            }
+        }
+        return false;
+    }
+
+    // Method 1: brute force
+    // Time O(n * n * m )
+    // Space O(1)
+    public int searchI(int[][] matrix) {
+        for (int i = 0; i < matrix[0].length; i++) {
+            int num = matrix[0][i];
+            if (existInAllRows(matrix, num)) {
+                return num;
+            }
+        }
+        return -1;
+    }
+
+    private boolean existInAllRows(int[][] matrix, int num) {
+        for (int i = 1; i < matrix.length; i++) {
+            if (!existInRow(matrix[i], num)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean existInRow(int[] array, int target) {
+        for (int num : array) {
+            if (num == target) {
+                return true;
             }
         }
         return false;

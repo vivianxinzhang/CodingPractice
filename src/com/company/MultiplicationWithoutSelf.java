@@ -1,6 +1,8 @@
 package com.company;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Deque;
 
 public class MultiplicationWithoutSelf {
     public static void main(String[] args) {
@@ -9,11 +11,9 @@ public class MultiplicationWithoutSelf {
         int[] array = new int[] {0, 1, 2, 3, 4};
         System.out.println(Arrays.toString(s.multiply(array)));
         // [24, 0, 0, 0, 0]
-
         array = new int[] {0, 1, 2, 0, 4};
         System.out.println(Arrays.toString(s.multiply(array)));
         // [0, 0, 0, 0, 0]
-
         array = new int[] {1, 2, 3, 4};
         System.out.println(Arrays.toString(s.multiply(array)));
         // [24, 12, 8, 6]

@@ -4,24 +4,24 @@ import java.util.*;
 public class LoginNumbersPerInterval {
     public static void main(String[] args) {
         LoginNumbersPerInterval s = new LoginNumbersPerInterval();
+
         int[][] logins = new int[][] {{1, 2}, {0, 4}, {5, 6}};
         int[][] res = s.sessionNum(logins);
         // [[0, 1, 1], [1, 2, 2], [2, 4, 1], [5, 6, 1]]
         for (int[] row : res) {
-            System.out.println(Arrays.toString(row));
+            System.out.print(Arrays.toString(row) + " ");
         }
         System.out.println();
         logins = new int[][] {{1,6}, {2,3}, {10,11}, {7,11}, {3,4}};
         res = s.sessionNum(logins);
         // [[1, 2, 1], [2, 4, 2], [4, 6, 1], [7, 10, 1], [10, 11, 2]]
-        // [[1, 2, 1], [2, 3, 2], [3, 4, 2], [4, 6, 1], [7, 10, 1], [10, 11, 2]]
         for (int[] row : res) {
-            System.out.println(Arrays.toString(row));
+            System.out.print(Arrays.toString(row) + " ");
         }
     }
 
-    // Time O(mnlogmn)
-    // Space O(mn)
+    // Time O(nlogn)
+    // Space O(n)
     public int[][] sessionNum(int[][] logins) {
         if (logins == null || logins.length == 0) {
             return null;

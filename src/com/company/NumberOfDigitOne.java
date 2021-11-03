@@ -3,10 +3,10 @@ package com.company;
 public class NumberOfDigitOne {
     public static void main(String[] args) {
         NumberOfDigitOne s = new NumberOfDigitOne();
-        System.out.println(s.countDigitOne(13));    // 6
-        // [1, 10, 11, 12, 13]
 
-        System.out.println(s.countDigitOne(3374172));    // 3090311
+        System.out.println(s.countDigitOne(13));        // 6
+        // [1, 10, 11, 12, 13]
+        System.out.println(s.countDigitOne(3374172));   // 3090311
     }
 
     //               345 [5]  78

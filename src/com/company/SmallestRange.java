@@ -4,7 +4,11 @@ import java.util.*;
 public class SmallestRange {
     public static void main(String[] args) {
         SmallestRange s = new SmallestRange();
-        int[][] matrix = new int[][] {
+
+        int[][] matrix = new int[][] {{0}};
+        System.out.println(Arrays.toString(s.smallestRange(matrix)));   // [0, 0]
+
+        matrix = new int[][] {
                 {1, 4, 6},
                 {2, 5},
                 {8, 10, 15}
@@ -262,7 +266,8 @@ public class SmallestRange {
     // Space O(1)
     public int[] smallestRange(int[][] matrix) {
         int minRange = Integer.MAX_VALUE;
-        int[] res = new int[] {0, 0};
+        int[] res = new int[] {matrix[0][0], matrix[0][0]};
+        // not initialize with new int[] {0, 0}
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 int first = matrix[i][j];

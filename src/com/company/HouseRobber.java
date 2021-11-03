@@ -3,6 +3,7 @@ package com.company;
 public class HouseRobber {
     public static void main(String[] args) {
         HouseRobber s = new HouseRobber();
+
         int[] array = new int[] {1, 5, 6, 7};
         System.out.println(s.rob(array));   // 12
 
@@ -10,7 +11,7 @@ public class HouseRobber {
         System.out.println(s.rob(array));   // 45
     }
 
-    // Method 3: optimize space
+    // Method III: optimize space
     // Time O(n)
     // Space O(1)
     public int rob(int[] array) {
@@ -29,11 +30,11 @@ public class HouseRobber {
         return Math.max(rob, noRob);
     }
 
-    // Method 2:
+    // Method 3:
     // M[i] represents maximum amount of gold you can rob without being caught between [0, i]
     // Time O(n)
     // Space O(n)
-    public int robII(int[] array) {
+    public int robIII(int[] array) {
         if (array == null || array.length == 0) {
             return 0;
         }
@@ -52,14 +53,14 @@ public class HouseRobber {
         return M[array.length - 1];
     }
 
-    // Method 1:
+    // Method 2:
     // rob[i] represents maximum amount of gold you can rob if rob house i
     // rob[i] = array[i] + notRob[i - 1];
     // noRob[i] represents maximum amount of gold you can rob if not rob house i
     // notRob[i] = Math.max(rob[i - 1], notRob[i - 1]);
     // Time O(n)
     // Space O(n)
-    public int robI(int[] array) {
+    public int robII(int[] array) {
         if (array == null || array.length == 0) {
             return 0;
         }
@@ -73,5 +74,28 @@ public class HouseRobber {
             notRob[i] = Math.max(rob[i - 1], notRob[i - 1]);
         }
         return Math.max(rob[n - 1], notRob[n - 1]);
+    }
+
+    // Method 1: dfs
+    // Time O(2^n)
+    // Space O(n)
+    public int robI(int[] num) {
+        boolean[] status = new boolean[num.length];
+        int[] max = new int[1];
+        dfs(num, 0, 0, status, max);
+        return max[0];
+    }
+
+    private void dfs(int[] num, int index, int cur, boolean[] status, int[] max) {
+        if (index == num.length) {
+            max[0] = Math.max(max[0], cur);
+            return;
+        }
+        status[index] = false;
+        dfs(num, index + 1, cur, status, max);
+        if (index == 0 || status[index - 1] == false) {
+            status[index] = true;
+            dfs(num, index + 1, cur + num[index], status, max);
+        }
     }
 }

@@ -4,13 +4,16 @@ import java.util.*;
 public class AllAnagrams {
     public static void main(String[] args) {
         AllAnagrams s = new AllAnagrams();
+
         String lo = "abcbac";
         String sh = "ab";
         System.out.println(s.allAnagrams(sh, lo));   // [0, 3]
     }
 
     // Find All anagrams of String sh in string lo, return all the starting indices
-    // Assumption: s, 1 are not null, s is not empty
+    // Assumption:
+    // 1. sh is not null or empty
+    // 2. 1o is not null
     // use a hash map to store characters of sh, and take the total numbers of unmatched characters
     // sliding window [i - sh.length() + 1, i], when # of unmatched characters is zero in window, find an anagram
     // Time average O(n) <-- O(m + n + n)String s: m  String l: m  worst O(mn) <-- (m^2+ n + n*m + (n-m)m)

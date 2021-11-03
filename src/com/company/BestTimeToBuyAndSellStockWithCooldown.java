@@ -3,8 +3,9 @@ package com.company;
 public class BestTimeToBuyAndSellStockWithCooldown {
     public static void main(String[] args) {
         BestTimeToBuyAndSellStockWithCooldown s = new BestTimeToBuyAndSellStockWithCooldown();
+
         int[] array = new int[]{};
-        System.out.println(s.maxProfit(array));  // 3
+        System.out.println(s.maxProfit(array));  // 0
 
         array = new int[]{1, 2, 3, 0, 2};
         System.out.println(s.maxProfit(array));  // 3
@@ -51,31 +52,31 @@ public class BestTimeToBuyAndSellStockWithCooldown {
     // Method 3: DP - optimize space
     // Time O(n)
     // Space O(1)
-    public int maxProfitIII(int[] prices) {
+    public int maxProfitIV(int[] prices) {
         if (prices == null || prices.length <= 1) {
             return 0;
         }
         int sold = 0;
-        int rest = 0;
-        int hold = Integer.MIN_VALUE;
+        int noStock = 0;
+        int inHand = Integer.MIN_VALUE;
         for (int price : prices) {
             int prevSold = sold;
-            sold = hold + price;
-            hold = Math.max(hold, rest - price);
-            rest = Math.max(rest, prevSold);
+            sold = inHand + price;
+            inHand = Math.max(inHand, noStock - price);
+            noStock = Math.max(noStock, prevSold);
         }
-        return Math.max(rest, sold);
+        return Math.max(noStock, sold);
     }
 
     // Method 2: DP
-    // hold[i] = max(hold[i-1], rest[i-1]-prices[i])
-    // sold[i] = hold[i-1] + prices[i]
-    // rest[i] = max(rest[i-1], sold[i-1])
+    // noStock[i] = max(noStock[i-1], sold[i-1])
+    // inHand[i] = max(inHand[i-1], noStock[i-1]-prices[i])
+    // sold[i] = inHand[i-1] + prices[i]
     // init: rest[0] = sold[0] = 0, hold[0] = -∞
     // ans: max(res[i], sold[i])
     // Time O(n)
     // Space O(n)
-    public int maxProfitII(int[] prices) {
+    public int maxProfitIII(int[] prices) {
         if (prices == null || prices.length <= 1) {
             return 0;
         }
@@ -100,18 +101,17 @@ public class BestTimeToBuyAndSellStockWithCooldown {
     // recursion has n levels, each level has three options buy / sell / rest
     // for each position can rest / buy / sell
     // what are valid sequences? buy sell rest buy sell
-    // can only buy after rest
-    // can only sell after buy or after buy and rest
-    // can rest after rest
+    // 1. can only buy after rest
+    // 2. can only sell after buy or after buy and rest
+    // 3. can rest after rest
     // Time O(3^n)
-    // Space O(1)
-    public int maxProfitI(int[] prices) {
+    // Space O(n)
+    public int maxProfitII(int[] prices) {
         if (prices == null || prices.length <= 1) {
             return 0;
         }
-        int[] maxProfit = new int[0];
-        int[] memo = new int[prices.length];
-        return findMax(prices, 0, memo);
+        int[] maxProfit  = new int[prices.length];
+        return findMax(prices, 0, maxProfit);
     }
 
     private int findMax(int[] prices, int index, int[] memo) {
@@ -121,19 +121,52 @@ public class BestTimeToBuyAndSellStockWithCooldown {
         if (memo[index] != 0) {
             return memo[index];
         }
+        // we have 2 options:
+        // 1.We can buy the stock at ith day and findMax from [i+2, n-1] th day
         // now find all the positions where we can sell the stock
-        int maxVal = 0;
+        int maxProfit = 0;
         // we can try to sell on the ith day
         for (int i = index + 1; i < prices.length; i++) {
             if (prices[i] > prices[index]) {
-                // we have 2 options:
-                // 1.We can sell the stock at ith day and findMax from (i+2)th day
-                // 2.We don't sell the stock on ith day
-                maxVal = Math.max(maxVal, prices[i] - prices[index] + findMax(prices, index, memo));
+                maxProfit = Math.max(maxProfit, prices[i] - prices[index] + findMax(prices, i + 2, memo));
             }
         }
-        maxVal = Math.max(maxVal, findMax(prices, index + 1, memo));
-        memo[index] = maxVal;
-        return maxVal;
+        // 2.We don't sell the stock on ith day
+        maxProfit = Math.max(maxProfit, findMax(prices, index + 1, memo));
+        memo[index] = maxProfit;
+        return maxProfit;
+    }
+
+    // Method 1: brute force dfs
+    // Time O(3^n)
+    // Space O(1)
+    public int maxProfitI(int[] prices) {
+        if (prices == null || prices.length <= 1) {
+            return 0;
+        }
+        char[] action = new char[prices.length];
+        int[] maxProfit = new int[] {0};
+        dfs( action, 0, prices, 0, 0, maxProfit);
+        return maxProfit[0];
+    }
+
+    private void dfs(char[] action, int index, int[] prices, int sumProfit, int stocks, int[] maxProfit) {
+        if (index == action.length) {
+            maxProfit[0] = Math.max(maxProfit[0], sumProfit);
+            return;
+        }
+        // buy - 'b'
+        if (index == 0 || action[index - 1] == 'r') {
+            action[index] = 'b';
+            dfs(action, index + 1, prices, sumProfit - prices[index], 1, maxProfit);
+        }
+        // sell - 's'
+        if (stocks == 1) {
+            action[index] = 's';
+            dfs(action, index + 1, prices, sumProfit + prices[index], 0, maxProfit);
+        }
+        // hold/ no action - 'h'
+        action[index] = 'h';
+        dfs(action, index + 1, prices, sumProfit, stocks, maxProfit);
     }
 }

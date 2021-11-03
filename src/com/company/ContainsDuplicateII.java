@@ -1,6 +1,8 @@
 package com.company;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class ContainsDuplicateII {
@@ -11,7 +13,7 @@ public class ContainsDuplicateII {
         System.out.println(s.containsNearbyDuplicate(array, 2));   // false
     }
 
-    // Method 2: two pointers
+    // Method 3: two pointers
     // Time O(n)
     // Space O(n)
     public boolean containsNearbyDuplicate(int[] array, int k) {
@@ -33,6 +35,23 @@ public class ContainsDuplicateII {
                 unmatched.remove(array[slow]);
                 slow++;
             }
+        }
+        return false;
+    }
+
+    // Method 2: map
+    // Time O(n)
+    // Space O(n)
+    public boolean containsNearbyDuplicateII(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            Integer preIdx = map.get(nums[i]);
+            if (preIdx != null) {
+                if (i - preIdx <= k) {
+                    return true;
+                }
+            }
+            map.put(nums[i], i);
         }
         return false;
     }

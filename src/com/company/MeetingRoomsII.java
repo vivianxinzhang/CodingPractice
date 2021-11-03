@@ -10,8 +10,15 @@ public class MeetingRoomsII {
 
         int[][] intervals = new int[][] {{0, 30}, {5, 10}, {15, 20}};
         System.out.println(s.minMeetingRooms(intervals));     // 2
+
+        intervals = new int[][] {{16,21},{0,11},{6,9},{1,2},{15,36},{4,21}};
+        System.out.println(s.minMeetingRooms(intervals));     // 3
+
+        intervals = new int[][] {{16,21},{0,11},{6,9},{1,2},{15,36},{4,21},{12,31},{22,42},{7,29},{21,45},{3,26},{17,18}};
+        System.out.println(s.minMeetingRooms(intervals));     // 7
     }
 
+    // Method 2:
     // Sort the intervals by starting time, so it will always find the earliest
     // available meeting once the most recent one is end.
     // Time O(nlogn)
@@ -50,5 +57,61 @@ public class MeetingRoomsII {
             minHeap.offer(intervals[i][1]);
         }
         return minHeap.size();
+    }
+
+    // Method 1:
+    // Time O(nlog(n)) <-- O(2nlog(2n))
+    // Space O(n)
+    public int minMeetingRoomsI(int[][] intervals) {
+        if (intervals == null || intervals.length == 0) {
+            return 0;
+        }
+        PriorityQueue<Point> minHeap = convert(intervals);
+        Point pre = minHeap.poll();
+        int preX = pre.x;
+        int count = 1;
+        int max = 1;
+        while (!minHeap.isEmpty()) {
+            Point cur = minHeap.poll();
+            int curX = cur.x;
+            if (cur.isStart) {
+                count++;
+            } else {
+                count--;
+            }
+            max = Math.max(count, max);
+        }
+        return max;
+    }
+
+    private PriorityQueue<Point> convert(int[][] intervals) {
+        PriorityQueue<Point> minHeap = new PriorityQueue<>(new Comparator<Point>() {
+            @Override
+            public int compare(Point o1, Point o2) {
+                if (o1.x == o2.x) {
+                    if ((o1.isStart && o2.isStart) || (!o1.isStart && !o2.isStart)) {
+                        return 0;
+                    } else {
+                        return o1.isStart ? 1 : -1;
+                    }
+                }
+                return o1.x < o2.x ? -1 : 1;
+            }
+        });
+        for (int[] interval : intervals) {
+            minHeap.offer(new Point(interval[0], true));
+            minHeap.offer(new Point(interval[1], false));
+        }
+        return minHeap;
+    }
+
+    class Point {
+        int x;
+        boolean isStart;
+
+        public Point(int x, boolean isStart) {
+            this.x = x;
+            this.isStart = isStart;
+        }
     }
 }

@@ -3,14 +3,17 @@ package com.company;
 public class MedianOfTwoSortedArrays {
     public static void main(String[] args) {
         MedianOfTwoSortedArrays s = new MedianOfTwoSortedArrays();
+
+        int[] A = new int[] {1, 2, 3, 4, 7, 9};
+        int[] B = new int[] {};
+        System.out.println(s.median(A, B)); // 3.5
         // 0, 1, 2, 3
         // (1th + 2th) / 2 = (1 + 2) / 2 = 1.5
         // 0, 1, 2
         // 1th = 1
-        int[] A = new int[] {1, 4};
-        int[] B = new int[] {2, 3};
+        A = new int[] {1, 4};
+        B = new int[] {2, 3};
         System.out.println(s.median(A, B)); // 2.5
-
         A = new int[] {1};
         B = new int[] {2, 3};
         System.out.println(s.median(A, B));   // 2.0

@@ -4,15 +4,13 @@ import java.util.*;
 public class MinimumHeightTrees {
     public static void main(String[] args) {
         MinimumHeightTrees s = new MinimumHeightTrees();
+
         int[][]edges = new int[][] {};
         System.out.println(s.findMinHeightTrees(1, edges));     // 0
-
         edges = new int[][] {{0, 1}};
         System.out.println(s.findMinHeightTrees(2, edges));     // 0, 1
-
         edges = new int[][] {{1, 0}, {1, 2}, {1, 3}};
         System.out.println(s.findMinHeightTrees(4, edges));     // 1
-
         edges = new int[][] {{3, 0}, {3, 1}, {3, 2}, {3, 4}, {5, 4}};
         System.out.println(s.findMinHeightTrees(6, edges));     // 3, 4
     }
