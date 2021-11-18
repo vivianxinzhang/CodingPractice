@@ -13,6 +13,7 @@ public class MeetingRooms {
         System.out.println(s.canAttendMeetings(intervals));     // false
     }
 
+    // Method 2:
     // Sorting according to start time
     // compare curr meeting's start time with previous meeting's end time
     // and check if two neighbor meeting overlap
@@ -38,5 +39,30 @@ public class MeetingRooms {
             }
         }
         return true;
+    }
+
+    // Method 2:
+    // Time O(n^2)
+    // Space O(1)
+    public boolean canAttendMeetingsI(int[][] intervals) {
+        for (int i = 0; i < intervals.length; i++) {
+            if (overLapPrevious(intervals, i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean overLapPrevious(int[][] intervals, int index) {
+        int[] cur = intervals[index];
+        for (int i = 0; i < index; i++) {
+            int[] pre = intervals[i];
+            if (pre[1] <= cur[0] || pre[0] >= cur[1]) {
+                continue;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -149,4 +149,46 @@ public class WordSearchII {
         }
         return wordSet;
     }
+
+    // Method 1: DFS another implementation
+    // at each level put current letter in the path prefix and then try to visit four direction in the next level
+    // DFS has at most m*n levels, branching factor is at most 4 (or 3)
+    // Time: O(mn * 4^mn * L)   m - rows  n - cols  word.length is L
+    // Space: Space O(mn)
+    public List<String> findWordsII(char[][] board, String[] words) {
+        if (board == null || board.length == 0 || board[0].length == 0) {
+            return new ArrayList<>();
+        }
+        Set<String> res = new HashSet<>();
+        Set<String> set = buildSet(words);
+        int m = board.length;
+        int n = board[0].length;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                boolean[][] visited = new boolean[m][n];
+                dfs(board, i, j, visited, sb, set, res);
+            }
+        }
+        return new ArrayList<>(res);
+    }
+
+    private void dfs(char[][] board, int i, int j, boolean[][] visited, StringBuilder sb, Set<String> set, Set<String> res) {
+        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || visited[i][j]) {
+            return;
+        }
+        sb.append(board[i][j]);
+        visited[i][j] = true;
+        String word = sb.toString();
+        if (set.contains(word)) {
+            res.add(word);
+        }
+        for (int[] dir : DIRS) {
+            int nextX = i + dir[0];
+            int nextY = j + dir[1];
+            dfs(board, nextX, nextY, visited, sb, set, res);
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        visited[i][j] = false;
+    }
 }

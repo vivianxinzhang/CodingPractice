@@ -3,6 +3,7 @@ package com.company;
 public class LargestBSTSubtree {
     public static void main(String[] args) {
         LargestBSTSubtree s = new LargestBSTSubtree();
+
         TreeNode ten = new TreeNode(10);
         TreeNode five = new TreeNode(5);
         TreeNode fifteen = new TreeNode(15);
@@ -39,11 +40,11 @@ public class LargestBSTSubtree {
     // left - right - root
     // visit everything on the left subtree, visit everything on the right subtree
     // use the information collected to find the largest BST
-    // Traverse tree in post order fashion. Left and right nodes return 4 piece
+    // Traverse tree in post order fashion. Left and right nodes return 4 pieces
     // of information to root which isBST, size of max BST, min and max in those subtree.
     // If both left and right subtree are BST and this node data is greater than max
-    // of left and less than min of right then it returns to above level left size +
-    // right size + 1 and new min will be min of left side and new max will be max of
+    // of left and less than min of right then it returns to above level
+    // left size + right size + 1 and new min will be min of left side and new max will be max of
     // right side.
     // Time O(n)
     // Space O(height) worst case O(n)

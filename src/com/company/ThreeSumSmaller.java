@@ -47,8 +47,8 @@ public class ThreeSumSmaller {
     }
 
     // Method 1:
-    // Time O(n^2)
-    // Space O(logn)
+    // Time O(n^3)
+    // Space O(1)
     public int threeSumSmallerI(int[] num, int target) {
         int count = 0;
         for (int i = 0; i <= num.length - 3; i++) {

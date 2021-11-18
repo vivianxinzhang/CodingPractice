@@ -6,7 +6,6 @@ public class BurstBalloons {
 
         int[] array = new int[] {4, 1, 3, 0};
         System.out.println(s.maxCoins(array));    // 28
-
         array = new int[] {50, 57, 64, 81, 56, 43, 73, 62, 89, 60, 85, 47};
         System.out.println(s.maxCoins(array));    // 3697768
     }

@@ -6,10 +6,10 @@ import java.util.List;
 public class MissingRanges {
     public static void main(String[] args) {
         MissingRanges s = new MissingRanges();
+
         int[] array = new int[] {3, 4, 5, 6, 7};
         System.out.println(s.findMissingRanges(array, 0, 99));
         // [0->2, 8->99]
-
         array = new int[] {0, 1, 3, 50, 75};
         System.out.println(s.findMissingRanges(array, 0, 99));
         // [2, 4->49, 51->74, 76->98]

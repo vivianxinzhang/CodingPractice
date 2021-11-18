@@ -4,6 +4,7 @@ import java.util.*;
 public class HouseRobberIII {
     public static void main(String[] args) {
         HouseRobberIII s = new HouseRobberIII();
+
         TreeNode one = new TreeNode(1);
         TreeNode two = new TreeNode(2);
         TreeNode three = new TreeNode(3);
@@ -15,8 +16,8 @@ public class HouseRobberIII {
     // Time O(n)
     // Space O(n)
     public int rob(TreeNode root) {
-        Map<TreeNode, Integer> flag1 = new HashMap<>();
-        Map<TreeNode, Integer> flag0 = new HashMap<>();
+        Map<TreeNode, Integer> flag1 = new HashMap<>();     // rob
+        Map<TreeNode, Integer> flag0 = new HashMap<>();     // not rob
         return helper(root, 1, flag1, flag0);
     }
 
@@ -50,11 +51,10 @@ public class HouseRobberIII {
         return res;
     }
 
-
-    // Method 1: DFS height levels, branching factor is 3
-    // Time: O(3^n)
+    // Method 2: DFS height levels, branching factor is 4
+    // Time: O(4^h)
     // Space: O(height) worst case O(n)
-    public int robI(TreeNode root) {
+    public int robII(TreeNode root) {
         return dfs(root, 1);
     }
 
@@ -74,5 +74,43 @@ public class HouseRobberIII {
             int option2 = dfs(root.left, 1) + dfs(root.right, 1);
             return Math.max(option1, option2);
         }
+    }
+
+    // Method 1: post order travesal + dfs
+    // Time O(2^n)
+    // Space O(n)
+    public int robI(TreeNode root) {
+        int[] max = new int[1];
+        List<TreeNode> postOrder = new ArrayList<>();
+        postOrder(root, postOrder);
+        Map<TreeNode, Integer> map = new HashMap<>();   // 1: rob   0: no rob
+        dfs(postOrder, 0, map, 0, max);
+        return max[0];
+    }
+
+    private void dfs(List<TreeNode> postOrder, int index, Map<TreeNode, Integer> map, int cur, int[] max) {
+        if (index == postOrder.size()) {
+            max[0] = Math.max(max[0], cur);
+            return;
+        }
+        // not rob
+        TreeNode root = postOrder.get(index);
+        map.put(root, 0);
+        dfs(postOrder, index + 1, map, cur, max);
+        // rob
+        if ((root.left == null || map.get(root.left) == 0) && (root.right == null || map.get(root.right) == 0)){
+            map.put(root, 1);
+            dfs(postOrder, index + 1, map, cur + root.key, max);
+            map.put(root, 0);
+        }
+    }
+
+    private void postOrder(TreeNode root, List<TreeNode> postOrder) {
+        if (root == null) {
+            return;
+        }
+        postOrder(root.left, postOrder);
+        postOrder(root.right, postOrder);
+        postOrder.add(root);
     }
 }

@@ -11,10 +11,14 @@ public class SuperUglyNumber {
         }
         // 1 2 4 7 8 13 14 16 19 26 28 32
         System.out.println();
-
         primes = new int[] {2,59,83,131,157,383,409,443,457,487,557,593,607,653,683,701,727,739,823,839,863,881,907,911,967};
         System.out.println(s.nthSuperUglyNumber(9800, primes));
         // 358743059
+
+        System.out.println();
+        primes = new int[] {2,13,19,43,59,137,227,263,269,397,419,433,463,479,487,491,547,563,613,653,787,797,839,877,911,991};
+        System.out.println(s.nthSuperUglyNumber(3776, primes));
+        // 3640832
     }
 
     // Note:

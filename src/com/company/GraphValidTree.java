@@ -22,6 +22,22 @@ public class GraphValidTree {
         System.out.println(s.validTree(5, edges));      // false
     }
 
+    // An undirected graph is a tree if it has the following properties:
+    // 1. there is no cycle
+    // 2. The graph is connected
+    // Clarifications:
+    // All nodes (0 through n-1) must be used to form the tree.
+    // You may not end up with any cycles or a disconnected graph.
+    // Q1: How to detect cycle in an undirected graph?
+    //     We can either use DFS or BFS. For every visited vertex 'v', if there is
+    //     an adjacent vertex 'u' such that 'u' is already visited and 'u' is not
+    //     parent of v, then there is a cycle in the graph.
+    //     If we don't find such an adjacent vertex for any vertex, we say that
+    //     there is no cycle.
+    // Q2: How to check for connectivity?
+    //     Since the given graph is undirected, we can start BFS or DFS from any vertex
+    //     and check if all vertices are reachable or not. If all vertices are reachable
+    //     then the graph is connected, otherwise not.
     // DFS
     // Time O(v+e)
     // Space O(v)
@@ -33,12 +49,12 @@ public class GraphValidTree {
             if (visited.contains(i)) {
                 continue;
             }
-            boolean flag = hasCycleDFSUtil(i, visited, graph, null);
-            if(flag){
-                return true;
+            boolean hasCycle = hasCycleDFSUtil(i, visited, graph, -1);
+            if(hasCycle){
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     private boolean hasCycleDFSUtil(int i, Set<Integer> visited, List<List<Integer>> graph, Integer parent) {
@@ -59,19 +75,6 @@ public class GraphValidTree {
         return false;
     }
 
-    // An undirected graph is a tree if it has the following properties:
-    // 1. there is no cycle
-    // 2. The graph is connected
-    // Q1: How to detect cycle in an undirected graph?
-    // We can either use DFS or BFS. For every visited vertex 'v', if there is
-    // an adjacent vertex 'u' such that 'u' is already visited and 'u' is not
-    // parent of v, then there is a cycle in the graph.
-    // If we don't find such an adjacent vertex for any vertex, we say that
-    // there is no cycle.
-    // Q2: How to check for connectivity?
-    // Since the given graph is undirected, we can start BFS or DFS from any vertex
-    // and check if all vertices are reachable or not. If all vertices are reachable
-    // then the graph is connected, otherwise not.
     // Time O(v+e)
     // Space O(v)
     public boolean validTreeI(int n, int[][] edges) {
@@ -79,9 +82,8 @@ public class GraphValidTree {
         // all the vertices as not visited yet
         boolean[] visited = new boolean[n];
         // The call to isCyclicUtil serves multiple purposes
-        // It returns true if graph reachable from vertex 0 is cyclcic.
-        // It also marks all vertices reachable
-        // from 0.
+        // It returns true if graph reachable from vertex 0 is cyclic.
+        // It also marks all vertices reachable from 0.
         if (isCyclicUtil(0, visited, graph, -1)) {      // O(v+e)
             return false;
         }

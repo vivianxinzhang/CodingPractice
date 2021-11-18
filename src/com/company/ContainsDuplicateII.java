@@ -11,38 +11,15 @@ public class ContainsDuplicateII {
 
         int[] array = new int[] {58, 21};
         System.out.println(s.containsNearbyDuplicate(array, 2));   // false
-    }
-
-    // Method 3: two pointers
-    // Time O(n)
-    // Space O(n)
-    public boolean containsNearbyDuplicate(int[] array, int k) {
-        int slow = 0;
-        int fast = 0;
-        int minDistance = Integer.MAX_VALUE;
-        Set<Integer> unmatched = new HashSet<>();
-        for (fast = 0; fast < array.length; fast++) {
-            if (unmatched.add(array[fast])) {
-                continue;
-            } else {    // 遇到相同的出现过的数字了
-                while (array[slow] != array[fast]) {
-                    slow++;
-                }
-                minDistance = Math.min(minDistance, fast - slow);
-                if (minDistance <= k) {
-                    return true;
-                }
-                unmatched.remove(array[slow]);
-                slow++;
-            }
-        }
-        return false;
+        array = new int[] {1, 0, 1};
+        System.out.println(s.containsNearbyDuplicate(array, 1));   // false
     }
 
     // Method 2: map
     // Time O(n)
     // Space O(n)
-    public boolean containsNearbyDuplicateII(int[] nums, int k) {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        // key: num    value: most nearby num index
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             Integer preIdx = map.get(nums[i]);

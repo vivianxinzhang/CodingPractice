@@ -14,18 +14,18 @@ public class ContainsDuplicateIII {
 
     // Method 3: TreeSet
     // Record numbers in a Binary Search Tree(TreeSet in Java), check if the diff
-    // between the new number came in and its closest number in the BST is less than t.
-    // index = 0    1   2   3   4
-    // nums = {11,  20, 5, 30,  1}
+    // between the new number came in and its closest number in the BST is less than target.
+    // index = 0    1    2    3   4
+    // nums = {11,  20,  5,  30,  1}
     // index        number      TreeSet(BST)
     // 0            11          11
     // 1            20          11
-    //                            \
-    //                             20
-    // 2            5           11
+    //                             \
+    //                              20
+    // 2            5            11
     //                         /   \
-    //                        5    20
-    // 3            30          20
+    //                        5     20
+    // 3            30           20
     //                         /    \
     //                        5     30
     // 4            1           20

@@ -6,7 +6,6 @@ public class BestTimeToBuyAndSellStockWithCooldown {
 
         int[] array = new int[]{};
         System.out.println(s.maxProfit(array));  // 0
-
         array = new int[]{1, 2, 3, 0, 2};
         System.out.println(s.maxProfit(array));  // 3
     }
@@ -14,18 +13,19 @@ public class BestTimeToBuyAndSellStockWithCooldown {
     // Assumption:
     // 1. You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
     // 2. After you sell your stock, you cannot buy stock on next day. (ie, cooldown 1 day)
+    // Method 3: DP with two states
     // hold[i]: maximum profit if hold a stock on day i
     // unhold[i]: maximum profit if unhold a stock on day i
     // Base case:
     // hold[0] = -prices[0]
-    // hold[1] = max(-prices[1], -prices[0]) on day one hold a stock, purchased either on day 0 or day 1
+    // hold[1] = max(-prices[1], -prices[0]) if on day one hold a stock, purchased either on day 0 or day 1
     // Induction rule:
-    // hold[i] = max(case1, case2)
-    // case 1: 第i天买入  unhold[i-2] - prices[i]
-    // case 2: 第i天没有买入  unhold[i-2]
-    // unhold[i] = max(case1, case2)
-    // case 1: 第i天卖出 hold[i-1] + prices[i]
-    // case 2: 第i天没有卖出 unhold[i-1]
+    // hold[i] = case 1: 第i天买入  unhold[i-2] - prices[i]
+    //           case 2: 第i天没有买入  hold[i-1]
+    //           max(case1, case2)
+    // unhold[i] case 1: 第i天卖出 hold[i-1] + prices[i]
+    //           case 2: 第i天没有卖出 unhold[i-1]
+    //           = max(case1, case2)
     // return: unhold[n-1]
     // Time O(n)
     // Space O(n) -> O(1)
@@ -49,7 +49,7 @@ public class BestTimeToBuyAndSellStockWithCooldown {
         return unhold[n - 1];
     }
 
-    // Method 3: DP - optimize space
+    // Method 4: DP - optimize space
     // Time O(n)
     // Space O(1)
     public int maxProfitIV(int[] prices) {
@@ -68,12 +68,15 @@ public class BestTimeToBuyAndSellStockWithCooldown {
         return Math.max(noStock, sold);
     }
 
-    // Method 2: DP
-    // noStock[i] = max(noStock[i-1], sold[i-1])
-    // inHand[i] = max(inHand[i-1], noStock[i-1]-prices[i])
+    // Method 3: DP with three states
+    // Initialization:
+    // rest[0] = sold[0] = 0, hold[0] = -∞
+    // Induction rule:
+    // rest[i] = max(rest[i-1], sold[i-1])
+    // inHand[i] = max(inHand[i-1], rest[i-1]-prices[i])
     // sold[i] = inHand[i-1] + prices[i]
-    // init: rest[0] = sold[0] = 0, hold[0] = -∞
-    // ans: max(res[i], sold[i])
+    // Return:
+    // max(res[i], sold[i])
     // Time O(n)
     // Space O(n)
     public int maxProfitIII(int[] prices) {
@@ -97,7 +100,7 @@ public class BestTimeToBuyAndSellStockWithCooldown {
         return Math.max(noStock[n - 1], sold[n - 1]);
     }
 
-    // Method 1: Recursion + memo
+    // Method 2: Recursion + memo
     // recursion has n levels, each level has three options buy / sell / rest
     // for each position can rest / buy / sell
     // what are valid sequences? buy sell rest buy sell

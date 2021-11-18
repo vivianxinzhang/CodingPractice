@@ -10,7 +10,7 @@ public class BulbsOn {
         System.out.println(s.bulbSwitch(169));   // 13
     }
 
-    // 对于每个position n，找他的总共因子数，因子数就是被switch的次数，如果次数是奇数就是on，偶数就是off
+    // 对于每个position n，find number of factors of n，因子数就是被switch的次数，如果次数是奇数就是on，偶数就是off
     // 处于n位置的灯泡，如果有偶数个因子，则最后会灭，如果有奇数个，则最后会亮。
     // 对于n号灯泡，如果它有因子k，则会有对应的因子n/k，所以因子总是成对出现的，除了n是一个平方数的时候，会有平方根是一个单个的因子。所以只有完全平方数最后会亮。
     // 那么有多少个完全平方数呢？根号n向下取整个。
@@ -18,6 +18,9 @@ public class BulbsOn {
     //    1     28        1      16
     //    2     14        2      8
     //    4     7         4       4
+    // Method 2:
+    // Times O(1)
+    // Space O(1)
     public int bulbSwitch(int n) {
         return (int) Math.sqrt(n);
     }

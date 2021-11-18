@@ -7,9 +7,9 @@ public class PaintHouse {
         int[][] costs = new int[][] {};
         System.out.println(s.minCost(costs));     // 0
         costs = new int[][] {{7, 6, 2}};
-        System.out.println(s.minCost(costs));     // 15
+        System.out.println(s.minCost(costs));     // 2
         costs = new int[][] {{8,9,9}, {13,11,7}, {9,5,10}, {9,12,19}};
-        System.out.println(s.minCost(costs));     // 104
+        System.out.println(s.minCost(costs));     // 29
     }
 
     // Note:
@@ -32,6 +32,6 @@ public class PaintHouse {
             green[i] = costs[i][1] + Math.min(red[i - 1], blue[i - 1]);
             blue[i] = costs[i][2] + Math.min(red[i - 1], green[i - 1]);
         }
-        return red[n - 1] + green[n - 1] + blue[n - 1];
+        return Math.min(red[n - 1], Math.min(green[n - 1], blue[n - 1]));
     }
 }

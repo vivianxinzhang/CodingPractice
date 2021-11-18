@@ -9,6 +9,8 @@ public class GeneralizedAbbreviation {
 
         System.out.println(s.generateAbbreviations("word"));
         // [word, wor1, wo1d, wo2, w1rd, w1r1, w2d, w3, 1ord, 1or1, 1o1d, 1o2, 2rd, 2r1, 3d, 4]
+        System.out.println(s.generateAbbreviations("aaaaaaaaaa"));
+        // [..., 6aaaa, 6aaa1, 6aa1a, 6aa2, 6a1aa, 6a1a1, 6a2a, 6a3, 7aaa, 7aa1, 7a1a, 7a2, 8aa, 8a1, 9a, 10]
     }
 
     // Time O(n!*n)

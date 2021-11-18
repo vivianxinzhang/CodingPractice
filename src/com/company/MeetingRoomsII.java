@@ -10,10 +10,10 @@ public class MeetingRoomsII {
 
         int[][] intervals = new int[][] {{0, 30}, {5, 10}, {15, 20}};
         System.out.println(s.minMeetingRooms(intervals));     // 2
-
+        intervals = new int[][] {{22,26},{6,24},{18,22},{17,25}};
+        System.out.println(s.minMeetingRooms(intervals));     // 3
         intervals = new int[][] {{16,21},{0,11},{6,9},{1,2},{15,36},{4,21}};
         System.out.println(s.minMeetingRooms(intervals));     // 3
-
         intervals = new int[][] {{16,21},{0,11},{6,9},{1,2},{15,36},{4,21},{12,31},{22,42},{7,29},{21,45},{3,26},{17,18}};
         System.out.println(s.minMeetingRooms(intervals));     // 7
     }
